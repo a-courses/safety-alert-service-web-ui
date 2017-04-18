@@ -23,7 +23,7 @@
                     </h2>
                 </div>
             </md-toolbar>
-            <div ui-view="content" flex layout-fill layout-padding></div>
+            <div ng-view=""></div>
         </md-content>
         {% for (var chunk in o.htmlWebpackPlugin.files) { %}
         <script src="{%= o.htmlWebpackPlugin.files[chunk]%}"></script>
