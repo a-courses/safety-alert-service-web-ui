@@ -1,23 +1,9 @@
 /* styles in src/style directory are applied to the whole page */
 body {
-    background: #0147A7;
-    color: #fff;
 }
 
 a {
-    color: #03A9F4;
-}
-
-main {
-    padding: 1em;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    display: block;
-}
-
-footer {
-    text-align: center;
-    font-size: 0.8em;
+    /*color: #03A9F4;*/
 }
 
 .card {
@@ -25,27 +11,19 @@ footer {
 }
 
 .remove-cards-padding {
-     padding-right: 0px !important;
-     padding-left: 0px!important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
 }
 
-.sidebar {
-    height: 100%;
-    padding-left: 0;
-    padding-right: 0;
+.card-header {
+    color: #0080b0 !important;
+    font-weight: bold;
 }
-.sidebar {
-    position: fixed;
-    top: 0px;
-    bottom: 0 !important;
-    left: 0;
-    z-index: 1000;
-    padding: 20px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    border-right: 1px solid #eee;
-    height: 100% !important;
+
+.blue-icons {
+    color: #0080b0 !important;
 }
-.bg-faded {
-    background-color: #f7f7f7;
+
+.icon-cell {
+    width: 16px;
 }
