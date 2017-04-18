@@ -1,5 +1,5 @@
-var path = require('path'),
-    webpack = require("webpack"),
+var path = require('path');
+var webpack = require("webpack"),
     libPath = path.join(__dirname, 'public'),
     wwwPath = path.join(__dirname, 'www'),
     pkg = require('./package.json'),
@@ -10,7 +10,7 @@ var config = {
     entry: path.join(libPath, 'index.js'),
     output: {
         path: path.join(wwwPath),
-        filename: 'bundle-[hash:6].js'
+        filename: 'bundle.js'
     },
     module: {
         loaders: [{
@@ -39,9 +39,15 @@ var config = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             pkg: pkg,
-            template: path.join(libPath, 'index.html')
+            template: path.join(libPath, 'index.html'),
+            inject: false
         }),
-
+        new webpack.ProvidePlugin({
+            jQuery: 'jquery',
+            $: 'jquery',
+            "window.jQuery": "jquery",
+            "window.Tether": "tether"
+        }),
         // OccurenceOrderPlugin: Assign the module and chunk ids by occurrence count. : https://webpack.github.io/docs/list-of-plugins.html#occurenceorderplugin
         new webpack.optimize.OccurenceOrderPlugin(),
 

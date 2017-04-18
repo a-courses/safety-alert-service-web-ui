@@ -11,11 +11,18 @@ import angularMaterial from 'angular-material';
 // Router
 import angularUIRouter from 'angular-ui-router';
 // Our modules
+import $ from "jquery/dist/jquery";
+
+import tether from 'tether/dist/js/tether';
+
+// import jQuery from 'jquery/dist/jquery';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap';
+// Project specific style
+// import './scss/bootstrap.scss'
+
 import home from './home/home.module';
 import sidenav from './sidenav/sidenav.module';
-
-// Project specific style
-import './scss/bootstrap.scss'
 
 // Create our demo module
 export const demoModule = angular.module('demo', [

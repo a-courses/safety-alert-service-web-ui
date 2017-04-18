@@ -3,40 +3,45 @@
   "version": "0.0.0",
   "private": true,
   "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "rm -rf www/* && webpack -p",
-        "devserver": "webpack-dev-server --port 3000 --progress --colors"
-    },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf www/* && webpack -p",
+    "devserver": "webpack-dev-server --port 3000 --progress --colors"
+  },
   "description": "safety-alert-service-web-ui",
   "repository": {
     "type": "git",
     "url": "git@github.com:jsandeepm/safety-alert-service-web-ui.git"
   },
   "dependencies": {
-    "angular": "~1.6.3",
-    "angular-messages": "~1.6.3",
-    "angular-mocks": "~1.6.3",
-    "angular-route": "~1.6.3",
-    "angular-sanitize": "~1.6.3",
-    "angular-material":"^1.1.3",
+    "tether": "^1.4.0",
+    "angular": "~1.5.11",
+    "angular-animate": "~1.5.11",
+    "angular-aria": "~1.5.11",
+    "angular-material": "^1.1.3",
+    "angular-ui-router": "^0.2.14",
+    "font-awesome": "^4.3.0",
     "bootstrap": "^4.0.0-alpha.6",
     "lodash": "^4.17.4",
-    "underscore": "~1.8.3",
-    "font-awesome": "^4.3.0"
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "angular-mocks": "^1.6.3",
-    "autoprefixer": "^6.0.3",
-    "babel-core": "^6.2.1",
-    "babel-loader": "^6.2.0",
+    "autoprefixer-loader": "^2.0.0",
+    "babel-core": "^5.2.9",
+    "babel-loader": "^5.0.0",
+    "angular-mocks": "^1.5.11",
     "css-loader": "0.26.1",
     "file-loader": "^0.9.0",
-    "html-webpack-plugin": "^2.7.1",
-    "ngannotate-loader":"^1.1.0",
-    "path":"^0.12.7",
+    "html-loader": "^0.3.0",
+    "html-webpack-plugin": "^1.3.0",
+    "ng-annotate-loader": "~0.0.4",
+    "path": "^0.12.7",
+    "node-sass": "^3.2.0",
+    "sass-loader": "^1.0.2",
     "rimraf": "^2.5.1",
     "style-loader": "^0.13.0",
+    "webpack": "^1.8.11",
+    "webpack-dev-server": "^1.8.2",
     "jasmine-core": "^2.3.4",
     "karma": "^1.1.0",
     "karma-coverage": "^1.0.0",
@@ -45,8 +50,6 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "2.0.1",
-    "phantomjs-prebuilt": "^2.1.4",
-    "webpack": "2.2.0",
-    "webpack-dev-server": "2.2.0"
+    "phantomjs-prebuilt": "^2.1.4"
   }
 }
