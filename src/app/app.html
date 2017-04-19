@@ -1,17 +1,18 @@
+<!--
 <div class="container-fluid">
     <div class="row">
-        <!--<div class="col-md-1 remove-cards-padding">
+        &lt;!&ndash;<div class="col-md-1 remove-cards-padding">
 
-        </div>-->
+        </div>&ndash;&gt;
         <nav class="col-md-1 remove-cards-padding" style="background-color: #0080b0;color: #FFF !important;">
             <ul class="nav nav-pills flex-column">
-                <li class="nav-item"  style="color:#FFF !important;padding: 12px;">
+                <li class="nav-item" style="color:#FFF !important;padding: 12px;">
                     <a href="#">
                         <i class="fa fa-user-o fa-3x"></i>
                         <p>Profile</p>
                     </a>
                 </li>
-                <li class="nav-item"  style="color:#FFF !important;padding: 12px;">
+                <li class="nav-item" style="color:#FFF !important;padding: 12px;">
                     <a href="#about">
                         <i class="fa fa-cog fa-3x"></i>
                         <p>Setting</p>
@@ -40,7 +41,7 @@
                         <p>Share</p>
                     </a>
                 </li>
-                <!--
+                &lt;!&ndash;
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
@@ -81,7 +82,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Another nav item</a>
                 </li>
-            </ul>-->
+            </ul>&ndash;&gt;
         </nav>
 
 
@@ -99,7 +100,10 @@
             <div class="card">
                 <div class="card-header">Surveillance Cameras</div>
                 <div class="card-block">
-                    <p class="card-text">Text for this card.</p>
+                    &lt;!&ndash;<div id="player" class="fp-slim" style="width: 300px;height: 300px;"></div>&ndash;&gt;
+
+                    </div>
+
                 </div>
             </div>
 
@@ -195,3 +199,28 @@
         </div>
     </div>
 </div>
+-->
+
+<div data-live="true" data-ratio="0.5625" class="flowplayer">
+
+    <video data-title="Live stream">
+        <source type="application/x-mpegurl"
+                src="//edge.flowplayer.org/bauhaus.m3u8">
+    </video>
+
+</div>
+
+<script>
+
+    flowplayer("#flowplayer", {
+        autoplay: true,live :true,
+        aspectRatio: "12:5",
+        clip: {
+            sources: [
+                {type: "application/x-mpegurl", src: "//edge.flowplayer.org/bauhaus.m3u8"},
+                {type: "video/mp4", src: "//edge.flowplayer.org/bauhaus.mp4"}
+            ],
+            title: "Javascript setup"
+        }
+    });
+</script>

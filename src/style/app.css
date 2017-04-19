@@ -27,3 +27,10 @@ a {
 .icon-cell {
     width: 16px;
 }
+
+.flowplayer {
+    background-color: #00abcd;
+}
+.flowplayer .fp-color-play {
+    fill: #eee;
+}
