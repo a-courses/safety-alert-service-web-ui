@@ -1,130 +1,83 @@
-<!--
 <div class="container-fluid">
     <div class="row">
-        &lt;!&ndash;<div class="col-md-1 remove-cards-padding">
-
-        </div>&ndash;&gt;
-        <nav class="col-md-1 remove-cards-padding" style="background-color: #0080b0;color: #FFF !important;">
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item" style="color:#FFF !important;padding: 12px;">
-                    <a href="#">
+        <nav class="col-lg-1 remove-cards-padding" style="background-color: #0080b0;">
+            <ul class="nav nav-pills flex-column text-center" style="padding-top: 10px;">
+                <li class="nav-item">
+                    <a href="#" style="color:#FFF !important;padding: 12px;">
                         <i class="fa fa-user-o fa-3x"></i>
                         <p>Profile</p>
                     </a>
                 </li>
-                <li class="nav-item" style="color:#FFF !important;padding: 12px;">
-                    <a href="#about">
+                <li class="nav-item">
+                    <a href="#about" style="color:#FFF !important;padding: 12px;">
                         <i class="fa fa-cog fa-3x"></i>
                         <p>Setting</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#photos">
+                    <a href="#photos" style="color:#FFF !important;padding: 12px;">
                         <i class="fa fa-pause fa-3x"></i>
                         <p>Record</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#contact">
+                    <a href="#contact" style="color:#FFF !important;padding: 12px;">
                         <i class="fa fa-camera fa-3x"></i>
                         <p>Record</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#contact">
+                    <a href="#contact" style="color:#FFF !important;padding: 12px;">
                         <i class="fa fa-phone fa-3x"></i>
                         <p>Call</p>
-                    </a></li>
+                    </a>
+                </li>
                 <li class="nav-item">
-                    <a href="#contact">
+                    <a href="#contact" style="color:#FFF !important;padding: 12px;">
                         <i class="fa fa-share-alt fa-3x"></i>
                         <p>Share</p>
                     </a>
                 </li>
-                &lt;!&ndash;
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Reports</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Analytics</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Export</a>
-                </li>
             </ul>
-
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Nav item</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Nav item again</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">One more nav</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Another nav item</a>
-                </li>
-            </ul>
-
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Nav item again</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">One more nav</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Another nav item</a>
-                </li>
-            </ul>&ndash;&gt;
         </nav>
 
+        <div class="col-lg-3 remove-cards-padding">
 
-        <div class="col-md-3 remove-cards-padding">
-
-            <div class="card">
-                <div class="card-header">Mobile Devices</div>
+            <div class="card" style="height: 25%">
+                <div class="card-header text-center">Mobile Devices <i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
                 <div class="card-block">
                     <p class="card-text">
-                        <img src="/img/logo.png" width="50px" height="50px"/>
+                    <div id='mediaplayer'></div>
                     </p>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">Surveillance Cameras</div>
+            <div class="card" style="height: 25%">
+                <div class="card-header text-center">Surveillance Cameras <i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
                 <div class="card-block">
-                    &lt;!&ndash;<div id="player" class="fp-slim" style="width: 300px;height: 300px;"></div>&ndash;&gt;
-
-                    </div>
-
+                    <p class="card-text">Text for this card.</p>
+                    <div id="player" class="fp-slim"></div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">Video Channels</div>
+            <div class="card" style="height: 25%">
+                <div class="card-header text-center">Video Channels <i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
                 <div class="card-block">
                     <p class="card-text">Text for this card.</p>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header">Social Networks</div>
+            <div class="card" style="height: 25%">
+                <div class="card-header text-center">Social Networks <i class="fa fa-external-link float-right" aria-hidden="true"></i> </div>
                 <div class="card-block">
                     <p class="card-text">Text for this card.</p>
                 </div>
             </div>
 
         </div>
-        <div class="col-md-5 remove-cards-padding"
+        <div class="col-lg-5 remove-cards-padding"
              style="border-right: 3px solid #0080b0;border-left: 3px solid #0080b0;">
-            <div class="card" style="border-bottom: 3px solid #0080b0;">
-                <div class="card-header">Alerts</div>
+            <div class="card" style="border-bottom: 3px solid #0080b0;height: 25%">
+                <div class="card-header text-center">Alerts<i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
                 <table class="table table-sm">
                     <thead>
                     <tr>
@@ -153,22 +106,22 @@
                     </tbody>
                 </table>
             </div>
-            <div class="card" style="border-bottom: 3px solid #0080b0;">
-                <div class="card-header">Locations</div>
-                <div class="card-block">
-                    <p class="card-text">Text for this card.</p>
-                </div>
+            <div class="card" style="border-bottom: 3px solid #0080b0;height: 50%">
+                <div class="card-header text-center">Locations<i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
+                <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1930.6110551670627!2d77.59862635640901!3d13.065878485148275!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDAzJzU3LjEiTiA3N8KwMzUnNTYuMyJF!5e1!3m2!1sen!2sin!4v1452078749856"
+                        width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen=""></iframe>
             </div>
-            <div class="card">
-                <div class="card-header">Messages</div>
+            <div class="card" style="height: 25%">
+                <div class="card-header text-center">Messages<i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
                 <div class="card-block">
                     <p class="card-text">Text for this card.</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 remove-cards-padding">
-            <div class="card">
-                <div class="card-header">Incidents</div>
+        <div class="col-lg-3 remove-cards-padding">
+            <div class="card" style="height: 50%">
+                <div class="card-header text-center">Incidents<i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
                 <table class="table table-sm">
 
                     <tbody>
@@ -183,14 +136,14 @@
                     </tbody>
                 </table>
             </div>
-            <div class="card">
-                <div class="card-header">Video Camera</div>
+            <div class="card" style="height: 25%">
+                <div class="card-header text-center">Video Camera<i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
                 <div class="card-block">
                     <p class="card-text">Text for this card.</p>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header">Content Sharing</div>
+            <div class="card" style="height: 25%">
+                <div class="card-header text-center">Content Sharing<i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
                 <div class="card-block">
                     <p class="card-text">Text for this card.</p>
                 </div>
@@ -199,28 +152,45 @@
         </div>
     </div>
 </div>
--->
 
-<div data-live="true" data-ratio="0.5625" class="flowplayer">
 
-    <video data-title="Live stream">
-        <source type="application/x-mpegurl"
-                src="//edge.flowplayer.org/bauhaus.m3u8">
-    </video>
+<script type="text/javascript">
+    jwplayer('mediaplayer').setup({
+        'flashplayer': '/img/flowplayer.rtmp-3.2.13.swf',
+        'id': 'playerID',
+        'width': '300',
+        'height': '106',
+        'sources': [{
+            'file': "rtmp://54.255.236.139:1935/vod/sample.mp4"
+        }],
+        'plugins': {
+            'qualitymonitor-2': {}
+        }
+    });
 
-</div>
+</script>
 
 <script>
 
-    flowplayer("#flowplayer", {
-        autoplay: true,live :true,
+    flowplayer("#player", {
+        autoplay: true,
+        live: true,
         aspectRatio: "12:5",
         clip: {
             sources: [
-                {type: "application/x-mpegurl", src: "//edge.flowplayer.org/bauhaus.m3u8"},
-                {type: "video/mp4", src: "//edge.flowplayer.org/bauhaus.mp4"}
+                {type: "video/mp4", src: "rtmp://54.255.236.139:1935/vod/sample.mp4"}
             ],
             title: "Javascript setup"
+        },
+        plugins: {
+
+            // here is our rtmp plugin configuration
+            hddn: {
+                url: "/img/flowplayer.rtmp-3.2.13.swf",
+
+                // netConnectionUrl defines where the streams are found
+                netConnectionUrl: 'rtmp://54.255.236.139:1935/live/android'
+            }
         }
     });
 </script>
