@@ -22,8 +22,11 @@
     "angular-messages": "^1.5.9",
     "angular-route": "^1.5.9",
     "angular-sanitize": "^1.5.9",
+    "angular-simple-logger": "^0.1.7",
     "bootstrap": "^4.0.0-alpha.6",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "leaflet": "^1.0.3",
+    "ui-leaflet": "^2.0.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.9",

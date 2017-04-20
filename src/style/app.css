@@ -36,6 +36,7 @@ body {
     fill: #eee;
 }
 
+/*
 .container-fluid {
     min-height: 100%;
     min-width: 100%;
@@ -47,6 +48,7 @@ body {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
+*/
 .row{
     min-height: 100%;
 }

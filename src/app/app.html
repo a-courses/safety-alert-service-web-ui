@@ -44,30 +44,35 @@
         <div class="col-md-3 col-lg-3  remove-cards-padding">
 
             <div class="card" style="height: 25%">
-                <div class="card-header text-center">Mobile Devices <i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
+                <div class="card-header text-center">Mobile Devices <i class="fa fa-external-link float-right"
+                                                                       aria-hidden="true"></i></div>
                 <div class="card-block">
                     <p class="card-text">
-                    <div id='mediaplayer'></div>
+                        media
+                        <!--<div id='mediaplayer'></div>-->
                     </p>
                 </div>
             </div>
 
             <div class="card" style="height: 25%">
-                <div class="card-header text-center">Surveillance Cameras <i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
+                <div class="card-header text-center">Surveillance Cameras <i class="fa fa-external-link float-right"
+                                                                             aria-hidden="true"></i></div>
                 <div class="card-block">
                     <p class="card-text">Text for this card.</p>
-                    <div id="player" class="fp-slim"></div>
+                    <!--<div id="player" class="fp-slim"></div>-->
                 </div>
             </div>
 
             <div class="card" style="height: 25%">
-                <div class="card-header text-center">Video Channels <i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
+                <div class="card-header text-center">Video Channels <i class="fa fa-external-link float-right"
+                                                                       aria-hidden="true"></i></div>
                 <div class="card-block">
                     <p class="card-text">Text for this card.</p>
                 </div>
             </div>
             <div class="card" style="height: 25%">
-                <div class="card-header text-center">Social Networks <i class="fa fa-external-link float-right" aria-hidden="true"></i> </div>
+                <div class="card-header text-center">Social Networks <i class="fa fa-external-link float-right"
+                                                                        aria-hidden="true"></i></div>
                 <div class="card-block">
                     <p class="card-text">Text for this card.</p>
                 </div>
@@ -77,7 +82,8 @@
         <div class="col-md-5 col-lg-5  remove-cards-padding"
              style="border-right: 3px solid #0080b0;border-left: 3px solid #0080b0;">
             <div class="card" style="border-bottom: 3px solid #0080b0;height: 25%">
-                <div class="card-header text-center">Alerts<i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
+                <div class="card-header text-center">Alerts<i class="fa fa-external-link float-right"
+                                                              aria-hidden="true"></i></div>
                 <table class="table table-sm">
                     <thead>
                     <tr>
@@ -107,21 +113,28 @@
                 </table>
             </div>
             <div class="card" style="border-bottom: 3px solid #0080b0;height: 50%">
-                <div class="card-header text-center">Locations<i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
-                <iframe
+                <div class="card-header text-center">Locations
+                    <i class="fa fa-external-link float-right" aria-hidden="true"></i>
+                </div>
+                <!--<iframe
                         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1930.6110551670627!2d77.59862635640901!3d13.065878485148275!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDAzJzU3LjEiTiA3N8KwMzUnNTYuMyJF!5e1!3m2!1sen!2sin!4v1452078749856"
-                        width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                        width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen=""></iframe>-->
+                <!--<leaflet width="100%" height="320px"></leaflet>-->
+                <leaflet lf-center="app.london" markers="app.markers" height="480px" width="100%"></leaflet>
+
             </div>
             <div class="card" style="height: 25%">
-                <div class="card-header text-center">Messages<i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
+                <div class="card-header text-center">Messages<i class="fa fa-external-link float-right"
+                                                                aria-hidden="true"></i></div>
                 <div class="card-block">
-                    <p class="card-text">Text for this card.</p>
+                    <p>messages</p>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-lg-3  remove-cards-padding">
             <div class="card" style="height: 50%">
-                <div class="card-header text-center">Incidents<i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
+                <div class="card-header text-center">Incidents<i class="fa fa-external-link float-right"
+                                                                 aria-hidden="true"></i></div>
                 <table class="table table-sm">
 
                     <tbody>
@@ -137,13 +150,15 @@
                 </table>
             </div>
             <div class="card" style="height: 25%">
-                <div class="card-header text-center">Video Camera<i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
+                <div class="card-header text-center">Video Camera<i class="fa fa-external-link float-right"
+                                                                    aria-hidden="true"></i></div>
                 <div class="card-block">
                     <p class="card-text">Text for this card.</p>
                 </div>
             </div>
             <div class="card" style="height: 25%">
-                <div class="card-header text-center">Content Sharing<i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
+                <div class="card-header text-center">Content Sharing<i class="fa fa-external-link float-right"
+                                                                       aria-hidden="true"></i></div>
                 <div class="card-block">
                     <p class="card-text">Text for this card.</p>
                 </div>
@@ -154,7 +169,7 @@
 </div>
 
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
     jwplayer('mediaplayer').setup({
         'flashplayer': '/img/flowplayer.rtmp-3.2.13.swf',
         'id': 'playerID',
@@ -193,4 +208,4 @@
             }
         }
     });
-</script>
+</script>-->
