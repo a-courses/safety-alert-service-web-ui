@@ -40,8 +40,8 @@ class AppCtrl {
         this.selectedDirection = 'up';
 
         this.mainMarker = {
-            lat: 13.060162,
-            lng: 77.562256,
+            lat: 12.9260208,
+            lng: 77.5470295,
             focus: true,
             message: "Hey, drag me if you want",
             draggable: true,
