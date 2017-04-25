@@ -26,7 +26,7 @@ import './alerts/AlertController';
 
 const MODULE_NAME = 'SafetyServiceModule';
 
-angular.module(MODULE_NAME, ['ngMaterial', 'ui-leaflet', 'ngRoute', 'ngMessages', 'ngSanitize', 'ControllerModule'])
+angular.module(MODULE_NAME, ['ngMaterial', 'ui-leaflet', 'ngRoute', 'ngMessages', 'ngSanitize', 'ControllerModule','ServiceModule'])
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {

@@ -1,9 +1,12 @@
-import serviceModule from '../common/ServiceModule';
+// import ServiceModule from '../common/ServiceModule';
+// import AlertService from './AlertService';
 import controllerModule from '../common/ControllerModule';
+import DeepStreamService from '../common/DeepStreamService';
 
 class AlertController {
-    constructor() {
-        this.url = 'https://github.com/preboot/angular-webpack';
+    constructor(DeepStreamService) {
+        // this.alertService = AlertService;
+        this.message = "";
         this.mainMarker = {
             lat: 12.9260208,
             lng: 77.5470295,
@@ -35,12 +38,18 @@ class AlertController {
                 lng: 0
             }
         });
+        console.log(DeepStreamService.getServerConnection());
         /*
          this.$on("leafletDirectiveMarker.dragend", function (event, args) {
          this.position.lat = args.model.lat;
          this.position.lng = args.model.lng;
          });*/
-    }
+    };
+
+    getDataFromService() {
+        return "Some text";
+    };
 }
-controllerModule.$inject = ['AlertService'];
+
+AlertController.$inject = [DeepStreamService];
 export default controllerModule.controller('AlertController', AlertController).name;

@@ -1,14 +1,12 @@
+import serviceModule from '../common/ServiceModule';
 
-import ServiceModule from '../common/ServiceModule';
-
-class AlertService{
-    constructor(){
-
+class AlertService {
+    constructor() {
     }
 
-    getFromService(){
+    getFromService() {
         return "service data";
     }
 }
 
-export default ServiceModule.service('AlertService',AlertService).name;
+export default serviceModule.service('AlertService', AlertService).name;
