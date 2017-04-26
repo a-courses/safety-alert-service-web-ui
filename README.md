@@ -6,3 +6,5 @@
 # https://www.wowza.com/docs/how-to-use-flowplayer-with-wowza-media-server-software
 # https://deepstream.io/blog/publishing-aws-sns-messages-to-browsers-tutorial/
 # http://angular-ui.github.io/ui-leaflet/examples/0000-viewer.html#/basic/first-example
+# https://deepstreamhub.com/tutorials/getting-started/angularjs/
+# https://www.codementor.io/christiannwamba/building-real-time-chat-angular-deepstream-4miwit44u
