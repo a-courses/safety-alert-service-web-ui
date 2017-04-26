@@ -16,20 +16,21 @@ class CommonService {
         var errorMsg = "";
 
         var successCallback = (result) => {
+            console.log("success");
             defer.resolve(result.data);
         };
 
         var errorCallback = (response) => {
             if (response.status >= 500) {
+                console.log("error if");
                 errorMsg = "[" + response.status + "] internal server error occurred";
             } else {
+                console.log("error else");
                 errorMsg = response.data;
             }
             defer.reject(errorTitle + " : " + errorMsg);
-            // console.log('error', errorTitle, errorMsg);
         };
         this.http.get(url).then(successCallback, errorCallback);
-
         return defer.promise;
     };
 
