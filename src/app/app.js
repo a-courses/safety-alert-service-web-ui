@@ -23,7 +23,7 @@ import 'ui-leaflet';
 import './common/ControllerModule';
 import './common/ServiceModule';
 import './alerts/AlertController';
-
+import deepstream from 'deepstream.io-client-js';
 const MODULE_NAME = 'SafetyServiceModule';
 
 angular.module(MODULE_NAME, ['ngMaterial', 'ui-leaflet', 'ngRoute', 'ngMessages', 'ngSanitize', 'ControllerModule','ServiceModule'])

@@ -16,7 +16,6 @@ class CommonService {
         var errorMsg = "";
 
         var successCallback = (result) => {
-            console.log("success");
             defer.resolve(result.data);
         };
 
