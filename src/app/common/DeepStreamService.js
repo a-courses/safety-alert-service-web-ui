@@ -9,8 +9,9 @@ class DeepStreamService {
     };
 
     getServerConnection() {
-        return deepstream('localhost:6020')
-            .login({username: 'safety-service'});
+        // wss://035.deepstreamhub.com?apiKey=74a08c64-7558-4adf-a71a-71e555580d1a
+        return deepstream('wss://035.deepstreamhub.com?apiKey=74a08c64-7558-4adf-a71a-71e555580d1a')
+            .login();
     };
 }
 

@@ -26,32 +26,33 @@ class AlertController {
         };
         this.connection = this.deepStreamService.getServerConnection();
 
-        var list = this.connection.record.getRecord('alertMessages');
-        var fields = ['firstname', 'lastname'];
-        list.set({'firstname': 'sandeep', 'lastname': 'M'});
-        this.bindMessages.getField(this, list, fields);
+        /*this.list = this.connection.record.getRecord('safety/messages');
+         this.fields = ['firstname', 'lastname'];
+         this.sendMessage = [{'firstname': 'sandeep-name', 'lastname': 'M'},
+         {'firstname': 'raghu', 'lastname': 'k'},
+         {'firstname': 'sanmay', 'lastname': 'M'}];
+         this.list.set(this.sendMessage);
+         this.bindMessages.getField(this, this.list, this.fields);
+
+
+         this.messages = [];
+         this.list.subscribe((entries) => {
+         console.log("inside subscribe controller");
+         console.log(entries);
+         this.messages = entries;
+         entries.map((entry)=> {
+         var record = this.connection.record.getRecord(entry);
+         // record.subscribe(scopeApply);
+         // return record;
+         this.messages.push(record);
+         });
+         console.log(this.messages);
+         // scopeApply();
+
+         });
+
+         */
         this.messages = [];
-        console.log("list");
-        console.log(list);
-        list.subscribe(function (entries) {
-            console.log("inside subscribe controller");
-            function scopeApply() {
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
-            }
-
-            this.messages = entries.map(function (entry) {
-                var record = this.connection.record.getRecord(entry);
-                record.subscribe(scopeApply);
-                return record;
-            });
-
-            scopeApply();
-        });
-
-        console.log(this.messages);
-
         angular.extend(this, {
             london: {
                 lat: 13.0601709,
@@ -66,16 +67,52 @@ class AlertController {
                 lng: 0
             }
         });
-
+        this.sendMessage = [];
+        this.readMessage = [];
     };
 
     loadAlertsAsync() {
+        console.log("this.messages");
+        console.log(this.messages);
         this.alertService.getAlertDataFromService().then((data) => {
             this.alertMessages = data;
         });
     };
 
+    sendMessages(formMessages) {
+        this.list = this.connection.record.getRecord('safety/messages');
+        let count = 0;
+        this.list.subscribe((entries) => {
+            console.log("inside subscribe controller -send");
+            console.log(entries);
+            count = entries.length;
+            /*angular.forEach(entries, (entry) => {
+                this.sendMessage.push(entry);
+            });*/
 
+        });
+        this.sendMessage.set(count+1,{'firstname': formMessages.firstname, 'lastname': formMessages.lastname});
+        this.list.set(this.sendMessage);
+    }
+
+    readMessages() {
+        this.list = this.connection.record.getRecord('safety/messages');
+        this.list.subscribe((entries) => {
+            this.readMessage = entries;
+            console.log("inside subscribe controller - read");
+            /*angular.forEach(entries, (entry) => {
+                this.readMessage.push(entry);
+            });*/
+
+        });
+        console.log(this.readMessage);
+    };
+
+    deleteMessages() {
+        this.list = this.connection.record.getRecord('safety/messages').delete();
+        console.log(this.list);
+        // this.list.discard();
+    };
 }
 
 AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', 'BindMessages'];

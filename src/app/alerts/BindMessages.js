@@ -8,6 +8,9 @@ class BindMessages {
     }
 
     getField(scope, record, names) {
+        console.log(scope);
+        console.log(record);
+        console.log(names);
         angular.forEach(names, function (name) {
             Object.defineProperty(scope, name, {
                 get: function () {
@@ -23,7 +26,10 @@ class BindMessages {
         });
 
         record.subscribe(function () {
-            this.scopeUpdateService.updateScope(scope)
+            console.log("record.subscribe");
+            if (!scope.$$phase) {
+                scope.$apply();
+            }
         });
     }
 }

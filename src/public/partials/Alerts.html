@@ -108,11 +108,16 @@
                         <td class="icon-cell"><a href="{{i.url}}" target="_blank"><i
                                 class="fa fa-user-circle-o blue-icons"
                                 aria-hidden="true"></i></a></td>
-                        <td class="icon-cell" ng-if="i.mediaType==='Photo'"><i class="fa fa-picture-o blue-icons" aria-hidden="true"></i></td>
-                        <td class="icon-cell" ng-if="i.mediaType==='video'"><i class="fa fa-film blue-icons" aria-hidden="true"></i></td>
-                        <td class="icon-cell" ng-if="i.mediaType==='record'"><i class="fa fa-video-camera blue-icons" aria-hidden="true"></i></td>
-                        <td class="icon-cell" ng-if="i.mediaType==='message'"><i class="fa fa-comments-o blue-icons" aria-hidden="true"></i></td>
-                        <td class="icon-cell" ng-if="i.mediaType==='phone'"><i class="fa fa-phone blue-icons" aria-hidden="true"></i></td>
+                        <td class="icon-cell" ng-if="i.mediaType==='Photo'"><i class="fa fa-picture-o blue-icons"
+                                                                               aria-hidden="true"></i></td>
+                        <td class="icon-cell" ng-if="i.mediaType==='video'"><i class="fa fa-film blue-icons"
+                                                                               aria-hidden="true"></i></td>
+                        <td class="icon-cell" ng-if="i.mediaType==='record'"><i class="fa fa-video-camera blue-icons"
+                                                                                aria-hidden="true"></i></td>
+                        <td class="icon-cell" ng-if="i.mediaType==='message'"><i class="fa fa-comments-o blue-icons"
+                                                                                 aria-hidden="true"></i></td>
+                        <td class="icon-cell" ng-if="i.mediaType==='phone'"><i class="fa fa-phone blue-icons"
+                                                                               aria-hidden="true"></i></td>
                         <td class="icon-cell"><a
                                 href="http://maps.google.com/maps?q={{i.location.latitude}},{{i.location.longitude}}"
                                 target="_blank"><i
@@ -136,7 +141,21 @@
                 <div class="card-header text-center">Messages<i class="fa fa-external-link float-right"
                                                                 aria-hidden="true"></i></div>
                 <div class="card-block">
-                    <p>messages</p>
+                    <form name="messageForm">
+                        <fieldset class="form-group">
+                            <label for="first_name">First Name</label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" ng-model="messageForm.firstname">
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" ng-model="messageForm.lastname">
+                        </fieldset>
+                        <button type="button" class="btn btn-default" ng-click="ac.sendMessages(messageForm)">Submit</button>
+                        <button type="button" class="btn btn-default" ng-click="ac.readMessages()">read</button>
+                        <button type="button" class="btn btn-default" ng-click="ac.deleteMessages()">delete all</button>
+
+                        <pre ng-bind="ac.readMessage | json"></pre>
+                    </form>
                 </div>
             </div>
         </div>
