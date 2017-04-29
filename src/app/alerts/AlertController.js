@@ -81,17 +81,17 @@ class AlertController {
 
     sendMessages(formMessages) {
         this.list = this.connection.record.getRecord('safety/messages');
-        let count = 0;
-        this.list.subscribe((entries) => {
+        console.log(formMessages.userMessage);
+        /*this.list.subscribe((entries) => {
             console.log("inside subscribe controller -send");
             console.log(entries);
             count = entries.length;
-            /*angular.forEach(entries, (entry) => {
-                this.sendMessage.push(entry);
-            });*/
+            /!*angular.forEach(entries, (entry) => {
+             this.sendMessage.push(entry);
+             });*!/
 
-        });
-        this.sendMessage.set(count+1,{'firstname': formMessages.firstname, 'lastname': formMessages.lastname});
+        });*/
+        this.sendMessage.push({'message': formMessages.userMessage});
         this.list.set(this.sendMessage);
     }
 
@@ -101,8 +101,8 @@ class AlertController {
             this.readMessage = entries;
             console.log("inside subscribe controller - read");
             /*angular.forEach(entries, (entry) => {
-                this.readMessage.push(entry);
-            });*/
+             this.readMessage.push(entry);
+             });*/
 
         });
         console.log(this.readMessage);
