@@ -98,6 +98,7 @@ class AlertController {
     readMessages() {
         this.list = this.connection.record.getRecord('safety/messages');
         this.list.subscribe((entries) => {
+            console.log(entries);
             this.readMessage = entries;
             console.log("inside subscribe controller - read");
             /*angular.forEach(entries, (entry) => {
