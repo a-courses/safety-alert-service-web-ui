@@ -1,0 +1,45 @@
+<div class="card-header text-center">Alerts<i class="fa fa-external-link float-right"
+                                              aria-hidden="true"></i></div>
+<table class="table table-sm">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>status</th>
+        <th>Level</th>
+        <th>User</th>
+        <th>Media</th>
+        <th>Map</th>
+    </tr>
+    </thead>
+    <tbody ng-init="ac.loadAlertsAsync()">
+    <tr ng-repeat="i in ac.alertMessages">
+        <td class="icon-cell"><i class="fa fa-exclamation-triangle blue-icons"
+                                 aria-hidden="true"></i>
+        </td>
+        <td>{{'12-JUL-2017'}}</td>
+        <td>{{'09:30PM'}}</td>
+        <td>{{i.status}}</td>
+        <td>{{i.incidentId}}</td>
+        <td class="icon-cell"><a href="{{i.url}}" target="_blank"><i
+                class="fa fa-user-circle-o blue-icons"
+                aria-hidden="true"></i></a></td>
+        <td class="icon-cell" ng-if="i.mediaType==='Photo'"><i class="fa fa-picture-o blue-icons"
+                                                               aria-hidden="true"></i></td>
+        <td class="icon-cell" ng-if="i.mediaType==='video'"><i class="fa fa-film blue-icons"
+                                                               aria-hidden="true"></i></td>
+        <td class="icon-cell" ng-if="i.mediaType==='record'"><i
+                class="fa fa-video-camera blue-icons"
+                aria-hidden="true"></i></td>
+        <td class="icon-cell" ng-if="i.mediaType==='message'"><i class="fa fa-comments-o blue-icons"
+                                                                 aria-hidden="true"></i></td>
+        <td class="icon-cell" ng-if="i.mediaType==='phone'"><i class="fa fa-phone blue-icons"
+                                                               aria-hidden="true"></i></td>
+        <td class="icon-cell"><a
+                href="http://maps.google.com/maps?q={{i.location.latitude}},{{i.location.longitude}}"
+                target="_blank"><i
+                class="fa fa-globe blue-icons" aria-hidden="true"></i></a></td>
+    </tr>
+    </tbody>
+</table>

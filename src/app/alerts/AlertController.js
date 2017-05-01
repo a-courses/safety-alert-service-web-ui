@@ -14,8 +14,8 @@ class AlertController {
             lat: 13.0601709,
             lng: 77.56245290000001,
             focus: true,
-            message: "Hey, drag me if you want",
-            draggable: true,
+            message: "I am draggable",
+            draggable: false,
             icon: {
                 iconUrl: 'img/location-pointer.png',
                 iconSize: [32, 32], // size of the icon
@@ -57,7 +57,7 @@ class AlertController {
             london: {
                 lat: 13.0601709,
                 lng: 77.56245290000001,
-                zoom: 8
+                zoom: 15
             },
             markers: {
                 mainMarker: angular.copy(this.mainMarker)

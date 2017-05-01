@@ -1,0 +1,19 @@
+<div class="card-header text-center">Messages<i class="fa fa-external-link float-right"
+                                                aria-hidden="true"></i></div>
+<div class="card-block">
+    <form name="messageForm">
+        <fieldset class="form-group">
+            <label for="userMessage">Message</label>
+            <input type="text" class=" form-control form-control-sm" id="userMessage"
+                   name="userMessage"
+                   ng-model="messageForm.userMessage">
+        </fieldset>
+        <button type="button" class="btn btn-default" ng-click="ac.sendMessages(messageForm)">Submit
+        </button>
+        <button type="button" class="btn btn-default" ng-click="ac.readMessages()">read</button>
+        <button type="button" class="btn btn-default" ng-click="ac.deleteMessages()">delete all
+        </button>
+
+        <pre ng-bind="ac.readMessage | json"></pre>
+    </form>
+</div>

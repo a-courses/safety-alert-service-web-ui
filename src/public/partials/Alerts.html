@@ -1,240 +1,77 @@
 <div class="row">
-    <nav class="col-md-1 col-lg-1 remove-cards-padding" style="background-color: #0080b0;">
-        <ul class="nav nav-pills flex-column text-center" style="padding-top: 10px;">
-            <li class="nav-item">
-                <a href="#" style="color:#FFF !important;padding: 12px;">
-                    <i class="fa fa-user-o fa-3x"></i>
-                    <p>Profile</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#about" style="color:#FFF !important;padding: 12px;">
-                    <i class="fa fa-cog fa-3x"></i>
-                    <p>Setting</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#photos" style="color:#FFF !important;padding: 12px;">
-                    <i class="fa fa-pause fa-3x"></i>
-                    <p>Record</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#contact" style="color:#FFF !important;padding: 12px;">
-                    <i class="fa fa-camera fa-3x"></i>
-                    <p>Record</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#contact" style="color:#FFF !important;padding: 12px;">
-                    <i class="fa fa-phone fa-3x"></i>
-                    <p>Call</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#contact" style="color:#FFF !important;padding: 12px;">
-                    <i class="fa fa-share-alt fa-3x"></i>
-                    <p>Share</p>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <!--nav bar-->
 
-    <div class="col-md-3 col-lg-3  remove-cards-padding">
-
+    <div class="col-sm-3  remove-cards-padding">
         <div class="card" style="height: 25%">
-            <div class="card-header text-center">Mobile Devices <i class="fa fa-external-link float-right"
-                                                                   aria-hidden="true"></i></div>
-            <div class="card-block">
-                <p class="card-text">
-                    media
-                    <!--<div id='mediaplayer'></div>-->
-                </p>
-            </div>
-        </div>
-
-        <div class="card" style="height: 25%">
-            <div class="card-header text-center">Surveillance Cameras <i class="fa fa-external-link float-right"
-                                                                         aria-hidden="true"></i></div>
-            <div class="card-block">
-                <p class="card-text">Text for this card.</p>
-                <!--<div id="player" class="fp-slim"></div>-->
-            </div>
-        </div>
-
-        <div class="card" style="height: 25%">
-            <div class="card-header text-center">Video Channels <i class="fa fa-external-link float-right"
-                                                                   aria-hidden="true"></i></div>
-            <div class="card-block">
-                <p class="card-text">Text for this card.</p>
-            </div>
+            <div ng-include src="'partials/mobile-video.html'"></div>
         </div>
         <div class="card" style="height: 25%">
-            <div class="card-header text-center">Social Networks <i class="fa fa-external-link float-right"
-                                                                    aria-hidden="true"></i></div>
-            <div class="card-block">
-                <p class="card-text">Text for this card.</p>
-            </div>
+            <div ng-include src="'partials/surveillance-video.html'"></div>
         </div>
-
+        <div class="card" style="height: 25%">
+            <div ng-include src="'partials/video-channel.html'"></div>
+        </div>
+        <div class="card" style="height: 25%">
+            <div ng-include="'partials/social-networks.html'"></div>
+        </div>
     </div>
-    <div class="col-md-5 col-lg-5  remove-cards-padding"
-         style="border-right: 3px solid #0080b0;border-left: 3px solid #0080b0;">
-        <div class="card" style="border-bottom: 3px solid #0080b0;height: 25%">
-            <div class="card-header text-center">Alerts<i class="fa fa-external-link float-right"
-                                                          aria-hidden="true"></i></div>
-            <table class="table table-sm">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>status</th>
-                    <th>Level</th>
-                    <th>User</th>
-                    <th>Media</th>
-                    <th>Map</th>
-                </tr>
-                </thead>
-                <tbody ng-init="ac.loadAlertsAsync()">
-                <tr ng-repeat="i in ac.alertMessages">
-                    <td class="icon-cell"><i class="fa fa-exclamation-triangle blue-icons" aria-hidden="true"></i>
-                    </td>
-                    <td>{{'12-JUL-2017'}}</td>
-                    <td>{{'09:30PM'}}</td>
-                    <td>{{i.status}}</td>
-                    <td>{{i.incidentId}}</td>
-                    <td class="icon-cell"><a href="{{i.url}}" target="_blank"><i
-                            class="fa fa-user-circle-o blue-icons"
-                            aria-hidden="true"></i></a></td>
-                    <td class="icon-cell" ng-if="i.mediaType==='Photo'"><i class="fa fa-picture-o blue-icons"
-                                                                           aria-hidden="true"></i></td>
-                    <td class="icon-cell" ng-if="i.mediaType==='video'"><i class="fa fa-film blue-icons"
-                                                                           aria-hidden="true"></i></td>
-                    <td class="icon-cell" ng-if="i.mediaType==='record'"><i class="fa fa-video-camera blue-icons"
-                                                                            aria-hidden="true"></i></td>
-                    <td class="icon-cell" ng-if="i.mediaType==='message'"><i class="fa fa-comments-o blue-icons"
-                                                                             aria-hidden="true"></i></td>
-                    <td class="icon-cell" ng-if="i.mediaType==='phone'"><i class="fa fa-phone blue-icons"
-                                                                           aria-hidden="true"></i></td>
-                    <td class="icon-cell"><a
-                            href="http://maps.google.com/maps?q={{i.location.latitude}},{{i.location.longitude}}"
-                            target="_blank"><i
-                            class="fa fa-globe blue-icons" aria-hidden="true"></i></a></td>
-                </tr>
-                </tbody>
-            </table>
+    <div class="col-sm-6 remove-cards-padding">
+        <div class="card style-4" style="height: 25%">
+            <div ng-include src="'partials/alert-messages.html'"></div>
         </div>
-        <div class="card" style="border-bottom: 3px solid #0080b0;height: 50%">
+        <div class="card" style="height: 50%">
             <div class="card-header text-center">Locations
                 <i class="fa fa-external-link float-right" aria-hidden="true"></i>
             </div>
-            <!--<iframe
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1930.6110551670627!2d77.59862635640901!3d13.065878485148275!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDAzJzU3LjEiTiA3N8KwMzUnNTYuMyJF!5e1!3m2!1sen!2sin!4v1452078749856"
-                    width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen=""></iframe>-->
-            <!--<leaflet width="100%" height="320px"></leaflet>-->
             <leaflet lf-center="ac.london" markers="ac.markers" height="460px" width="100%"></leaflet>
-
         </div>
-        <div class="card" style="height: 25%">
-            <div class="card-header text-center">Messages<i class="fa fa-external-link float-right"
-                                                            aria-hidden="true"></i></div>
-            <div class="card-block">
-                <form name="messageForm">
-                    <fieldset class="form-group">
-                        <label for="first_name">First Name</label>
-                        <input type="text" class="form-control" id="first_name" name="first_name"
-                               ng-model="messageForm.firstname">
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <label for="last_name">Last Name</label>
-                        <input type="text" class="form-control" id="last_name" name="last_name"
-                               ng-model="messageForm.lastname">
-                    </fieldset>
-                    <button type="button" class="btn btn-default" ng-click="ac.sendMessages(messageForm)">Submit
-                    </button>
-                    <button type="button" class="btn btn-default" ng-click="ac.readMessages()">read</button>
-                    <button type="button" class="btn btn-default" ng-click="ac.deleteMessages()">delete all</button>
-
-                    <pre ng-bind="ac.readMessage | json"></pre>
-                </form>
-            </div>
+        <div class="card style-4" style="height: 25%">
+            <div ng-include src="'partials/user-messages.html'"></div>
         </div>
     </div>
-    <div class="col-md-3 col-lg-3  remove-cards-padding">
-        <div class="card" style="height: 50%">
-            <div class="card-header text-center">Incidents<i class="fa fa-external-link float-right"
-                                                             aria-hidden="true"></i></div>
-            <table class="table table-sm">
-
-                <tbody>
-                <tr ng-repeat="i in [1,3,4,5,6,7,8,9,10]">
-                    <td class="icon-cell"><i class="fa fa-folder-open blue-icons" aria-hidden="true"></i></td>
-                    <td>Cell</td>
-                    <td>Cell</td>
-                    <td>Cell</td>
-                    <td class="icon-cell"><i class="fa fa-exclamation-triangle blue-icons" aria-hidden="true"></i>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+    <div class="col-sm-3 remove-cards-padding">
+        <div class="card style-4" style="height: 50%">
+            <div ng-include src="'partials/incidents-messages.html'"></div>
         </div>
         <div class="card" style="height: 25%">
-            <div class="card-header text-center">Video Camera<i class="fa fa-external-link float-right"
-                                                                aria-hidden="true"></i></div>
-            <div class="card-block">
-                <p class="card-text">Text for this card.</p>
-            </div>
+            <div ng-include src="'partials/video-camera.html'"></div>
         </div>
         <div class="card" style="height: 25%">
-            <div class="card-header text-center">Content Sharing<i class="fa fa-external-link float-right"
-                                                                   aria-hidden="true"></i></div>
-            <div class="card-block">
-                <p class="card-text">Text for this card.</p>
-            </div>
+            <div ng-include src="'partials/content-sharing.html'"></div>
         </div>
-
     </div>
 </div>
 
+<nav class="nav-container">
 
-<!--<script type="text/javascript">
-    jwplayer('mediaplayer').setup({
-        'flashplayer': '/img/flowplayer.rtmp-3.2.13.swf',
-        'id': 'playerID',
-        'width': '300',
-        'height': '106',
-        'sources': [{
-            'file': "rtmp://54.255.236.139:1935/vod/sample.mp4"
-        }],
-        'plugins': {
-            'qualitymonitor-2': {}
-        }
-    });
+    <a href="#" class="buttons" tooltip="Share"></a>
+    <a href="#" class="buttons" tooltip="Record"></a>
+    <a href="#" class="buttons" tooltip="Record"></a>
+    <a href="#" class="buttons" tooltip="Call"></a>
+    <a href="#" class="buttons" tooltip="Profile"></a>
 
-</script>
+    <a href="#" class="buttons" tooltip="Setting" data-toggle="modal" data-target="#flipFlop"></a>
+    <a class="buttons" tooltip="Share" href="#"></a>
 
-<script>
+</nav>
 
-    flowplayer("#player", {
-        autoplay: true,
-        live: true,
-        aspectRatio: "12:5",
-        clip: {
-            sources: [
-                {type: "video/mp4", src: "rtmp://54.255.236.139:1935/vod/sample.mp4"}
-            ],
-            title: "Javascript setup"
-        },
-        plugins: {
-
-            // here is our rtmp plugin configuration
-            hddn: {
-                url: "/img/flowplayer.rtmp-3.2.13.swf",
-
-                // netConnectionUrl defines where the streams are found
-                netConnectionUrl: 'rtmp://54.255.236.139:1935/live/android'
-            }
-        }
-    });
-</script>-->
+<!-- The modal -->
+<div class="modal fade" id="flipFlop" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalLabel">Flip-flop</h4>
+            </div>
+            <div class="modal-body">
+                A type of open-toed sandal.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-->

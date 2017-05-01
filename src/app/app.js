@@ -11,7 +11,6 @@ import 'angular-animate';
 import 'angular-aria';
 // Materail Design lib
 import 'angular-material';
-import '../style/app.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap'
 
