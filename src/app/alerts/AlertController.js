@@ -72,11 +72,16 @@ class AlertController {
     };
 
     loadAlertsAsync() {
-        console.log("this.messages");
-        console.log(this.messages);
-        this.alertService.getAlertDataFromService().then((data) => {
-            this.alertMessages = data;
+        console.log("this.alertmessages");
+        this.list = this.connection.record.getRecord('safety/messages');
+        this.list.subscribe((entries) => {
+            console.log(entries);
+            this.alertMessages = entries;
         });
+        console.log(this.alertMessages);
+        /*this.alertService.getAlertDataFromService().then((data) => {
+            this.alertMessages = data;
+        });*/
     };
 
     sendMessages(formMessages) {
@@ -91,8 +96,8 @@ class AlertController {
              });*!/
 
         });*/
-        this.sendMessage.push({'message': formMessages.userMessage});
-        this.list.set(this.sendMessage);
+        // this.sendMessage.push({'message': formMessages.userMessage});
+        // this.list.push(this.sendMessage);
     }
 
     readMessages() {
