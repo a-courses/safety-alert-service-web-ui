@@ -14,8 +14,9 @@ html, body, .container-fluid, .row {
 .remove-cards-padding {
     padding-right: 0px !important;
     padding-left: 0px !important;
-    border-right: 1px solid #205081;
+    border-right: 2px solid #205081;
 }
+
 .nav-container {
     bottom: 0;
     position: fixed;
@@ -42,8 +43,8 @@ html, body, .container-fluid, .row {
 .buttons:active,
 .buttons:focus,
 .buttons:hover {
-    box-shadow: 0 0 4px rgba(0,0,0,.14),
-    0 4px 8px rgba(0,0,0,.28);
+    box-shadow: 0 0 4px rgba(0, 0, 0, .14),
+    0 4px 8px rgba(0, 0, 0, .28);
     z-index: 9999;
 }
 
@@ -56,12 +57,14 @@ html, body, .container-fluid, .row {
     -ms-transform: translateY(150px);
     transform: translateY(150px);
 }
-.nav-container:hover{
+
+.nav-container:hover {
     background: #FFF;
     border: 1px solid #205081;
     padding: 10px;
     border-radius: 5px;
 }
+
 .nav-container:hover
 .buttons:not(:last-child) {
     opacity: 1;
@@ -121,6 +124,7 @@ html, body, .container-fluid, .row {
     background-image: url('../img/svg/share.svg');
     background-size: contain;
 }
+
 /* Show tooltip content on hover */
 
 [tooltip]:before {
@@ -202,4 +206,18 @@ html, body, .container-fluid, .row {
     height: 135px;
     width: 119px;
     display: inline-block;
+}
+
+.table {
+    color: #205081;
+}
+
+.table thead th {
+    border-bottom: 2px solid #205081 !important;
+    font-size: 12px !important;
+}
+
+.table td {
+    border-top: 1px solid #205081 !important;
+    font-size: 12px !important;
 }
