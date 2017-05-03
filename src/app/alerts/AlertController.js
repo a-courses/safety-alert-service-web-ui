@@ -26,33 +26,6 @@ class AlertController {
         };
         this.connection = this.deepStreamService.getServerConnection();
 
-        /*this.list = this.connection.record.getRecord('safety/messages');
-         this.fields = ['firstname', 'lastname'];
-         this.sendMessage = [{'firstname': 'sandeep-name', 'lastname': 'M'},
-         {'firstname': 'raghu', 'lastname': 'k'},
-         {'firstname': 'sanmay', 'lastname': 'M'}];
-         this.list.set(this.sendMessage);
-         this.bindMessages.getField(this, this.list, this.fields);
-
-
-         this.messages = [];
-         this.list.subscribe((entries) => {
-         console.log("inside subscribe controller");
-         console.log(entries);
-         this.messages = entries;
-         entries.map((entry)=> {
-         var record = this.connection.record.getRecord(entry);
-         // record.subscribe(scopeApply);
-         // return record;
-         this.messages.push(record);
-         });
-         console.log(this.messages);
-         // scopeApply();
-
-         });
-
-         */
-        this.messages = [];
         angular.extend(this, {
             london: {
                 lat: 13.0601709,
@@ -80,43 +53,25 @@ class AlertController {
         });
         console.log(this.alertMessages);
         /*this.alertService.getAlertDataFromService().then((data) => {
-            this.alertMessages = data;
-        });*/
+         this.alertMessages = data;
+         });*/
     };
 
     sendMessages(formMessages) {
-        this.list = this.connection.record.getRecord('safety/messages');
         console.log(formMessages.userMessage);
-        /*this.list.subscribe((entries) => {
-            console.log("inside subscribe controller -send");
-            console.log(entries);
-            count = entries.length;
-            /!*angular.forEach(entries, (entry) => {
-             this.sendMessage.push(entry);
-             });*!/
-
-        });*/
-        // this.sendMessage.push({'message': formMessages.userMessage});
-        // this.list.push(this.sendMessage);
     }
 
     readMessages() {
         this.list = this.connection.record.getRecord('safety/messages');
         this.list.subscribe((entries) => {
-            console.log(entries);
-            this.readMessage = entries;
             console.log("inside subscribe controller - read");
-            /*angular.forEach(entries, (entry) => {
-             this.readMessage.push(entry);
-             });*/
-
+            console.log(entries);
         });
-        console.log(this.readMessage);
     };
 
     deleteMessages() {
-        this.list = this.connection.record.getRecord('safety/messages').delete();
-        console.log(this.list);
+        //this.list = this.connection.record.getRecord('safety/messages').delete();
+        // console.log(this.list);
         // this.list.discard();
     };
 }
