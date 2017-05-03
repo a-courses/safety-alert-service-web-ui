@@ -14,7 +14,7 @@ html, body, .container-fluid, .row {
 .remove-cards-padding {
     padding-right: 0px !important;
     padding-left: 0px !important;
-    border-right: 1px solid #0080B0;
+    border-right: 1px solid #205081;
 }
 .nav-container {
     bottom: 0;
@@ -58,7 +58,7 @@ html, body, .container-fluid, .row {
 }
 .nav-container:hover{
     background: #FFF;
-    border: 1px solid #0080B0;
+    border: 1px solid #205081;
     padding: 10px;
     border-radius: 5px;
 }
@@ -178,12 +178,12 @@ html, body, .container-fluid, .row {
 
 .card-header {
     color: #FFFFFF !important;
-    background-color: #0080b0 !important;
+    background-color: #205081 !important;
     font-weight: bold;
 }
 
 .blue-icons {
-    color: #0080b0 !important;
+    color: #205081 !important;
 }
 
 .icon-cell {

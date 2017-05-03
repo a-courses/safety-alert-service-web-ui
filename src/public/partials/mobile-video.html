@@ -3,16 +3,35 @@
 </div>
 <div class="card-block" style="padding: 0px !important;margin: 0px !important;">
 
-    <div data-live="true" class="flowplayer" style="height: 134px;width: 118px;">
+    <!--<div data-live="true" class="flowplayer" style="height: 134px;width: 118px;">
 
         <video autoplay data-title="Live stream">
             <source type="video/mp4"
                     src="//edge.flowplayer.org/playful.mp4">
         </video>
 
-    </div>
+    </div>-->
+    <div id="player" style="width:300px;height:150px;margin:0 auto;text-align:center">
 
-    <div data-live="true" class="flowplayer" style="height:134px;width: 118px;">
+    <script type="text/javascript">
+        flowplayer("#player", "img/flowplayer-3.2.18.swf",
+                {
+                    clip: {
+                        url: 'mp4://edge.flowplayer.org/playful.mp4',
+                        live: true,
+                        provider: 'rtmp'
+                    },
+                    plugins: {
+                        rtmp: {
+                            url: 'img/flowplayer.rtmp-3.2.13.swf',
+                            netConnectionUrl: 'rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st'
+                        }
+                    }
+                }
+        );
+    </script>
+
+    <!--<div data-live="true" class="flowplayer" style="height:134px;width: 118px;">
 
         <video autoplay data-title="Live stream">
             <source type="video/mp4"
@@ -28,5 +47,5 @@
                     src="http://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov/playlist.m3u8">
         </video>
 
-    </div>
+    </div>-->
 </div>
