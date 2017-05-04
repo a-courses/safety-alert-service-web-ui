@@ -42,6 +42,7 @@ class AlertController {
         });
         this.sendMessage = [];
         this.readMessage = [];
+        this.deleteMessages();
     };
 
     loadAlertsAsync() {
@@ -73,6 +74,44 @@ class AlertController {
         //this.list = this.connection.record.getRecord('safety/messages').delete();
         // console.log(this.list);
         // this.list.discard();
+        console.log("flowplayer");
+        $("#player").flowplayer({
+            live: true,
+            swf: "video/flowplayer.swf",
+            clip: {
+                sources: [
+                    {type: "video/mp4", src: "video/sanmay.mp4"}
+                ]
+            }
+        });
+
+        $("#myplayer").flowplayer({
+
+            // option 1
+            ratio: 3 / 4,
+
+            // option 2
+            rtmp: 'rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st'
+
+        });
+
+        $("#rtmpyplayer").flowplayer({
+                swf: "video/flowplayer.swf",
+                live: true,
+                clip: {
+                    url: 'mp4:video/sanmay.mp4',
+                    live: true,
+                    provider: 'rtmp'
+                },
+                plugins: {
+                    rtmp: {
+                        url: 'video/flowplayer.rtmp-3.2.13.swf',
+                        netConnectionUrl: 'rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st'
+                    }
+                }
+            }
+        )
+        ;
     };
 }
 

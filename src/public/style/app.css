@@ -125,7 +125,6 @@ html, body, .container-fluid, .row {
     transition-delay: 100ms;
     background-image: url('../img/svg/share.svg');
     background-size: contain;
-    border: 1px solid green;
 }
 
 /* Show tooltip content on hover */

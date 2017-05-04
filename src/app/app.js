@@ -1,3 +1,5 @@
+import flowplayer from 'flowplayer';
+import 'flowplayer/dist/skin/skin.css';
 import angular from 'angular';
 import 'angular-route';
 import 'angular-sanitize';
