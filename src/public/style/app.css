@@ -221,3 +221,8 @@ html, body, .container-fluid, .row {
     border-top: 1px solid #205081 !important;
     font-size: 12px !important;
 }
+
+nav-bar-menu {
+    color: #FFF;
+    padding: 12px;
+}
