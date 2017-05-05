@@ -42,7 +42,7 @@ class AlertController {
         });
         this.sendMessage = [];
         this.readMessage = [];
-        this.deleteMessages();
+        this.loadAsyncMobileVideos();
     };
 
     loadAlertsAsync() {
@@ -58,22 +58,7 @@ class AlertController {
          });*/
     };
 
-    sendMessages(formMessages) {
-        console.log(formMessages.userMessage);
-    }
-
-    readMessages() {
-        this.list = this.connection.record.getRecord('safety/messages');
-        this.list.subscribe((entries) => {
-            console.log("inside subscribe controller - read");
-            console.log(entries);
-        });
-    };
-
-    deleteMessages() {
-        //this.list = this.connection.record.getRecord('safety/messages').delete();
-        // console.log(this.list);
-        // this.list.discard();
+    loadAsyncMobileVideos() {
         console.log("flowplayer");
         $("#player").flowplayer({
             live: true,
