@@ -58,6 +58,13 @@ class AlertController {
          });*/
     };
 
+    deleteRecordFromList(i){
+        console.log("removing entry from list");
+        console.log(i);
+        console.log(this.list);
+        // this.list.delete(i); removes all records. do not use
+    }
+
     loadAsyncMobileVideos() {
         console.log("flowplayer");
         $("#player").flowplayer({

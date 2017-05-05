@@ -11,6 +11,7 @@
         <th>User</th>
         <th>Media</th>
         <th>Map</th>
+        <th style="width: 45px;"></th>
     </tr>
     </thead>
     <tbody ng-init="ac.loadAlertsAsync()">
@@ -21,7 +22,9 @@
         <td>{{'12-JUL-2017'}}</td>
         <td>{{'09:30PM'}}</td>
         <td>{{i.status}}</td>
-        <td>{{i.incidentId}}</td>
+        <td>{{i.incidentId}}
+        </td>
+
         <td class="icon-cell"><a href="{{i.url}}" target="_blank"><i
                 class="fa fa-user-circle-o blue-icons"
                 aria-hidden="true"></i></a></td>
@@ -39,7 +42,13 @@
         <td class="icon-cell"><a
                 href="http://maps.google.com/maps?q={{i.location.latitude}},{{i.location.longitude}}"
                 target="_blank"><i
-                class="fa fa-globe blue-icons" aria-hidden="true"></i></a></td>
+                class="fa fa-globe blue-icons" aria-hidden="true"></i></a>
+        </td>
+        <td>
+            <span class="badge badge-danger"><i class="fa fa-trash" ng-click="ac.deleteRecordFromList(i)"></i></span>
+            <span class="badge badge-warning"><i class="fa fa-link" ng-if="$index%2===0"></i></span>
+            <span class="badge badge-warning"><i class="fa fa-chain-broken" ng-if="$index%2===1"></i></span>
+        </td>
     </tr>
     </tbody>
 </table>
