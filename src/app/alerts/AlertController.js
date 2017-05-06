@@ -9,7 +9,7 @@ class AlertController {
         this.commonService = CommonService;
         this.deepStreamService = DeepStreamService;
         this.bindMessages = BindMessages;
-        this.alertMessages = "";
+        this.alertMessages = [];
         this.mainMarker = {
             lat: 13.0601709,
             lng: 77.56245290000001,
@@ -42,16 +42,24 @@ class AlertController {
         });
         this.sendMessage = [];
         this.readMessage = [];
+        this.loadAlertsAsync();
         this.loadAsyncMobileVideos();
     };
 
     loadAlertsAsync() {
         console.log("this.alertmessages");
-        this.list = this.connection.record.getRecord('safety/messages');
-        this.list.subscribe((entries) => {
-            console.log(entries);
-            this.alertMessages = entries;
+        this.messagelist = this.connection.record.getList('safety/alerts');
+        this.messagelist.subscribe((entries)=> {
+            entries.map((entry)=> {
+                this.list = this.connection.record.getRecord(entry);
+                this.list.subscribe((alert) => {
+                    console.log("alert");
+                    console.log(alert);
+                    this.alertMessages.push(alert);
+                });
+            });
         });
+
         console.log(this.alertMessages);
         /*this.alertService.getAlertDataFromService().then((data) => {
          this.alertMessages = data;
