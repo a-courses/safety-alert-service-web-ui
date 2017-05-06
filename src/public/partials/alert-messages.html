@@ -28,24 +28,20 @@
         <td class="icon-cell"><a href="{{i.url}}" target="_blank"><i
                 class="fa fa-user-circle-o blue-icons"
                 aria-hidden="true"></i></a></td>
-        <td class="icon-cell" ng-if="i.mediaType==='Photo'"><i class="fa fa-picture-o blue-icons"
-                                                               aria-hidden="true"></i></td>
-        <td class="icon-cell" ng-if="i.mediaType==='video'"><i class="fa fa-film blue-icons"
-                                                               aria-hidden="true"></i></td>
-        <td class="icon-cell" ng-if="i.mediaType==='record'"><i
-                class="fa fa-video-camera blue-icons"
-                aria-hidden="true"></i></td>
-        <td class="icon-cell" ng-if="i.mediaType==='message'"><i class="fa fa-comments-o blue-icons"
-                                                                 aria-hidden="true"></i></td>
-        <td class="icon-cell" ng-if="i.mediaType==='phone'"><i class="fa fa-phone blue-icons"
-                                                               aria-hidden="true"></i></td>
+        <td class="icon-cell">
+            <i ng-if="i.mediaType==='Photo'" class="fa fa-picture-o blue-icons" aria-hidden="true"></i>
+            <i ng-if="i.mediaType==='video'" class="fa fa-film blue-icons" aria-hidden="true"></i>
+            <i ng-if="i.mediaType==='record'" class="fa fa-video-camera blue-icons" aria-hidden="true"></i>
+            <i ng-if="i.mediaType==='message'" class="fa fa-comments-o blue-icons" aria-hidden="true"></i>
+            <i ng-if="i.mediaType==='phone'" class="fa fa-phone blue-icons" aria-hidden="true"></i>
+        </td>
         <td class="icon-cell"><a
                 href="http://maps.google.com/maps?q={{i.location.latitude}},{{i.location.longitude}}"
                 target="_blank"><i
                 class="fa fa-globe blue-icons" aria-hidden="true"></i></a>
         </td>
         <td>
-            <span class="badge badge-danger"><i class="fa fa-trash" ng-click="ac.deleteRecordFromList(i)"></i></span>
+            <span class="badge badge-danger"><i class="fa fa-trash" ng-click="ac.deleteRecordFromList(i.entry)"></i></span>
             <span class="badge badge-warning"><i class="fa fa-link" ng-if="$index%2===0"></i></span>
             <span class="badge badge-warning"><i class="fa fa-chain-broken" ng-if="$index%2===1"></i></span>
         </td>

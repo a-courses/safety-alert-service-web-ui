@@ -25,7 +25,7 @@ class AlertController {
             }
         };
         this.connection = this.deepStreamService.getServerConnection();
-
+        this.messagelist = this.connection.record.getList('safety/alerts');
         angular.extend(this, {
             london: {
                 lat: 13.0601709,
@@ -40,21 +40,19 @@ class AlertController {
                 lng: 0
             }
         });
-        this.sendMessage = [];
-        this.readMessage = [];
         this.loadAlertsAsync();
         this.loadAsyncMobileVideos();
     };
 
     loadAlertsAsync() {
-        console.log("this.alertmessages");
-        this.messagelist = this.connection.record.getList('safety/alerts');
+
         this.messagelist.subscribe((entries)=> {
             entries.map((entry)=> {
                 this.list = this.connection.record.getRecord(entry);
                 this.list.subscribe((alert) => {
                     console.log("alert");
                     console.log(alert);
+                    alert.entry = entry;
                     this.alertMessages.push(alert);
                 });
             });
@@ -66,11 +64,11 @@ class AlertController {
          });*/
     };
 
-    deleteRecordFromList(i){
+    deleteRecordFromList(recordName) {
         console.log("removing entry from list");
-        console.log(i);
-        console.log(this.list);
-        // this.list.delete(i); removes all records. do not use
+        console.log(recordName);
+        this.messagelist.removeEntry(recordName);
+        this.connection.record.getRecord(recordName).delete();
     }
 
     loadAsyncMobileVideos() {
