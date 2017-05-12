@@ -4,11 +4,10 @@ import DeepStreamService from '../common/DeepStreamService';
 import BindMessages from './BindMessages';
 
 class AlertController {
-    constructor(AlertService, CommonService, DeepStreamService, BindMessages) {
+    constructor(AlertService, CommonService, DeepStreamService) {
         this.alertService = AlertService;
         this.commonService = CommonService;
         this.deepStreamService = DeepStreamService;
-        this.bindMessages = BindMessages;
         this.alertMessages = [];
         this.mainMarker = {
             lat: 13.0601709,
@@ -47,17 +46,15 @@ class AlertController {
     loadAlertsAsync() {
 
         this.messagelist.subscribe((entries)=> {
-            entries.map((entry)=> {
-                this.list = this.connection.record.getRecord(entry);
-                this.list.subscribe((alert) => {
-                    console.log("alert");
-                    console.log(alert);
-                    alert.entry = entry;
-                    this.alertMessages.push(alert);
-                });
+            function scopeApply() {
+            }
+
+            this.alertMessages = entries.map((entry)=> {
+                var list = this.connection.record.getRecord(entry);
+                list.subscribe(scopeApply);
+                return list;
             });
         });
-
         console.log(this.alertMessages);
         /*this.alertService.getAlertDataFromService().then((data) => {
          this.alertMessages = data;
@@ -65,53 +62,64 @@ class AlertController {
     };
 
     deleteRecordFromList(recordName) {
-        console.log("removing entry from list");
-        console.log(recordName);
         this.messagelist.removeEntry(recordName);
         this.connection.record.getRecord(recordName).delete();
     }
 
+    addRecordToList(alertRecord) {
+
+    }
+
     loadAsyncMobileVideos() {
         console.log("flowplayer");
-        $("#player").flowplayer({
-            live: true,
-            swf: "video/flowplayer.swf",
+        jwplayer("stream1").setup({
+            autostart: 'true',
+            primary: 'html5',
+            file: "rtmp://192.168.1.103:1935/Sandeep-live-demo/myStream",
+            image: "img/location-pointer.png",
+            height: 250,
+            width: 230
+        });
+
+        jwplayer("stream2").setup({
+            autostart: 'true',
+            primary: 'html5',
+            file: "rtmp://192.168.1.103:1935/Sandeep-live-demo/myStream",
+            image: "img/location-pointer.png",
+            height: 250,
+            width: 230
+        });
+        // jwplayer().play();
+
+        // --------------
+       /* flowplayer("#live", "http://releases.flowplayer.org/swf/flowplayer-3.2.18.swf", {
             clip: {
-                sources: [
-                    {type: "video/mp4", src: "video/sanmay.mp4"}
-                ]
-            }
-        });
-
-        $("#myplayer").flowplayer({
-
-            // option 1
-            ratio: 3 / 4,
-
-            // option 2
-            rtmp: 'rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st'
-
-        });
-
-        $("#rtmpyplayer").flowplayer({
-                swf: "video/flowplayer.swf",
+                url: 'myStream',
                 live: true,
-                clip: {
-                    url: 'mp4:video/sanmay.mp4',
-                    live: true,
-                    provider: 'rtmp'
-                },
-                plugins: {
-                    rtmp: {
-                        url: 'video/flowplayer.rtmp-3.2.13.swf',
-                        netConnectionUrl: 'rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st'
-                    }
+                provider: 'rtmp'
+            },
+
+            // streaming plugins are configured under the plugins node
+            plugins: {
+                rtmp: {
+                    url: "video/flowplayer.rtmp-3.2.13.swf",
+                    netConnectionUrl: 'rtmp://192.168.1.103:1935/Sandeep-live-demo'
                 }
             }
-        )
-        ;
+        });*/
+       this.url = "rtmp://192.168.1.103:1935/Sandeep-live-demo";
+        this.file ="myStream";
+        $("#flowplayer123").flowplayer({
+            live: true,
+            swf: "video/flowplayer.swf",
+            rtmp: this.url,
+            playlist: [[{
+                flash: this.file
+            }]]
+        });
+
     };
 }
 
-AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', 'BindMessages'];
+AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService'];
 export default controllerModule.controller('AlertController', AlertController).name;
