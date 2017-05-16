@@ -2,6 +2,7 @@ import AlertService from './AlertService';
 import controllerModule from '../common/ControllerModule';
 import DeepStreamService from '../common/DeepStreamService';
 import BindMessages from './BindMessages';
+import _ from 'underscore';
 
 class AlertController {
     constructor(AlertService, CommonService, DeepStreamService) {
@@ -11,7 +12,7 @@ class AlertController {
         this.alertMessages = [];
         this.mainMarker = {
             lat: 13.0601709,
-            lng: 77.56245290000001,
+            lang: 77.56245290000001,
             focus: true,
             message: "I am draggable",
             draggable: false,
@@ -27,20 +28,15 @@ class AlertController {
         this.messagelist = this.connection.record.getList('safety/alerts');
         angular.extend(this, {
             london: {
-                lat: 13.0601709,
-                lng: 77.56245290000001,
-                zoom: 15
+                lat: 12.972169,
+                lng: 77.590606,
+                zoom: 11
             },
-            markers: {
-                mainMarker: angular.copy(this.mainMarker)
-            },
-            position: {
-                lat: 51,
-                lng: 0
-            }
+            markers: this.mapDetails
         });
         this.loadAlertsAsync();
         this.loadAsyncMobileVideos();
+        console.log();
     };
 
     loadAlertsAsync() {
@@ -56,9 +52,31 @@ class AlertController {
             });
         });
         console.log(this.alertMessages);
-        /*this.alertService.getAlertDataFromService().then((data) => {
-         this.alertMessages = data;
-         });*/
+        this.mapDetails = {};
+        this.alertService.getAlertDataFromService().then((data) => {
+            this.mapData = _.groupBy(data, "incidentId");
+            _.each(this.mapData, (item, key) => {
+                this.mapDetails[key] = {
+                    lat: item[0].location.latitude,
+                    lng: item[0].location.longitude,
+                    message: "I am : " + key,
+                    draggable: true,
+                    icon: {
+                        iconUrl: 'img/location-pointer.png',
+                    }
+                };
+            });
+        }).then(()=> {
+            console.log(this.mapDetails);
+            angular.extend(this, {
+                london: {
+                    lat: 12.972169,
+                    lng: 77.590606,
+                    zoom: 11
+                },
+                markers: this.mapDetails
+            });
+        });
     };
 
     deleteRecordFromList(recordName) {
@@ -75,7 +93,7 @@ class AlertController {
         jwplayer("stream1").setup({
             autostart: 'true',
             primary: 'html5',
-            file: "rtmp://192.168.1.103:1935/Sandeep-live-demo/myStream",
+            file: "rtmp://192.168.1.102:1935/Sandeep-live-demo/myStream",
             image: "img/location-pointer.png",
             height: 250,
             width: 230
@@ -84,7 +102,7 @@ class AlertController {
         jwplayer("stream2").setup({
             autostart: 'true',
             primary: 'html5',
-            file: "rtmp://192.168.1.103:1935/Sandeep-live-demo/myStream",
+            file: "rtmp://192.168.1.102:1935/Sandeep-live-demo/myStream",
             image: "img/location-pointer.png",
             height: 250,
             width: 230
@@ -92,23 +110,23 @@ class AlertController {
         // jwplayer().play();
 
         // --------------
-       /* flowplayer("#live", "http://releases.flowplayer.org/swf/flowplayer-3.2.18.swf", {
-            clip: {
-                url: 'myStream',
-                live: true,
-                provider: 'rtmp'
-            },
+        /* flowplayer("#live", "http://releases.flowplayer.org/swf/flowplayer-3.2.18.swf", {
+         clip: {
+         url: 'myStream',
+         live: true,
+         provider: 'rtmp'
+         },
 
-            // streaming plugins are configured under the plugins node
-            plugins: {
-                rtmp: {
-                    url: "video/flowplayer.rtmp-3.2.13.swf",
-                    netConnectionUrl: 'rtmp://192.168.1.103:1935/Sandeep-live-demo'
-                }
-            }
-        });*/
-       this.url = "rtmp://192.168.1.103:1935/Sandeep-live-demo";
-        this.file ="myStream";
+         // streaming plugins are configured under the plugins node
+         plugins: {
+         rtmp: {
+         url: "video/flowplayer.rtmp-3.2.13.swf",
+         netConnectionUrl: 'rtmp://192.168.1.102:1935/Sandeep-live-demo'
+         }
+         }
+         });*/
+        this.url = "rtmp://192.168.1.102:1935/Sandeep-live-demo";
+        this.file = "myStream";
         $("#flowplayer123").flowplayer({
             live: true,
             swf: "video/flowplayer.swf",
