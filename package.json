@@ -13,7 +13,6 @@
     "type": "git",
     "url": "git@github.com:jsandeepm/safety-alert-service-web-ui.git"
   },
-  "homepage": "https://github.com/preboot/angularjs-webpack",
   "dependencies": {
     "angular": "~1.6.4",
     "angular-animate": "~1.6.4",
