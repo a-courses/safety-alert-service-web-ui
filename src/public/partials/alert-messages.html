@@ -35,7 +35,7 @@
             <i ng-if="i.get('mediaType')==='message'" class="fa fa-comments-o blue-icons" aria-hidden="true"></i>
             <i ng-if="i.get('mediaType')==='phone'" class="fa fa-phone blue-icons" aria-hidden="true"></i>
         </td>
-        <td class="icon-cell"><a
+        <td class="icon-cell" ng-init=""><a
                 href="http://maps.google.com/maps?q={{i.get('location.latitude')}},{{i.get('location.longitude')}}"
                 target="_blank"><i
                 class="fa fa-globe blue-icons" aria-hidden="true"></i></a>

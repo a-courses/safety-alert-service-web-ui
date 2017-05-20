@@ -5,11 +5,12 @@ import BindMessages from './BindMessages';
 import _ from 'underscore';
 
 class AlertController {
-    constructor(AlertService, CommonService, DeepStreamService) {
+    constructor(AlertService, CommonService, DeepStreamService, $scope) {
         this.alertService = AlertService;
         this.commonService = CommonService;
         this.deepStreamService = DeepStreamService;
         this.alertMessages = [];
+        this.mapDetails = {};
         this.mainMarker = {
             lat: 13.0601709,
             lang: 77.56245290000001,
@@ -41,33 +42,57 @@ class AlertController {
 
     loadAlertsAsync() {
 
-        this.messagelist.subscribe((entries)=> {
-            function scopeApply() {
-            }
 
-            this.alertMessages = entries.map((entry)=> {
-                var list = this.connection.record.getRecord(entry);
-                list.subscribe(scopeApply);
-                return list;
-            });
-        });
-        console.log(this.alertMessages);
-        this.mapDetails = {};
-        this.alertService.getAlertDataFromService().then((data) => {
-            this.mapData = _.groupBy(data, "incidentId");
-            _.each(this.mapData, (item, key) => {
-                this.mapDetails[key] = {
-                    lat: item[0].location.latitude,
-                    lng: item[0].location.longitude,
-                    message: "I am : " + key,
+        this.messagelist.subscribe((entries)=> {
+            /*scopeApply((data) => {
+                console.log(data);
+                this.mapDetails[data.incidentId] = {
+                    lat: data.location.latitude,
+                    lng: data.location.longitude,
+                    message: "I am : " + data.id,
                     draggable: true,
                     icon: {
                         iconUrl: 'img/location-pointer.png',
                     }
-                };
+                }
+
             });
-        }).then(()=> {
-            console.log(this.mapDetails);
+*/
+            this.mapDetails = {};
+            this.alertMessages = entries.map((entry)=> {
+                var list = this.connection.record.getRecord(entry);
+                /*list.whenReady((record) => {
+                 console.log("updated");
+                 this.mapDetails[record.get('incidentId')] = {
+                 lat: record.get('location.latitude'),
+                 lng: record.get('location.longitude'),
+                 message: "I am : " + record.get('id'),
+                 draggable: true,
+                 icon: {
+                 iconUrl: 'img/location-pointer.png',
+                 }
+                 };
+                 console.log(this.mapDetails);
+                 });*/
+
+                list.subscribe((data) => {
+                    console.log(data);
+                    this.mapDetails[data.incidentId] = {
+                        lat: data.location.latitude,
+                        lng: data.location.longitude,
+                        message: "I am : " + data.id,
+                        draggable: true,
+                        icon: {
+                            iconUrl: 'img/location-pointer.png',
+                        }
+                    }
+                    console.log(this.mapDetails[data.incidentId]);
+
+                });
+                return list;
+            });
+
+
             angular.extend(this, {
                 london: {
                     lat: 12.972169,
@@ -76,6 +101,25 @@ class AlertController {
                 },
                 markers: this.mapDetails
             });
+            /*
+             console.log(this.alertMessages);
+             _.each(this.alertMessages, (i) => {
+             console.log(i);
+             });
+             this.mapDetails = {};
+             this.mapData = _.groupBy(this.alertMessages, "incidentId");
+             _.each(this.mapData, (item, key) => {
+             this.mapDetails[key] = {
+             lat: item[0].location.latitude,
+             lng: item[0].location.longitude,
+             message: "I am : " + key,
+             draggable: true,
+             icon: {
+             iconUrl: 'img/location-pointer.png',
+             }
+             };
+             });*/
+
         });
     };
 
@@ -139,5 +183,5 @@ class AlertController {
     };
 }
 
-AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService'];
+AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', '$scope'];
 export default controllerModule.controller('AlertController', AlertController).name;
