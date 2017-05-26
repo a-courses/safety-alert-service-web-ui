@@ -45,19 +45,19 @@ class AlertController {
 
         this.messagelist.subscribe((entries)=> {
             /*scopeApply((data) => {
-                console.log(data);
-                this.mapDetails[data.incidentId] = {
-                    lat: data.location.latitude,
-                    lng: data.location.longitude,
-                    message: "I am : " + data.id,
-                    draggable: true,
-                    icon: {
-                        iconUrl: 'img/location-pointer.png',
-                    }
-                }
+             console.log(data);
+             this.mapDetails[data.incidentId] = {
+             lat: data.location.latitude,
+             lng: data.location.longitude,
+             message: "I am : " + data.id,
+             draggable: true,
+             icon: {
+             iconUrl: 'img/location-pointer.png',
+             }
+             }
 
-            });
-*/
+             });
+             */
             this.mapDetails = {};
             this.alertMessages = entries.map((entry)=> {
                 var list = this.connection.record.getRecord(entry);
@@ -134,23 +134,53 @@ class AlertController {
 
     loadAsyncMobileVideos() {
         console.log("flowplayer");
-        jwplayer("stream1").setup({
-            autostart: 'true',
-            primary: 'html5',
-            file: "rtmp://192.168.1.102:1935/Sandeep-live-demo/myStream",
-            image: "img/location-pointer.png",
-            height: 250,
-            width: 230
+
+        this.url = "rtmp://192.168.1.103:1935/Sandeep-live-demo";
+        this.file = "myStream";
+        $("#flowplayer1").flowplayer({
+            live: true,
+            swf: "video/flowplayer.swf",
+            rtmp: this.url,
+            playlist: [[{
+                flash: this.file
+            }]]
         });
 
-        jwplayer("stream2").setup({
-            autostart: 'true',
-            primary: 'html5',
-            file: "rtmp://192.168.1.102:1935/Sandeep-live-demo/myStream",
-            image: "img/location-pointer.png",
-            height: 250,
-            width: 230
+        $("#flowplayer2").flowplayer({
+            live: true,
+            swf: "video/flowplayer.swf",
+            rtmp: this.url,
+            playlist: [[{
+                flash: this.file
+            }]]
         });
+
+        $("#flowplayer3").flowplayer({
+            live: true,
+            swf: "video/flowplayer.swf",
+            rtmp: this.url,
+            playlist: [[{
+                flash: this.file
+            }]]
+        });
+
+        /*jwplayer("stream1").setup({
+         autostart: 'true',
+         primary: 'html5',
+         file: "rtmp://192.168.1.102:1935/Sandeep-live-demo/myStream",
+         image: "img/location-pointer.png",
+         height: 250,
+         width: 230
+         });
+
+         jwplayer("stream2").setup({
+         autostart: 'true',
+         primary: 'html5',
+         file: "rtmp://192.168.1.102:1935/Sandeep-live-demo/myStream",
+         image: "img/location-pointer.png",
+         height: 250,
+         width: 230
+         });*/
         // jwplayer().play();
 
         // --------------
@@ -169,17 +199,6 @@ class AlertController {
          }
          }
          });*/
-        this.url = "rtmp://192.168.1.102:1935/Sandeep-live-demo";
-        this.file = "myStream";
-        $("#flowplayer123").flowplayer({
-            live: true,
-            swf: "video/flowplayer.swf",
-            rtmp: this.url,
-            playlist: [[{
-                flash: this.file
-            }]]
-        });
-
     };
 }
 
