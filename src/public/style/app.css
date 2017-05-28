@@ -1,9 +1,10 @@
 /* styles in src/style directory are applied to the whole page */
 
 html, body, .container-fluid, .row {
-    font-size: 14px !important;
+    font-size: 16px !important;
     line-height: 1.2 !important;
     height: 100%;
+    font-family: 'Roboto', serif;
 
 }
 
@@ -189,19 +190,20 @@ html, body, .container-fluid, .row {
 }
 
 .blue-icons {
-    color: #205081 !important;
+    color: #00B0F0 !important;
 }
 
 .orange-icons{
-    color: #d9534f;
+    color: #00B0F0;
 }
 
 .icon-cell {
-    width: 16px;
+    width: 50px;
+    text-align: center;
 }
 
 .flowplayer {
-    background-color: #00abcd;
+    background-color: #00B0F0;
 }
 
 .flowplayer .fp-color-play {
@@ -221,23 +223,20 @@ html, body, .container-fluid, .row {
 .table thead th {
     border-bottom: 2px solid #205081 !important;
     font-size: 12px !important;
+    text-align: center!important;
 }
 
 .table td {
     border-top: 1px solid #205081 !important;
     font-size: 12px !important;
+    text-align: center!important;
 }
 
-#video-wrapper{
-    background:red;
-    height:100%;
+.badge-custom-color {
+    background-color: #00B0F0!important;
 }
 
-#video{
-    float:left;
-    width:50px;
-    height:100%;
-    background:blue;
-    margin:10px;
-
+.alert-icons {
+    width: 18px;
+    height: 18px;
 }
