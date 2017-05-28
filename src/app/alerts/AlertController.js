@@ -85,7 +85,7 @@ class AlertController {
                         icon: {
                             iconUrl: 'img/location-pointer.png',
                         }
-                    }
+                    };
                     console.log(this.mapDetails[data.incidentId]);
 
                 });

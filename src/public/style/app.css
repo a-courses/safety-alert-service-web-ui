@@ -192,6 +192,10 @@ html, body, .container-fluid, .row {
     color: #205081 !important;
 }
 
+.orange-icons{
+    color: #d9534f;
+}
+
 .icon-cell {
     width: 16px;
 }
