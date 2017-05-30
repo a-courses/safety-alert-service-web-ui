@@ -397,3 +397,8 @@ body {
     border-radius: 0em !important;
 }
 
+.video-channels {
+    text-align: center;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}

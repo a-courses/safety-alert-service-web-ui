@@ -14,23 +14,64 @@
                 </div>
             </div>
         </div>
-         <div class="card" style="height: 25%">
-             <div class="card-header text-center">
-                 Surveillance Cameras <i class="fa fa-external-link float-right" aria-hidden="true"></i>
-             </div>
-             <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
-                 <div class="row">
-                     <div id="surveillanceCamera1" class="col-md-4" style="border-right:2px solid #FFFFFF"></div>
-                     <div id="surveillanceCamera2" class="col-md-4" style="border-right:2px solid #FFFFFF"></div>
-                     <div id="surveillanceCamera3" class="col-md-4"></div>
-                 </div>
-             </div>
-         </div>
         <div class="card" style="height: 25%">
-            <div ng-include src="'partials/video-channel.html'"></div>
+            <div class="card-header text-center">
+                Surveillance Cameras <i class="fa fa-external-link float-right" aria-hidden="true"></i>
+            </div>
+            <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
+                <div class="row">
+                    <div id="surveillanceCamera1" class="col-md-4" style="border-right:2px solid #FFFFFF"></div>
+                    <div id="surveillanceCamera2" class="col-md-4" style="border-right:2px solid #FFFFFF"></div>
+                    <div id="surveillanceCamera3" class="col-md-4"></div>
+                </div>
+            </div>
         </div>
         <div class="card" style="height: 25%">
-            <div ng-include="'partials/social-networks.html'"></div>
+            <div class="card-header text-center">Video Channels <i class="fa fa-external-link float-right"
+                                                                   aria-hidden="true"></i></div>
+            <div class="card-block" style="height: inherit;padding: 0em 0.9rem;background: #505050">
+                <div class="row" style="height: calc(100%/2);">
+                    <div id="videoChannel1" class="col-md-6 video-channels">
+                        Channel 1
+                    </div>
+                    <div id="videoChannel2" class="col-md-6 video-channels">
+                        Channel 2
+                    </div>
+                </div>
+                <div class="row" style="height: calc(100%/2)">
+                    <div id="videoChannel3" class="col-md-6 video-channels">
+                        Channel 3
+                    </div>
+                    <div id="videoChannel4" class="col-md-6 video-channels">
+                        Channel 4
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card" style="height: 25%">
+            <div class="card-header text-center">Social Networks
+                <i class="fa fa-external-link float-right" aria-hidden="true"></i>
+            </div>
+            <div class="card-block" style="height: inherit;padding: 0em 0.9rem;background: #505050">
+                <div class="row" style="height: calc(100%/2);">
+                    <div id="socialNetwork1" class="col-md-6 video-channels">
+                        Facebook
+                    </div>
+                    <div id="socialNetwork2" class="col-md-6 video-channels">
+                        Twitter
+                    </div>
+                </div>
+                <div class="row" style="height: calc(100%/2)">
+                    <div id="socialNetwork3" class="col-md-6 video-channels">
+                        YouTube
+                    </div>
+                    <div id="socialNetwork4" class="col-md-6 video-channels">
+                        Instagram
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-sm-6 remove-cards-padding">
@@ -55,7 +96,28 @@
             <div ng-include src="'partials/video-camera.html'"></div>
         </div>
         <div class="card" style="height: 25%">
-            <div ng-include src="'partials/content-sharing.html'"></div>
+            <div class="card-header text-center">Content Sharing
+                <i class="fa fa-external-link float-right" aria-hidden="true"></i>
+            </div>
+            <div class="card-block" style="height: inherit;padding: 0em 0.9rem;background: #505050">
+                <div class="row" style="height: calc(100%/2);">
+                    <div id="contentSharing1" class="col-md-6 video-channels">
+                       1
+        </div>
+                    <div id="contentSharing2" class="col-md-6 video-channels">
+                        2
+                    </div>
+                </div>
+                <div class="row" style="height: calc(100%/2)">
+                    <div id="contentSharing3" class="col-md-6 video-channels">
+                        3
+                    </div>
+                    <div id="contentSharing4" class="col-md-6 video-channels">
+                        4
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
