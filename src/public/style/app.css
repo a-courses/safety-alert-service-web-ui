@@ -193,7 +193,7 @@ html, body, .container-fluid, .row {
     color: #00B0F0 !important;
 }
 
-.orange-icons{
+.orange-icons {
     color: #00B0F0;
 }
 
@@ -222,18 +222,19 @@ html, body, .container-fluid, .row {
 
 .table thead th {
     border-bottom: 2px solid #205081 !important;
-    font-size: 12px !important;
-    text-align: center!important;
+    font-size: 14px !important;
+    text-align: center !important;
+    color: #00B0F0 !important;
 }
 
 .table td {
     border-top: 1px solid #205081 !important;
     font-size: 12px !important;
-    text-align: center!important;
+    text-align: center !important;
 }
 
 .badge-custom-color {
-    background-color: #00B0F0!important;
+    background-color: #00B0F0 !important;
 }
 
 .alert-icons {
@@ -301,7 +302,7 @@ body {
     height: 40px;
     background: url('../img/svg/menu.svg');
     background-size: contain;
-    color : #FFFFFF;
+    color: #FFFFFF;
 }
 
 .fab-buttons__item {
@@ -360,23 +361,39 @@ body {
     height: 40px;
 }
 
-.icon-Profile {
+.icon-profile {
     background: url('../img/svg/user.svg') center no-repeat;
     background-size: contain;
 }
+
 .icon-call {
     background: url('../img/svg/phone.svg') center no-repeat;
     background-size: contain;
 }
+
 .icon-video-record {
     background: url('../img/svg/record.svg') center no-repeat;
     background-size: contain;
 }
+
 .icon-audio-record {
     background: url('../img/svg/record.svg') center no-repeat;
     background-size: contain;
 }
+
 .icon-share {
     background: url('../img/svg/Share.svg') center no-repeat;
     background-size: contain;
 }
+
+.icon-settings {
+    background: url('../img/svg/Settings.svg') center no-repeat;
+    background-size: contain;
+}
+
+.flowplayer {
+    font-family: inherit !important;
+    font-size: 12px !important;
+    border-radius: 0em !important;
+}
+

@@ -1,11 +1,10 @@
 import AlertService from './AlertService';
 import controllerModule from '../common/ControllerModule';
 import DeepStreamService from '../common/DeepStreamService';
-import BindMessages from './BindMessages';
 import _ from 'underscore';
 
 class AlertController {
-    constructor(AlertService, CommonService, DeepStreamService, $scope) {
+    constructor(AlertService, CommonService, DeepStreamService) {
         this.alertService = AlertService;
         this.commonService = CommonService;
         this.deepStreamService = DeepStreamService;
@@ -41,40 +40,10 @@ class AlertController {
     };
 
     loadAlertsAsync() {
-
-
         this.messagelist.subscribe((entries)=> {
-            /*scopeApply((data) => {
-             console.log(data);
-             this.mapDetails[data.incidentId] = {
-             lat: data.location.latitude,
-             lng: data.location.longitude,
-             message: "I am : " + data.id,
-             draggable: true,
-             icon: {
-             iconUrl: 'img/location-pointer.png',
-             }
-             }
-
-             });
-             */
             this.mapDetails = {};
             this.alertMessages = entries.map((entry)=> {
                 var list = this.connection.record.getRecord(entry);
-                /*list.whenReady((record) => {
-                 console.log("updated");
-                 this.mapDetails[record.get('incidentId')] = {
-                 lat: record.get('location.latitude'),
-                 lng: record.get('location.longitude'),
-                 message: "I am : " + record.get('id'),
-                 draggable: true,
-                 icon: {
-                 iconUrl: 'img/location-pointer.png',
-                 }
-                 };
-                 console.log(this.mapDetails);
-                 });*/
-
                 list.subscribe((data) => {
                     console.log(data);
                     this.mapDetails[data.incidentId] = {
@@ -87,11 +56,9 @@ class AlertController {
                         }
                     };
                     console.log(this.mapDetails[data.incidentId]);
-
                 });
                 return list;
             });
-
 
             angular.extend(this, {
                 london: {
@@ -101,24 +68,6 @@ class AlertController {
                 },
                 markers: this.mapDetails
             });
-            /*
-             console.log(this.alertMessages);
-             _.each(this.alertMessages, (i) => {
-             console.log(i);
-             });
-             this.mapDetails = {};
-             this.mapData = _.groupBy(this.alertMessages, "incidentId");
-             _.each(this.mapData, (item, key) => {
-             this.mapDetails[key] = {
-             lat: item[0].location.latitude,
-             lng: item[0].location.longitude,
-             message: "I am : " + key,
-             draggable: true,
-             icon: {
-             iconUrl: 'img/location-pointer.png',
-             }
-             };
-             });*/
 
         });
     };
@@ -164,43 +113,37 @@ class AlertController {
             }]]
         });
 
-        /*jwplayer("stream1").setup({
-         autostart: 'true',
-         primary: 'html5',
-         file: "rtmp://192.168.1.102:1935/Sandeep-live-demo/myStream",
-         image: "img/location-pointer.png",
-         height: 250,
-         width: 230
-         });
+        // Surv--Camera
+        $("#surveillanceCamera1").flowplayer({
+            live: true,
+            swf: "video/flowplayer.swf",
+            rtmp: this.url,
+            playlist: [[{
+                flash: this.file
+            }]]
+        });
 
-         jwplayer("stream2").setup({
-         autostart: 'true',
-         primary: 'html5',
-         file: "rtmp://192.168.1.102:1935/Sandeep-live-demo/myStream",
-         image: "img/location-pointer.png",
-         height: 250,
-         width: 230
-         });*/
-        // jwplayer().play();
+        $("#surveillanceCamera2").flowplayer({
+            live: true,
+            swf: "video/flowplayer.swf",
+            rtmp: this.url,
+            playlist: [[{
+                flash: this.file
+            }]]
+        });
 
-        // --------------
-        /* flowplayer("#live", "http://releases.flowplayer.org/swf/flowplayer-3.2.18.swf", {
-         clip: {
-         url: 'myStream',
-         live: true,
-         provider: 'rtmp'
-         },
+        $("#surveillanceCamera3").flowplayer({
+            live: true,
+            swf: "video/flowplayer.swf",
+            rtmp: this.url,
+            playlist: [[{
+                flash: this.file
+            }]]
+        });
 
-         // streaming plugins are configured under the plugins node
-         plugins: {
-         rtmp: {
-         url: "video/flowplayer.rtmp-3.2.13.swf",
-         netConnectionUrl: 'rtmp://192.168.1.102:1935/Sandeep-live-demo'
-         }
-         }
-         });*/
+
     };
 }
 
-AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', '$scope'];
+AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService'];
 export default controllerModule.controller('AlertController', AlertController).name;
