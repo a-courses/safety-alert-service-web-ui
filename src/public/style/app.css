@@ -2,7 +2,7 @@ html, body, .container-fluid, .row {
     font-size: 16px !important;
     line-height: 1.2 !important;
     height: 100%;
-    font-family: 'Roboto', serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .row > div {
@@ -61,16 +61,6 @@ html, body, .container-fluid, .row {
 
 .flowplayer {
     background-color: #00B0F0;
-}
-
-.flowplayer .fp-color-play {
-    fill: #eee;
-}
-
-.flowplayer-block {
-    height: 135px;
-    width: 119px;
-    display: inline-block;
 }
 
 .table {
