@@ -27,7 +27,7 @@ class AlertController {
         this.connection = this.deepStreamService.getServerConnection();
         this.messagelist = this.connection.record.getList('safety/alerts');
         angular.extend(this, {
-            london: {
+            center: {
                 lat: 12.972169,
                 lng: 77.590606,
                 zoom: 11
