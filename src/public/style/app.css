@@ -12,13 +12,13 @@ html, body, .container-fluid, .row {
 .remove-cards-padding {
     padding-right: 0px !important;
     padding-left: 0px !important;
-    border-right: 0px solid #49659F;
 }
 
 .card {
     border-radius: 0rem !important;
     overflow: auto;
-    border: 1px solid #E9EBEE !important;
+    border-right: 2px solid #E9EBEE !important;
+    /*border: 1px solid #E9EBEE !important;*/
 }
 
 .card-header {
