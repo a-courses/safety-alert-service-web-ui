@@ -9,6 +9,7 @@ class AlertController {
         this.commonService = CommonService;
         this.deepStreamService = DeepStreamService;
         this.alertMessages = [];
+        this.availableColors = ['1','2','3','4','5','6','7','8'];
         this.mapDetails = {};
         this.mainMarker = {
             lat: 13.0601709,

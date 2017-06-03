@@ -47,9 +47,45 @@
             </span>
         </td>
         <td style="width: 50px;">
-            <span class="badge badge-warning badge-custom-color"><i class="fa fa-link" ng-if="$index%2===0"></i></span>
+            <span class="badge badge-warning badge-custom-color">
+                 <a href="#" data-tooltip="Settings" data-toggle="modal"
+                    data-target="#incidentMapping">
+                 <i class="fa fa-link" ng-if="$index%2===0"></i>
+            </a>
+            </span>
             <span class="badge badge-warning badge-custom-color"><i class="fa fa-chain-broken" ng-if="$index%2===1"></i></span>
         </td>
     </tr>
     </tbody>
 </table>
+
+
+<!-- The modal Incedent Mapper -->
+<div class="modal fade" id="incidentMapping" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="incidentMappingTitle">Alert Incident Mapping</h4>
+            </div>
+            <div class="modal-body">
+                <h5>Incidents</h5>
+                <ui-select multiple ng-model="ac.multipleDemo.colors" theme="select2" style="width:100%; min-width: 300px" close-on-select="false" title="Select Incident">
+                    <ui-select-match placeholder="Select colors...">{{$item}}</ui-select-match>
+                    <ui-select-choices repeat="color in ac.availableColors | filter:$select.search">
+                        {{color}}
+                    </ui-select-choices>
+                </ui-select>
+                <p>Selected Incidents: {{ac.multipleDemo.colors}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save Incidents</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-->

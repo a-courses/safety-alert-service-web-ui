@@ -1,9 +1,12 @@
 import flowplayer from 'flowplayer';
+
 import 'flowplayer/dist/skin/skin.css';
 import angular from 'angular';
 import 'angular-route';
 import 'angular-sanitize';
 import 'angular-messages';
+import 'ui-select/dist/select.css'
+import 'ui-select';
 // Material design css
 import 'angular-material/angular-material.css';
 // Icons
@@ -27,7 +30,7 @@ import './alerts/AlertController';
 import deepstream from 'deepstream.io-client-js';
 const MODULE_NAME = 'SafetyServiceModule';
 
-angular.module(MODULE_NAME, ['ngMaterial', 'ui-leaflet', 'ngRoute', 'ngMessages', 'ngSanitize', 'ControllerModule','ServiceModule'])
+angular.module(MODULE_NAME, ['ngMaterial', 'ui-leaflet', 'ui.select','ngRoute', 'ngMessages', 'ngSanitize', 'ControllerModule','ServiceModule'])
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {

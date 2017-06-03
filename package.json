@@ -27,7 +27,9 @@
     "flowplayer": "^7.0.4",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.0.3",
+    "select2": "^4.0.3",
     "ui-leaflet": "^2.0.0",
+    "ui-select": "^0.19.8",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
