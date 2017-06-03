@@ -152,7 +152,7 @@ html, body, .container-fluid, .row {
 .fab-buttons__item {
     display: block;
     text-align: center;
-    margin: 12px 0;
+    margin: 11px 0;
 }
 
 .fab-buttons__link {
@@ -175,8 +175,9 @@ html, body, .container-fluid, .row {
     margin-top: -11px;
     font-weight: 600;
     border-radius: 2px;
-    background: #585858;
-    color: #fff;
+    border: 1px solid #00B0F0;
+    background: #FFFFFF;
+    color: #00B0F0;
     content: attr(data-tooltip);
     font-size: 12px;
     text-decoration: none;
@@ -216,12 +217,20 @@ html, body, .container-fluid, .row {
 }
 
 .icon-video-record {
-    background: url('../img/svg/record.svg') center no-repeat;
+    background: url('../img/svg/record.svg') 50% center no-repeat;
+    width: 50%;
+    height: 50%;
+    position: relative;
+    top: 25%;
     background-size: contain;
 }
 
 .icon-audio-record {
-    background: url('../img/svg/record.svg') center no-repeat;
+    background: url('../img/mic.png') center no-repeat;
+    width: 50%;
+    height: 50%;
+    position: relative;
+    top: 25%;
     background-size: contain;
 }
 

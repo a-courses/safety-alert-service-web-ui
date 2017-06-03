@@ -36,7 +36,6 @@ class AlertController {
         });
         this.loadAlertsAsync();
         this.loadAsyncMobileVideos();
-        console.log();
     };
 
     loadAlertsAsync() {
@@ -55,7 +54,19 @@ class AlertController {
                             iconUrl: 'img/location-pointer.png',
                         }
                     };
-                    console.log(this.mapDetails[data.incidentId]);
+                    this.mapDetails[data.incidentId].icon.iconSize=[24, 24];
+                    console.log(data.incidentType);
+                    if (data.incidentType === 'Hazard') {
+                        this.mapDetails[data.incidentId].icon.iconUrl = 'img/hazard-location.png';
+                    }if (data.incidentType === 'Accident') {
+                        this.mapDetails[data.incidentId].icon.iconUrl = 'img/location-pointer.png';
+                    }if (data.incidentType === 'Fire') {
+                        this.mapDetails[data.incidentId].icon.iconUrl = 'img/fire-location.png';
+                    }if (data.incidentType === 'Police') {
+                        this.mapDetails[data.incidentId].icon.iconUrl = 'img/police-location.png';
+                    }if (data.incidentType === 'Medical') {
+                        this.mapDetails[data.incidentId].icon.iconUrl = 'img/medical-location.png';
+                    }
                 });
                 return list;
             });
@@ -82,8 +93,6 @@ class AlertController {
     }
 
     loadAsyncMobileVideos() {
-        console.log("flowplayer");
-
         this.url = "rtmp://192.168.1.102:1935/Sandeep-live-demo";
         this.file = "myStream";
         $("#flowplayer1").flowplayer({
