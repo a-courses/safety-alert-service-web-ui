@@ -31,7 +31,7 @@ class AlertController {
             center: {
                 lat: 12.97,
                 lng: 77.56,
-                zoom: 11
+                zoom: 10
             },
             markers: this.mapDetails
         });
@@ -56,7 +56,7 @@ class AlertController {
                             }
                         };
 
-                        this.mapDetails[data.incidentId].draggable = true;
+                        this.mapDetails[data.incidentId].draggable = false;
                         this.mapDetails[data.incidentId].icon.iconUrl = 'img/location-pointer.png';
                         this.mapDetails[data.incidentId].icon.iconSize = [24, 24];
                         console.log(data.incidentType);
@@ -84,7 +84,7 @@ class AlertController {
                 center: {
                     lat: 12.97,
                     lng: 77.56,
-                    zoom: 11
+                    zoom: 10
                 },
                 markers: this.mapDetails
             });
