@@ -89,8 +89,9 @@ class AlertController {
     };
 
     deleteRecordFromList(recordName) {
-        this.messagelist.removeEntry(recordName);
+        console.log("recordName : " + recordName);
         this.connection.record.getRecord(recordName).delete();
+        this.messagelist.removeEntry(recordName);
     }
 
     addRecordToList(alertRecord) {
