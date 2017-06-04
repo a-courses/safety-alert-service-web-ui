@@ -214,23 +214,27 @@ html, body, .container-fluid, .row {
 .icon-call {
     background: url('../img/svg/phone.svg') center no-repeat;
     background-size: contain;
+    width: 60%;
+    height: 60%;
+    position: relative;
+    top: 22%;
 }
 
 .icon-video-record {
-    background: url('../img/svg/record.svg') 50% center no-repeat;
-    width: 50%;
-    height: 50%;
+    background: url('../img/svg/record.svg') center no-repeat;
+    width: 60%;
+    height: 60%;
     position: relative;
-    top: 25%;
+    top: 22%;
     background-size: contain;
 }
 
 .icon-audio-record {
     background: url('../img/mic.png') center no-repeat;
-    width: 50%;
-    height: 50%;
+    width: 60%;
+    height: 60%;
     position: relative;
-    top: 25%;
+    top: 22%;
     background-size: contain;
 }
 
