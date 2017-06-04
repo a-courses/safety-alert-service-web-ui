@@ -9,7 +9,7 @@ class AlertController {
         this.commonService = CommonService;
         this.deepStreamService = DeepStreamService;
         this.alertMessages = [];
-        this.availableColors = ['1','2','3','4','5','6','7','8'];
+        this.availableColors = ['1', '2', '3', '4', '5', '6', '7', '8'];
         this.mapDetails = {};
         this.mainMarker = {
             lat: 13.0601709,
@@ -29,8 +29,8 @@ class AlertController {
         this.messagelist = this.connection.record.getList('safety/alerts');
         angular.extend(this, {
             center: {
-                lat: 12.972169,
-                lng: 77.590606,
+                lat: 14.0,
+                lng: 12.0,
                 zoom: 11
             },
             markers: this.mapDetails
@@ -49,23 +49,27 @@ class AlertController {
                     this.mapDetails[data.incidentId] = {
                         lat: data.location.latitude,
                         lng: data.location.longitude,
-                        message: "I am : " + data.id,
+                        message: data.location.latitude + "," + data.location.longitude,
                         draggable: true,
                         icon: {
                             iconUrl: 'img/location-pointer.png',
                         }
                     };
-                    this.mapDetails[data.incidentId].icon.iconSize=[24, 24];
+                    this.mapDetails[data.incidentId].icon.iconSize = [24, 24];
                     console.log(data.incidentType);
                     if (data.incidentType === 'Hazard') {
                         this.mapDetails[data.incidentId].icon.iconUrl = 'img/hazard-location.png';
-                    }if (data.incidentType === 'Accident') {
+                    }
+                    if (data.incidentType === 'Accident') {
                         this.mapDetails[data.incidentId].icon.iconUrl = 'img/location-pointer.png';
-                    }if (data.incidentType === 'Fire') {
+                    }
+                    if (data.incidentType === 'Fire') {
                         this.mapDetails[data.incidentId].icon.iconUrl = 'img/fire-location.png';
-                    }if (data.incidentType === 'Police') {
+                    }
+                    if (data.incidentType === 'Police') {
                         this.mapDetails[data.incidentId].icon.iconUrl = 'img/police-location.png';
-                    }if (data.incidentType === 'Medical') {
+                    }
+                    if (data.incidentType === 'Medical') {
                         this.mapDetails[data.incidentId].icon.iconUrl = 'img/medical-location.png';
                     }
                 });
@@ -74,8 +78,8 @@ class AlertController {
 
             angular.extend(this, {
                 london: {
-                    lat: 12.972169,
-                    lng: 77.590606,
+                    lat: 14.0,
+                    lng: 12.0,
                     zoom: 11
                 },
                 markers: this.mapDetails

@@ -3,13 +3,22 @@
 <table class="table table-sm">
 
     <tbody>
-    <tr ng-repeat="i in [1,3,4,5,6,7,8,9,10]">
-        <td class="icon-cell"><i class="fa fa-folder-open blue-icons" aria-hidden="true"></i></td>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td class="icon-cell"><i class="fa fa-exclamation-triangle blue-icons"
-                                 aria-hidden="true"></i>
+    <tr ng-repeat="i in ac.alertMessages">
+        <td class="icon-cell">
+            <img ng-if="i.get('status')==='open'" src="../img/open-inc.png" class="alert-icons"/>
+            <img ng-if="i.get('status')==='new'" src="../img/new-inc.png" class="alert-icons"/>
+            <img ng-if="i.get('status')==='closed'" src="../img/closed-inc.png" class="alert-icons"/>
+        </td>
+
+        <td>{{i.get('incidentId')}}</td>
+        <td style="width: 100px;">{{i.get('time') | date:'dd-MMM-yyyy'}}</td>
+        <td>{{i.get('status')}}</td>
+        <td class="icon-cell">
+            <img ng-if="i.get('incidentType')==='Fire'" src="../img/fire.png" class="alert-icons"/>
+            <img ng-if="i.get('incidentType')==='Hazard'" src="../img/hazard.png" class="alert-icons"/>
+            <img ng-if="i.get('incidentType')==='Medical'" src="../img/medical.png" class="alert-icons"/>
+            <img ng-if="i.get('incidentType')==='Accident'" src="../img/accident.png" class="alert-icons"/>
+            <img ng-if="i.get('incidentType')==='Police'" src="../img/police.png" class="alert-icons"/>
         </td>
     </tr>
     </tbody>

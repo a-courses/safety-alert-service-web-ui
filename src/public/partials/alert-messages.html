@@ -25,10 +25,9 @@
         <td style="width: 100px;">{{i.get('time') | date:'dd-MMM-yyyy'}}</td>
         <td style="width: 50px;">{{i.get('time') | date:'h:mma'}}</td>
         <td>{{i.get('status')}}</td>
+        <td class="icon-cell"><a href="{{i.get('url')}}" target="_blank">
+            <i class="fa fa-user-circle-o blue-icons" aria-hidden="true"></i></a>
         </td>
-        <td class="icon-cell"><a href="{{i.get('url')}}" target="_blank"><i
-                class="fa fa-user-circle-o blue-icons"
-                aria-hidden="true"></i></a></td>
         <td class="icon-cell">
             <i ng-if="i.get('mediaType')==='jpeg'" class="fa fa-picture-o blue-icons" aria-hidden="true"></i>
             <i ng-if="i.get('mediaType')==='video'" class="fa fa-film blue-icons" aria-hidden="true"></i>
@@ -73,7 +72,8 @@
             </div>
             <div class="modal-body">
                 <h5>Incidents</h5>
-                <ui-select multiple ng-model="ac.multipleDemo.colors" theme="select2" style="width:100%; min-width: 300px" close-on-select="false" title="Select Incident">
+                <ui-select multiple ng-model="ac.multipleDemo.colors" theme="select2"
+                           style="width:100%; min-width: 300px" close-on-select="false" title="Select Incident">
                     <ui-select-match placeholder="Select colors...">{{$item}}</ui-select-match>
                     <ui-select-choices repeat="color in ac.availableColors | filter:$select.search">
                         {{color}}
