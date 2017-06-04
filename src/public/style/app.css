@@ -82,6 +82,7 @@ html, body, .container-fluid, .row {
 
 .badge-custom-color {
     background-color: #00B0F0 !important;
+    color: #ffffff !important;
 }
 
 .alert-icons {

@@ -95,15 +95,14 @@ class AlertController {
     deleteRecordFromList(recordName, incidentId) {
         console.log(incidentId);
         delete this.mapDetails[incidentId];
-
         console.log(this.mapDetails);
         console.log("recordName : " + recordName);
         this.connection.record.getRecord(recordName).delete();
         this.messagelist.removeEntry(recordName);
     }
 
-    addRecordToList(alertRecord) {
-
+    setIncidentId(incidentId) {
+    this.selectIncidentId = incidentId;
     }
 
     loadAsyncMobileVideos() {
