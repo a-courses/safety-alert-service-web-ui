@@ -29,8 +29,8 @@ class AlertController {
         this.messagelist = this.connection.record.getList('safety/alerts');
         angular.extend(this, {
             center: {
-                lat: 14.0,
-                lng: 12.0,
+                lat: 12.97,
+                lng: 77.56,
                 zoom: 11
             },
             markers: this.mapDetails
@@ -40,46 +40,50 @@ class AlertController {
     };
 
     loadAlertsAsync() {
+        this.mapDetails = {};
         this.messagelist.subscribe((entries)=> {
-            this.mapDetails = {};
             this.alertMessages = entries.map((entry)=> {
                 var list = this.connection.record.getRecord(entry);
                 list.subscribe((data) => {
-                    console.log(data);
-                    this.mapDetails[data.incidentId] = {
-                        lat: data.location.latitude,
-                        lng: data.location.longitude,
-                        message: data.location.latitude + "," + data.location.longitude,
-                        draggable: true,
-                        icon: {
-                            iconUrl: 'img/location-pointer.png',
-                        }
-                    };
-                    this.mapDetails[data.incidentId].icon.iconSize = [24, 24];
-                    console.log(data.incidentType);
-                    if (data.incidentType === 'Hazard') {
-                        this.mapDetails[data.incidentId].icon.iconUrl = 'img/hazard-location.png';
-                    }
-                    if (data.incidentType === 'Accident') {
+                    if (data.notificationType !== 'incident') {
+                        this.mapDetails[data.incidentId] = {
+                            lat: data.location.latitude,
+                            lng: data.location.longitude,
+                            message: data.location.latitude + "," + data.location.longitude,
+                            draggable: false,
+                            icon: {
+                                iconUrl: "",
+                            }
+                        };
+
+                        this.mapDetails[data.incidentId].draggable = true;
                         this.mapDetails[data.incidentId].icon.iconUrl = 'img/location-pointer.png';
-                    }
-                    if (data.incidentType === 'Fire') {
-                        this.mapDetails[data.incidentId].icon.iconUrl = 'img/fire-location.png';
-                    }
-                    if (data.incidentType === 'Police') {
-                        this.mapDetails[data.incidentId].icon.iconUrl = 'img/police-location.png';
-                    }
-                    if (data.incidentType === 'Medical') {
-                        this.mapDetails[data.incidentId].icon.iconUrl = 'img/medical-location.png';
+                        this.mapDetails[data.incidentId].icon.iconSize = [24, 24];
+                        console.log(data.incidentType);
+                        if (data.incidentType === 'Hazard') {
+                            this.mapDetails[data.incidentId].icon.iconUrl = 'img/hazard-location.png';
+                        }
+                        if (data.incidentType === 'Accident') {
+                            this.mapDetails[data.incidentId].icon.iconUrl = 'img/location-pointer.png';
+                        }
+                        if (data.incidentType === 'Fire') {
+                            this.mapDetails[data.incidentId].icon.iconUrl = 'img/fire-location.png';
+                        }
+                        if (data.incidentType === 'Police') {
+                            this.mapDetails[data.incidentId].icon.iconUrl = 'img/police-location.png';
+                        }
+                        if (data.incidentType === 'Medical') {
+                            this.mapDetails[data.incidentId].icon.iconUrl = 'img/medical-location.png';
+                        }
                     }
                 });
                 return list;
             });
 
             angular.extend(this, {
-                london: {
-                    lat: 14.0,
-                    lng: 12.0,
+                center: {
+                    lat: 12.97,
+                    lng: 77.56,
                     zoom: 11
                 },
                 markers: this.mapDetails
@@ -88,7 +92,11 @@ class AlertController {
         });
     };
 
-    deleteRecordFromList(recordName) {
+    deleteRecordFromList(recordName, incidentId) {
+        console.log(incidentId);
+        delete this.mapDetails[incidentId];
+
+        console.log(this.mapDetails);
         console.log("recordName : " + recordName);
         this.connection.record.getRecord(recordName).delete();
         this.messagelist.removeEntry(recordName);

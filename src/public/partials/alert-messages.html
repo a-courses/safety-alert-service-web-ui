@@ -36,21 +36,26 @@
         <td class="icon-cell">
             <div ng-if="i.get('notificationType') !== 'incident' || i.get('notificationType') !== 'call'">
                 <a href="{{i.get('url')}}" target="_blank">
-                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='jpeg'" class="fa fa-picture-o blue-icons" aria-hidden="true"></i>
+                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='jpeg'"
+                       class="fa fa-picture-o blue-icons" aria-hidden="true"></i>
                 </a>
                 <a href="{{i.get('url')}}" target="_blank">
-                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='video'" class="fa fa-film blue-icons" aria-hidden="true"></i>
-                </a>
-                <a href="{{i.get('url')}}" target="_blank">
-                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='record'" class="fa fa-video-camera blue-icons"
+                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='video'" class="fa fa-film blue-icons"
                        aria-hidden="true"></i>
                 </a>
                 <a href="{{i.get('url')}}" target="_blank">
-                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='message'" class="fa fa-comments-o blue-icons"
+                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='record'"
+                       class="fa fa-video-camera blue-icons"
                        aria-hidden="true"></i>
                 </a>
                 <a href="{{i.get('url')}}" target="_blank">
-                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='phone'" class="fa fa-phone blue-icons" aria-hidden="true"></i>
+                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='message'"
+                       class="fa fa-comments-o blue-icons"
+                       aria-hidden="true"></i>
+                </a>
+                <a href="{{i.get('url')}}" target="_blank">
+                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='phone'"
+                       class="fa fa-phone blue-icons" aria-hidden="true"></i>
                 </a>
             </div>
         </td>
@@ -61,7 +66,7 @@
         </td>
         <td style="width: 50px;">
             <span class="badge badge-danger badge-custom-color">
-                <i class="fa fa-trash" ng-click="ac.deleteRecordFromList(i.name)"></i>
+                <i class="fa fa-trash" ng-click="ac.deleteRecordFromList(i.name, i.get('incidentId'))"></i>
             </span>
         </td>
         <td style="width: 50px;">
