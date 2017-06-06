@@ -4,7 +4,7 @@
   "description": "safety-alert-service-web-ui",
   "scripts": {
     "build": "rimraf dist && webpack --bail --progress --profile",
-    "server": "webpack-dev-server --history-api-fallback --inline --progress",
+    "server": "webpack-dev-server  --hot --host 0.0.0.0 --history-api-fallback --inline --progress",
     "test": "karma start",
     "test-watch": "karma start --auto-watch --no-single-run",
     "start": "npm run server"
