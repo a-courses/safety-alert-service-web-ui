@@ -45,7 +45,8 @@ class AlertController {
             this.alertMessages = entries.map((entry)=> {
                 var list = this.connection.record.getRecord(entry);
                 list.subscribe((data) => {
-                    if (data.notificationType !== 'incident') {
+                    console.log(data.type);
+                    if (data.type !== 'incident') {
                         this.mapDetails[data.incidentId] = {
                             lat: data.location.latitude,
                             lng: data.location.longitude,
@@ -76,6 +77,12 @@ class AlertController {
                             this.mapDetails[data.incidentId].icon.iconUrl = 'img/medical-location.png';
                         }
                     }
+                    else {
+                        console.log(this.mapDetails[data.incidentId]);
+                        if (this.mapDetails[data.incidentId] !== undefined) {
+                            delete this.mapDetails[data.incidentId];
+                        }
+                    }
                 });
                 return list;
             });
@@ -102,7 +109,7 @@ class AlertController {
     }
 
     setIncidentId(incidentId) {
-    this.selectIncidentId = incidentId;
+        this.selectIncidentId = incidentId;
     }
 
     loadAsyncMobileVideos() {
