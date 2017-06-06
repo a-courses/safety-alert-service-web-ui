@@ -106,7 +106,7 @@ class AlertController {
     }
 
     loadAsyncMobileVideos() {
-        this.url = "rtmp://192.168.1.102:1935/Sandeep-live-demo";
+        this.url = "rtmp://192.168.1.101:1935/Sandeep-live-demo";
         this.file = "myStream";
         $("#flowplayer1").flowplayer({
             live: true,
