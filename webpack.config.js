@@ -223,7 +223,6 @@ module.exports = function makeWebpackConfig() {
      */
     config.devServer = {
         contentBase: './src/public',
-        disableHostCheck: true,
         stats: 'minimal'
     };
 
