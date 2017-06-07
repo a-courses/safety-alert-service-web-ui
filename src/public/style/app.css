@@ -23,12 +23,16 @@ html, body, .container-fluid, .row {
 
 .card-header {
     color: #00B0F0 !important;
-    background-color: #E6E6E6 !important;
+    background-color: #F0F0F0 !important;
     font-weight: bold;
 }
 
 .card-header:first-child {
     border-radius: 0px !important;
+}
+
+card-footer {
+    background-color: #F0F0F0 !important;
 }
 
 .style-4::-webkit-scrollbar-track {
