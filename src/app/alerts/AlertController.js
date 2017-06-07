@@ -142,6 +142,15 @@ class AlertController {
             }]]
         });
 
+        $("#flowplayer4").flowplayer({
+            live: true,
+            swf: "video/flowplayer.swf",
+            rtmp: this.url,
+            playlist: [[{
+                flash: this.file
+            }]]
+        });
+
         // Surv--Camera
         $("#surveillanceCamera1").flowplayer({
             live: true,
@@ -162,6 +171,14 @@ class AlertController {
         });
 
         $("#surveillanceCamera3").flowplayer({
+            live: true,
+            swf: "video/flowplayer.swf",
+            rtmp: this.url,
+            playlist: [[{
+                flash: this.file
+            }]]
+        });
+        $("#surveillanceCamera4").flowplayer({
             live: true,
             swf: "video/flowplayer.swf",
             rtmp: this.url,
