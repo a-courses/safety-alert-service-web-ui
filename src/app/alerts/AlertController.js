@@ -66,17 +66,17 @@ class AlertController {
                     Medical: {
                         name: 'Medical',
                         type: 'group',
-                        visible: false
+                        visible: true
                     },
                     Hazard: {
                         name: 'Hazard',
                         type: 'group',
-                        visible: false
+                        visible: true
                     },
                     Accident: {
                         name: 'Accident',
                         type: 'group',
-                        visible: false
+                        visible: true
                     }
                 }
             }
@@ -177,17 +177,17 @@ class AlertController {
                         Medical: {
                             name: 'Medical',
                             type: 'group',
-                            visible: false
+                            visible: true
                         },
                         Hazard: {
                             name: 'Hazard',
                             type: 'group',
-                            visible: false
+                            visible: true
                         },
                         Accident: {
                             name: 'Accident',
                             type: 'group',
-                            visible: false
+                            visible: true
                         }
                     }
                 }
