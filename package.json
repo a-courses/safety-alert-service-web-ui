@@ -26,9 +26,10 @@
     "deepstream.io-client-js": "^2.1.4",
     "flowplayer": "^7.0.4",
     "font-awesome": "^4.7.0",
-    "leaflet": "^1.0.3",
+    "leaflet": "0.7.x",
+    "leaflet-plugins": "1.9.2",
     "select2": "^4.0.3",
-    "ui-leaflet": "^2.0.0",
+    "ui-leaflet": "^1.0.3",
     "ui-select": "^0.19.8",
     "underscore": "^1.8.3"
   },

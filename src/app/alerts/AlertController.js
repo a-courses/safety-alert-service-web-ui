@@ -33,7 +33,26 @@ class AlertController {
                 lng: 77.56,
                 zoom: 10
             },
-            markers: this.mapDetails
+            markers: this.mapDetails,
+            layers: {
+                baselayers: {
+                    googleTerrain: {
+                        name: 'Google Terrain',
+                        layerType: 'TERRAIN',
+                        type: 'google'
+                    },
+                    googleHybrid: {
+                        name: 'Google Hybrid',
+                        layerType: 'HYBRID',
+                        type: 'google'
+                    },
+                    googleRoadmap: {
+                        name: 'Google Streets',
+                        layerType: 'ROADMAP',
+                        type: 'google'
+                    }
+                }
+            }
         });
         this.loadAlertsAsync();
         this.loadAsyncMobileVideos();
@@ -93,9 +112,27 @@ class AlertController {
                     lng: 77.56,
                     zoom: 10
                 },
-                markers: this.mapDetails
+                markers: this.mapDetails,
+                layers: {
+                    baselayers: {
+                        googleTerrain: {
+                            name: 'Google Terrain',
+                            layerType: 'TERRAIN',
+                            type: 'google'
+                        },
+                        googleHybrid: {
+                            name: 'Google Hybrid',
+                            layerType: 'HYBRID',
+                            type: 'google'
+                        },
+                        googleRoadmap: {
+                            name: 'Google Streets',
+                            layerType: 'ROADMAP',
+                            type: 'google'
+                        }
+                    }
+                }
             });
-
         });
     };
 

@@ -9,6 +9,7 @@ import 'ui-select/dist/select.css'
 import 'ui-select';
 // Material design css
 import 'angular-material/angular-material.css';
+
 // Icons
 import 'font-awesome/css/font-awesome.css';
 // Animation
@@ -23,7 +24,7 @@ import 'angular-simple-logger';
 import 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'ui-leaflet';
-
+import 'leaflet-plugins/layer/tile/Google';
 import './common/ControllerModule';
 import './common/ServiceModule';
 import './alerts/AlertController';

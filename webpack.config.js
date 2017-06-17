@@ -12,6 +12,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
  * Get npm lifecycle event to identify the environment
  */
 var ENV = process.env.npm_lifecycle_event;
+ENV = 'build';
 var isTest = ENV === 'test' || ENV === 'test-watch';
 var isProd = ENV === 'build';
 
@@ -45,7 +46,7 @@ module.exports = function makeWebpackConfig() {
 
         // Output path from the view of the page
         // Uses webpack-dev-server in development
-        publicPath: isProd ? '/' : '/',
+        publicPath: isProd ? '/' : 'http://localhost:8080/',
 
         // Filename for entry points
         // Only adds hash in build mode
@@ -68,7 +69,7 @@ module.exports = function makeWebpackConfig() {
         config.devtool = 'source-map';
     }
     else {
-        config.devtool = 'eval-source-map';
+        config.devtool = 'source-map';
     }
 
     /**
@@ -220,6 +221,7 @@ module.exports = function makeWebpackConfig() {
      * Dev server configuration
      * Reference: http://webpack.github.io/docs/configuration.html#devserver
      * Reference: http://webpack.github.io/docs/webpack-dev-server.html
+     * ***********disableHostCheck: true, use while deploying to AWS***************
      */
     config.devServer = {
         contentBase: './src/public',
