@@ -4,7 +4,8 @@ import DeepStreamService from '../common/DeepStreamService';
 import _ from 'underscore';
 
 class AlertController {
-    constructor(AlertService, CommonService, DeepStreamService) {
+    constructor(AlertService, CommonService, DeepStreamService, toaster) {
+        this.toaster = toaster;
         this.alertService = AlertService;
         this.commonService = CommonService;
         this.deepStreamService = DeepStreamService;
@@ -197,11 +198,15 @@ class AlertController {
 
     deleteRecordFromList(recordName, incidentId) {
         console.log(incidentId);
+        console.log(i);
         delete this.mapDetails[incidentId];
-        console.log(this.mapDetails);
-        console.log("recordName : " + recordName);
-        this.connection.record.getRecord(recordName).delete();
-        this.messagelist.removeEntry(recordName);
+         console.log(this.mapDetails);
+         console.log("recordName : " + recordName);
+         this.connection.record.getRecord(recordName).delete();
+         this.messagelist.removeEntry(recordName);
+
+         //this.alertService.deleteRecordFromDB({incidentId : incidentId});
+        this.toaster.pop('success', "Delete Incident", "Incident id :" + incidentId + " deleted.");
     }
 
     setIncidentId(incidentId) {
@@ -285,5 +290,5 @@ class AlertController {
     };
 }
 
-AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService'];
+AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', 'toaster'];
 export default controllerModule.controller('AlertController', AlertController).name;

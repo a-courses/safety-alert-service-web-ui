@@ -1,42 +1,21 @@
 import serviceModule from '../common/ServiceModule';
 import CommonService from '../common/CommonService';
 class AlertService {
-    constructor(CommonService, $q, DeepStreamService, $timeout) {
+    constructor(CommonService, $q, DeepStreamService) {
         this.commonService = CommonService;
         this.q = $q;
-        this.timeout = $timeout;
-        this.deepStreamService = DeepStreamService;
     }
 
     getAlertDataFromService() {
         return this.commonService.getData("data/alerts.json", "Error while fetching data");
     }
 
-    /*getAlertsFromDeepStreamServer() {
-        var alertMessages = [];
-        // var defer = this.q.defer();
-        this.timeout(function () {
-            this.connection = this.deepStreamService.getServerConnection();
-            var messageList = this.connection.record.getList('safety/alerts');
-            messageList.subscribe((entries)=> {
-                function scopeApply() {
-                }
+    deleteRecordFromDB(data) {
+        return this.commonService.putData("https://siosqa7482.execute-api.us-west-2.amazonaws.com/dev/calldata",
+            data, "Alert Updated Successfully");
 
-                alertMessages = entries.map((entry)=> {
-                    let list = this.connection.record.getRecord(entry);
-                    list.subscribe(scopeApply);
-                    return list;
-                });
-            });
-        }, 5000);
-        console.log(alertMessages);
-        var defer;
-        defer = this.q.defer();
-        defer.resolve(alertMessages);
-        // defer.resolve(['detail', 'simple']);
-        return defer.promise;
-        // return alertMessages;
-    }*/
+    }
+
 }
-AlertService.$inject = ['CommonService', '$q', 'DeepStreamService', '$timeout'];
+AlertService.$inject = ['CommonService', '$q'];
 export default serviceModule.service('AlertService', AlertService).name;
