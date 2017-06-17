@@ -243,12 +243,12 @@ card-footer {
 }
 
 .icon-share {
-    background: url('../img/svg/Share.svg') center no-repeat;
+    background: url('../img/svg/share.svg') center no-repeat;
     background-size: contain;
 }
 
 .icon-settings {
-    background: url('../img/svg/Settings.svg') center no-repeat;
+    background: url('../img/svg/settings.svg') center no-repeat;
     background-size: contain;
 }
 
