@@ -51,6 +51,33 @@ class AlertController {
                         layerType: 'ROADMAP',
                         type: 'google'
                     }
+                },
+                overlays: {
+                    Fire: {
+                        name: 'Fire',
+                        type: 'group',
+                        visible: true
+                    },
+                    Police: {
+                        name: 'Police',
+                        type: 'group',
+                        visible: true
+                    },
+                    Medical: {
+                        name: 'Medical',
+                        type: 'group',
+                        visible: false
+                    },
+                    Hazard: {
+                        name: 'Hazard',
+                        type: 'group',
+                        visible: false
+                    },
+                    Accident: {
+                        name: 'Accident',
+                        type: 'group',
+                        visible: false
+                    }
                 }
             }
         });
@@ -65,8 +92,12 @@ class AlertController {
                 var list = this.connection.record.getRecord(entry);
                 list.subscribe((data) => {
                     console.log(data.type);
+                    var incidentType = data.incidentType;
                     if (data.type !== 'incident') {
-                        this.mapDetails[data.incidentId] = {
+                        if (this.mapDetails[incidentType] === undefined) {
+                            this.mapDetails[incidentType] = {};
+                        }
+                        this.mapDetails[incidentType][data.incidentId] = {
                             lat: data.location.latitude,
                             lng: data.location.longitude,
                             message: data.location.latitude + "," + data.location.longitude,
@@ -76,30 +107,31 @@ class AlertController {
                             }
                         };
 
-                        this.mapDetails[data.incidentId].draggable = false;
-                        this.mapDetails[data.incidentId].icon.iconUrl = 'img/location-pointer.png';
-                        this.mapDetails[data.incidentId].icon.iconSize = [24, 24];
-                        console.log(data.incidentType);
-                        if (data.incidentType === 'Hazard') {
-                            this.mapDetails[data.incidentId].icon.iconUrl = 'img/hazard-location.png';
+                        this.mapDetails[incidentType][data.incidentId].draggable = false;
+                        this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/location-pointer.png';
+                        this.mapDetails[incidentType][data.incidentId].icon.iconSize = [24, 24];
+                        console.log(incidentType);
+                        if (incidentType === 'Hazard') {
+                            this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/hazard-location.png';
                         }
-                        if (data.incidentType === 'Accident') {
-                            this.mapDetails[data.incidentId].icon.iconUrl = 'img/location-pointer.png';
+                        if (incidentType === 'Accident') {
+                            this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/location-pointer.png';
                         }
-                        if (data.incidentType === 'Fire') {
-                            this.mapDetails[data.incidentId].icon.iconUrl = 'img/fire-location.png';
+                        if (incidentType === 'Fire') {
+                            this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/fire-location.png';
                         }
-                        if (data.incidentType === 'Police') {
-                            this.mapDetails[data.incidentId].icon.iconUrl = 'img/police-location.png';
+                        if (incidentType === 'Police') {
+                            this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/police-location.png';
                         }
-                        if (data.incidentType === 'Medical') {
-                            this.mapDetails[data.incidentId].icon.iconUrl = 'img/medical-location.png';
+                        if (incidentType === 'Medical') {
+                            this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/medical-location.png';
                         }
+                        console.log(this.mapDetails);
                     }
                     else {
-                        console.log(this.mapDetails[data.incidentId]);
-                        if (this.mapDetails[data.incidentId] !== undefined) {
-                            delete this.mapDetails[data.incidentId];
+                        console.log(this.mapDetails);
+                        if (this.mapDetails[incidentType][data.incidentId] !== undefined) {
+                            delete this.mapDetails[incidentType][data.incidentId];
                         }
                     }
                 });
@@ -129,6 +161,33 @@ class AlertController {
                             name: 'Google Streets',
                             layerType: 'ROADMAP',
                             type: 'google'
+                        }
+                    },
+                    overlays: {
+                        Fire: {
+                            name: 'Fire',
+                            type: 'group',
+                            visible: true
+                        },
+                        Police: {
+                            name: 'Police',
+                            type: 'group',
+                            visible: true
+                        },
+                        Medical: {
+                            name: 'Medical',
+                            type: 'group',
+                            visible: false
+                        },
+                        Hazard: {
+                            name: 'Hazard',
+                            type: 'group',
+                            visible: false
+                        },
+                        Accident: {
+                            name: 'Accident',
+                            type: 'group',
+                            visible: false
                         }
                     }
                 }
@@ -223,8 +282,6 @@ class AlertController {
                 flash: this.file
             }]]
         });
-
-
     };
 }
 
