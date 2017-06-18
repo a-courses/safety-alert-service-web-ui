@@ -61,7 +61,7 @@ class CommonService {
     putData(url, data, successMessage) {
         var defer = this.q.defer();
         var errorCallback = (response) => {
-            // console.log(response);
+            console.log(response);
         };
 
         var successCallback = (result) => {

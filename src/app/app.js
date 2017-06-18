@@ -17,22 +17,22 @@ import 'angular-animate';
 import 'angular-aria';
 // Materail Design lib
 import 'angular-material';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap'
-import 'angularjs-toaster/toaster.css';
-import 'angularjs-toaster';
 import 'angular-simple-logger';
 import 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'ui-leaflet';
 import 'leaflet-plugins/layer/tile/Google';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap'
+import 'angularjs-toaster/toaster.css';
+import 'angularjs-toaster';
 import './common/ControllerModule';
 import './common/ServiceModule';
 import './alerts/AlertController';
 import deepstream from 'deepstream.io-client-js';
 const MODULE_NAME = 'SafetyServiceModule';
 
-angular.module(MODULE_NAME, ['ngMaterial', 'ui-leaflet', 'ui.select', 'ngRoute', 'ngMessages', 'ngSanitize', 'toaster', 'ControllerModule', 'ServiceModule'])
+angular.module(MODULE_NAME, ['ngMaterial', 'ui-leaflet', 'ui.select', 'ngRoute', 'ngMessages', 'ngSanitize', 'ngAnimate', 'toaster', 'ControllerModule', 'ServiceModule'])
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {

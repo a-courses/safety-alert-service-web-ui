@@ -10,22 +10,8 @@ class AlertController {
         this.commonService = CommonService;
         this.deepStreamService = DeepStreamService;
         this.alertMessages = [];
-        this.availableColors = ['1', '2', '3', '4', '5', '6', '7', '8'];
+        this.mappingIncidentIds = [];
         this.mapDetails = {};
-        this.mainMarker = {
-            lat: 13.0601709,
-            lang: 77.56245290000001,
-            focus: true,
-            message: "I am draggable",
-            draggable: false,
-            icon: {
-                iconUrl: 'img/location-pointer.png',
-                iconSize: [32, 32], // size of the icon
-                iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-                shadowAnchor: [4, 62],  // the same for the shadow
-                popupAnchor: [-7, -90] // point from which the popup should open relative to the iconAnchor
-            }
-        };
         this.connection = this.deepStreamService.getServerConnection();
         this.messagelist = this.connection.record.getList('safety/alerts');
         angular.extend(this, {
@@ -92,9 +78,9 @@ class AlertController {
             this.alertMessages = entries.map((entry)=> {
                 var list = this.connection.record.getRecord(entry);
                 list.subscribe((data) => {
-                    console.log(data.type);
+                    console.log(data.notificationType);
                     var incidentType = data.incidentType;
-                    if (data.type !== 'incident') {
+                    if (data.notificationType !== 'incident') {
                         if (this.mapDetails[incidentType] === undefined) {
                             this.mapDetails[incidentType] = {};
                         }
@@ -104,14 +90,13 @@ class AlertController {
                             message: data.location.latitude + "," + data.location.longitude,
                             draggable: false,
                             icon: {
-                                iconUrl: "",
+                                iconUrl: '',
                             }
                         };
-
+                        this.mappingIncidentIds.push(data.incidentId);
                         this.mapDetails[incidentType][data.incidentId].draggable = false;
                         this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/location-pointer.png';
                         this.mapDetails[incidentType][data.incidentId].icon.iconSize = [24, 24];
-                        console.log(incidentType);
                         if (incidentType === 'Hazard') {
                             this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/hazard-location.png';
                         }
@@ -127,11 +112,9 @@ class AlertController {
                         if (incidentType === 'Medical') {
                             this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/medical-location.png';
                         }
-                        console.log(this.mapDetails);
                     }
                     else {
-                        console.log(this.mapDetails);
-                        if (this.mapDetails[incidentType][data.incidentId] !== undefined) {
+                        if (data.notificationType !== 'incident' && this.mapDetails[incidentType][data.incidentId] !== undefined) {
                             delete this.mapDetails[incidentType][data.incidentId];
                         }
                     }
@@ -196,21 +179,72 @@ class AlertController {
         });
     };
 
-    deleteRecordFromList(recordName, incidentId) {
+    deleteRecordFromList(recordName, incidentId, alertType) {
+        var alertData = {};
+        if (alertType === 'upload' || alertType === 'stream') {
+            alertData = {
+                notificationType: alertType,
+                id: incidentId,
+                url: '',
+                fileName: '',
+                user: {
+                    phoneNumber: '',
+                    emailId: '',
+                    userName: ''
+                },
+                location: {
+                    latitude: '',
+                    longitude: ''
+                },
+                status: 'read',
+                mediaType: '',
+                incidentType: '',
+                time: '',
+                incidentId: ''
+            }
+        }
+        if (alertType === 'call') {
+            alertData = {
+                notificationType: alertType,
+                id: incidentId,
+                caller: {
+                    phoneNumber: '',
+                    emailId: '',
+                    userName: ''
+                },
+                callee: {
+                    phoneNumber: '',
+                    emailId: '',
+                    userName: ''
+                },
+                location: {
+                    latitude: '',
+                    longitude: ''
+                },
+                status: "read",
+                mediaType: '',
+                incidentType: '',
+                time: '',
+                incidentId: ''
+            }
+        }
+
         console.log(incidentId);
-        console.log(i);
-        delete this.mapDetails[incidentId];
+         delete this.mapDetails[incidentId];
          console.log(this.mapDetails);
          console.log("recordName : " + recordName);
          this.connection.record.getRecord(recordName).delete();
          this.messagelist.removeEntry(recordName);
-
-         //this.alertService.deleteRecordFromDB({incidentId : incidentId});
+        /*this.alertService.deleteRecordFromDB(alertData).then((data)=> {
+            console.log(data);
+        });*/
         this.toaster.pop('success', "Delete Incident", "Incident id :" + incidentId + " deleted.");
     }
 
     setIncidentId(incidentId) {
         this.selectIncidentId = incidentId;
+        this.mappingIncidentIdsWithoutParent = _.without(this.mappingIncidentIds, incidentId);
+        this.multiple.incidents = [];
     }
 
     loadAsyncMobileVideos() {
