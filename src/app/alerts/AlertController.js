@@ -228,23 +228,31 @@ class AlertController {
                 incidentId: ''
             }
         }
-
         console.log(incidentId);
-         delete this.mapDetails[incidentId];
-         console.log(this.mapDetails);
-         console.log("recordName : " + recordName);
-         this.connection.record.getRecord(recordName).delete();
-         this.messagelist.removeEntry(recordName);
-        /*this.alertService.deleteRecordFromDB(alertData).then((data)=> {
-            console.log(data);
-        });*/
-        this.toaster.pop('success', "Delete Incident", "Incident id :" + incidentId + " deleted.");
+        this.alertService.deleteRecordFromDB(alertData).then((result)=> {
+            console.log("result");
+            console.log(result.data.message);
+            if (result.data.message === "success") {
+                delete this.mapDetails[incidentId];
+                console.log(this.mapDetails);
+                console.log("recordName : " + recordName);
+                this.connection.record.getRecord(recordName).delete();
+                this.messagelist.removeEntry(recordName);
+                this.toaster.pop("success", incidentId + " deleted")
+            } else {
+                this.toaster.pop("error", "Error while delete")
+            }
+
+        });
+        // this.toaster.pop('success', "Delete Incident", "Incident id :" + incidentId + " deleted.");
     }
 
     setIncidentId(incidentId) {
         this.selectIncidentId = incidentId;
         this.mappingIncidentIdsWithoutParent = _.without(this.mappingIncidentIds, incidentId);
-        this.multiple.incidents = [];
+        this.multiple = {
+            incidents: []
+        };
     }
 
     loadAsyncMobileVideos() {

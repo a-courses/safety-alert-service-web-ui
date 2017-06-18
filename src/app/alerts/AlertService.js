@@ -10,10 +10,18 @@ class AlertService {
         return this.commonService.getData("data/alerts.json", "Error while fetching data");
     }
 
-    deleteRecordFromDB(data) {
-        console.log(data);
-        return this.commonService.putData("https://siosqa7482.execute-api.us-west-2.amazonaws.com/dev/calldata",
-            data, "Alert Updated Successfully");
+    deleteRecordFromDB(alertData) {
+        console.log(alertData);
+        var url = '';
+        if (alertData.notificationType === 'upload' || alertData.notificationType === 'stream') {
+            url = 'https://siosqa7482.execute-api.us-west-2.amazonaws.com/dev/alert';
+        }
+        if (alertData.notificationType === 'call') {
+            url = 'https://siosqa7482.execute-api.us-west-2.amazonaws.com/dev/calldata';
+        }
+        //
+        //
+        return this.commonService.putData(url, alertData, alertData.notificationType + "alert updated Successfully");
 
     }
 

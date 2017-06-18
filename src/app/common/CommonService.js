@@ -6,9 +6,10 @@ import serviceModule from '../common/ServiceModule';
 
 class CommonService {
 
-    constructor($q, $http) {
+    constructor($q, $http, toaster) {
         this.q = $q;
         this.http = $http;
+        this.toaster = toaster;
     }
 
     getData(url, errorTitle) {
@@ -62,10 +63,13 @@ class CommonService {
         var defer = this.q.defer();
         var errorCallback = (response) => {
             console.log(response);
+            // this.toaster.pop('error', response);
         };
 
         var successCallback = (result) => {
             defer.resolve(result);
+            // this.toaster.pop('success', successMessage);
+
         };
 
         this.http.put(url, data).then(successCallback, errorCallback);
@@ -88,5 +92,5 @@ class CommonService {
 
 }
 
-CommonService.$inject = ['$q', '$http'];
+CommonService.$inject = ['$q', '$http', 'toaster'];
 export default serviceModule.service('CommonService', CommonService).name;
