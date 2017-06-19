@@ -184,12 +184,12 @@ class AlertController {
         });
     };
 
-    deleteRecordFromList(recordName, incidentId, alertType) {
+    deleteRecordFromList(recordName, id, alertType) {
         var alertData = {};
         if (alertType === 'upload' || alertType === 'stream') {
             alertData = {
                 notificationType: alertType,
-                id: incidentId,
+                id: id,
                 url: '',
                 fileName: '',
                 user: {
@@ -211,7 +211,7 @@ class AlertController {
         if (alertType === 'call') {
             alertData = {
                 notificationType: alertType,
-                id: incidentId,
+                id: id,
                 caller: {
                     phoneNumber: '',
                     emailId: '',
@@ -233,17 +233,17 @@ class AlertController {
                 incidentId: ''
             }
         }
-        console.log(incidentId);
+        console.log(id);
         this.alertService.deleteRecordFromDB(alertData).then((result)=> {
             console.log("result");
             console.log(result.data.message);
             if (result.data.message === "success") {
-                delete this.mapDetails[incidentId];
+                delete this.mapDetails[id];
                 console.log(this.mapDetails);
                 console.log("recordName : " + recordName);
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
-                this.toaster.pop("success", incidentId + " deleted")
+                this.toaster.pop("success", id + " deleted")
             } else {
                 this.toaster.pop("error", "Error while delete")
             }
