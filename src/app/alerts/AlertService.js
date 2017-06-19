@@ -25,6 +25,12 @@ class AlertService {
 
     }
 
+    saveMappedIncidents(alert) {
+        console.log(alert);
+        var url = 'https://siosqa7482.execute-api.us-west-2.amazonaws.com/dev/incidents';
+        return this.commonService.postData(url, alert, '', 'success');
+    }
+
 }
 AlertService.$inject = ['CommonService', '$q'];
 export default serviceModule.service('AlertService', AlertService).name;

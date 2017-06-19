@@ -70,21 +70,24 @@
         </td>
         <td style="width: 50px;">
             <span class="badge badge-danger badge-custom-color">
-                <i class="fa fa-trash" ng-click="ac.deleteRecordFromList(i.name, i.get('incidentId'), i.get('notificationType'))"></i>
+                <i class="fa fa-trash"
+                   ng-click="ac.deleteRecordFromList(i.name, i.get('incidentId'), i.get('notificationType'))"></i>
             </span>
         </td>
         <td style="width: 50px;">
             <span class="badge badge-warning badge-custom-color" ng-if="$index%2===0">
                  <a href="#" data-tooltip="Settings" data-toggle="modal"
                     data-target="#incidentMapping" style="color: #ffffff !important;">
-                 <i class="fa fa-link" ng-click="ac.setIncidentId(i.get('incidentId'))"></i>
+                 <i class="fa fa-link"
+                    ng-click="ac.setIncidentId(i.get('incidentId'),i.get('id'),i.get('notificationType'))"></i>
             </a>
             </span>
 
             <span class="badge badge-warning badge-custom-color" ng-if="$index%2===1">
                 <a href="#" data-tooltip="Settings" data-toggle="modal"
                    data-target="#incidentMapping" style="color: #ffffff !important;">
-                <i class="fa fa-chain-broken" ng-click="ac.setIncidentId(i.get('incidentId'))"></i>
+                <i class="fa fa-chain-broken"
+                   ng-click="ac.setIncidentId(i.get('incidentId'),i.get('id'),i.get('notificationType'))"></i>
             </a>
             </span>
         </td>
@@ -106,7 +109,7 @@
                 <h4 class="modal-title" id="incidentMappingTitle">Alert Incident Mapping</h4>
             </div>
             <div class="modal-body">
-                Parent Incident Id : <strong>{{ac.selectIncidentId}}</strong>
+                Parent Alert : <strong>{{ac.selectIncidentId}}</strong>
                 <h5>Incidents</h5>
                 <ui-select multiple ng-model="ac.multiple.incidents" theme="select2"
                            style="width:100%; min-width: 300px" close-on-select="false" title="Select Incident">
@@ -119,7 +122,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary"
-                        style="background-color: #49659F!important;border-color: #49659F!important;">
+                        style="background-color: #49659F!important;border-color: #49659F!important;"
+                        ng-click="ac.saveMappedIncidents(ac.selectIncidentId, ac.selectNotificationType)">
                     Save Mapping
                 </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

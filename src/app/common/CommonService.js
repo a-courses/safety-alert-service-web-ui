@@ -44,7 +44,7 @@ class CommonService {
         };
 
         var successCallback = (result) => {
-            defer.resolve(result.data);
+            defer.resolve(result);
         };
         /*$http.post(serviceAPI.resolveServiceUrl(url), data,{
          'Content-Type': 'application/json'

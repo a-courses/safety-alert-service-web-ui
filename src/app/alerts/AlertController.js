@@ -12,6 +12,9 @@ class AlertController {
         this.alertMessages = [];
         this.mappingIncidentIds = [];
         this.mapDetails = {};
+        this.multiple = {
+            incidents: []
+        };
         this.connection = this.deepStreamService.getServerConnection();
         this.messagelist = this.connection.record.getList('safety/alerts');
         angular.extend(this, {
@@ -93,7 +96,9 @@ class AlertController {
                                 iconUrl: '',
                             }
                         };
-                        this.mappingIncidentIds.push(data.incidentId);
+                        if (_.indexOf(this.mappingIncidentIds, data.incidentId) === -1) {
+                            this.mappingIncidentIds.push(data.incidentId);
+                        }
                         this.mapDetails[incidentType][data.incidentId].draggable = false;
                         this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/location-pointer.png';
                         this.mapDetails[incidentType][data.incidentId].icon.iconSize = [24, 24];
@@ -247,12 +252,80 @@ class AlertController {
         // this.toaster.pop('success', "Delete Incident", "Incident id :" + incidentId + " deleted.");
     }
 
-    setIncidentId(incidentId) {
+    setIncidentId(incidentId, id, notificationType) {
         this.selectIncidentId = incidentId;
+        this.selectNotificationType = notificationType;
+        console.log(this.selectIncidentId);
+        console.log(this.selectNotificationType);
         this.mappingIncidentIdsWithoutParent = _.without(this.mappingIncidentIds, incidentId);
         this.multiple = {
             incidents: []
         };
+    }
+
+    saveMappedIncidents(id, notificationType) {
+        // console.log(id);
+        // console.log(notificationType);
+        var alert
+        if (notificationType === 'call') {
+            alert = {
+                id: '',
+                time: new Date().getDate(),
+                name: "testIncident",
+                parentAlert: [
+                    {
+                        notificationType: notificationType,
+                        alert: {
+                            id: id,
+                            caller: {},
+                            callee: {},
+                            location: {},
+                            status: '',
+                            mediaType: '',
+                            incidentType: '',
+                            time: '',
+                            incidentId: ''
+                        }
+                    }
+                ],
+                mappedAlerts: [],
+                createdBy: '',
+                description: '',
+                status: '',
+                assignedTo: [],
+                alertUsers: []
+            }
+        } else {
+            alert = {
+                id: '',
+                time: new Date().getDate(),
+                name: "testIncident",
+                parentAlert: [
+                    {
+                        notificationType: notificationType,
+                        alert: {
+                            id: id,
+                            user: {},
+                            status: '',
+                            mediaType: '',
+                            incidentType: '',
+                            time: '',
+                            incidentId: ''
+                        }
+                    }
+                ],
+                mappedAlerts: [],
+                createdBy: '',
+                description: '',
+                status: '',
+                assignedTo: [],
+                alertUsers: []
+            }
+        }
+        console.log(alert);
+        this.alertService.saveMappedIncidents(alert).then((result)=> {
+            console.log(result.data.message);
+        })
     }
 
     loadAsyncMobileVideos() {
