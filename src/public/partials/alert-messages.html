@@ -31,7 +31,7 @@
                  class="alert-icons"/>
         </td>
         <td style="width: 100px;">{{i.get('time') | date:'dd-MMM-yyyy'}}</td>
-        <td style="width: 50px;">{{i.get('time') | date:'h:mma'}}</td>
+        <td style="width: 50px;">{{i.get('time') | date:'hh:mma'}}</td>
         <td>{{i.get('status')}}</td>
         <td class="icon-cell">
             <i class="fa fa-user-circle-o blue-icons" aria-hidden="true" title="{{i.get('user.phoneNumber')}}"></i>
@@ -39,7 +39,7 @@
         <td class="icon-cell">
             <div ng-if="i.get('notificationType') !== 'incident' || i.get('notificationType') !== 'call'">
                 <a href="{{i.get('url')}}" target="_blank">
-                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='jpeg'"
+                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='image/jpeg'"
                        class="fa fa-picture-o blue-icons" aria-hidden="true"></i>
                 </a>
                 <a href="{{i.get('url')}}" target="_blank">

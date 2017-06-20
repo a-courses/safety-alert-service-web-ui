@@ -266,7 +266,7 @@ class AlertController {
     saveMappedIncidents(id, notificationType) {
         // console.log(id);
         // console.log(notificationType);
-        var alert
+        var alert={};
         if (notificationType === 'call') {
             alert = {
                 id: '',
