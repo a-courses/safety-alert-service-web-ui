@@ -249,7 +249,6 @@ class AlertController {
             }
 
         });
-        // this.toaster.pop('success', "Delete Incident", "Incident id :" + incidentId + " deleted.");
     }
 
     setIncidentId(incidentId, id, notificationType) {
@@ -263,29 +262,27 @@ class AlertController {
         };
     }
 
-    saveMappedIncidents(id, notificationType) {
+    saveMappedIncidents(recordName, incidentId, id, notificationType) {
         // console.log(id);
         // console.log(notificationType);
-        var alert={};
+        var alert = {};
         if (notificationType === 'call') {
             alert = {
                 id: '',
-                time: new Date().getDate(),
-                name: "testIncident",
+                time: '2017-06-19T22:40:02.486Z',
+                name: '',
                 parentAlert: [
                     {
-                        notificationType: notificationType,
-                        alert: {
-                            id: id,
-                            caller: {},
-                            callee: {},
-                            location: {},
-                            status: '',
-                            mediaType: '',
-                            incidentType: '',
-                            time: '',
-                            incidentId: ''
-                        }
+                        alertType: notificationType,
+                        alertId: id,
+                        caller: {},
+                        callee: {},
+                        location: {},
+                        status: '',
+                        mediaType: '',
+                        incidentType: '',
+                        time: '',
+                        incidentId: ''
                     }
                 ],
                 mappedAlerts: [],
@@ -298,20 +295,18 @@ class AlertController {
         } else {
             alert = {
                 id: '',
-                time: new Date().getDate(),
-                name: "testIncident",
+                time: '2017-06-19T22:40:02.486Z',
+                name: '',
                 parentAlert: [
                     {
-                        notificationType: notificationType,
-                        alert: {
-                            id: id,
-                            user: {},
-                            status: '',
-                            mediaType: '',
-                            incidentType: '',
-                            time: '',
-                            incidentId: ''
-                        }
+                        alertType: notificationType,
+                        alertId: id,
+                        user: {},
+                        status: '',
+                        mediaType: '',
+                        incidentType: '',
+                        time: '',
+                        incidentId: ''
                     }
                 ],
                 mappedAlerts: [],
@@ -324,7 +319,15 @@ class AlertController {
         }
         console.log(alert);
         this.alertService.saveMappedIncidents(alert).then((result)=> {
-            console.log(result.data.message);
+            console.log(result);
+            if (result.data.message === 'success') {
+                console.log("recordName : " + recordName);
+                this.connection.record.getRecord(recordName).delete();
+                this.messagelist.removeEntry(recordName);
+                this.toaster.pop("success", "Incident created")
+            } else {
+                this.toaster.pop("error", "Error while creating incident created");
+            }
         })
     }
 

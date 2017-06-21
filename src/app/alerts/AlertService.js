@@ -26,7 +26,6 @@ class AlertService {
     }
 
     saveMappedIncidents(alert) {
-        console.log(alert);
         var url = 'https://siosqa7482.execute-api.us-west-2.amazonaws.com/dev/incidents';
         return this.commonService.postData(url, alert, '', 'success');
     }

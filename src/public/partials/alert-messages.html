@@ -39,8 +39,9 @@
         <td class="icon-cell">
             <div ng-if="i.get('notificationType') !== 'incident' || i.get('notificationType') !== 'call'">
                 <a href="{{i.get('url')}}" target="_blank">
-                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='image/jpeg'"
-                       class="fa fa-picture-o blue-icons" aria-hidden="true"></i>
+                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType').indexOf('image')!== -1
+                    || i.get('mediaType').indexOf('jpeg')!== -1" class="fa fa-picture-o blue-icons"
+                       aria-hidden="true"></i>
                 </a>
                 <a href="{{i.get('url')}}" target="_blank">
                     <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='video'"
@@ -75,19 +76,14 @@
             </span>
         </td>
         <td style="width: 50px;">
-            <span class="badge badge-warning badge-custom-color" ng-if="$index%2===0">
-                 <a href="#" data-tooltip="Settings" data-toggle="modal"
-                    data-target="#incidentMapping" style="color: #ffffff !important;">
-                 <i class="fa fa-link"
-                    ng-click="ac.setIncidentId(i.get('incidentId'),i.get('id'),i.get('notificationType'))"></i>
-            </a>
+            <span class="badge badge-warning badge-custom-color" ng-if="i.get('incidentId')">
+                 <i class="fa fa-link" style="color: #ffffff !important;"></i>
             </span>
 
-            <span class="badge badge-warning badge-custom-color" ng-if="$index%2===1">
-                <a href="#" data-tooltip="Settings" data-toggle="modal"
-                   data-target="#incidentMapping" style="color: #ffffff !important;">
+            <span class="badge badge-warning badge-custom-color" ng-if="!i.get('incidentId')">
+                <a href="#" data-tooltip="Settings" style="color: #ffffff !important;">
                 <i class="fa fa-chain-broken"
-                   ng-click="ac.setIncidentId(i.get('incidentId'),i.get('id'),i.get('notificationType'))"></i>
+                   ng-click="ac.saveMappedIncidents(i.get('name'),i.get('incidentId'),i.get('id'),i.get('notificationType'))"></i>
             </a>
             </span>
         </td>
