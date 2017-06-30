@@ -76,14 +76,12 @@
             </span>
         </td>
         <td style="width: 50px;">
-            <span class="badge badge-warning badge-custom-color" ng-if="i.get('incidentId')">
-                 <i class="fa fa-link" style="color: #ffffff !important;"></i>
-            </span>
-
-            <span class="badge badge-warning badge-custom-color" ng-if="!i.get('incidentId')">
-                <a href="#" data-tooltip="Settings" style="color: #ffffff !important;">
+            <span class="badge badge-warning badge-custom-color">
+                 <i class="fa fa-link" style="color: #ffffff !important;" ng-if="i.get('incidentId')"></i>
+                <a href="#" data-tooltip="Settings" style="color: #ffffff !important;" ng-if="!i.get('incidentId')">
                 <i class="fa fa-chain-broken"
-                   ng-click="ac.saveMappedIncidents(i.get('name'),i.get('incidentId'),i.get('id'),i.get('notificationType'))"></i>
+                   ng-click="ac.saveMappedIncidents(i.get('name'),i.get('incidentId'),i.get('id'),i.get('notificationType'))">
+                </i>
             </a>
             </span>
         </td>

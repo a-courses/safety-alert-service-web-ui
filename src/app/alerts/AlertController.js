@@ -83,44 +83,48 @@ class AlertController {
                 list.subscribe((data) => {
                     console.log(data.notificationType);
                     var incidentType = data.incidentType;
-                    if (data.notificationType !== 'incident') {
-                        if (this.mapDetails[incidentType] === undefined) {
-                            this.mapDetails[incidentType] = {};
-                        }
-                        this.mapDetails[incidentType][data.incidentId] = {
-                            lat: data.location.latitude,
-                            lng: data.location.longitude,
-                            message: data.location.latitude + "," + data.location.longitude,
-                            draggable: false,
-                            icon: {
-                                iconUrl: '',
+                    if (data.incidentId) {
+                        var incId = data.incidentId.replace(/[^a-zA-Z0-9]/g, "");
+                        if (data.notificationType !== 'incident') {
+                            if (this.mapDetails[incidentType] === undefined) {
+                                this.mapDetails[incidentType] = {};
                             }
-                        };
-                        if (_.indexOf(this.mappingIncidentIds, data.incidentId) === -1) {
-                            this.mappingIncidentIds.push(data.incidentId);
+
+                            this.mapDetails[incidentType][incId] = {
+                                lat: data.location.latitude,
+                                lng: data.location.longitude,
+                                message: data.location.latitude + "," + data.location.longitude,
+                                draggable: false,
+                                icon: {
+                                    iconUrl: '',
+                                }
+                            };
+                            if (_.indexOf(this.mappingIncidentIds, incId) === -1) {
+                                this.mappingIncidentIds.push(incId);
+                            }
+                            this.mapDetails[incidentType][incId].draggable = false;
+                            this.mapDetails[incidentType][incId].icon.iconUrl = 'img/location-pointer.png';
+                            this.mapDetails[incidentType][incId].icon.iconSize = [24, 24];
+                            if (incidentType === 'Hazard') {
+                                this.mapDetails[incidentType][incId].icon.iconUrl = 'img/hazard-location.png';
+                            }
+                            if (incidentType === 'Accident') {
+                                this.mapDetails[incidentType][incId].icon.iconUrl = 'img/location-pointer.png';
+                            }
+                            if (incidentType === 'Fire') {
+                                this.mapDetails[incidentType][incId].icon.iconUrl = 'img/fire-location.png';
+                            }
+                            if (incidentType === 'Police') {
+                                this.mapDetails[incidentType][incId].icon.iconUrl = 'img/police-location.png';
+                            }
+                            if (incidentType === 'Medical') {
+                                this.mapDetails[incidentType][incId].icon.iconUrl = 'img/medical-location.png';
+                            }
                         }
-                        this.mapDetails[incidentType][data.incidentId].draggable = false;
-                        this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/location-pointer.png';
-                        this.mapDetails[incidentType][data.incidentId].icon.iconSize = [24, 24];
-                        if (incidentType === 'Hazard') {
-                            this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/hazard-location.png';
-                        }
-                        if (incidentType === 'Accident') {
-                            this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/location-pointer.png';
-                        }
-                        if (incidentType === 'Fire') {
-                            this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/fire-location.png';
-                        }
-                        if (incidentType === 'Police') {
-                            this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/police-location.png';
-                        }
-                        if (incidentType === 'Medical') {
-                            this.mapDetails[incidentType][data.incidentId].icon.iconUrl = 'img/medical-location.png';
-                        }
-                    }
-                    else {
-                        if (data.notificationType !== 'incident' && this.mapDetails[incidentType][data.incidentId] !== undefined) {
-                            delete this.mapDetails[incidentType][data.incidentId];
+                        else {
+                            if (data.notificationType !== 'incident' && this.mapDetails[incidentType][incId] !== undefined) {
+                                delete this.mapDetails[incidentType][incId];
+                            }
                         }
                     }
                 });
