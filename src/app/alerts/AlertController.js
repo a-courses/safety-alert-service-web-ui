@@ -273,7 +273,7 @@ class AlertController {
                 name: '',
                 parentAlert: [
                     {
-                        alertType: notificationType,
+                        alertType: 'call',
                         alertId: id,
                         caller: {},
                         callee: {},
@@ -299,7 +299,7 @@ class AlertController {
                 name: '',
                 parentAlert: [
                     {
-                        alertType: notificationType,
+                        alertType: 'file',
                         alertId: id,
                         user: {},
                         status: '',
