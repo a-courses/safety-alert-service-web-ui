@@ -252,7 +252,84 @@ class AlertController {
                 this.toaster.pop("error", "Error while delete")
             }
 
-        });
+       });
+
+        /*var oldRecords = ['alerts/j38pqt3f-1c555dc4ttu',
+            'alerts/j3i7okbp-13n43kwr9toi',
+            'alerts/j3i7sn5o-h9gkd8zsz3i',
+            'alerts/j3i9w9h3-2n3hjucia6g',
+            'alerts/j3ia2cao-2kst1jgduua',
+            'alerts/j3ianfh9-zfyjuk7lfxi',
+            'alerts/j3iapixk-jfhiz7f20o9',
+            'alerts/j3iaqfuq-2bnqrs3swhl',
+            'alerts/j3iart99-2n1v9zxe54s',
+            'alerts/j3ib06f8-21tr1qj2qkc',
+            'alerts/j3ib1egf-bqepzm4o6d9',
+            'alerts/j3ib3go6-9zd2gtqiqdmi',
+            'alerts/j3ibwp1e-6b6ib36cwf4i',
+            'alerts/j3ih16y8-di00l2jnwl',
+            'alerts/j428unk7-2b762fg3gzr',
+            'alerts/j428wrwh-2ndeq8u0xla',
+            'alerts/j4imwo0g-249cv9hptxx',
+            'alerts/j4imwxhy-s0ss59y409',
+            'alerts/j4imx3p4-13hbsmd1fvs',
+            'alerts/j4imxebu-1kom4os6rxn',
+            'alerts/j4imxk0g-14eppnnx9v3',
+            'alerts/j4imxunn-13m1qq3gil2i',
+            'alerts/j4imy0a3-1hp5xrenft3',
+            'alerts/j4imy3ml-2zwrg8zh6tr',
+            'alerts/j4imyjyx-mnwgnivts5cdi',
+            'alerts/j4imyzgw-rrj50axnpli',
+            'alerts/j4imzfkc-2dmw8vgsyg0',
+            'alerts/j4imzfrl-2cwp6na1m8h',
+            'alerts/j4imzlp6-2dgfi1qzxn3',
+            'alerts/j4imzvys-rvtkk4hhrs',
+            'alerts/j4in0c9u-bf7bxj8yv7r',
+            'alerts/j4in0sk2-1e60ywd1asj',
+            'alerts/j4in2n7v-f61i02c54x9',
+            'alerts/j4in33u0-18scybf3kx0',
+            'alerts/j4in3ins-vd12dhbp1ni',
+            'alerts/j4in3k3l-1e76me91it1',
+            'alerts/j4in3znr-2p7b7i1h9oc',
+            'alerts/j4in40lb-47u6pcwue9k9',
+            'alerts/j4in4fye-1fer8h6iyjd',
+            'alerts/j4in4wr0-1sh691vobgp',
+            'alerts/j4in7egq-168cgj6msrhi',
+            'alerts/j4in7uqx-8rdam6bf48mi',
+            'alerts/j4in7xt2-4ca7i6p5vu9',
+            'alerts/j4in8b1g-a9w0hnd1ogr',
+            'alerts/j4in8e34-1aj527ytrmt',
+            'alerts/j4in8ql9-1yqt3bijna4',
+            'alerts/j4in8rft-kwdj7o72u4r',
+            'alerts/j4in8tl0-5zf5vujp9fdi',
+            'alerts/j4in96xw-1k54d2jq3td',
+            'alerts/j4in99xj-r2yn68kqaqi',
+            'alerts/j4in9i6t-1sembg7khpc',
+            'alerts/j4in9n84-16bcjjodkfxi',
+            'alerts/j4in9yke-1hrjlkfoyq4',
+            'alerts/j4ina3j7-e39fvua5hai',
+            'alerts/j4inaetw-ihlbcfuoxb9',
+            'alerts/j4inapfx-xlyy9k6kg3',
+            'alerts/j4inauc4-12z5194ql32',
+            'alerts/j4inb5qx-2edemrx5ee5',
+            'alerts/j4inbm35-2o26tddy48u',
+            'alerts/j4inc2io-5hpudhflqi4i',
+            'alerts/j4inf060-28gzrc9awg5',
+            'alerts/j4infggv-vn6b0ie4zqi',
+            'alerts/j4infwqc-rjfvt8o6zx',
+            'alerts/j4ingczw-2mxdtrfbvnk',
+            'alerts/j4inunui-2n1isiozw8e',
+            'alerts/j4inymiv-14fu5ggy5odi',
+            'alerts/j4inysbd-s90mqnyd3d',
+            'alerts/j4inz248-bo4mmwoalp9',
+            'alerts/j4inzii8-2h2qjvr10zw',
+            'alerts/j4inzysa-2a0hov1bkul',
+            'alerts/j4ioitt9-1zs7uf58hv6',
+        ];
+        for(var i in oldRecords){
+            console.log(oldRecords[i]);
+            this.connection.record.getRecord(oldRecords[i]).delete();
+        }*/
     }
 
     setIncidentId(incidentId, id, notificationType) {
@@ -267,8 +344,8 @@ class AlertController {
     }
 
     saveMappedIncidents(recordName, incidentId, id, notificationType) {
-        // console.log(id);
-        // console.log(notificationType);
+        console.log(id);
+        console.log(notificationType);
         var alert = {};
         if (notificationType === 'call') {
             alert = {
