@@ -82,14 +82,14 @@ class AlertController {
                 var list = this.connection.record.getRecord(entry);
                 list.subscribe((data) => {
                     console.log(data.notificationType);
+                    console.log(data.id);
                     var incidentType = data.incidentType;
-                    if (data.incidentId) {
-                        var incId = data.incidentId.replace(/[^a-zA-Z0-9]/g, "");
+                    if (data.id) {
+                        var incId = data.id.replace(/[^a-zA-Z0-9]/g, "");
                         if (data.notificationType !== 'incident') {
                             if (this.mapDetails[incidentType] === undefined) {
                                 this.mapDetails[incidentType] = {};
                             }
-
                             this.mapDetails[incidentType][incId] = {
                                 lat: data.location.latitude,
                                 lng: data.location.longitude,
