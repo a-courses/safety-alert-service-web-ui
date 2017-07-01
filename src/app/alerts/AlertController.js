@@ -242,7 +242,8 @@ class AlertController {
             console.log("result");
             console.log(result.data.message);
             if (result.data.message === "success") {
-                delete this.mapDetails[id];
+                var incId = id.replace(/[^a-zA-Z0-9]/g, "");
+                delete this.mapDetails[incId];
                 console.log(this.mapDetails);
                 console.log("recordName : " + recordName);
                 this.connection.record.getRecord(recordName).delete();
@@ -415,14 +416,14 @@ class AlertController {
     loadAsyncMobileVideos() {
         this.url = "rtmp://192.168.1.101:1935/Sandeep-live-demo";
         this.file = "myStream";
-        $("#flowplayer1").flowplayer({
+       /* $("#flowplayer1").flowplayer({
             live: true,
             swf: "video/flowplayer.swf",
             rtmp: this.url,
             playlist: [[{
                 flash: this.file
             }]]
-        });
+        });*/
 
         $("#flowplayer2").flowplayer({
             live: true,
