@@ -80,7 +80,7 @@
                  <i class="fa fa-link" style="color: #ffffff !important;" ng-if="i.get('incidentId')"></i>
                 <a href="#" data-tooltip="Settings" style="color: #ffffff !important;" ng-if="!i.get('incidentId')">
                 <i class="fa fa-chain-broken"
-                   ng-click="ac.saveMappedIncidents(i.get('name'),i.get('incidentId'),i.get('id'),i.get('notificationType'))">
+                   ng-click="ac.saveMappedIncidents(i.name, i.get('incidentId'),i.get('id'),i.get('notificationType'))">
                 </i>
             </a>
             </span>

@@ -12,7 +12,7 @@ html, body, .container-fluid, .row {
 .remove-cards-padding {
     padding-right: 0px !important;
     padding-left: 0px !important;
-    border-right: 5px solid #00B0F0 !important;
+    border-right: 3px solid #00B0F0 !important;
 }
 
 .card {
