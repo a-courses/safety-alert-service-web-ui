@@ -427,8 +427,10 @@ class AlertController {
     }
 
     loadAsyncMobileVideos() {
-        this.url = "rtmp://192.168.1.101:1935/Sandeep-live-demo";
-        this.file = "myStream";
+        this.url = "rtmp://54.169.237.13:1935/live";
+        // this.url = "rtmp://54.169.237.13:1935/live/919845145035";
+        // this.url = "rtmp://192.168.1.101:1935/Sandeep-live-demo";
+        this.file = "919845145035";
         /* $("#flowplayer1").flowplayer({
          live: true,
          swf: "video/flowplayer.swf",
