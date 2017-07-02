@@ -441,41 +441,9 @@ class AlertController {
         });
 
 
-        /*var incId = id.replace(/[^a-zA-Z0-9]/g, "");
-         delete this.mapDetails[incId];
-         console.log(this.mapDetails);
-         console.log("recordName : " + recordName);
-         this.connection.record.getRecord(recordName).delete();
-         this.messagelist.removeEntry(recordName);
-         this.toaster.pop("success", id + " deleted");*/
-
-        /*var oldRecords = ['alerts/j38pqt3f-1c555dc4ttu',
-         'alerts/j3i5iv30-2fv5vt08ey6',
-         'alerts/j4imwhz8-27zc0zotrb3',
-         'alerts/j4l7sgsr-1nyvux57jvt9',
-         'alerts/j4l7sx1w-5plz21yrq3mi',
-         'alerts/j4l7tdbc-1yxrn1tyiax',
-         'alerts/j4l7ttna-1ooouo1irkm',
-         'alerts/j4l7zpon-tnlrtbxxee',
-         'alerts/j4l805zh-snognwdjq5i',
-         'alerts/j4l80lh0-1rhnir45sq5',
-         'alerts/j4l811qh-2jmo33hhtpk',
-         'alerts/j4l89gz7-np908jor3ei',
-         'alerts/j4l89wiq-hg2rp7wx9x',
-         'alerts/j4l8ae15-1y6sw003ukb',
-         'alerts/j4l8au6f-1028rrygr2g',
-         'alerts/j4l8mo9g-76c0hp23m5i',
-         'alerts/j4l8mo9y-l7x81b7s45i',
-         'alerts/j4lb6rlv-1yr0bu4vg2e',
-         'alerts/j4lb7826-yy30gjuq5h',
-         'alerts/j4lb7obq-bt7v4rknyni',
-         'alerts/j4lb84mr-257yllls3r4'
-         ];
-         for(var i in oldRecords){
-         console.log(oldRecords[i]);
-         this.connection.record.getRecord(oldRecords[i]).delete();
-         }*/
+        this.deleteAbsoluteRecords();
     }
+
 
     setIncidentId(incidentId, id, notificationType) {
         this.selectIncidentId = incidentId;
@@ -638,6 +606,43 @@ class AlertController {
             }]]
         });
     };
+
+    deleteAbsoluteRecords() {
+     /*   var incId = id.replace(/[^a-zA-Z0-9]/g, "");
+        delete this.mapDetails[incId];
+        console.log(this.mapDetails);
+        console.log("recordName : " + recordName);
+        this.connection.record.getRecord(recordName).delete();
+        this.messagelist.removeEntry(recordName);
+        this.toaster.pop("success", id + " deleted");*/
+
+        var oldRecords = ['alerts/j38pqt3f-1c555dc4ttu',
+            'alerts/j3i5iv30-2fv5vt08ey6',
+            'alerts/j4imwhz8-27zc0zotrb3',
+            'alerts/j4l7sgsr-1nyvux57jvt9',
+            'alerts/j4l7sx1w-5plz21yrq3mi',
+            'alerts/j4l7tdbc-1yxrn1tyiax',
+            'alerts/j4l7ttna-1ooouo1irkm',
+            'alerts/j4l7zpon-tnlrtbxxee',
+            'alerts/j4l805zh-snognwdjq5i',
+            'alerts/j4l80lh0-1rhnir45sq5',
+            'alerts/j4l811qh-2jmo33hhtpk',
+            'alerts/j4l89gz7-np908jor3ei',
+            'alerts/j4l89wiq-hg2rp7wx9x',
+            'alerts/j4l8ae15-1y6sw003ukb',
+            'alerts/j4l8au6f-1028rrygr2g',
+            'alerts/j4l8mo9g-76c0hp23m5i',
+            'alerts/j4l8mo9y-l7x81b7s45i',
+            'alerts/j4lb6rlv-1yr0bu4vg2e',
+            'alerts/j4lb7826-yy30gjuq5h',
+            'alerts/j4lb7obq-bt7v4rknyni',
+            'alerts/j4lb84mr-257yllls3r4'
+        ];
+        for (var i in oldRecords) {
+            console.log(oldRecords[i]);
+            this.connection.record.getRecord(oldRecords[i]).delete();
+        }
+    }
 }
 
 AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', 'toaster'];
