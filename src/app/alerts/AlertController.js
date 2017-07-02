@@ -82,13 +82,14 @@ class AlertController {
             this.alertMessages = entries.map((entry)=> {
                 var list = this.connection.record.getRecord(entry);
                 list.subscribe((data) => {
-                    console.log(data.notificationType + ":" + data.id);
+                    console.log("-----------------------------------------------------------------");
+                    console.log("Load alerts : notificationType :" + data.notificationType + " | id :" + data.id);
                     var incidentType = data.incidentType;
                     var recordName = list.name;
                     if (data.id) {
                         this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
-                            if(currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime){
-                                console.log("list.name" + recordName);
+                            if (currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime) {
+                                console.log("Load alerts : remove record message list : " + recordName);
                             }
                             return currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime;
                         });
@@ -135,6 +136,7 @@ class AlertController {
                         }
 
                         if (data.notificationType === 'upload' || data.notificationType === 'stream') {
+                            console.log("Load alerts : Create UPLOAD/STREAM : " + data.notificationType + " | record name :" + recordName);
                             var uploadData = {
                                 name: recordName,
                                 notificationType: data.notificationType,
@@ -158,8 +160,10 @@ class AlertController {
                                 incidentId: data.incidentId
                             };
                             this.alertMessageList.push(uploadData);
+                            console.log("UPLOAD/STREAM alert added");
                         }
                         if (data.notificationType === 'call') {
+                            console.log("Load alerts : Create CALL :" + data.notificationType + " | record name :" + recordName);
                             var callData = {
                                 name: recordName,
                                 notificationType: data.notificationType,
@@ -186,10 +190,11 @@ class AlertController {
                                 incidentId: data.incidentId
                             };
                             this.alertMessageList.push(callData);
+                            console.log("CALL alert added");
                         }
                     }
                     if (data.notificationType === 'incident') {
-                        console.log("----In create of " + data.notificationType + "-------------:");
+                        console.log("Load alerts : Create incident " + data.notificationType + " | record name :" + recordName);
                         var parentAlerts = [];
                         var assignedToList = [];
                         var alertUsersList = [];
@@ -235,7 +240,6 @@ class AlertController {
                                 parentAlerts.push(singleAlert);
                             }
                         }
-                        console.log(parentAlerts.length);
                         if (data.alert.mappedAlerts) {
                             for (var i in data.alert.mappedAlerts) {
                                 var singleAlert = {};
@@ -276,7 +280,6 @@ class AlertController {
                                 mappedAlertList.push(singleAlert);
                             }
                         }
-                        console.log(mappedAlertList.length);
                         if (data.alert.assignedTo) {
                             for (var i in data.alert.assignedTo) {
                                 var assign = {
@@ -287,8 +290,6 @@ class AlertController {
                                 assignedToList.push(assign);
                             }
                         }
-
-                        console.log(assignedToList.length);
                         if (data.alert.alertUsers) {
                             for (var i in data.alert.alertUsers) {
                                 var user = {
@@ -299,8 +300,6 @@ class AlertController {
                                 alertUsersList.push(user);
                             }
                         }
-                        console.log(alertUsersList.length);
-
                         var incidentData = {
                             notificationType: data.notificationType,
                             alert: {
@@ -317,11 +316,11 @@ class AlertController {
                                 alertUsers: alertUsersList
                             }
                         };
-                        console.log(incidentData.notificationType);
                         this.alertMessageList.push(incidentData);
+                        console.log("INCIDENT alert added");
                     }
+                    console.log("=================================================================");
                 });
-
                 return list;
             });
 
@@ -431,26 +430,24 @@ class AlertController {
                 incidentId: ''
             }
         }
-        console.log(id);
+        console.log("Alert Delete service request body : " , alertData);
         this.alertService.deleteRecordFromDB(alertData).then((result)=> {
-            console.log("delete service result");
-            console.log(result.data.message);
+            console.log("Alert Delete service response body : " , result.data.message);
             if (result.data.message === "success") {
                 var incId = id.replace(/[^a-zA-Z0-9]/g, "");
                 delete this.mapDetails[incId];
-                console.log(this.mapDetails);
-                console.log("recordName : " + recordName);
+                console.log("Delete alert : mapDetails marker details :", this.mapDetails);
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
                 this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
-                    if(currentItem.id === id){
-                        console.log("delete record name : " + recordName);
+                    if (currentItem.id === id) {
+                        console.log("Delete alert : recordName : " + recordName);
                     }
                     return currentItem.id === id;
                 });
-                this.toaster.pop("success", id + " deleted")
+                this.toaster.pop("success", id + " : Record Removed!");
             } else {
-                this.toaster.pop("error", "Error while delete")
+                this.toaster.pop("error", "Error while delete : " + id);
             }
 
         });
@@ -458,22 +455,8 @@ class AlertController {
         // this.deleteAbsoluteRecords();
     }
 
-
-    setIncidentId(incidentId, id, notificationType) {
-        this.selectIncidentId = incidentId;
-        this.selectNotificationType = notificationType;
-        console.log(this.selectIncidentId);
-        console.log(this.selectNotificationType);
-        this.mappingIncidentIdsWithoutParent = _.without(this.mappingIncidentIds, incidentId);
-        this.multiple = {
-            incidents: []
-        };
-    }
-
     saveMappedIncidents(recordName, incidentId, id, notificationType) {
-        console.log(id);
-        console.log(notificationType);
-        console.log(recordName);
+        console.log("Link incident : " + id + " type:" + notificationType + " and recordName :" + recordName);
         var alert = {};
         if (notificationType === 'call') {
             alert = {
@@ -530,15 +513,15 @@ class AlertController {
                 alertUsers: []
             }
         }
-        console.log(alert);
+        console.log("Link alerts request body : ", alert);
         this.alertService.saveMappedIncidents(alert).then((result)=> {
-            console.log(result);
+            console.log("Link alerts response body : ", result);
             if (result.data.message === 'success') {
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
                 this.toaster.pop("success", "Incident created")
             } else {
-                this.toaster.pop("error", "Error while creating incident created");
+                this.toaster.pop("error", "Error while creating incident created : " + id);
             }
         })
     }
@@ -621,14 +604,25 @@ class AlertController {
         });
     };
 
+    setIncidentId(incidentId, id, notificationType) {
+        this.selectIncidentId = incidentId;
+        this.selectNotificationType = notificationType;
+        console.log(this.selectIncidentId);
+        console.log(this.selectNotificationType);
+        this.mappingIncidentIdsWithoutParent = _.without(this.mappingIncidentIds, incidentId);
+        this.multiple = {
+            incidents: []
+        };
+    }
+
     deleteAbsoluteRecords() {
-     /*   var incId = id.replace(/[^a-zA-Z0-9]/g, "");
-        delete this.mapDetails[incId];
-        console.log(this.mapDetails);
-        console.log("recordName : " + recordName);
-        this.connection.record.getRecord(recordName).delete();
-        this.messagelist.removeEntry(recordName);
-        this.toaster.pop("success", id + " deleted");*/
+        /*   var incId = id.replace(/[^a-zA-Z0-9]/g, "");
+         delete this.mapDetails[incId];
+         console.log(this.mapDetails);
+         console.log("recordName : " + recordName);
+         this.connection.record.getRecord(recordName).delete();
+         this.messagelist.removeEntry(recordName);
+         this.toaster.pop("success", id + " deleted");*/
 
         var oldRecords = ['alerts/j38pqt3f-1c555dc4ttu',
             'alerts/j3i5iv30-2fv5vt08ey6',

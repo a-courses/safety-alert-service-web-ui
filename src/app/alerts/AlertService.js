@@ -11,7 +11,6 @@ class AlertService {
     }
 
     deleteRecordFromDB(alertData) {
-        console.log(alertData);
         var url = '';
         if (alertData.notificationType === 'upload' || alertData.notificationType === 'stream') {
             url = 'https://siosqa7482.execute-api.us-west-2.amazonaws.com/dev/alert';
@@ -19,14 +18,14 @@ class AlertService {
         if (alertData.notificationType === 'call') {
             url = 'https://siosqa7482.execute-api.us-west-2.amazonaws.com/dev/calldata';
         }
-        //
-        //
+        console.log("deleteRecordFromDB URL : ", url);
         return this.commonService.putData(url, alertData, alertData.notificationType + "alert updated Successfully");
 
     }
 
     saveMappedIncidents(alert) {
         var url = 'https://siosqa7482.execute-api.us-west-2.amazonaws.com/dev/incidents';
+        console.log("saveMappedIncidents URL : ", url);
         return this.commonService.postData(url, alert, '', 'success');
     }
 
