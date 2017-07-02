@@ -85,6 +85,10 @@ class AlertController {
                     console.log(data.notificationType + ":" + data.id);
                     var incidentType = data.incidentType;
                     if (data.id) {
+                        this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
+                            console.log(currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime);
+                            return currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime;
+                        });
                         var incId = data.id.replace(/[^a-zA-Z0-9]/g, "");
                         if (data.notificationType !== 'incident') {
                             if (this.mapDetails[incidentType] === undefined) {
