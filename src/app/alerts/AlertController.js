@@ -2,6 +2,7 @@ import AlertService from './AlertService';
 import controllerModule from '../common/ControllerModule';
 import DeepStreamService from '../common/DeepStreamService';
 import _ from 'underscore';
+import moment from 'moment';
 
 class AlertController {
     constructor(AlertService, CommonService, DeepStreamService, toaster) {
@@ -76,6 +77,8 @@ class AlertController {
     };
 
     loadAlertsAsync() {
+        console.log("date  :");
+        console.log(moment().format());
         this.alertMessageList = [];
         this.mapDetails = {};
         this.messagelist.subscribe((entries)=> {
@@ -462,8 +465,8 @@ class AlertController {
         if (notificationType === 'call') {
             alert = {
                 id: '',
-                time: new Date(),
-                modifiedTime: new Date(),
+                time: moment().format(),
+                modifiedTime: moment().format(),
                 parentAlert: [
                     {
                         alertType: 'call',
@@ -474,8 +477,8 @@ class AlertController {
         } else {
             alert = {
                 id: '',
-                time: new Date(),
-                modifiedTime: new Date(),
+                time: moment().format(),
+                modifiedTime: moment().format(),
                 parentAlert: [
                     {
                         alertType: 'file',

@@ -51,7 +51,12 @@
                        aria-hidden="true"></i>
                 </a>
                 <a href="{{i.url}}" target="_blank">
-                    <i title="{{i.mediaType}}" ng-if="i.mediaType==='record'"
+                    <i title="{{i.mediaType}}"  ng-if="i.mediaType.indexOf('audio')!== -1 || i.mediaType.indexOf('mpeg')!== -1"
+                       class="fa fa-video-camera blue-icons"
+                       aria-hidden="true"></i>
+                </a>
+                <a href="{{i.url}}" target="_blank">
+                    <i title="{{i.mediaType}}"  ng-if="i.mediaType.indexOf('streaming')!== -1"
                        class="fa fa-video-camera blue-icons"
                        aria-hidden="true"></i>
                 </a>
