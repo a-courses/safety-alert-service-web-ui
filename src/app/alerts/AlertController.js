@@ -21,7 +21,7 @@ class AlertController {
             center: {
                 lat: 12.97,
                 lng: 77.56,
-                zoom: 10
+                zoom: 12
             },
             markers: this.mapDetails,
             layers: {
@@ -328,7 +328,7 @@ class AlertController {
                 center: {
                     lat: 12.97,
                     lng: 77.56,
-                    zoom: 10
+                    zoom: 12
                 },
                 markers: this.mapDetails,
                 layers: {
@@ -430,9 +430,9 @@ class AlertController {
                 incidentId: ''
             }
         }
-        console.log("Alert Delete service request body : " , alertData);
+        console.log("Alert Delete service request body : ", alertData);
         this.alertService.deleteRecordFromDB(alertData).then((result)=> {
-            console.log("Alert Delete service response body : " , result.data.message);
+            console.log("Alert Delete service response body : ", result.data.message);
             if (result.data.message === "success") {
                 var incId = id.replace(/[^a-zA-Z0-9]/g, "");
                 delete this.mapDetails[incId];
@@ -463,54 +463,24 @@ class AlertController {
                 id: '',
                 time: new Date(),
                 modifiedTime: new Date(),
-                name: '',
                 parentAlert: [
                     {
                         alertType: 'call',
-                        alertId: id,
-                        caller: {},
-                        callee: {},
-                        location: {},
-                        status: '',
-                        mediaType: '',
-                        incidentType: '',
-                        time: '',
-                        modifiedTime: '',
-                        incidentId: ''
+                        alertId: id
                     }
-                ],
-                mappedAlerts: [],
-                createdBy: '',
-                description: '',
-                status: '',
-                assignedTo: [],
-                alertUsers: []
+                ]
             }
         } else {
             alert = {
                 id: '',
                 time: new Date(),
                 modifiedTime: new Date(),
-                name: '',
                 parentAlert: [
                     {
                         alertType: 'file',
-                        alertId: id,
-                        user: {},
-                        status: '',
-                        mediaType: '',
-                        incidentType: '',
-                        time: '',
-                        modifiedTime: '',
-                        incidentId: ''
+                        alertId: id
                     }
-                ],
-                mappedAlerts: [],
-                createdBy: '',
-                description: '',
-                status: '',
-                assignedTo: [],
-                alertUsers: []
+                ]
             }
         }
         console.log("Link alerts request body : ", alert);

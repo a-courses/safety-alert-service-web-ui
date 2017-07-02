@@ -21,7 +21,7 @@
         <td class="icon-cell">
             <img title="{{i.incidentType}}" ng-if="i.incidentType==='Fire'" src="../img/fire.png"
                  class="alert-icons"/>
-            <img title="{{i.incidentType}}" ng-if="i.incidentType==='Hazard'" src="../img/hazard.png"
+            <img title="{{i.incidentType}}" ng-if="i.incidentType==='Alerts'" src="../img/hazard.png"
                  class="alert-icons"/>
             <img title="{{i.incidentType}}" ng-if="i.incidentType==='Medical'"
                  src="../img/medical.png"
@@ -61,7 +61,7 @@
                        aria-hidden="true"></i>
                 </a>
                 <a href="{{i.url}}" target="_blank">
-                    <i title="{{i.mediaType}}" ng-if="i.mediaType==='phone'"
+                    <i title="{{i.mediaType}}" ng-if="i.mediaType==='Emergency Call'"
                        class="fa fa-phone blue-icons" aria-hidden="true"></i>
                 </a>
             </div>
@@ -94,7 +94,7 @@
         <td class="icon-cell">
             <img title="{{i.get('incidentType')}}" ng-if="i.get('incidentType')==='Fire'" src="../img/fire.png"
                  class="alert-icons"/>
-            <img title="{{i.get('incidentType')}}" ng-if="i.get('incidentType')==='Hazard'" src="../img/hazard.png"
+            <img title="{{i.get('incidentType')}}" ng-if="i.get('incidentType')==='Alerts'" src="../img/hazard.png"
                  class="alert-icons"/>
             <img title="{{i.get('incidentType')}}" ng-if="i.get('incidentType')==='Medical'"
                  src="../img/medical.png"
@@ -134,7 +134,7 @@
                        aria-hidden="true"></i>
                 </a>
                 <a href="{{i.get('url')}}" target="_blank">
-                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='phone'"
+                    <i title="{{i.get('mediaType')}}" ng-if="i.get('mediaType')==='Emergency Call'"
                        class="fa fa-phone blue-icons" aria-hidden="true"></i>
                 </a>
             </div>
