@@ -17,7 +17,7 @@
     </thead>
     <tbody>
 
-    <tr ng-repeat="i in ac.alertMessageList | orderBy:'-modifiedTime'" ng-if="i.notificationType!=='incident'">
+    <tr ng-repeat="i in ac.alertMessageList" ng-if="i.notificationType!=='incident'">
         <td class="icon-cell">
             <img title="{{i.incidentType}}" ng-if="i.incidentType==='Fire'" src="../img/fire.png"
                  class="alert-icons"/>

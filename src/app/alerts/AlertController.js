@@ -72,7 +72,7 @@ class AlertController {
             }
         });
         this.loadAlertsAsync();
-        this.loadAsyncMobileVideos();
+
     };
 
     loadAlertsAsync() {
@@ -319,6 +319,7 @@ class AlertController {
                         this.alertMessageList.push(incidentData);
                         console.log("INCIDENT alert added");
                     }
+                    this.alertMessageList = _.sortBy(this.alertMessageList, 'modifiedTime').reverse();
                     console.log("=================================================================");
                 });
                 return list;
@@ -498,13 +499,13 @@ class AlertController {
 
     loadAsyncMobileVideos() {
         this.alertService.getRTMPip().then((data)=> {
-            console.log("RTMP IP address : " +data.rtmpIp);
+            console.log("RTMP IP address : " + data.rtmpIp);
             this.url = "rtmp://" + data.rtmpIp + ":1935/live";
 
-            console.log("RTMP url : " +this.url);
+            console.log("RTMP url : " + this.url);
             // this.url = "rtmp://54.169.237.13:1935/live/919845145035";
             // this.url = "rtmp://192.168.1.101:1935/Sandeep-live-demo";
-
+            console.log(this.alertMessageList);
             this.mobileVideoFileOne = "919845145035";
             this.mobileVideoFileTwo = "919845145035";
             this.mobileVideoFileThree = "919845145035";
