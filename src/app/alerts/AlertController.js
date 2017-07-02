@@ -84,9 +84,12 @@ class AlertController {
                 list.subscribe((data) => {
                     console.log(data.notificationType + ":" + data.id);
                     var incidentType = data.incidentType;
+                    var recordName = list.name;
                     if (data.id) {
                         this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
-                            console.log(currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime);
+                            if(currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime){
+                                console.log("list.name" + recordName);
+                            }
                             return currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime;
                         });
                         var incId = data.id.replace(/[^a-zA-Z0-9]/g, "");
@@ -133,6 +136,7 @@ class AlertController {
 
                         if (data.notificationType === 'upload' || data.notificationType === 'stream') {
                             var uploadData = {
+                                name: recordName,
                                 notificationType: data.notificationType,
                                 id: data.id,
                                 url: data.url,
@@ -157,6 +161,7 @@ class AlertController {
                         }
                         if (data.notificationType === 'call') {
                             var callData = {
+                                name: recordName,
                                 notificationType: data.notificationType,
                                 id: data.id,
                                 caller: {
@@ -428,7 +433,7 @@ class AlertController {
         }
         console.log(id);
         this.alertService.deleteRecordFromDB(alertData).then((result)=> {
-            console.log("result");
+            console.log("delete service result");
             console.log(result.data.message);
             if (result.data.message === "success") {
                 var incId = id.replace(/[^a-zA-Z0-9]/g, "");
@@ -437,6 +442,12 @@ class AlertController {
                 console.log("recordName : " + recordName);
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
+                this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
+                    if(currentItem.id === id){
+                        console.log("delete record name : " + recordName);
+                    }
+                    return currentItem.id === id;
+                });
                 this.toaster.pop("success", id + " deleted")
             } else {
                 this.toaster.pop("error", "Error while delete")
@@ -444,8 +455,7 @@ class AlertController {
 
         });
 
-
-        this.deleteAbsoluteRecords();
+        // this.deleteAbsoluteRecords();
     }
 
 
