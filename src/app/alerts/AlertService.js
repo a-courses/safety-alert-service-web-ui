@@ -29,6 +29,10 @@ class AlertService {
         return this.commonService.postData(url, alert, '', 'success');
     }
 
+    getRTMPip(){
+        return this.commonService.getData("data/ip.json", "Error while fetching RTMP IP");
+    }
+
 }
 AlertService.$inject = ['CommonService', '$q'];
 export default serviceModule.service('AlertService', AlertService).name;
