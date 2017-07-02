@@ -490,6 +490,12 @@ class AlertController {
             if (result.data.message === 'success') {
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
+                this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
+                    if (currentItem.id === id) {
+                        console.log("Delete Linked alert : recordName : " + recordName);
+                    }
+                    return currentItem.id === id;
+                });
                 this.toaster.pop("success", "Incident created")
             } else {
                 this.toaster.pop("error", "Error while creating incident created : " + id);
