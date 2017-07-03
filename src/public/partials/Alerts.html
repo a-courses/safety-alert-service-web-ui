@@ -9,17 +9,24 @@
             </div>
             <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
                 <div class="row" style="height: calc(100%/2);">
-
-                    <div id="flowplayer1" class="col-md-6 channel1">
-                        <img src="../img/IMG_3260-01.jpeg" style="width: inherit;height: inherit"/>
+                    <!--{{ac.uploadStreamList}}-->
+                    <div id="flowplayer0" class="col-md-6 channel1" ng-if="ac.uploadStreamList[0].id"
+                         ng-init="ac.playVideo(ac.uploadStreamList[0],0)">
+                        <img ng-src="{{ac.imageURL[0]}}" style="width: inherit;height: inherit"/>
                     </div>
-                    <div id="flowplayer2" class="col-md-6 channel2">
+                    <div id="flowplayer1" class="col-md-6 channel2" ng-if="ac.uploadStreamList[1].id"
+                         ng-init="ac.playVideo(ac.uploadStreamList[1],1)">
+                        <img ng-src="{{ac.imageURL[0]}}" style="width: inherit;height: inherit"/>
                     </div>
                 </div>
                 <div class="row" style="height: calc(100%/2)">
-                    <div id="flowplayer3" class="col-md-6 channel3">
+                    <div id="flowplayer2" class="col-md-6 channel3" ng-if="ac.uploadStreamList[2].id"
+                         ng-init="ac.playVideo(ac.uploadStreamList[2],2)">
+                        <img ng-src="{{ac.imageURL[1]}}" style="width: inherit;height: inherit"/>
                     </div>
-                    <div id="flowplayer4" class="col-md-6 channel4">
+                    <div id="flowplayer3" class="col-md-6 channel4" ng-if="ac.uploadStreamList[3].id"
+                         ng-init="ac.playVideo(ac.uploadStreamList[3],3)">
+                        <img ng-src="{{ac.imageURL[2]}}" style="width: inherit;height: inherit"/>
                     </div>
 
                 </div>
@@ -116,7 +123,8 @@
                 <img src="../img/foresee.png" class="float-left"> Locations
                 <i class="fa fa-external-link float-right" aria-hidden="true"></i>
             </div>
-            <leaflet lf-center="ac.center" markers="ac.markers" layers="ac.layers" markers-nested="true" height="460px" width="100%"></leaflet>
+            <leaflet lf-center="ac.center" markers="ac.markers" layers="ac.layers" markers-nested="true" height="460px"
+                     width="100%"></leaflet>
         </div>
         <div class="card style-4" style="height: 25%">
             <div class="card-header text-center">

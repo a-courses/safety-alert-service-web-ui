@@ -13,6 +13,7 @@ class AlertController {
         this.alertMessages = [];
         this.mappingIncidentIds = [];
         this.mapDetails = {};
+        this.imageURL = [];
         this.multiple = {
             incidents: []
         };
@@ -78,7 +79,8 @@ class AlertController {
 
     loadAlertsAsync() {
         console.log("date  :");
-        console.log(moment().format());
+        var offset = moment().utcOffset();
+        console.log(offset);
         this.alertMessageList = [];
         this.mapDetails = {};
         this.messagelist.subscribe((entries)=> {
@@ -158,8 +160,8 @@ class AlertController {
                                 status: data.status,
                                 mediaType: data.mediaType,
                                 incidentType: data.incidentType,
-                                time: data.time,
-                                modifiedTime: data.modifiedTime,
+                                time: moment.utc(data.time).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
+                                modifiedTime: moment.utc(data.modifiedTime).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
                                 incidentId: data.incidentId
                             };
                             this.alertMessageList.push(uploadData);
@@ -188,8 +190,8 @@ class AlertController {
                                 status: data.status,
                                 mediaType: data.mediaType,
                                 incidentType: data.incidentType,
-                                time: data.time,
-                                modifiedTime: data.modifiedTime,
+                                time: moment.utc(data.time).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
+                                modifiedTime: moment.utc(data.modifiedTime).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
                                 incidentId: data.incidentId
                             };
                             this.alertMessageList.push(callData);
@@ -303,12 +305,13 @@ class AlertController {
                                 alertUsersList.push(user);
                             }
                         }
+
                         var incidentData = {
                             notificationType: data.notificationType,
                             alert: {
                                 id: data.alert.id,
-                                time: data.alert.time,
-                                modifiedTime: data.alert.modifiedTime,
+                                time: moment.utc(data.time).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
+                                modifiedTime: moment.utc(data.modifiedTime).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
                                 name: data.alert.name,
                                 parentAlert: parentAlerts,
                                 mappedAlerts: data.alert.mappedAlerts,
@@ -465,8 +468,8 @@ class AlertController {
         if (notificationType === 'call') {
             alert = {
                 id: '',
-                time: moment().format(),
-                modifiedTime: moment().format(),
+                time: moment.utc().format('YYYY-MM-DDTHH:mm:ss'),
+                modifiedTime: moment.utc().format('YYYY-MM-DDTHH:mm:ss'),
                 parentAlert: [
                     {
                         alertType: 'call',
@@ -477,8 +480,8 @@ class AlertController {
         } else {
             alert = {
                 id: '',
-                time: moment().format(),
-                modifiedTime: moment().format(),
+                time: moment.utc().format('YYYY-MM-DDTHH:mm:ss'),
+                modifiedTime: moment.utc().format('YYYY-MM-DDTHH:mm:ss'),
                 parentAlert: [
                     {
                         alertType: 'file',
@@ -507,91 +510,73 @@ class AlertController {
     }
 
     loadAsyncMobileVideos() {
-        this.alertService.getRTMPip().then((data)=> {
-            console.log("RTMP IP address : " + data.rtmpIp);
-            this.url = "rtmp://" + data.rtmpIp + ":1935/live";
+        this.uploadStreamList = [];
+        this.messagelist.subscribe((entries)=> {
+            var messages = entries.map((entry)=> {
+                var list = this.connection.record.getRecord(entry);
+                list.subscribe((data) => {
+                    console.log("-----------------------------------------------------------------");
+                    console.log("UPLOAD STREAM LIST : notificationType :" + data.notificationType + " | id :" + data.id);
+                    var incidentType = data.incidentType;
+                    var recordName = list.name;
+                    if (data.id) {
+                        this.uploadStreamList = _.reject(this.uploadStreamList, function (currentItem) {
+                            if (currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime) {
+                                console.log("UPLOAD STREAM LIST : remove record message list : " + recordName);
+                            }
+                            return currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime;
+                        });
+                        if (data.notificationType === 'upload' || data.notificationType === 'stream') {
+                            console.log("UPLOAD STREAM LIST : Create UPLOAD/STREAM : " + data.notificationType + " | record name :" + recordName);
+                            if (data.mediaType.indexOf("image") !== -1 || data.mediaType.indexOf("jpeg") !== -1
+                                || data.mediaType.indexOf("video") !== -1 || data.mediaType.indexOf("streaming") !== -1
+                                && data.modifiedTime !== undefined) {
+                                var uploadData = {
+                                    id: data.id,
+                                    url: data.url,
+                                    fileName: data.fileName,
+                                    phoneNumber: data.user.phoneNumber,
+                                    mediaType: data.mediaType,
+                                    incidentType: data.incidentType,
+                                    time: data.time,
+                                    modifiedTime: data.modifiedTime
+                                };
+                                this.uploadStreamList.push(uploadData);
+                                console.log("UPLOAD STREAM added");
+                            }
+                        }
+                    }
 
-            console.log("RTMP url : " + this.url);
-            // this.url = "rtmp://54.169.237.13:1935/live/919845145035";
-            // this.url = "rtmp://192.168.1.101:1935/Sandeep-live-demo";
-            console.log(this.alertMessageList);
-            this.mobileVideoFileOne = "919845145035";
-            this.mobileVideoFileTwo = "919845145035";
-            this.mobileVideoFileThree = "919845145035";
-            this.mobileVideoFileFour = "919845145035";
-            /* $("#flowplayer1").flowplayer({
-             live: true,
-             swf: "video/flowplayer.swf",
-             rtmp: this.url,
-             playlist: [[{
-             flash: this.file
-             }]]
-             });*/
-
-            $("#flowplayer2").flowplayer({
-                live: true,
-                swf: "video/flowplayer.swf",
-                rtmp: this.url,
-                playlist: [[{
-                    flash: this.mobileVideoFileOne
-                }]]
-            });
-
-            $("#flowplayer3").flowplayer({
-                live: true,
-                swf: "video/flowplayer.swf",
-                rtmp: this.url,
-                playlist: [[{
-                    flash: this.mobileVideoFileTwo
-                }]]
-            });
-
-            $("#flowplayer4").flowplayer({
-                live: true,
-                swf: "video/flowplayer.swf",
-                rtmp: this.url,
-                playlist: [[{
-                    flash: this.mobileVideoFileThree
-                }]]
-            });
-
-            // Surv--Camera
-            $("#surveillanceCamera1").flowplayer({
-                live: true,
-                swf: "video/flowplayer.swf",
-                rtmp: this.url,
-                playlist: [[{
-                    flash: this.mobileVideoFileFour
-                }]]
-            });
-
-            $("#surveillanceCamera2").flowplayer({
-                live: true,
-                swf: "video/flowplayer.swf",
-                rtmp: this.url,
-                playlist: [[{
-                    flash: this.file
-                }]]
-            });
-
-            $("#surveillanceCamera3").flowplayer({
-                live: true,
-                swf: "video/flowplayer.swf",
-                rtmp: this.url,
-                playlist: [[{
-                    flash: this.file
-                }]]
-            });
-            $("#surveillanceCamera4").flowplayer({
-                live: true,
-                swf: "video/flowplayer.swf",
-                rtmp: this.url,
-                playlist: [[{
-                    flash: this.file
-                }]]
+                    this.uploadStreamList = _.sortBy(this.uploadStreamList, 'modifiedTime').reverse();
+                    console.log("=================================================================");
+                    console.log("this.uploadStreamList");
+                    console.log(this.uploadStreamList);
+                });
+                return list;
             });
         });
+
     };
+
+    playVideo(streamList, index) {
+        console.log(streamList);
+        if (streamList.mediaType.indexOf("streaming") !== -1 || streamList.mediaType.indexOf("video") !== -1) {
+            var URL = streamList.url.replace("rtsp", "rtmp");
+            //rtmp://54.169.237.13:1935/live/
+            console.log(URL);
+            $("#flowplayer" + index).flowplayer({
+                live: true,
+                swf: "video/flowplayer.swf",
+                rtmp: URL,
+                playlist: [[{
+                    flash: streamList.fileName
+                }]]
+            });
+        } else {
+            this.imageURL.push(streamList.url);
+        }
+        console.log(this.imageURL);
+    }
 
     setIncidentId(incidentId, id, notificationType) {
         this.selectIncidentId = incidentId;
@@ -613,27 +598,62 @@ class AlertController {
          this.messagelist.removeEntry(recordName);
          this.toaster.pop("success", id + " deleted");*/
 
-        var oldRecords = ['alerts/j38pqt3f-1c555dc4ttu',
-            'alerts/j3i5iv30-2fv5vt08ey6',
-            'alerts/j4imwhz8-27zc0zotrb3',
-            'alerts/j4l7sgsr-1nyvux57jvt9',
+        var oldRecords = [
+            'alerts/j4my3r1s-1l0wa1iti54',
+            'alerts/j4imzlp6-2dgfi1qzxn3',
+            'alerts/j4myv1lz-i5ynlon2vhi',
+            'alerts/j44ct1uw-1ky87bc6rto',
+            'alerts/j44cekih-lhhhqum8i2',
+            'alerts/j44dj4bj-14ghyunrtmw',
+            'alerts/j44ef1u0-5fknsbcs1vb9',
+            'alerts/j4mm7ho1-z21ohpqzf8i',
+            'alerts/j4mx96wb-nuzazpj4n6',
+            'alerts/j429lntp-h98xvcqkzo',
+            'alerts/j42a0ouk-2e925sqa504',
+            'alerts/j44ed2p8-10796u7yn84i',
+            'alerts/j4l80lh0-1rhnir45sq5',
             'alerts/j4l7sx1w-5plz21yrq3mi',
+            'alerts/j4l7sgsr-1nyvux57jvt9',
+            'alerts/j38pqt3f-1c555dc4ttu',
             'alerts/j4l7tdbc-1yxrn1tyiax',
             'alerts/j4l7ttna-1ooouo1irkm',
+            'alerts/j44d7fw9-27b1gvmmxkl',
             'alerts/j4l7zpon-tnlrtbxxee',
             'alerts/j4l805zh-snognwdjq5i',
-            'alerts/j4l80lh0-1rhnir45sq5',
-            'alerts/j4l811qh-2jmo33hhtpk',
-            'alerts/j4l89gz7-np908jor3ei',
-            'alerts/j4l89wiq-hg2rp7wx9x',
             'alerts/j4l8ae15-1y6sw003ukb',
+            'alerts/j4l7jst7-1u5pkopv0ev',
             'alerts/j4l8au6f-1028rrygr2g',
+            'alerts/j3i5kwnp-10pt1571dp2',
             'alerts/j4l8mo9g-76c0hp23m5i',
             'alerts/j4l8mo9y-l7x81b7s45i',
+            'alerts/j38pqt3f-1c555dc4ttu',
             'alerts/j4lb6rlv-1yr0bu4vg2e',
             'alerts/j4lb7826-yy30gjuq5h',
+            'alerts/j4l811qh-2jmo33hhtpk',
+            'alerts/j4l89wiq-hg2rp7wx9x',
+            'alerts/j4l89gz7-np908jor3ei',
+            'alerts/j4lb84mr-257yllls3r4',
             'alerts/j4lb7obq-bt7v4rknyni',
-            'alerts/j4lb84mr-257yllls3r4'
+            'alerts/j4ml48eb-5v0vxu1zrlr',
+            'alerts/j4ml4o7e-24ta0un2py0',
+            'alerts/j4ml5k9a-dmkv2dbuy1i',
+            'alerts/j4mmzgsd-2251aep13mk',
+            'alerts/j4ml53yy-17tir907jili',
+            'alerts/j4l7m8zd-2g7gf5wfa00',
+            'alerts/j4mz3tf7-2lw6bdkx3w6r',
+            'alerts/j4mz3tha-cgfit54qku9',
+            'alerts/j4mzzp5o-2ejnrgg0x3o',
+            'alerts/j4mjxnt5-2ane6gqbdpy',
+            'alerts/j4mjy3bt-102pmyapm8ei',
+            'alerts/j4mjyzw6-z1p214lwrci',
+            'alerts/j4mm0qa9-1avs5sjkvxxr',
+            'alerts/j4mxile4-2h4vbqf1m50',
+            'alerts/j4iniyw9-18p51a2fkka',
+            'alerts/j4mjyjlz-1ytomf3upnq',
+            'alerts/j4mm54r5-5p87mh4f444i',
+            'alerts/j4n0f4na-lbmagoo1b4',
+            'alerts/j4n0f4kp-f4gdka8791',
+            'alerts/j4mzljaf-1zrno4dpifk'
         ];
         for (var i in oldRecords) {
             console.log(oldRecords[i]);

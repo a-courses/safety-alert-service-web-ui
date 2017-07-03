@@ -95,3 +95,90 @@
          }
          }
          });*/
+         
+         
+         
+        /*this.alertService.getRTMPip().then((data)=> {
+         console.log("RTMP IP address : " + data.rtmpIp);
+         this.url = "rtmp://" + data.rtmpIp + ":1935/live";
+
+         console.log("RTMP url : " + this.url);
+         // this.url = "rtmp://54.169.237.13:1935/live/919845145035";
+         // this.url = "rtmp://192.168.1.101:1935/Sandeep-live-demo";
+         console.log(this.uploadStreamList);
+         this.mobileVideoFileOne = "919845145035";
+         this.mobileVideoFileTwo = "919845145035";
+         this.mobileVideoFileThree = "919845145035";
+         this.mobileVideoFileFour = "919845145035";
+         /!* $("#flowplayer1").flowplayer({
+         live: true,
+         swf: "video/flowplayer.swf",
+         rtmp: this.url,
+         playlist: [[{
+         flash: this.file
+         }]]
+         });*!/
+
+         $("#flowplayer2").flowplayer({
+         live: true,
+         swf: "video/flowplayer.swf",
+         rtmp: this.url,
+         playlist: [[{
+         flash: this.mobileVideoFileOne
+         }]]
+         });
+
+         $("#flowplayer3").flowplayer({
+         live: true,
+         swf: "video/flowplayer.swf",
+         rtmp: this.url,
+         playlist: [[{
+         flash: this.mobileVideoFileTwo
+         }]]
+         });
+
+         $("#flowplayer4").flowplayer({
+         live: true,
+         swf: "video/flowplayer.swf",
+         rtmp: this.url,
+         playlist: [[{
+         flash: this.mobileVideoFileThree
+         }]]
+         });
+
+         // Surv--Camera
+         $("#surveillanceCamera1").flowplayer({
+         live: true,
+         swf: "video/flowplayer.swf",
+         rtmp: this.url,
+         playlist: [[{
+         flash: this.mobileVideoFileFour
+         }]]
+         });
+
+         $("#surveillanceCamera2").flowplayer({
+         live: true,
+         swf: "video/flowplayer.swf",
+         rtmp: this.url,
+         playlist: [[{
+         flash: this.file
+         }]]
+         });
+
+         $("#surveillanceCamera3").flowplayer({
+         live: true,
+         swf: "video/flowplayer.swf",
+         rtmp: this.url,
+         playlist: [[{
+         flash: this.file
+         }]]
+         });
+         $("#surveillanceCamera4").flowplayer({
+         live: true,
+         swf: "video/flowplayer.swf",
+         rtmp: this.url,
+         playlist: [[{
+         flash: this.file
+         }]]
+         });
+         });*/
