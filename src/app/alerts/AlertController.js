@@ -557,7 +557,7 @@ class AlertController {
                             if (value.mediaType.indexOf("streaming") !== -1 || value.mediaType.indexOf("video") !== -1) {
                                 var URL = value.url.replace("rtsp", "rtmp");
                                 //rtmp://54.169.237.13:1935/live/
-                                console.log(URL);
+                                console.log(URL, value.fileName);
                                 $("#flowplayer" + id).flowplayer({
                                     live: true,
                                     swf: "video/flowplayer.swf",
