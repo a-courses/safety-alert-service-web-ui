@@ -14,6 +14,7 @@ class AlertController {
         this.mappingIncidentIds = [];
         this.mapDetails = {};
         this.imageURL = [];
+        this.uploadStreamList = [];
         this.multiple = {
             incidents: []
         };
@@ -74,7 +75,6 @@ class AlertController {
             }
         });
         this.loadAlertsAsync();
-
     };
 
     loadAlertsAsync() {
@@ -510,7 +510,6 @@ class AlertController {
     }
 
     loadAsyncMobileVideos() {
-        this.uploadStreamList = [];
         this.messagelist.subscribe((entries)=> {
             var messages = entries.map((entry)=> {
                 var list = this.connection.record.getRecord(entry);
@@ -551,6 +550,28 @@ class AlertController {
                     console.log("=================================================================");
                     console.log("this.uploadStreamList");
                     console.log(this.uploadStreamList);
+                    this.imageURL = [];
+                    _.each(this.uploadStreamList, (value, id)=> {
+                        console.log(value, id);
+                        if (id !== 4) {
+                            if (value.mediaType.indexOf("streaming") !== -1 || value.mediaType.indexOf("video") !== -1) {
+                                var URL = value.url.replace("rtsp", "rtmp");
+                                //rtmp://54.169.237.13:1935/live/
+                                console.log(URL);
+                                $("#flowplayer" + id).flowplayer({
+                                    live: true,
+                                    swf: "video/flowplayer.swf",
+                                    rtmp: URL,
+                                    playlist: [[{
+                                        flash: value.fileName
+                                    }]]
+                                });
+                            } else {
+                                this.imageURL.push(value.url);
+                            }
+                            console.log(this.imageURL);
+                        }
+                    })
                 });
                 return list;
             });

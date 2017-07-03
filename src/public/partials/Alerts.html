@@ -9,7 +9,14 @@
             </div>
             <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
                 <div class="row" style="height: calc(100%/2);">
-                    <!--{{ac.uploadStreamList}}-->
+                    <div ng-repeat="i in ac.uploadStreamList | limitTo: 4" id="flowplayer+{{$index}}" class="col-md-6 channel1">
+                        <img ng-if="ac.imageURL[$index]" ng-src="{{ac.imageURL[$index]}}"
+                             style="width: inherit;height: inherit"/>
+                    </div>
+                </div>
+
+                <!--<div class="row" style="height: calc(100%/2);">
+                    &lt;!&ndash;{{ac.uploadStreamList}}&ndash;&gt;
                     <div id="flowplayer0" class="col-md-6 channel1" ng-if="ac.uploadStreamList[0].id"
                          ng-init="ac.playVideo(ac.uploadStreamList[0],0)">
                         <img ng-src="{{ac.imageURL[0]}}" style="width: inherit;height: inherit"/>
@@ -28,13 +35,7 @@
                          ng-init="ac.playVideo(ac.uploadStreamList[3],3)">
                         <img ng-src="{{ac.imageURL[2]}}" style="width: inherit;height: inherit"/>
                     </div>
-
-                </div>
-                <!-- <div class="row">
-                     <div id="flowplayer1" class="col-md-4" style="border-right:2px solid #FFFFFF"></div>
-                     <div id="flowplayer2" class="col-md-4" style="border-right:2px solid #FFFFFF"></div>
-                     <div id="flowplayer3" class="col-md-4"></div>
-                 </div>-->
+                </div>-->
             </div>
         </div>
         <!--<div class="card" style="height: 25%">
