@@ -8,13 +8,17 @@
                 <i class="fa fa-external-link float-right" aria-hidden="true"></i>
             </div>
             <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
+                <div class="row" style="height: calc(100%/2);" id="mbVideos"></div>
                 <div class="row" style="height: calc(100%/2);">
-                    <div ng-repeat="i in ac.uploadStreamList | limitTo: 4" id="flowplayer+{{$index}}" class="col-md-6 channel1">
-                        <img ng-if="ac.imageURL[$index]" ng-src="{{ac.imageURL[$index]}}"
-                             style="width: inherit;height: inherit"/>
+                    <div ng-repeat="i in ac.imageURL | limitTo: 4" ng-if="ac.imageURL[$index]"
+                         class="col-md-6 channel1" style="padding: 0px!important;">
+                        <img ng-src="{{i}}" style="width: inherit;height: inherit"/>
                     </div>
                 </div>
-
+                <!--<div id="flowplayer0" class="col-md-6 channel1"></div>
+                <div id="flowplayer1" class="col-md-6 channel1"></div>
+                <div id="flowplayer2" class="col-md-6 channel1"></div>
+                <div id="flowplayer3" class="col-md-6 channel1"></div>-->
                 <!--<div class="row" style="height: calc(100%/2);">
                     &lt;!&ndash;{{ac.uploadStreamList}}&ndash;&gt;
                     <div id="flowplayer0" class="col-md-6 channel1" ng-if="ac.uploadStreamList[0].id"
