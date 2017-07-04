@@ -8,13 +8,20 @@
                 <i class="fa fa-external-link float-right" aria-hidden="true"></i>
             </div>
             <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
-                <div class="row" style="height: calc(100%/2);" id="mbVideos"></div>
-                <div class="row" style="height: calc(100%/2);">
+                <div class="row" style="height: calc(100%/2);" id="mbVideos">
+                    <div class="card text-center" style="width:100%;height:100%;border: 0px!important;" id="loadingTextId">
+                        <div class="card-block">
+                            <p class="card-text">Loading ...</p>
+                            <img src="../img/loading.gif">
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="row" style="height: calc(100%/2);">
                     <div ng-repeat="i in ac.imageURL | limitTo: 4" ng-if="ac.imageURL[$index]"
                          class="col-md-6 channel1" style="padding: 0px!important;">
                         <img ng-src="{{i}}" style="width: inherit;height: inherit"/>
                     </div>
-                </div>
+                </div>-->
                 <!--<div id="flowplayer0" class="col-md-6 channel1"></div>
                 <div id="flowplayer1" class="col-md-6 channel1"></div>
                 <div id="flowplayer2" class="col-md-6 channel1"></div>

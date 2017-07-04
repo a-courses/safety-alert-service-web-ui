@@ -92,7 +92,7 @@ class AlertController {
                     var incidentType = data.incidentType;
                     var recordName = list.name;
                     if (data.id) {
-                        this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
+                        this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
                             if (currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime) {
                                 console.log("Load alerts : remove record message list : " + recordName);
                             }
@@ -446,7 +446,7 @@ class AlertController {
                 console.log("Delete alert : mapDetails marker details :", this.mapDetails);
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
-                this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
+                this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
                     if (currentItem.id === id) {
                         console.log("Delete alert : recordName : " + recordName);
                     }
@@ -496,7 +496,7 @@ class AlertController {
             if (result.data.message === 'success') {
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
-                this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
+                this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
                     if (currentItem.id === id) {
                         console.log("Delete Linked alert : recordName : " + recordName);
                     }
@@ -519,7 +519,7 @@ class AlertController {
                     var incidentType = data.incidentType;
                     var recordName = list.name;
                     if (data.id) {
-                        this.uploadStreamList = _.reject(this.uploadStreamList, function(currentItem) {
+                        this.uploadStreamList = _.reject(this.uploadStreamList, function (currentItem) {
                             if (currentItem.id === data.id) {
                                 console.log("UPLOAD STREAM LIST : remove record message list : " + recordName);
                             }
@@ -556,6 +556,11 @@ class AlertController {
                         if (elementById) {
                             document.getElementById("mbVideos").removeChild(elementById);
                         }
+                        var loadingTextId = document.getElementById("loadingTextId");
+                        if (loadingTextId) {
+                            document.getElementById("mbVideos").removeChild(loadingTextId);
+                        }
+
                     });
                     _.each(this.uploadStreamList, (value, id) => {
 
@@ -566,6 +571,7 @@ class AlertController {
                                 console.log(URL, value.fileName);
                                 var vidDiv = document.createElement('div');
                                 vidDiv.setAttribute("id", "flowplayer" + id);
+                                vidDiv.setAttribute("style", "padding: 0px!important");
                                 vidDiv.className = 'col-md-6 channel1';
                                 console.log("element : ", vidDiv);
                                 document.getElementById('mbVideos').appendChild(vidDiv);
@@ -579,9 +585,17 @@ class AlertController {
                                     }]]
                                 });
                             } else {
-                                this.imageURL.push(value.url);
+                                var imgDiv = document.createElement('div');
+                                imgDiv.setAttribute("id", "flowplayer" + id);
+                                imgDiv.setAttribute("style", "padding: 0px!important");
+                                imgDiv.className = 'col-md-6 channel1';
+                                var imgTag = document.createElement('img');
+                                imgTag.setAttribute('src', value.url);
+                                imgTag.setAttribute("style", "width: inherit;height: inherit");
+                                imgDiv.appendChild(imgTag);
+                                console.log("element : ", imgDiv);
+                                document.getElementById('mbVideos').appendChild(imgDiv);
                             }
-                            console.log(this.imageURL);
                         }
                     })
                 });
