@@ -579,6 +579,7 @@ class AlertController {
                                     flowplayer(vidDiv, {
                                         hlsjs: true,
                                         live: true,
+                                        autoplay: true,
                                         swf: "video/flowplayer.swf",
                                         rtmp: URL,
                                         playlist: [[{
@@ -590,6 +591,7 @@ class AlertController {
                                     console.log("----------------------------", value.url);
                                     flowplayer(vidDiv, {
                                         swf: "video/flowplayer.swf",
+                                        autoplay: true,
                                         clip: {
                                             sources: [
                                                 {
