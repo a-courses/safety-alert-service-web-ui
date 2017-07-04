@@ -46,7 +46,7 @@
                        aria-hidden="true"></i>
                 </a>
                 <a href="{{i.url}}" target="_blank">
-                    <i title="{{i.mediaType}}" ng-if="i.mediaType==='video'"
+                    <i title="{{i.mediaType}}" ng-if="i.mediaType.indexOf('video')!== -1"
                        class="fa fa-film blue-icons"
                        aria-hidden="true"></i>
                 </a>

@@ -575,15 +575,31 @@ class AlertController {
                                 vidDiv.className = 'col-md-6 channel1';
                                 console.log("element : ", vidDiv);
                                 document.getElementById('mbVideos').appendChild(vidDiv);
-                                flowplayer(vidDiv, {
-                                    hlsjs: true,
-                                    live: true,
-                                    swf: "video/flowplayer.swf",
-                                    rtmp: URL,
-                                    playlist: [[{
-                                        flash: value.fileName
-                                    }]]
-                                });
+                                if (value.mediaType.indexOf("streaming") !== -1) {
+                                    flowplayer(vidDiv, {
+                                        hlsjs: true,
+                                        live: true,
+                                        swf: "video/flowplayer.swf",
+                                        rtmp: URL,
+                                        playlist: [[{
+                                            flash: value.fileName
+                                        }]]
+                                    });
+                                }
+                                if (value.mediaType.indexOf("video") !== -1) {
+                                    console.log("----------------------------", value.url);
+                                    flowplayer(vidDiv, {
+                                        swf: "video/flowplayer.swf",
+                                        clip: {
+                                            sources: [
+                                                {
+                                                    type: "video/mp4", src: value.url}
+                                            ]
+                                        }
+                                    });
+                                }
+
+                                // type: "video/mp4", src: "video/sanmay.mp4"}
                             } else {
                                 var imgDiv = document.createElement('div');
                                 imgDiv.setAttribute("id", "flowplayer" + id);
