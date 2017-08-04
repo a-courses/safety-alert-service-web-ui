@@ -1,11 +1,9 @@
 <div class="row" ng-init="ac.loadAsyncMobileVideos();">
-    <!--nav bar-->
 
-    <div class="col-sm-3  remove-cards-padding">
+    <div class="col-sm-3  remove-cards-padding"  style="border-right:2px solid #213B68">
         <div class="card" style="height: 50%">
             <div class="card-header text-center">
-                <img src="../img/foresee.png" class="float-left"> Mobile Devices
-                <i class="fa fa-external-link float-right" aria-hidden="true"></i>
+                Mobile Feeds
             </div>
             <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
                 <div class="row" style="height: calc(100%/2);" id="mbVideos">
@@ -16,69 +14,13 @@
                         </div>
                     </div>
                 </div>
-                <!--<div class="row" style="height: calc(100%/2);">
-                    <div ng-repeat="i in ac.imageURL | limitTo: 4" ng-if="ac.imageURL[$index]"
-                         class="col-md-6 channel1" style="padding: 0px!important;">
-                        <img ng-src="{{i}}" style="width: inherit;height: inherit"/>
-                    </div>
-                </div>-->
-                <!--<div id="flowplayer0" class="col-md-6 channel1"></div>
-                <div id="flowplayer1" class="col-md-6 channel1"></div>
-                <div id="flowplayer2" class="col-md-6 channel1"></div>
-                <div id="flowplayer3" class="col-md-6 channel1"></div>-->
-                <!--<div class="row" style="height: calc(100%/2);">
-                    &lt;!&ndash;{{ac.uploadStreamList}}&ndash;&gt;
-                    <div id="flowplayer0" class="col-md-6 channel1" ng-if="ac.uploadStreamList[0].id"
-                         ng-init="ac.playVideo(ac.uploadStreamList[0],0)">
-                        <img ng-src="{{ac.imageURL[0]}}" style="width: inherit;height: inherit"/>
-                    </div>
-                    <div id="flowplayer1" class="col-md-6 channel2" ng-if="ac.uploadStreamList[1].id"
-                         ng-init="ac.playVideo(ac.uploadStreamList[1],1)">
-                        <img ng-src="{{ac.imageURL[0]}}" style="width: inherit;height: inherit"/>
-                    </div>
-                </div>
-                <div class="row" style="height: calc(100%/2)">
-                    <div id="flowplayer2" class="col-md-6 channel3" ng-if="ac.uploadStreamList[2].id"
-                         ng-init="ac.playVideo(ac.uploadStreamList[2],2)">
-                        <img ng-src="{{ac.imageURL[1]}}" style="width: inherit;height: inherit"/>
-                    </div>
-                    <div id="flowplayer3" class="col-md-6 channel4" ng-if="ac.uploadStreamList[3].id"
-                         ng-init="ac.playVideo(ac.uploadStreamList[3],3)">
-                        <img ng-src="{{ac.imageURL[2]}}" style="width: inherit;height: inherit"/>
-                    </div>
-                </div>-->
             </div>
         </div>
-        <!--<div class="card" style="height: 25%">
-            <div class="card-header text-center">
-                <img src="../img/foresee.png" class="float-left"> Surveillance Cameras <i
-                    class="fa fa-external-link float-right" aria-hidden="true"></i>
-            </div>
-            <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
-                <div class="row" style="height: calc(100%/2);">
-                    <div id="surveillanceCamera1" class="col-md-6 channel1">
-                    </div>
-                    <div id="surveillanceCamera2" class="col-md-6 channel2">
-                    </div>
-                </div>
-                <div class="row" style="height: calc(100%/2)">
-                    <div id="surveillanceCamera3" class="col-md-6 channel3">
-                    </div>
-                    <div id="surveillanceCamera4" class="col-md-6 channel4">
-                    </div>
 
-                </div>
-                &lt;!&ndash; <div class="row">
-                     <div id="surveillanceCamera1" class="col-md-4" style="border-right:2px solid #FFFFFF"></div>
-                     <div id="surveillanceCamera2" class="col-md-4" style="border-right:2px solid #FFFFFF"></div>
-                     <div id="surveillanceCamera3" class="col-md-4"></div>
-                 </div>&ndash;&gt;
-            </div>
-        </div>-->
         <div class="card" style="height: 25%">
             <div class="card-header text-center">
-                <img src="../img/foresee.png" class="float-left"> Video Channels
-                <i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
+                Camera Feeds
+            </div>
             <div class="card-block" style="height: inherit;padding: 0em 0.9rem;background: #505050">
                 <div class="row" style="height: calc(100%/2);">
                     <div id="videoChannel1" class="col-md-6 channel1">
@@ -101,8 +43,7 @@
         </div>
         <div class="card" style="height: 25%">
             <div class="card-header text-center">
-                <img src="../img/foresee.png" class="float-left"> Social Networks
-                <i class="fa fa-external-link float-right" aria-hidden="true"></i>
+                Social Feeds
             </div>
             <div class="card-block" style="height: inherit;padding: 0em 0.9rem;background: #505050">
                 <div class="row" style="height: calc(100%/2);">
@@ -130,24 +71,27 @@
             <div ng-include src="'partials/alert-messages.html'"></div>
         </div>
         <div class="card"
-             style="height: 50%;border-top: 3px solid #00B0F0 !important;border-bottom: 3px solid #00B0F0 !important;">
-            <div class="card-header text-center">
-                <img src="../img/foresee.png" class="float-left"> Locations
-                <i class="fa fa-external-link float-right" aria-hidden="true"></i>
+             style="height: 50%;">
+            <div class="card-header text-center gr2">
+                Locations
             </div>
             <leaflet lf-center="ac.center" markers="ac.markers" layers="ac.layers" markers-nested="true" height="460px"
                      width="100%"></leaflet>
         </div>
         <div class="card style-4" style="height: 25%">
-            <div class="card-header text-center">
-                <img src="../img/foresee.png" class="float-left"> Messages
-                <i class="fa fa-external-link float-right" aria-hidden="true"></i>
+            <div ng-include src="'partials/incidents-messages.html'"></div>
+        </div>
+    </div>
+    <div class="col-sm-3 remove-cards-padding" style="border-left:2px solid #1175BE">
+        <div class="card style-4" style="height: 50%;">
+            <div class="card-header text-center gr1">
+                Messaging
             </div>
             <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
                 <div class="row">
                     <div class="col-md-6" style="padding: 0px !important;">
                         <table class="table table-sm">
-                            <tbody style="border-right: 1px solid #00B0F0;border-bottom: 1px solid #00B0F0; height: 200px;overflow-y: auto">
+                            <tbody>
                             <tr>
                                 <td><img style="height: 18px;width: 18px;" src="../img/man.png"></td>
                                 <td>Chat Room</td>
@@ -174,15 +118,9 @@
                 </form>
             </div>
         </div>
-    </div>
-    <div class="col-sm-3 remove-cards-padding">
-        <div class="card style-4" style="height: 50%;border-bottom: 3px solid #00B0F0 !important;">
-            <div ng-include src="'partials/incidents-messages.html'"></div>
-        </div>
         <div class="card" style="height: 25%">
-            <div class="card-header text-center">
-                <img src="../img/foresee.png" class="float-left"> Video Camera
-                <i class="fa fa-external-link float-right" aria-hidden="true"></i>
+            <div class="card-header text-center gr1">
+                Video Camera
             </div>
             <div class="card-block" style="height: inherit;padding: 0em 0.9rem;background: #505050">
                 <div class="row" style="height: 100%;">
@@ -191,9 +129,8 @@
             </div>
         </div>
         <div class="card" style="height: 25%">
-            <div class="card-header text-center">
-                <img src="../img/foresee.png" class="float-left"> Content Sharing
-                <i class="fa fa-external-link float-right" aria-hidden="true"></i>
+            <div class="card-header text-center gr1">
+                Content Sharing
             </div>
             <div class="card-block" style="height: inherit;padding: 0em 0.9rem;background: #505050">
                 <div class="row" style="height: calc(100%/2);">
@@ -218,62 +155,3 @@
     </div>
 </div>
 
-<div class="fab">
-  <span class="fab-action-button">
-        <i class="fab-action-button__icon"></i>
-    </span>
-    <ul class="fab-buttons">
-        <li class="fab-buttons__item">
-            <a href="#" class="fab-buttons__link" data-tooltip="Share">
-                <i class="icon-material icon-share"></i>
-            </a>
-        </li>
-        <li class="fab-buttons__item">
-            <a href="#" class="fab-buttons__link" data-tooltip="Record">
-                <i class="icon-material icon-audio-record"></i>
-            </a>
-        </li>
-        <li class="fab-buttons__item">
-            <a href="#" class="fab-buttons__link" data-tooltip="Record">
-                <i class="icon-material icon-video-record"></i>
-            </a>
-        </li>
-        <li class="fab-buttons__item">
-            <a href="#" class="fab-buttons__link" data-tooltip="Call">
-                <i class="icon-material icon-call"></i>
-            </a>
-        </li>
-        <li class="fab-buttons__item">
-            <a href="#" class="fab-buttons__link" data-tooltip="User Profile">
-                <i class="icon-material icon-profile"></i>
-            </a>
-        </li>
-        <li class="fab-buttons__item">
-            <a href="#" class="fab-buttons__link" data-tooltip="Settings" data-toggle="modal"
-               data-target="#settings">
-                <i class="icon-material icon-settings"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-<!-- The modal -->
-<div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="modalLabel">Settings</h4>
-            </div>
-            <div class="modal-body">
-                Settings
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-->

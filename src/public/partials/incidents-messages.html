@@ -1,18 +1,31 @@
-<div class="card-header text-center">
-    <img src="../img/foresee.png" class="float-left"> Incidents
-    <i class="fa fa-external-link float-right" aria-hidden="true"></i></div>
-<table class="table table-sm">
+<div class="card-header text-center gr2">
+    Incidents
+</div>
+<table class="table table-bordered table-sm">
+    <thead>
+    <tr>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Description</th>
+        <th>Reference</th>
+        <th>Location</th>
+        <th>Status</th>
+        <th>Meeting #</th>
+    </tr>
+    </thead>
     <tbody>
     <tr ng-repeat="i in ac.alertMessageList" ng-if="i.notificationType==='incident'">
         <td class="icon-cell">
-            <!--<img ng-if="i.alert.status==='new'" src="../img/open-inc.png" class="alert-icons"/>-->
-            <img ng-if="i.alert.status==='new'" src="../img/new-inc.png" class="alert-icons"/>
-            <img ng-if="i.alert.status==='read'" src="../img/closed-inc.png" class="alert-icons"/>
+            <img title="incidentType" src="../img/fire.png" class="alert-icons"/>
         </td>
-        <td>{{i.alert.id}}</td>
         <td style="width: 100px;">{{i.alert.time | date:'dd-MMM-yyyy'}}</td>
+        <td style="width: 50px;">{{i.alert.time | date:'hh:mma'}}</td>
         <td>{{i.alert.status}}</td>
-
+        <td>{{i.alert.id}}</td>
+        <td>1</td>
+        <td>{{i.alert.status}}</td>
+        <td>1</td>
         <!-- <tr ng-repeat="i in ac.alertMessages" ng-if="i.get('notificationType')==='incident'">
              <td class="icon-cell">
                  <!--<img ng-if="i.get('alert.status')==='new'" src="../img/open-inc.png" class="alert-icons"/>

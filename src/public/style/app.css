@@ -12,26 +12,28 @@ html, body, .container-fluid, .row {
 .remove-cards-padding {
     padding-right: 0px !important;
     padding-left: 0px !important;
-    border-right: 3px solid #00B0F0 !important;
 }
 
 .card {
     border-radius: 0rem !important;
     overflow: auto;
+    border: none !important;
     /*border: 1px solid #E9EBEE !important;*/
 }
 
 .card-header {
-    color: #00B0F0 !important;
-    background-color: #F0F0F0 !important;
-    font-weight: bold;
+    color: #FFFFFF !important;
+    background-color: #213B68 !important;
+    padding: 0.15rem 1.25rem!important;
+    font-family: 'Corbel'!important;
+    font-size: 14px !important;
 }
 
 .card-header:first-child {
     border-radius: 0px !important;
 }
 
-card-footer {
+.card-footer {
     background-color: #F0F0F0 !important;
 }
 
@@ -59,7 +61,7 @@ card-footer {
 }
 
 .icon-cell {
-    width: 50px;
+    width: 25px;
     text-align: center;
 }
 
@@ -71,16 +73,16 @@ card-footer {
 }
 
 .table thead th {
-    /*border-bottom: 2px solid #49659F !important;*/
-    font-size: 14px !important;
+    font-size: 13px !important;
     text-align: center !important;
     color: #00B0F0 !important;
+    font-family: 'Corbel'!important;
 }
 
 .table td {
-    border-top: 1px solid #00B0F0 !important;
     font-size: 13px !important;
     text-align: center !important;
+    border-right: 1px solid ghostwhite!important;
 }
 
 .badge-custom-color {
@@ -94,6 +96,25 @@ card-footer {
 
 }
 
+.gr1{
+    background: -moz-linear-gradient(0deg, rgba(17,117,190,1) 0%, rgba(17,117,190,1) 6%, rgba(0,174,240,1) 30%, rgba(0,174,240,1) 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(17,117,190,1)), color-stop(6%, rgba(17,117,190,1)), color-stop(30%, rgba(0,174,240,1)), color-stop(100%, rgba(0,174,240,1))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(0deg, rgba(17,117,190,1) 0%, rgba(17,117,190,1) 6%, rgba(0,174,240,1) 30%, rgba(0,174,240,1) 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(0deg, rgba(17,117,190,1) 0%, rgba(17,117,190,1) 6%, rgba(0,174,240,1) 30%, rgba(0,174,240,1) 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(0deg, rgba(17,117,190,1) 0%, rgba(17,117,190,1) 6%, rgba(0,174,240,1) 30%, rgba(0,174,240,1) 100%); /* ie10+ */
+    background: linear-gradient(90deg, rgba(17,117,190,1) 0%, rgba(17,117,190,1) 6%, rgba(0,174,240,1) 30%, rgba(0,174,240,1) 100%); /* w3c */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1175AB', endColorstr='#00AEF0',GradientType=1 ); /* ie6-9 */
+}
+
+.gr2{
+    background: -moz-linear-gradient(0deg, rgba(33,57,101,1) 0%, rgba(33,57,101,1) 69%, rgba(14,128,184,1) 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(33,57,101,1)), color-stop(69%, rgba(33,57,101,1)), color-stop(100%, rgba(14,128,184,1))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(0deg, rgba(33,57,101,1) 0%, rgba(33,57,101,1) 69%, rgba(14,128,184,1) 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(0deg, rgba(33,57,101,1) 0%, rgba(33,57,101,1) 69%, rgba(14,128,184,1) 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(0deg, rgba(33,57,101,1) 0%, rgba(33,57,101,1) 69%, rgba(14,128,184,1) 100%); /* ie10+ */
+    background: linear-gradient(90deg, rgba(33,57,101,1) 0%, rgba(33,57,101,1) 69%, rgba(14,128,184,1) 100%); /* w3c */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#213B68', endColorstr='#0E80B8',GradientType=1 ); /* ie6-9 */
+}
 /*---------fab icons-----*/
 
 .fab {
