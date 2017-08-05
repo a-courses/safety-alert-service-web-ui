@@ -124,6 +124,7 @@ html, body, .container-fluid, .row {
 .chat-card-header{
     background: none!important;
     padding: 0.25rem!important;
+    border-top: 2px solid #eceeef;
     border-bottom: 0px solid #00B0F0 !important;
     color:#000000!important;
 }
