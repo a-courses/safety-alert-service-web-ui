@@ -1,10 +1,24 @@
 <div class="row" ng-init="ac.loadAsyncMobileVideos();">
 
     <div class="col-sm-3  remove-cards-padding" style="border-right:2px solid #213B68">
-        <div class="card" style="height: 50%">
+        <div class="card" style="height: 25%">
             <div class="card-header text-center">
                 Mobile Feeds
             </div>
+            <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
+                <div class="row" style="height: calc(100%/2);" id="mbVideosOne">
+                    <div class="card text-center"
+                         style="width:100%;height:100%;border: 0px!important;overflow-y:hidden;" id="loadingTextIdOne">
+                        <div class="card-block">
+                            <p class="card-text">Loading ...</p>
+                            <img src="../img/loading.gif">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="height: 25%">
             <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
                 <div class="row" style="height: calc(100%/2);" id="mbVideos">
                     <div class="card text-center"
