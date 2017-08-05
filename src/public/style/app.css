@@ -1,5 +1,5 @@
 html, body, .container-fluid, .row {
-    font-size: 16px !important;
+    font-size: 14px !important;
     line-height: 1.2 !important;
     height: 100%;
     font-family: 'Roboto', sans-serif;
@@ -16,7 +16,8 @@ html, body, .container-fluid, .row {
 
 .card {
     border-radius: 0rem !important;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     border: none !important;
     /*border: 1px solid #E9EBEE !important;*/
 }
