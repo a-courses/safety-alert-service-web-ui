@@ -120,6 +120,13 @@ html, body, .container-fluid, .row {
     background: linear-gradient(90deg, rgba(33,57,101,1) 0%, rgba(33,57,101,1) 69%, rgba(14,128,184,1) 100%); /* w3c */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#213B68', endColorstr='#0E80B8',GradientType=1 ); /* ie6-9 */
 }
+
+.chat-card-header{
+    background: none!important;
+    padding: 0.25rem!important;
+    border-bottom: 0px solid #00B0F0 !important;
+    color:#000000!important;
+}
 /*---------fab icons-----*/
 
 .fab {
