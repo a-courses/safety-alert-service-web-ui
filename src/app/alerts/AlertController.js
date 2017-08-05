@@ -592,6 +592,7 @@ class AlertController {
                                             hlsjs: true,
                                             live: true,
                                             autoplay: true,
+                                            volume: 0.0,
                                             ratio: 9 / 16,
                                             swf: "video/flowplayer.swf",
                                             rtmp: URL,
@@ -777,6 +778,7 @@ class AlertController {
                 ]
             }
         });
+
         flowplayer("#VideoCamera1", {
             swf: "video/flowplayer.swf",
             autoplay: true,
