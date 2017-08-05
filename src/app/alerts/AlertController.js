@@ -18,8 +18,10 @@ class AlertController {
         this.multiple = {
             incidents: []
         };
-        this.connection = this.deepStreamService.getServerConnection();
-        this.messagelist = this.connection.record.getList('safety/alerts');
+        this.loadCameraFeed();
+        this.loadsocialFeed();
+        this.loadVideoCamera();
+        this.loadsharing();
         angular.extend(this, {
             center: {
                 lat: 12.97,
@@ -74,6 +76,8 @@ class AlertController {
                 }
             }
         });
+        this.connection = this.deepStreamService.getServerConnection();
+        this.messagelist = this.connection.record.getList('safety/alerts');
         this.loadAlertsAsync();
     };
 
@@ -591,7 +595,7 @@ class AlertController {
                                         flowplayer(vidDiv, {
                                             hlsjs: true,
                                             live: true,
-                                            autoplay: true,
+                                            autoplay: true, share: false, splash: false,
                                             volume: 0.0,
                                             ratio: 9 / 16,
                                             swf: "video/flowplayer.swf",
@@ -605,7 +609,8 @@ class AlertController {
                                         console.log("----------------------------", value.url);
                                         flowplayer(vidDiv, {
                                             swf: "video/flowplayer.swf",
-                                            autoplay: true,
+                                            hlsjs: true,
+                                            autoplay: true, share: false, splash: false,
                                             ratio: 9 / 16,
                                             volume: 0.0,
                                             clip: {
@@ -649,7 +654,7 @@ class AlertController {
                                         flowplayer(vidDiv, {
                                             hlsjs: true,
                                             live: true,
-                                            autoplay: true,
+                                            autoplay: true, share: false, splash: false,
                                             ratio: 9 / 16,
                                             swf: "video/flowplayer.swf",
                                             rtmp: URL,
@@ -662,7 +667,8 @@ class AlertController {
                                         console.log("----------------------------", value.url);
                                         flowplayer(vidDiv, {
                                             swf: "video/flowplayer.swf",
-                                            autoplay: true,
+                                            autoplay: true, share: false, splash: false,
+                                            hlsjs: true,
                                             ratio: 9 / 16,
                                             volume: 0.0,
                                             clip: {
@@ -696,10 +702,15 @@ class AlertController {
             });
         });
 
+
+    };
+
+    loadCameraFeed() {
         flowplayer("#CameraFeed1", {
             swf: "video/flowplayer.swf",
-            autoplay: true,
+            autoplay: true, share: false, splash: false,
             ratio: 9 / 16,
+            hlsjs: true,
             volume: 0.0,
             clip: {
                 sources: [
@@ -712,9 +723,10 @@ class AlertController {
 
         flowplayer("#CameraFeed2", {
             swf: "video/flowplayer.swf",
-            autoplay: true,
+            autoplay: true, share: false, splash: false,
             ratio: 9 / 16,
             volume: 0.0,
+            hlsjs: true,
             clip: {
                 sources: [
                     {
@@ -726,8 +738,9 @@ class AlertController {
 
         flowplayer("#CameraFeed3", {
             swf: "video/flowplayer.swf",
-            autoplay: true,
+            autoplay: true, share: false, splash: false,
             ratio: 9 / 16,
+            hlsjs: true,
             volume: 0.0,
             clip: {
                 sources: [
@@ -740,8 +753,9 @@ class AlertController {
 
         flowplayer("#CameraFeed4", {
             swf: "video/flowplayer.swf",
-            autoplay: true,
+            autoplay: true, share: false, splash: false,
             ratio: 9 / 16,
+            hlsjs: true,
             volume: 0.0,
             clip: {
                 sources: [
@@ -751,11 +765,14 @@ class AlertController {
                 ]
             }
         });
+    }
 
+    loadsocialFeed() {
         flowplayer("#socialFeed1", {
             swf: "video/flowplayer.swf",
-            autoplay: true,
+            autoplay: true, share: false, splash: false,
             ratio: 9 / 16,
+            hlsjs: true,
             volume: 0.0,
             clip: {
                 sources: [
@@ -767,8 +784,9 @@ class AlertController {
         });
         flowplayer("#socialFeed3", {
             swf: "video/flowplayer.swf",
-            autoplay: true,
+            autoplay: true, share: false, splash: false,
             ratio: 9 / 16,
+            hlsjs: true,
             volume: 0.0,
             clip: {
                 sources: [
@@ -778,11 +796,14 @@ class AlertController {
                 ]
             }
         });
+    }
 
+    loadVideoCamera() {
         flowplayer("#VideoCamera1", {
             swf: "video/flowplayer.swf",
-            autoplay: true,
+            autoplay: true, share: false, splash: false,
             ratio: 9 / 16,
+            hlsjs: true,
             volume: 0.0,
             clip: {
                 sources: [
@@ -792,10 +813,14 @@ class AlertController {
                 ]
             }
         });
+    }
+
+    loadsharing() {
         flowplayer("#sharing1", {
             swf: "video/flowplayer.swf",
-            autoplay: true,
+            autoplay: true, share: false, splash: false,
             ratio: 9 / 16,
+            hlsjs: true,
             volume: 0.0,
             clip: {
                 sources: [
@@ -807,8 +832,9 @@ class AlertController {
         });
         flowplayer("#sharing2", {
             swf: "video/flowplayer.swf",
-            autoplay: true,
+            autoplay: true, share: false, splash: false,
             ratio: 9 / 16,
+            hlsjs: true,
             volume: 0.0,
             clip: {
                 sources: [
@@ -820,8 +846,9 @@ class AlertController {
         });
         flowplayer("#sharing3", {
             swf: "video/flowplayer.swf",
-            autoplay: true,
+            autoplay: true, share: false, splash: false,
             ratio: 9 / 16,
+            hlsjs: true,
             volume: 0.0,
             clip: {
                 sources: [
@@ -833,8 +860,9 @@ class AlertController {
         });
         flowplayer("#sharing4", {
             swf: "video/flowplayer.swf",
-            autoplay: true,
+            autoplay: true, share: false, splash: false,
             ratio: 9 / 16,
+            hlsjs: true,
             volume: 0.0,
             clip: {
                 sources: [
@@ -844,7 +872,7 @@ class AlertController {
                 ]
             }
         });
-    };
+    }
 
     playVideo(streamList, index) {
         console.log(streamList);
