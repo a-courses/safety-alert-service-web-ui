@@ -1,13 +1,14 @@
 <div class="row" ng-init="ac.loadAsyncMobileVideos();">
 
-    <div class="col-sm-3  remove-cards-padding"  style="border-right:2px solid #213B68">
+    <div class="col-sm-3  remove-cards-padding" style="border-right:2px solid #213B68">
         <div class="card" style="height: 50%">
             <div class="card-header text-center">
                 Mobile Feeds
             </div>
             <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
                 <div class="row" style="height: calc(100%/2);" id="mbVideos">
-                    <div class="card text-center" style="width:100%;height:100%;border: 0px!important;overflow-y:hidden;" id="loadingTextId">
+                    <div class="card text-center"
+                         style="width:100%;height:100%;border: 0px!important;overflow-y:hidden;" id="loadingTextId">
                         <div class="card-block">
                             <p class="card-text">Loading ...</p>
                             <img src="../img/loading.gif">
@@ -25,17 +26,17 @@
                 <div class="row" style="height: calc(100%/2);">
                     <div id="videoChannel1" class="col-md-6 channel1">
                         <div id="CameraFeed1"></div>
-                    <!--    <video autoplay style="height: 100%;width: 100%;">
-                            <source type="video/mp4"
-                                    src="video/Camera Feed 1 - Liverpool  Shopping.mp4">
-                        </video>-->
+                        <!--    <video autoplay style="height: 100%;width: 100%;">
+                                <source type="video/mp4"
+                                        src="video/Camera Feed 1 - Liverpool  Shopping.mp4">
+                            </video>-->
                     </div>
                     <div id="videoChannel2" class="col-md-6 channel2">
                         <div id="CameraFeed2"></div>
-                       <!-- <video autoplay style="height: 100%;width: 100%;">
-                            <source type="video/mp4"
-                                    src="video/Camera Feed 2 - Highway Car Video.mp4">
-                        </video>-->
+                        <!-- <video autoplay style="height: 100%;width: 100%;">
+                             <source type="video/mp4"
+                                     src="video/Camera Feed 2 - Highway Car Video.mp4">
+                         </video>-->
                     </div>
                 </div>
                 <div class="row" style="height: calc(100%/2)">
@@ -92,38 +93,55 @@
         </div>
     </div>
     <div class="col-sm-3 remove-cards-padding" style="border-left:2px solid #1175BE">
-        <div class="card style-4" style="height: 50%;">
+        <div class="card" style="height: 50%;">
             <div class="card-header text-center gr1">
                 Messaging
             </div>
-            <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
-                <div class="row">
-                    <div class="col-md-6" style="padding: 0px !important;">
-                        <table class="table table-sm">
-                            <tbody>
-                            <tr>
-                                <td><img style="height: 18px;width: 18px;" src="../img/man.png"></td>
-                                <td>Chat Room</td>
-                                <td>Some text message</td>
-                            </tr>
-                            <tr>
-                                <td><img style="height: 18px;width: 18px;" src="../img/man-woman.png"></td>
-                                <td>Contact Person</td>
-                                <td>Some text message</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-md-6">Chat messages</div>
-                </div>
+            <table class="table table-bordered table-hover table-sm">
+                <thead>
+                <tr>
+                    <th>Contact</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td align="left">Michael Smith</td>
+                    <td>13-07-2017</td>
+                    <td>21:33:24</td>
+                </tr>
+                <tr>
+                    <td>Jessica Santiago</td>
+                    <td>13-07-2017</td>
+                    <td>21:33:24</td>
+                </tr>
+                <tr>
+                    <td>David Wong</td>
+                    <td>12-07-2017</td>
+                    <td>21:33:24</td>
+                </tr>
+                <tr>
+                    <td>Christophe Lenot</td>
+                    <td>11-07-2017</td>
+                    <td>21:33:24</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="card-block">
+
             </div>
-            <div class="card-footer">
+            <div class="card-footer" style="padding: 0px !important; border-top: none !important;">
                 <form class="form-inline">
-                    <label for="inlineFormInput"><i class="fa fa-paperclip blue-icons" aria-hidden="true"></i>&nbsp;&nbsp;
-                    </label>
-                    <input type="text" class="form-control form-control-sm col-md-11" id="inlineFormInput"
-                           placeholder="User Message">
-                    <label>&nbsp;&nbsp;<i class="fa fa-microphone blue-icons" aria-hidden="true"></i></label>
+                    <div class="input-group col-md-12" style="padding: 0px !important;">
+                        <input type="text" class="form-control">
+                        <span class="input-group-addon">
+                            <i class="fa fa-paperclip blue-icons" aria-hidden="true"></i>
+                        </span>
+                        <span class="input-group-addon">
+                                <i class="fa fa-microphone blue-icons" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </form>
             </div>
         </div>
