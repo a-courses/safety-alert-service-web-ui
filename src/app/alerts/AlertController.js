@@ -582,6 +582,7 @@ class AlertController {
                                             hlsjs: true,
                                             live: true,
                                             autoplay: true,
+                                            ratio: 9 / 16,
                                             swf: "video/flowplayer.swf",
                                             rtmp: URL,
                                             playlist: [[{
@@ -594,6 +595,7 @@ class AlertController {
                                         flowplayer(vidDiv, {
                                             swf: "video/flowplayer.swf",
                                             autoplay: true,
+                                            ratio: 9 / 16,
                                             volume: 0.0,
                                             clip: {
                                                 sources: [
@@ -626,6 +628,153 @@ class AlertController {
             });
         });
 
+       flowplayer("#CameraFeed1", {
+            swf: "video/flowplayer.swf",
+            autoplay: true,
+            ratio: 9 / 16,
+            volume: 0.0,
+            clip: {
+                sources: [
+                    {
+                        type: "video/mp4", src: "video/Camera Feed 1 - Liverpool  Shopping.mp4"
+                    }
+                ]
+            }
+        });
+
+        flowplayer("#CameraFeed2", {
+            swf: "video/flowplayer.swf",
+            autoplay: true,
+            ratio: 9 / 16,
+            volume: 0.0,
+            clip: {
+                sources: [
+                    {
+                        type: "video/mp4", src: "video/Camera Feed 2 - Highway Car Video.mp4"
+                    }
+                ]
+            }
+        });
+
+        flowplayer("#CameraFeed3", {
+            swf: "video/flowplayer.swf",
+            autoplay: true,
+            ratio: 9 / 16,
+            volume: 0.0,
+            clip: {
+                sources: [
+                    {
+                        type: "video/mp4", src: "video/Camera Feed 3 - Drone  Forest Fire.mp4"
+                    }
+                ]
+            }
+        });
+
+        flowplayer("#CameraFeed4", {
+            swf: "video/flowplayer.swf",
+            autoplay: true,
+            ratio: 9 / 16,
+            volume: 0.0,
+            clip: {
+                sources: [
+                    {
+                        type: "video/mp4", src: "video/Camera Feed 4 - News Video.mp4"
+                    }
+                ]
+            }
+        });
+
+        flowplayer("#socialFeed1", {
+            swf: "video/flowplayer.swf",
+            autoplay: true,
+            ratio: 9 / 16,
+            volume: 0.0,
+            clip: {
+                sources: [
+                    {
+                        type: "video/mp4", src: "video/Camera Feed 1 - Liverpool  Shopping.mp4"
+                    }
+                ]
+            }
+        });
+        flowplayer("#socialFeed3", {
+            swf: "video/flowplayer.swf",
+            autoplay: true,
+            ratio: 9 / 16,
+            volume: 0.0,
+            clip: {
+                sources: [
+                    {
+                        type: "video/mp4", src: "video/Social Feed 3 - YouTube Screen Video.mp4"
+                    }
+                ]
+            }
+        });
+        flowplayer("#VideoCamera1", {
+            swf: "video/flowplayer.swf",
+            autoplay: true,
+            ratio: 9 / 16,
+            volume: 0.0,
+            clip: {
+                sources: [
+                    {
+                        type: "video/mp4", src: "video/Meeting Video Feed.mp4"
+                    }
+                ]
+            }
+        });
+        flowplayer("#sharing1", {
+            swf: "video/flowplayer.swf",
+            autoplay: true,
+            ratio: 9 / 16,
+            volume: 0.0,
+            clip: {
+                sources: [
+                    {
+                        type: "video/mp4", src: "video/Mobile Feed - Bus Stop.mp4"
+                    }
+                ]
+            }
+        });
+        flowplayer("#sharing2", {
+            swf: "video/flowplayer.swf",
+            autoplay: true,
+            ratio: 9 / 16,
+            volume: 0.0,
+            clip: {
+                sources: [
+                    {
+                        type: "video/mp4", src: "video/Mobile Feed - Car Theft.mp4"
+                    }
+                ]
+            }
+        });
+        flowplayer("#sharing3", {
+            swf: "video/flowplayer.swf",
+            autoplay: true,
+            ratio: 9 / 16,
+            volume: 0.0,
+            clip: {
+                sources: [
+                    {
+                        type: "video/mp4", src: "video/Social Feed 1 - Facebook Screen Video.mp4"
+                    }
+                ]
+            }
+        });
+        flowplayer("#sharing4", {
+            swf: "video/flowplayer.swf",
+            autoplay: true,
+            ratio: 9 / 16,
+            volume: 0.0,
+            clip: {
+                sources: [
+                    {
+                        type: "video/mp4", src: "video/Camera Feed 3 - Drone  Forest Fire.mp4"
+                    }
+                ]
+            }
+        });
     };
 
     playVideo(streamList, index) {

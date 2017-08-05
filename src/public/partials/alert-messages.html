@@ -1,6 +1,6 @@
 <div class="card-header text-center gr2">
     Alerts
-    </div>
+</div>
 <table class="table table-bordered table-sm">
     <thead>
     <tr>
@@ -17,7 +17,8 @@
     </thead>
     <tbody>
 
-    <tr ng-repeat="i in ac.alertMessageList" ng-if="i.notificationType!=='incident' && !(i.status === 'read' && !i.incidentId)">
+    <tr ng-repeat="i in ac.alertMessageList"
+        ng-if="i.notificationType!=='incident' && !(i.status === 'read' && !i.incidentId)">
         <td class="icon-cell">
             <img title="{{i.incidentType}}" ng-if="i.incidentType==='Fire'" src="../img/fire.png"
                  class="alert-icons"/>
@@ -41,7 +42,8 @@
         <td class="icon-cell">
             <div ng-if="i.notificationType !== 'incident' || i.notificationType !== 'call'">
                 <a href="{{i.url}}" target="_blank">
-                    <i title="{{i.mediaType}}" ng-if="i.mediaType.indexOf('image')!== -1 || i.mediaType.indexOf('jpeg')!== -1"
+                    <i title="{{i.mediaType}}"
+                       ng-if="i.mediaType.indexOf('image')!== -1 || i.mediaType.indexOf('jpeg')!== -1"
                        class="fa fa-picture-o blue-icons"
                        aria-hidden="true"></i>
                 </a>
@@ -51,12 +53,13 @@
                        aria-hidden="true"></i>
                 </a>
                 <a href="{{i.url}}" target="_blank">
-                    <i title="{{i.mediaType}}"  ng-if="i.mediaType.indexOf('audio')!== -1 || i.mediaType.indexOf('mpeg')!== -1"
+                    <i title="{{i.mediaType}}"
+                       ng-if="i.mediaType.indexOf('audio')!== -1 || i.mediaType.indexOf('mpeg')!== -1"
                        class="fa fa-microphone blue-icons"
                        aria-hidden="true"></i>
                 </a>
                 <a href="{{i.url}}" target="_blank">
-                    <i title="{{i.mediaType}}"  ng-if="i.mediaType.indexOf('streaming')!== -1"
+                    <i title="{{i.mediaType}}" ng-if="i.mediaType.indexOf('streaming')!== -1"
                        class="fa fa-video-camera blue-icons"
                        aria-hidden="true"></i>
                 </a>
@@ -77,20 +80,16 @@
                 <i class="fa fa-map-marker blue-icons" aria-hidden="true"></i></a>
         </td>
         <td style="width: 50px;">
-            <span class="badge badge-danger badge-custom-color">
-                <i class="fa fa-trash"
-                   ng-click="ac.deleteRecordFromList(i.name, i.id, i.notificationType)"></i>
-            </span>
+            <i class="fa fa-trash blue-icons"
+               ng-click="ac.deleteRecordFromList(i.name, i.id, i.notificationType)"></i>
         </td>
         <td style="width: 50px;">
-            <span class="badge badge-warning badge-custom-color">
-                 <i class="fa fa-link" style="color: #ffffff !important;" ng-if="i.incidentId"></i>
-                <a href="#" data-tooltip="Settings" style="color: #ffffff !important;" ng-if="!i.incidentId">
-                <i class="fa fa-chain-broken"
+            <i class="fa fa-link blue-icons" style="color: #ffffff !important;" ng-if="i.incidentId"></i>
+            <a href="#" data-tooltip="Settings" style="color: #ffffff !important;" ng-if="!i.incidentId">
+                <i class="fa fa-chain-broken blue-icons"
                    ng-click="ac.saveMappedIncidents(i.name, i.incidentId,i.id,i.notificationType)">
                 </i>
             </a>
-            </span>
         </td>
     </tr>
 
@@ -168,41 +167,3 @@
     </tr>-->
     </tbody>
 </table>
-
-
-<!-- The modal Incedent Mapper -->
-<div class="modal fade" id="incidentMapping" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" style="border: 0px !important;">
-            <div class="modal-header" style="background-color: #49659F;color: #FFFFFF !important;">
-                <button type="button" style="background-color: #49659F!important;color: #FFFFFF !important;"
-                        class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">x</span>
-                </button>
-                <h4 class="modal-title" id="incidentMappingTitle">Alert Incident Mapping</h4>
-            </div>
-            <div class="modal-body">
-                Parent Alert : <strong>{{ac.selectIncidentId}}</strong>
-                <h5>Incidents</h5>
-                <ui-select multiple ng-model="ac.multiple.incidents" theme="select2"
-                           style="width:100%; min-width: 300px" close-on-select="false" title="Select Incident">
-                    <ui-select-match placeholder="Select colors...">{{$item}}</ui-select-match>
-                    <ui-select-choices repeat="color in ac.mappingIncidentIdsWithoutParent | filter:$select.search">
-                        {{color}}
-                    </ui-select-choices>
-                </ui-select>
-                <p>Selected Incidents: {{ac.multiple.incidents}}</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary"
-                        style="background-color: #49659F!important;border-color: #49659F!important;"
-                        ng-click="ac.saveMappedIncidents(ac.selectIncidentId, ac.selectNotificationType)">
-                    Save Mapping
-                </button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-->
