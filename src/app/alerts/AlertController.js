@@ -10,6 +10,7 @@ class AlertController {
         this.alertService = AlertService;
         this.commonService = CommonService;
         this.deepStreamService = DeepStreamService;
+        this.i = 0;
         this.alertMessages = [];
         this.mappingIncidentIds = [];
         this.mapDetails = {};
@@ -82,23 +83,23 @@ class AlertController {
     };
 
     loadAlertsAsync() {
-        console.log("date  :");
+        //console.log("date  :");
         var offset = moment().utcOffset();
-        console.log(offset);
+        //console.log(offset);
         this.alertMessageList = [];
         this.mapDetails = {};
         this.messagelist.subscribe((entries) => {
             this.alertMessages = entries.map((entry) => {
                 var list = this.connection.record.getRecord(entry);
                 list.subscribe((data) => {
-                    console.log("-----------------------------------------------------------------");
-                    console.log("Load alerts : notificationType :" + data.notificationType + " | id :" + data.id);
+                    //console.log("-----------------------------------------------------------------");
+                    //console.log("Load alerts : notificationType :" + data.notificationType + " | id :" + data.id);
                     var incidentType = data.incidentType;
                     var recordName = list.name;
                     if (data.id) {
                         this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
                             if (currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime) {
-                                console.log("Load alerts : remove record message list : " + recordName);
+                                //console.log("Load alerts : remove record message list : " + recordName);
                             }
                             return currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime;
                         });
@@ -145,7 +146,7 @@ class AlertController {
                         }
 
                         if (data.notificationType === 'upload' || data.notificationType === 'stream') {
-                            console.log("Load alerts : Create UPLOAD/STREAM : " + data.notificationType + " | record name :" + recordName);
+                            //console.log("Load alerts : Create UPLOAD/STREAM : " + data.notificationType + " | record name :" + recordName);
                             var uploadData = {
                                 name: recordName,
                                 notificationType: data.notificationType,
@@ -169,10 +170,10 @@ class AlertController {
                                 incidentId: data.incidentId
                             };
                             this.alertMessageList.push(uploadData);
-                            console.log("UPLOAD/STREAM alert added");
+                            //console.log("UPLOAD/STREAM alert added");
                         }
                         if (data.notificationType === 'call') {
-                            console.log("Load alerts : Create CALL :" + data.notificationType + " | record name :" + recordName);
+                            //console.log("Load alerts : Create CALL :" + data.notificationType + " | record name :" + recordName);
                             var callData = {
                                 name: recordName,
                                 notificationType: data.notificationType,
@@ -199,18 +200,18 @@ class AlertController {
                                 incidentId: data.incidentId
                             };
                             this.alertMessageList.push(callData);
-                            console.log("CALL alert added");
+                            //console.log("CALL alert added");
                         }
                     }
                     if (data.notificationType === 'incident') {
-                        console.log("Load alerts : Create incident " + data.notificationType + " | record name :" + recordName);
+                        //console.log("Load alerts : Create incident " + data.notificationType + " | record name :" + recordName);
                         var parentAlerts = [];
                         var assignedToList = [];
                         var alertUsersList = [];
                         var mappedAlertList = [];
                         if (data.alert.parentAlert) {
                             for (var i in data.alert.parentAlert) {
-                                console.log(data.alert.parentAlert[i].alertType);
+                                //console.log(data.alert.parentAlert[i].alertType);
                                 var singleAlert = {};
                                 if (data.alert.parentAlert[i].alertType === 'call') {
                                     singleAlert = {
@@ -327,10 +328,10 @@ class AlertController {
                             }
                         };
                         this.alertMessageList.push(incidentData);
-                        console.log("INCIDENT alert added");
+                        //console.log("INCIDENT alert added");
                     }
                     this.alertMessageList = _.sortBy(this.alertMessageList, 'modifiedTime').reverse();
-                    console.log("=================================================================");
+                    //console.log("=================================================================");
                 });
                 return list;
             });
@@ -441,18 +442,18 @@ class AlertController {
                 incidentId: ''
             }
         }
-        console.log("Alert Delete service request body : ", alertData);
+        //console.log("Alert Delete service request body : ", alertData);
         this.alertService.deleteRecordFromDB(alertData).then((result) => {
-            console.log("Alert Delete service response body : ", result.data.message);
+            //console.log("Alert Delete service response body : ", result.data.message);
             if (result.data.message === "success") {
                 var incId = id.replace(/[^a-zA-Z0-9]/g, "");
                 delete this.mapDetails[incId];
-                console.log("Delete alert : mapDetails marker details :", this.mapDetails);
+                //console.log("Delete alert : mapDetails marker details :", this.mapDetails);
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
                 this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
                     if (currentItem.id === id) {
-                        console.log("Delete alert : recordName : " + recordName);
+                        //console.log("Delete alert : recordName : " + recordName);
                     }
                     return currentItem.id === id;
                 });
@@ -467,7 +468,7 @@ class AlertController {
     }
 
     saveMappedIncidents(recordName, incidentId, id, notificationType) {
-        console.log("Link incident : " + id + " type:" + notificationType + " and recordName :" + recordName);
+        //console.log("Link incident : " + id + " type:" + notificationType + " and recordName :" + recordName);
         var alert = {};
         if (notificationType === 'call') {
             alert = {
@@ -494,15 +495,15 @@ class AlertController {
                 ]
             }
         }
-        console.log("Link alerts request body : ", alert);
+        //console.log("Link alerts request body : ", alert);
         this.alertService.saveMappedIncidents(alert).then((result) => {
-            console.log("Link alerts response body : ", result);
+            //console.log("Link alerts response body : ", result);
             if (result.data.message === 'success') {
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
                 this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
                     if (currentItem.id === id) {
-                        console.log("Delete Linked alert : recordName : " + recordName);
+                        //console.log("Delete Linked alert : recordName : " + recordName);
                     }
                     return currentItem.id === id;
                 });
@@ -518,19 +519,19 @@ class AlertController {
             var messages = entries.map((entry) => {
                 var list = this.connection.record.getRecord(entry);
                 list.subscribe((data) => {
-                    console.log("-----------------------------------------------------------------");
-                    console.log("UPLOAD STREAM LIST : notificationType :" + data.notificationType + " | id :" + data.id);
+                    //console.log("-----------------------------------------------------------------");
+                    //console.log("UPLOAD STREAM LIST : notificationType :" + data.notificationType + " | id :" + data.id);
                     var incidentType = data.incidentType;
                     var recordName = list.name;
                     if (data.id) {
                         this.uploadStreamList = _.reject(this.uploadStreamList, function (currentItem) {
                             if (currentItem.id === data.id) {
-                                console.log("UPLOAD STREAM LIST : remove record message list : " + recordName);
+                                //console.log("UPLOAD STREAM LIST : remove record message list : " + recordName);
                             }
                             return currentItem.id === data.id;
                         });
                         if (data.notificationType === 'upload' || data.notificationType === 'stream') {
-                            console.log("UPLOAD STREAM LIST : Create UPLOAD/STREAM : " + data.notificationType + " | record name :" + recordName);
+                            //console.log("UPLOAD STREAM LIST : Create UPLOAD/STREAM : " + data.notificationType + " | record name :" + recordName);
                             if (data.mediaType.indexOf("image") !== -1 || data.mediaType.indexOf("jpeg") !== -1
                                 || data.mediaType.indexOf("video") !== -1 || data.mediaType.indexOf("streaming") !== -1
                                 && data.modifiedTime !== undefined) {
@@ -545,24 +546,47 @@ class AlertController {
                                     modifiedTime: data.modifiedTime
                                 };
                                 this.uploadStreamList.push(uploadData);
-                                console.log("UPLOAD STREAM added");
+                                //console.log("UPLOAD STREAM added");
                             }
                         }
                     }
                     this.uploadStreamList = _.sortBy(this.uploadStreamList, 'modifiedTime').reverse();
-                    this.updateViewOnTimeInterval(this.uploadStreamList);
+                    // var n = 5;
+                    //console.log("333333333333333333333333333333333333333");
+                    // var lists = _.groupBy(this.uploadStreamList, function (element, index) {
+                    //     return Math.floor(index / n);
+                    // });
+                    //console.log(lists);
+                    // _.forEach(lists, (uploadStreamList, id)=>{
+                    // window.setTimeout(()=> {
+                    // this.updateViewOnTimeInterval(this.uploadStreamList);
+                    //console.log(new Date().getMinutes());
+                    // }, 5000);
+                    // });
+
                 });
                 return list;
             });
         });
-
-
+        window.setInterval(()=> {
+            var n = 5;
+            var lists = _.groupBy(this.uploadStreamList, function (element, index) {
+                return Math.floor(index / n);
+            });
+            if (this.i >= Math.floor(this.uploadStreamList.length / 5)) {
+                this.i = 0;
+            }
+            this.i++;
+            console.log("this.i");
+            console.log(this.i);
+            this.updateViewOnTimeInterval(lists[this.i]);
+        }, 10000);
     };
 
     updateViewOnTimeInterval(uploadStreamList) {
-        console.log("=================================================================");
+        console.log("=================================================================:" + this.i);
         console.log("this.uploadStreamList");
-        console.log(uploadStreamList);
+        console.log(uploadStreamList.length);
         this.imageURL = [];
         _.each(uploadStreamList, (value, id) => {
             if (id == 0) {
@@ -589,16 +613,16 @@ class AlertController {
         var urlArray = [];
         _.each(uploadStreamList, (value, id) => {
             if (id == 0) {
-                console.log("LOOPING : ", id);
+                //console.log("LOOPING : ", id);
                 if (value.mediaType.indexOf("streaming") !== -1 || value.mediaType.indexOf("video") !== -1) {
                     var URL = value.url.replace("rtsp", "rtmp"); //rtmp://54.169.237.13:1935/live/
-                    console.log(URL, value.fileName);
+                    //console.log(URL, value.fileName);
                     if (!_.contains(urlArray, URL)) {
                         var vidDiv = document.createElement('div');
                         vidDiv.setAttribute("id", "flowplayer" + id);
                         vidDiv.setAttribute("style", "padding: 0px!important");
                         vidDiv.className = 'col-md-12';
-                        console.log("element : ", vidDiv);
+                        //console.log("element : ", vidDiv);
                         document.getElementById('mbVideosOne').appendChild(vidDiv);
                         if (value.mediaType.indexOf("streaming") !== -1) {
                             flowplayer(vidDiv, {
@@ -615,7 +639,7 @@ class AlertController {
                             });
                         }
                         if (value.mediaType.indexOf("video") !== -1) {
-                            console.log("----------------------------", value.url);
+                            //console.log("----------------------------", value.url);
                             flowplayer(vidDiv, {
                                 swf: "video/flowplayer.swf",
                                 hlsjs: true,
@@ -643,21 +667,21 @@ class AlertController {
                     imgTag.setAttribute('src', value.url);
                     imgTag.setAttribute("style", "width: inherit;height: inherit");
                     imgDiv.appendChild(imgTag);
-                    console.log("element : ", imgDiv);
+                    //console.log("element : ", imgDiv);
                     document.getElementById('mbVideosOne').appendChild(imgDiv);
                 }
             }
             if (id >= 1 && id <= 4) {
-                console.log("LOOPING : ", id);
+                //console.log("LOOPING : ", id);
                 if (value.mediaType.indexOf("streaming") !== -1 || value.mediaType.indexOf("video") !== -1) {
                     var URL = value.url.replace("rtsp", "rtmp"); //rtmp://54.169.237.13:1935/live/
-                    console.log(URL, value.fileName);
+                    //console.log(URL, value.fileName);
                     if (!_.contains(urlArray, URL)) {
                         var vidDiv = document.createElement('div');
                         vidDiv.setAttribute("id", "flowplayer" + id);
                         vidDiv.setAttribute("style", "padding: 0px!important");
                         vidDiv.className = 'col-md-6 channel1';
-                        console.log("element : ", vidDiv);
+                        //console.log("element : ", vidDiv);
                         document.getElementById('mbVideos').appendChild(vidDiv);
                         if (value.mediaType.indexOf("streaming") !== -1) {
                             flowplayer(vidDiv, {
@@ -673,7 +697,7 @@ class AlertController {
                             });
                         }
                         if (value.mediaType.indexOf("video") !== -1) {
-                            console.log("----------------------------", value.url);
+                            //console.log("----------------------------", value.url);
                             flowplayer(vidDiv, {
                                 swf: "video/flowplayer.swf",
                                 autoplay: true, share: false, splash: false,
@@ -701,7 +725,7 @@ class AlertController {
                     imgTag.setAttribute('src', value.url);
                     imgTag.setAttribute("style", "width: inherit;height: inherit");
                     imgDiv.appendChild(imgTag);
-                    console.log("element : ", imgDiv);
+                    //console.log("element : ", imgDiv);
                     document.getElementById('mbVideos').appendChild(imgDiv);
                 }
             }
@@ -718,7 +742,8 @@ class AlertController {
             clip: {
                 sources: [
                     {
-                        type: "video/mp4", src: "video/Camera Feed 1 - Liverpool  Shopping.mp4"
+                        type: "video/mp4",
+                        src: "https://s3-us-west-2.amazonaws.com/www.ciclopstech.com/Camera Feed 1 - Liverpool  Shopping.mp4"
                     }
                 ]
             }
@@ -733,7 +758,8 @@ class AlertController {
             clip: {
                 sources: [
                     {
-                        type: "video/mp4", src: "video/Camera Feed 2 - Highway Car Video.mp4"
+                        type: "video/mp4",
+                        src: "https://s3-us-west-2.amazonaws.com/www.ciclopstech.com/Camera Feed 2 - Highway Car Video.mp4"
                     }
                 ]
             }
@@ -748,7 +774,8 @@ class AlertController {
             clip: {
                 sources: [
                     {
-                        type: "video/mp4", src: "video/Camera Feed 3 - Drone  Forest Fire.mp4"
+                        type: "video/mp4",
+                        src: "https://s3-us-west-2.amazonaws.com/www.ciclopstech.com/Camera Feed 3 - Drone  Forest Fire.mp4"
                     }
                 ]
             }
@@ -763,7 +790,8 @@ class AlertController {
             clip: {
                 sources: [
                     {
-                        type: "video/mp4", src: "video/Camera Feed 4 - News Video.mp4"
+                        type: "video/mp4",
+                        src: "https://s3-us-west-2.amazonaws.com/www.ciclopstech.com/Camera Feed 4 - News Video.mp4"
                     }
                 ]
             }
@@ -780,7 +808,8 @@ class AlertController {
             clip: {
                 sources: [
                     {
-                        type: "video/mp4", src: "video/Camera Feed 1 - Liverpool  Shopping.mp4"
+                        type: "video/mp4",
+                        src: "https://s3-us-west-2.amazonaws.com/www.ciclopstech.com/Camera Feed 1 - Liverpool  Shopping.mp4"
                     }
                 ]
             }
@@ -794,7 +823,8 @@ class AlertController {
             clip: {
                 sources: [
                     {
-                        type: "video/mp4", src: "video/Social Feed 3 - YouTube Screen Video.mp4"
+                        type: "video/mp4",
+                        src: "https://s3-us-west-2.amazonaws.com/www.ciclopstech.com/Social Feed 3 - YouTube Screen Video.mp4"
                     }
                 ]
             }
@@ -811,7 +841,8 @@ class AlertController {
             clip: {
                 sources: [
                     {
-                        type: "video/mp4", src: "video/Meeting Video Feed.mp4"
+                        type: "video/mp4",
+                        src: "https://s3-us-west-2.amazonaws.com/www.ciclopstech.com/Meeting Video Feed.mp4"
                     }
                 ]
             }
@@ -828,7 +859,8 @@ class AlertController {
             clip: {
                 sources: [
                     {
-                        type: "video/mp4", src: "video/Mobile Feed - Bus Stop.mp4"
+                        type: "video/mp4",
+                        src: "https://s3-us-west-2.amazonaws.com/www.ciclopstech.com/Mobile Feed - Bus Stop.mp4"
                     }
                 ]
             }
@@ -842,7 +874,8 @@ class AlertController {
             clip: {
                 sources: [
                     {
-                        type: "video/mp4", src: "video/Mobile Feed - Car Theft.mp4"
+                        type: "video/mp4",
+                        src: "https://s3-us-west-2.amazonaws.com/www.ciclopstech.com/Mobile Feed - Car Theft.mp4"
                     }
                 ]
             }
@@ -856,7 +889,8 @@ class AlertController {
             clip: {
                 sources: [
                     {
-                        type: "video/mp4", src: "video/Social Feed 1 - Facebook Screen Video.mp4"
+                        type: "video/mp4",
+                        src: "https://s3-us-west-2.amazonaws.com/www.ciclopstech.com/Social Feed 1 - Facebook Screen Video.mp4"
                     }
                 ]
             }
@@ -870,7 +904,8 @@ class AlertController {
             clip: {
                 sources: [
                     {
-                        type: "video/mp4", src: "video/Camera Feed 3 - Drone  Forest Fire.mp4"
+                        type: "video/mp4",
+                        src: "https://s3-us-west-2.amazonaws.com/www.ciclopstech.com/Camera Feed 3 - Drone  Forest Fire.mp4"
                     }
                 ]
             }
@@ -878,7 +913,7 @@ class AlertController {
     }
 
     setLocationCenter(lat, long) {
-        console.log(lat, ",", long);
+        //console.log(lat, ",", long);
         angular.extend(this, {
             center: {
                 lat: lat,
@@ -889,11 +924,11 @@ class AlertController {
     }
 
     playVideo(streamList, index) {
-        console.log(streamList);
+        //console.log(streamList);
         if (streamList.mediaType.indexOf("streaming") !== -1 || streamList.mediaType.indexOf("video") !== -1) {
             var URL = streamList.url.replace("rtsp", "rtmp");
             //rtmp://54.169.237.13:1935/live/
-            console.log(URL);
+            //console.log(URL);
             $("#flowplayer" + index).flowplayer({
                 live: true,
                 swf: "video/flowplayer.swf",
@@ -905,14 +940,14 @@ class AlertController {
         } else {
             this.imageURL.push(streamList.url);
         }
-        console.log(this.imageURL);
+        //console.log(this.imageURL);
     }
 
     setIncidentId(incidentId, id, notificationType) {
         this.selectIncidentId = incidentId;
         this.selectNotificationType = notificationType;
-        console.log(this.selectIncidentId);
-        console.log(this.selectNotificationType);
+        //console.log(this.selectIncidentId);
+        //console.log(this.selectNotificationType);
         this.mappingIncidentIdsWithoutParent = _.without(this.mappingIncidentIds, incidentId);
         this.multiple = {
             incidents: []
@@ -922,8 +957,8 @@ class AlertController {
     deleteAbsoluteRecords() {
         /*   var incId = id.replace(/[^a-zA-Z0-9]/g, "");
          delete this.mapDetails[incId];
-         console.log(this.mapDetails);
-         console.log("recordName : " + recordName);
+         //console.log(this.mapDetails);
+         //console.log("recordName : " + recordName);
          this.connection.record.getRecord(recordName).delete();
          this.messagelist.removeEntry(recordName);
          this.toaster.pop("success", id + " deleted");*/
@@ -933,7 +968,7 @@ class AlertController {
             'alerts/ j38pqt3f-1c555dc4ttu'
         ];
         for (var i in oldRecords) {
-            console.log(oldRecords[i]);
+            //console.log(oldRecords[i]);
             this.connection.record.getRecord(oldRecords[i]).delete();
             // this.messagelist.removeEntry(oldRecords[i]);
         }
