@@ -874,6 +874,17 @@ class AlertController {
         });
     }
 
+    setLocationCenter(lat, long){
+        console.log(lat,",", long);
+        angular.extend(this, {
+            center: {
+                lat: lat,
+                lng: long,
+                zoom: 12
+            }
+        })
+    }
+
     playVideo(streamList, index) {
         console.log(streamList);
         if (streamList.mediaType.indexOf("streaming") !== -1 || streamList.mediaType.indexOf("video") !== -1) {
