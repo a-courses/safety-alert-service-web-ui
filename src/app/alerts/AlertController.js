@@ -549,154 +549,8 @@ class AlertController {
                             }
                         }
                     }
-
                     this.uploadStreamList = _.sortBy(this.uploadStreamList, 'modifiedTime').reverse();
-                    console.log("=================================================================");
-                    console.log("this.uploadStreamList");
-                    console.log(this.uploadStreamList);
-                    this.imageURL = [];
-                    _.each(this.uploadStreamList, (value, id) => {
-                        if (id == 0) {
-                            var elementById = document.getElementById("flowplayer" + id);
-                            if (elementById) {
-                                document.getElementById("mbVideosOne").removeChild(elementById);
-                            }
-                            var loadingTextIdOne = document.getElementById("loadingTextIdOne");
-                            if (loadingTextIdOne) {
-                                document.getElementById("mbVideosOne").removeChild(loadingTextIdOne);
-                            }
-                        } else {
-                            var elementById = document.getElementById("flowplayer" + id);
-                            if (elementById) {
-                                document.getElementById("mbVideos").removeChild(elementById);
-                            }
-                            var loadingTextId = document.getElementById("loadingTextId");
-                            if (loadingTextId) {
-                                document.getElementById("mbVideos").removeChild(loadingTextId);
-                            }
-                        }
-
-                    });
-                    var urlArray = [];
-                    _.each(this.uploadStreamList, (value, id) => {
-                        if (id == 0) {
-                            console.log("LOOPING : ", id);
-                            if (value.mediaType.indexOf("streaming") !== -1 || value.mediaType.indexOf("video") !== -1) {
-                                var URL = value.url.replace("rtsp", "rtmp"); //rtmp://54.169.237.13:1935/live/
-                                console.log(URL, value.fileName);
-                                if (!_.contains(urlArray, URL)) {
-                                    var vidDiv = document.createElement('div');
-                                    vidDiv.setAttribute("id", "flowplayer" + id);
-                                    vidDiv.setAttribute("style", "padding: 0px!important");
-                                    vidDiv.className = 'col-md-12';
-                                    console.log("element : ", vidDiv);
-                                    document.getElementById('mbVideosOne').appendChild(vidDiv);
-                                    if (value.mediaType.indexOf("streaming") !== -1) {
-                                        flowplayer(vidDiv, {
-                                            hlsjs: true,
-                                            live: true,
-                                            autoplay: true, share: false, splash: false,
-                                            volume: 0.0,
-                                            ratio: 9 / 16,
-                                            swf: "video/flowplayer.swf",
-                                            rtmp: URL,
-                                            playlist: [[{
-                                                flash: value.fileName
-                                            }]]
-                                        });
-                                    }
-                                    if (value.mediaType.indexOf("video") !== -1) {
-                                        console.log("----------------------------", value.url);
-                                        flowplayer(vidDiv, {
-                                            swf: "video/flowplayer.swf",
-                                            hlsjs: true,
-                                            autoplay: true, share: false, splash: false,
-                                            ratio: 9 / 16,
-                                            volume: 0.0,
-                                            clip: {
-                                                sources: [
-                                                    {
-                                                        type: "video/mp4", src: value.url
-                                                    }
-                                                ]
-                                            }
-                                        });
-                                    }
-                                    urlArray.push(URL);
-                                }
-                                // type: "video/mp4", src: "video/sanmay.mp4"}
-                            } else {
-                                var imgDiv = document.createElement('div');
-                                imgDiv.setAttribute("id", "flowplayer" + id);
-                                imgDiv.setAttribute("style", "padding: 0px!important");
-                                imgDiv.className = 'col-md-12';
-                                var imgTag = document.createElement('img');
-                                imgTag.setAttribute('src', value.url);
-                                imgTag.setAttribute("style", "width: inherit;height: inherit");
-                                imgDiv.appendChild(imgTag);
-                                console.log("element : ", imgDiv);
-                                document.getElementById('mbVideosOne').appendChild(imgDiv);
-                            }
-                        }
-                        if (id >= 1 && id <= 4) {
-                            console.log("LOOPING : ", id);
-                            if (value.mediaType.indexOf("streaming") !== -1 || value.mediaType.indexOf("video") !== -1) {
-                                var URL = value.url.replace("rtsp", "rtmp"); //rtmp://54.169.237.13:1935/live/
-                                console.log(URL, value.fileName);
-                                if (!_.contains(urlArray, URL)) {
-                                    var vidDiv = document.createElement('div');
-                                    vidDiv.setAttribute("id", "flowplayer" + id);
-                                    vidDiv.setAttribute("style", "padding: 0px!important");
-                                    vidDiv.className = 'col-md-6 channel1';
-                                    console.log("element : ", vidDiv);
-                                    document.getElementById('mbVideos').appendChild(vidDiv);
-                                    if (value.mediaType.indexOf("streaming") !== -1) {
-                                        flowplayer(vidDiv, {
-                                            hlsjs: true,
-                                            live: true,
-                                            autoplay: true, share: false, splash: false,
-                                            ratio: 9 / 16,
-                                            swf: "video/flowplayer.swf",
-                                            rtmp: URL,
-                                            playlist: [[{
-                                                flash: value.fileName
-                                            }]]
-                                        });
-                                    }
-                                    if (value.mediaType.indexOf("video") !== -1) {
-                                        console.log("----------------------------", value.url);
-                                        flowplayer(vidDiv, {
-                                            swf: "video/flowplayer.swf",
-                                            autoplay: true, share: false, splash: false,
-                                            hlsjs: true,
-                                            ratio: 9 / 16,
-                                            volume: 0.0,
-                                            clip: {
-                                                sources: [
-                                                    {
-                                                        type: "video/mp4", src: value.url
-                                                    }
-                                                ]
-                                            }
-                                        });
-                                    }
-                                    urlArray.push(URL);
-                                }
-                                // type: "video/mp4", src: "video/sanmay.mp4"}
-                            } else {
-                                var imgDiv = document.createElement('div');
-                                imgDiv.setAttribute("id", "flowplayer" + id);
-                                imgDiv.setAttribute("style", "padding: 0px!important");
-                                imgDiv.className = 'col-md-6 channel1';
-                                var imgTag = document.createElement('img');
-                                imgTag.setAttribute('src', value.url);
-                                imgTag.setAttribute("style", "width: inherit;height: inherit");
-                                imgDiv.appendChild(imgTag);
-                                console.log("element : ", imgDiv);
-                                document.getElementById('mbVideos').appendChild(imgDiv);
-                            }
-                        }
-                    })
+                    this.updateViewOnTimeInterval(this.uploadStreamList);
                 });
                 return list;
             });
@@ -704,6 +558,155 @@ class AlertController {
 
 
     };
+
+    updateViewOnTimeInterval(uploadStreamList) {
+        console.log("=================================================================");
+        console.log("this.uploadStreamList");
+        console.log(uploadStreamList);
+        this.imageURL = [];
+        _.each(uploadStreamList, (value, id) => {
+            if (id == 0) {
+                var elementById = document.getElementById("flowplayer" + id);
+                if (elementById) {
+                    document.getElementById("mbVideosOne").removeChild(elementById);
+                }
+                var loadingTextIdOne = document.getElementById("loadingTextIdOne");
+                if (loadingTextIdOne) {
+                    document.getElementById("mbVideosOne").removeChild(loadingTextIdOne);
+                }
+            } else {
+                var elementById = document.getElementById("flowplayer" + id);
+                if (elementById) {
+                    document.getElementById("mbVideos").removeChild(elementById);
+                }
+                var loadingTextId = document.getElementById("loadingTextId");
+                if (loadingTextId) {
+                    document.getElementById("mbVideos").removeChild(loadingTextId);
+                }
+            }
+
+        });
+        var urlArray = [];
+        _.each(uploadStreamList, (value, id) => {
+            if (id == 0) {
+                console.log("LOOPING : ", id);
+                if (value.mediaType.indexOf("streaming") !== -1 || value.mediaType.indexOf("video") !== -1) {
+                    var URL = value.url.replace("rtsp", "rtmp"); //rtmp://54.169.237.13:1935/live/
+                    console.log(URL, value.fileName);
+                    if (!_.contains(urlArray, URL)) {
+                        var vidDiv = document.createElement('div');
+                        vidDiv.setAttribute("id", "flowplayer" + id);
+                        vidDiv.setAttribute("style", "padding: 0px!important");
+                        vidDiv.className = 'col-md-12';
+                        console.log("element : ", vidDiv);
+                        document.getElementById('mbVideosOne').appendChild(vidDiv);
+                        if (value.mediaType.indexOf("streaming") !== -1) {
+                            flowplayer(vidDiv, {
+                                hlsjs: true,
+                                live: true,
+                                autoplay: true, share: false, splash: false,
+                                volume: 0.0,
+                                ratio: 9 / 16,
+                                swf: "video/flowplayer.swf",
+                                rtmp: URL,
+                                playlist: [[{
+                                    flash: value.fileName
+                                }]]
+                            });
+                        }
+                        if (value.mediaType.indexOf("video") !== -1) {
+                            console.log("----------------------------", value.url);
+                            flowplayer(vidDiv, {
+                                swf: "video/flowplayer.swf",
+                                hlsjs: true,
+                                autoplay: true, share: false, splash: false,
+                                ratio: 9 / 16,
+                                volume: 0.0,
+                                clip: {
+                                    sources: [
+                                        {
+                                            type: "video/mp4", src: value.url
+                                        }
+                                    ]
+                                }
+                            });
+                        }
+                        urlArray.push(URL);
+                    }
+                    // type: "video/mp4", src: "video/sanmay.mp4"}
+                } else {
+                    var imgDiv = document.createElement('div');
+                    imgDiv.setAttribute("id", "flowplayer" + id);
+                    imgDiv.setAttribute("style", "padding: 0px!important");
+                    imgDiv.className = 'col-md-12';
+                    var imgTag = document.createElement('img');
+                    imgTag.setAttribute('src', value.url);
+                    imgTag.setAttribute("style", "width: inherit;height: inherit");
+                    imgDiv.appendChild(imgTag);
+                    console.log("element : ", imgDiv);
+                    document.getElementById('mbVideosOne').appendChild(imgDiv);
+                }
+            }
+            if (id >= 1 && id <= 4) {
+                console.log("LOOPING : ", id);
+                if (value.mediaType.indexOf("streaming") !== -1 || value.mediaType.indexOf("video") !== -1) {
+                    var URL = value.url.replace("rtsp", "rtmp"); //rtmp://54.169.237.13:1935/live/
+                    console.log(URL, value.fileName);
+                    if (!_.contains(urlArray, URL)) {
+                        var vidDiv = document.createElement('div');
+                        vidDiv.setAttribute("id", "flowplayer" + id);
+                        vidDiv.setAttribute("style", "padding: 0px!important");
+                        vidDiv.className = 'col-md-6 channel1';
+                        console.log("element : ", vidDiv);
+                        document.getElementById('mbVideos').appendChild(vidDiv);
+                        if (value.mediaType.indexOf("streaming") !== -1) {
+                            flowplayer(vidDiv, {
+                                hlsjs: true,
+                                live: true,
+                                autoplay: true, share: false, splash: false,
+                                ratio: 9 / 16,
+                                swf: "video/flowplayer.swf",
+                                rtmp: URL,
+                                playlist: [[{
+                                    flash: value.fileName
+                                }]]
+                            });
+                        }
+                        if (value.mediaType.indexOf("video") !== -1) {
+                            console.log("----------------------------", value.url);
+                            flowplayer(vidDiv, {
+                                swf: "video/flowplayer.swf",
+                                autoplay: true, share: false, splash: false,
+                                hlsjs: true,
+                                ratio: 9 / 16,
+                                volume: 0.0,
+                                clip: {
+                                    sources: [
+                                        {
+                                            type: "video/mp4", src: value.url
+                                        }
+                                    ]
+                                }
+                            });
+                        }
+                        urlArray.push(URL);
+                    }
+                    // type: "video/mp4", src: "video/sanmay.mp4"}
+                } else {
+                    var imgDiv = document.createElement('div');
+                    imgDiv.setAttribute("id", "flowplayer" + id);
+                    imgDiv.setAttribute("style", "padding: 0px!important");
+                    imgDiv.className = 'col-md-6 channel1';
+                    var imgTag = document.createElement('img');
+                    imgTag.setAttribute('src', value.url);
+                    imgTag.setAttribute("style", "width: inherit;height: inherit");
+                    imgDiv.appendChild(imgTag);
+                    console.log("element : ", imgDiv);
+                    document.getElementById('mbVideos').appendChild(imgDiv);
+                }
+            }
+        })
+    }
 
     loadCameraFeed() {
         flowplayer("#CameraFeed1", {
@@ -874,8 +877,8 @@ class AlertController {
         });
     }
 
-    setLocationCenter(lat, long){
-        console.log(lat,",", long);
+    setLocationCenter(lat, long) {
+        console.log(lat, ",", long);
         angular.extend(this, {
             center: {
                 lat: lat,
