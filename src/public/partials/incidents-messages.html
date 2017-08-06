@@ -1,47 +1,33 @@
 <div class="card-header text-center gr2">
     Incidents
 </div>
-<table class="table table-bordered table-sm">
-    <thead>
-    <tr>
-        <th>Type</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Description</th>
-        <th>Reference</th>
-        <th>Location</th>
-        <th>Status</th>
-        <th>Meeting #</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="i in ac.alertMessageList" ng-if="i.notificationType==='incident'">
-        <td class="icon-cell">
-            <img title="incidentType" src="../img/fire.png" class="alert-icons"/>
-        </td>
-        <td style="width: 100px;">{{i.alert.time | date:'dd-MMM-yyyy'}}</td>
-        <td style="width: 50px;">{{i.alert.time | date:'hh:mma'}}</td>
-        <td>{{i.alert.status}}</td>
-        <td>{{i.alert.id}}</td>
-        <td>1</td>
-        <td>{{i.alert.status}}</td>
-        <td>1</td>
-        <!-- <tr ng-repeat="i in ac.alertMessages" ng-if="i.get('notificationType')==='incident'">
-             <td class="icon-cell">
-                 <!--<img ng-if="i.get('alert.status')==='new'" src="../img/open-inc.png" class="alert-icons"/>
-            <img ng-if="i.get('alert.status')==='new'" src="../img/new-inc.png" class="alert-icons"/>
-            <img ng-if="i.get('alert.status')==='read'" src="../img/closed-inc.png" class="alert-icons"/>
-        </td>
-        <td>{{i.get('alert.id')}}</td>
-        <td style="width: 100px;">{{i.get('alert.time') | date:'dd-MMM-yyyy'}}</td>
-        <td>{{i.get('alert.status')}}</td>
-        <td class="icon-cell">
-            <img ng-if="i.get('alert.incidentType')==='Fire'" src="../img/fire.png" class="alert-icons"/>
-            <img ng-if="i.get('alert.incidentType')==='Alerts'" src="../img/hazard.png" class="alert-icons"/>
-            <img ng-if="i.get('alert.incidentType')==='Medical'" src="../img/medical.png" class="alert-icons"/>
-            <img ng-if="i.get('alert.incidentType')==='Accident'" src="../img/accident.png" class="alert-icons"/>
-            <img ng-if="i.get('alert.incidentType')==='Police'" src="../img/police.png" class="alert-icons"/>
-        </td>-->
-    </tr>
-    </tbody>
-</table>
+<div class="card-block" style="overflow-y: auto;padding: 0px;!important; font-size: 10px">
+    <table class="table table-bordered table-sm">
+        <thead>
+        <tr>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Description</th>
+            <th>Reference</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Meeting #</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="i in ac.alertMessageList" ng-if="i.notificationType==='incident'">
+            <td class="icon-cell">
+                <img title="incidentType" src="../img/fire.png" class="alert-icons"/>
+            </td>
+            <td style="width: 100px;">{{i.alert.time | date:'dd-MMM-yyyy'}}</td>
+            <td style="width: 50px;">{{i.alert.time | date:'hh:mma'}}</td>
+            <td>{{i.alert.status}}</td>
+            <td>{{i.alert.id}}</td>
+            <td>1</td>
+            <td>{{i.alert.status}}</td>
+            <td>1</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

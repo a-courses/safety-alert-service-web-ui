@@ -1,97 +1,99 @@
 <div class="card-header text-center gr2">
     Alerts
 </div>
-<table class="table table-bordered table-sm" style="overflow-y: auto">
-    <thead>
-    <tr>
-        <th>Type</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>status</th>
-        <th>User</th>
-        <th>Media</th>
-        <th>Location</th>
-        <th>Delete</th>
-        <th>Link</th>
-    </tr>
-    </thead>
-    <tbody>
+<div class="card-block" style="overflow-y: auto;padding: 0px;!important; font-size: 10px">
+    <table class="table table-bordered table-sm" style="overflow-y: auto">
+        <thead>
+        <tr>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>status</th>
+            <th>User</th>
+            <th>Media</th>
+            <th>Location</th>
+            <th>Delete</th>
+            <th>Link</th>
+        </tr>
+        </thead>
+        <tbody>
 
-    <tr ng-repeat="i in ac.alertMessageList"
-        ng-if="i.notificationType!=='incident' && !(i.status === 'read' && !i.incidentId)"
-        ng-click="ac.setLocationCenter(i.location.latitude,i.location.longitude)">
-        <td class="icon-cell">
-            <img title="{{i.incidentType}}" ng-if="i.incidentType==='Fire'" src="../img/fire.png"
-                 class="alert-icons"/>
-            <img title="{{i.incidentType}}" ng-if="i.incidentType==='Alerts'" src="../img/hazard.png"
-                 class="alert-icons"/>
-            <img title="{{i.incidentType}}" ng-if="i.incidentType==='Medical'"
-                 src="../img/medical.png"
-                 class="alert-icons"/>
-            <img title="{{i.incidentType}}" ng-if="i.incidentType==='Accident'"
-                 src="../img/accident.png"
-                 class="alert-icons"/>
-            <img title="{{i.incidentType}}" ng-if="i.incidentType==='Police'" src="../img/police.png"
-                 class="alert-icons"/>
-        </td>
-        <td style="width: 100px;">{{i.time | date:'dd-MMM-yyyy'}}</td>
-        <td style="width: 50px;">{{i.time | date:'hh:mma'}}</td>
-        <td style="width: 100px;">{{i.status}}</td>
-        <td class="icon-cell">{{i.user.phoneNumber}}
-            <!--<i class="fa fa-user-circle-o blue-icons" aria-hidden="true" title="{{i.user.phoneNumber}}"></i>-->
-        </td>
-        <td class="icon-cell">
-            <div ng-if="i.notificationType !== 'incident' || i.notificationType !== 'call'">
-                <a href="{{i.url}}" target="_blank">
-                    <i title="{{i.mediaType}}"
-                       ng-if="i.mediaType.indexOf('image')!== -1 || i.mediaType.indexOf('jpeg')!== -1"
-                       class="fa fa-picture-o blue-icons"
-                       aria-hidden="true"></i>
+        <tr ng-repeat="i in ac.alertMessageList"
+            ng-if="i.notificationType!=='incident' && !(i.status === 'read' && !i.incidentId)"
+            ng-click="ac.setLocationCenter(i.location.latitude,i.location.longitude)">
+            <td class="icon-cell">
+                <img title="{{i.incidentType}}" ng-if="i.incidentType==='Fire'" src="../img/fire.png"
+                     class="alert-icons"/>
+                <img title="{{i.incidentType}}" ng-if="i.incidentType==='Alerts'" src="../img/hazard.png"
+                     class="alert-icons"/>
+                <img title="{{i.incidentType}}" ng-if="i.incidentType==='Medical'"
+                     src="../img/medical.png"
+                     class="alert-icons"/>
+                <img title="{{i.incidentType}}" ng-if="i.incidentType==='Accident'"
+                     src="../img/accident.png"
+                     class="alert-icons"/>
+                <img title="{{i.incidentType}}" ng-if="i.incidentType==='Police'" src="../img/police.png"
+                     class="alert-icons"/>
+            </td>
+            <td style="width: 100px;">{{i.time | date:'dd-MMM-yyyy'}}</td>
+            <td style="width: 50px;">{{i.time | date:'hh:mma'}}</td>
+            <td style="width: 100px;">{{i.status}}</td>
+            <td class="icon-cell">{{i.user.phoneNumber}}
+                <!--<i class="fa fa-user-circle-o blue-icons" aria-hidden="true" title="{{i.user.phoneNumber}}"></i>-->
+            </td>
+            <td class="icon-cell">
+                <div ng-if="i.notificationType !== 'incident' || i.notificationType !== 'call'">
+                    <a href="{{i.url}}" target="_blank">
+                        <i title="{{i.mediaType}}"
+                           ng-if="i.mediaType.indexOf('image')!== -1 || i.mediaType.indexOf('jpeg')!== -1"
+                           class="fa fa-picture-o blue-icons"
+                           aria-hidden="true"></i>
+                    </a>
+                    <a href="{{i.url}}" target="_blank">
+                        <i title="{{i.mediaType}}" ng-if="i.mediaType.indexOf('video')!== -1"
+                           class="fa fa-film blue-icons"
+                           aria-hidden="true"></i>
+                    </a>
+                    <a href="{{i.url}}" target="_blank">
+                        <i title="{{i.mediaType}}"
+                           ng-if="i.mediaType.indexOf('audio')!== -1 || i.mediaType.indexOf('mpeg')!== -1"
+                           class="fa fa-microphone blue-icons"
+                           aria-hidden="true"></i>
+                    </a>
+                    <a href="{{i.url}}" target="_blank">
+                        <i title="{{i.mediaType}}" ng-if="i.mediaType.indexOf('streaming')!== -1"
+                           class="fa fa-video-camera blue-icons"
+                           aria-hidden="true"></i>
+                    </a>
+                    <a href="{{i.url}}" target="_blank">
+                        <i title="{{i.mediaType}}" ng-if="i.mediaType==='message'"
+                           class="fa fa-comments-o blue-icons"
+                           aria-hidden="true"></i>
+                    </a>
+                    <a href="{{i.url}}" target="_blank">
+                        <i title="{{i.mediaType}}" ng-if="i.mediaType==='Emergency Call'"
+                           class="fa fa-phone blue-icons" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </td>
+            <td class="icon-cell" ng-init="">
+                <a href="http://maps.google.com/maps?q={{i.location.latitude}},{{i.location.longitude}}"
+                   target="_blank">
+                    <i class="fa fa-map-marker blue-icons" aria-hidden="true"></i></a>
+            </td>
+            <td style="width: 50px;">
+                <i class="fa fa-trash blue-icons"
+                   ng-click="ac.deleteRecordFromList(i.name, i.id, i.notificationType)"></i>
+            </td>
+            <td style="width: 50px;">
+                <i class="fa fa-link blue-icons" ng-if="i.incidentId"></i>
+                <a href="#" data-tooltip="Settings" ng-if="!i.incidentId">
+                    <i class="fa fa-chain-broken blue-icons"
+                       ng-click="ac.saveMappedIncidents(i.name, i.incidentId,i.id,i.notificationType)">
+                    </i>
                 </a>
-                <a href="{{i.url}}" target="_blank">
-                    <i title="{{i.mediaType}}" ng-if="i.mediaType.indexOf('video')!== -1"
-                       class="fa fa-film blue-icons"
-                       aria-hidden="true"></i>
-                </a>
-                <a href="{{i.url}}" target="_blank">
-                    <i title="{{i.mediaType}}"
-                       ng-if="i.mediaType.indexOf('audio')!== -1 || i.mediaType.indexOf('mpeg')!== -1"
-                       class="fa fa-microphone blue-icons"
-                       aria-hidden="true"></i>
-                </a>
-                <a href="{{i.url}}" target="_blank">
-                    <i title="{{i.mediaType}}" ng-if="i.mediaType.indexOf('streaming')!== -1"
-                       class="fa fa-video-camera blue-icons"
-                       aria-hidden="true"></i>
-                </a>
-                <a href="{{i.url}}" target="_blank">
-                    <i title="{{i.mediaType}}" ng-if="i.mediaType==='message'"
-                       class="fa fa-comments-o blue-icons"
-                       aria-hidden="true"></i>
-                </a>
-                <a href="{{i.url}}" target="_blank">
-                    <i title="{{i.mediaType}}" ng-if="i.mediaType==='Emergency Call'"
-                       class="fa fa-phone blue-icons" aria-hidden="true"></i>
-                </a>
-            </div>
-        </td>
-        <td class="icon-cell" ng-init="">
-            <a href="http://maps.google.com/maps?q={{i.location.latitude}},{{i.location.longitude}}"
-               target="_blank">
-                <i class="fa fa-map-marker blue-icons" aria-hidden="true"></i></a>
-        </td>
-        <td style="width: 50px;">
-            <i class="fa fa-trash blue-icons"
-               ng-click="ac.deleteRecordFromList(i.name, i.id, i.notificationType)"></i>
-        </td>
-        <td style="width: 50px;">
-            <i class="fa fa-link blue-icons" ng-if="i.incidentId"></i>
-            <a href="#" data-tooltip="Settings" ng-if="!i.incidentId">
-                <i class="fa fa-chain-broken blue-icons"
-                   ng-click="ac.saveMappedIncidents(i.name, i.incidentId,i.id,i.notificationType)">
-                </i>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
