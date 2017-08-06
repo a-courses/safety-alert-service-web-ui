@@ -60,7 +60,10 @@ html, body, .container-fluid, .row {
 .blue-icons {
     color: #00B0F0 !important;
 }
-
+.blue-play-icons {
+    color: #00B0F0 !important;
+    font-size: 3em!important;
+}
 .icon-cell {
     width: 25px;
     text-align: center;
