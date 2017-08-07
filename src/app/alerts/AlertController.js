@@ -97,7 +97,7 @@ class AlertController {
                     var incidentType = data.incidentType;
                     var recordName = list.name;
                     if (data.id) {
-                        this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
+                        this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
                             if (currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime) {
                                 //console.log("Load alerts : remove record message list : " + recordName);
                             }
@@ -451,7 +451,7 @@ class AlertController {
                 //console.log("Delete alert : mapDetails marker details :", this.mapDetails);
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
-                this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
+                this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
                     if (currentItem.id === id) {
                         //console.log("Delete alert : recordName : " + recordName);
                     }
@@ -501,7 +501,7 @@ class AlertController {
             if (result.data.message === 'success') {
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
-                this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
+                this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
                     if (currentItem.id === id) {
                         //console.log("Delete Linked alert : recordName : " + recordName);
                     }
@@ -524,7 +524,7 @@ class AlertController {
                     var incidentType = data.incidentType;
                     var recordName = list.name;
                     if (data.id) {
-                        this.uploadStreamList = _.reject(this.uploadStreamList, function (currentItem) {
+                        this.uploadStreamList = _.reject(this.uploadStreamList, function(currentItem) {
                             if (currentItem.id === data.id) {
                                 //console.log("UPLOAD STREAM LIST : remove record message list : " + recordName);
                             }
@@ -568,9 +568,9 @@ class AlertController {
                 return list;
             });
         });
-        window.setInterval(()=> {
-            var n = 5;
-            var lists = _.groupBy(this.uploadStreamList, function (element, index) {
+        window.setInterval(() => {
+            var n = 4;
+            var lists = _.groupBy(this.uploadStreamList, function(element, index) {
                 return Math.floor(index / n);
             });
             if (this.i >= Math.floor(this.uploadStreamList.length / 5)) {
@@ -589,89 +589,20 @@ class AlertController {
         console.log(uploadStreamList.length);
         this.imageURL = [];
         _.each(uploadStreamList, (value, id) => {
-            if (id == 0) {
-                var elementById = document.getElementById("flowplayer" + id);
-                if (elementById) {
-                    document.getElementById("mbVideosOne").removeChild(elementById);
-                }
-                var loadingTextIdOne = document.getElementById("loadingTextIdOne");
-                if (loadingTextIdOne) {
-                    document.getElementById("mbVideosOne").removeChild(loadingTextIdOne);
-                }
-            } else {
-                var elementById = document.getElementById("flowplayer" + id);
-                if (elementById) {
-                    document.getElementById("mbVideos").removeChild(elementById);
-                }
-                var loadingTextId = document.getElementById("loadingTextId");
-                if (loadingTextId) {
-                    document.getElementById("mbVideos").removeChild(loadingTextId);
-                }
-            }
 
+            var elementById = document.getElementById("flowplayer" + id);
+            if (elementById) {
+                document.getElementById("mbVideos").removeChild(elementById);
+            }
+            var loadingTextId = document.getElementById("loadingTextId");
+            if (loadingTextId) {
+                document.getElementById("mbVideos").removeChild(loadingTextId);
+            }
         });
+
         var urlArray = [];
         _.each(uploadStreamList, (value, id) => {
-            if (id == 0) {
-                //console.log("LOOPING : ", id);
-                if (value.mediaType.indexOf("streaming") !== -1 || value.mediaType.indexOf("video") !== -1) {
-                    var URL = value.url.replace("rtsp", "rtmp"); //rtmp://54.169.237.13:1935/live/
-                    //console.log(URL, value.fileName);
-                    if (!_.contains(urlArray, URL)) {
-                        var vidDiv = document.createElement('div');
-                        vidDiv.setAttribute("id", "flowplayer" + id);
-                        vidDiv.setAttribute("style", "padding: 0px!important");
-                        vidDiv.className = 'col-md-12';
-                        //console.log("element : ", vidDiv);
-                        document.getElementById('mbVideosOne').appendChild(vidDiv);
-                        if (value.mediaType.indexOf("streaming") !== -1) {
-                            flowplayer(vidDiv, {
-                                hlsjs: true,
-                                live: true,
-                                autoplay: true, share: false, splash: false,
-                                volume: 0.0,
-                                ratio: 9 / 16,
-                                swf: "video/flowplayer.swf",
-                                rtmp: URL,
-                                playlist: [[{
-                                    flash: value.fileName
-                                }]]
-                            });
-                        }
-                        if (value.mediaType.indexOf("video") !== -1) {
-                            //console.log("----------------------------", value.url);
-                            flowplayer(vidDiv, {
-                                swf: "video/flowplayer.swf",
-                                hlsjs: true,
-                                autoplay: true, share: false, splash: false,
-                                ratio: 9 / 16,
-                                volume: 0.0,
-                                clip: {
-                                    sources: [
-                                        {
-                                            type: "video/mp4", src: value.url
-                                        }
-                                    ]
-                                }
-                            });
-                        }
-                        urlArray.push(URL);
-                    }
-                    // type: "video/mp4", src: "video/sanmay.mp4"}
-                } else {
-                    var imgDiv = document.createElement('div');
-                    imgDiv.setAttribute("id", "flowplayer" + id);
-                    imgDiv.setAttribute("style", "padding: 0px!important");
-                    imgDiv.className = 'col-md-12';
-                    var imgTag = document.createElement('img');
-                    imgTag.setAttribute('src', value.url);
-                    imgTag.setAttribute("style", "width: inherit;height: inherit");
-                    imgDiv.appendChild(imgTag);
-                    //console.log("element : ", imgDiv);
-                    document.getElementById('mbVideosOne').appendChild(imgDiv);
-                }
-            }
-            if (id >= 1 && id <= 4) {
+            if (id >= 0 && id <= 3) {
                 //console.log("LOOPING : ", id);
                 if (value.mediaType.indexOf("streaming") !== -1 || value.mediaType.indexOf("video") !== -1) {
                     var URL = value.url.replace("rtsp", "rtmp"); //rtmp://54.169.237.13:1935/live/
