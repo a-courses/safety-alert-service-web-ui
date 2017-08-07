@@ -19,8 +19,7 @@
         <tbody>
 
         <tr ng-repeat="i in ac.alertMessageList"
-            ng-if="i.notificationType!=='incident' && !(i.status === 'read' && !i.incidentId)"
-            ng-click="ac.setLocationCenter(i.location.latitude,i.location.longitude)">
+            ng-if="i.notificationType!=='incident' && !(i.status === 'read' && !i.incidentId)">
             <td class="icon-cell">
                 <img title="{{i.incidentType}}" ng-if="i.incidentType==='Fire'" src="../img/fire.png"
                      class="alert-icons"/>
@@ -76,10 +75,13 @@
                     </a>
                 </div>
             </td>
-            <td class="icon-cell" ng-init="">
-                <a href="http://maps.google.com/maps?q={{i.location.latitude}},{{i.location.longitude}}"
-                   target="_blank">
-                    <i class="fa fa-map-marker blue-icons" aria-hidden="true"></i></a>
+            <td class="icon-cell">
+                <!-- <a href="http://maps.google.com/maps?q={{i.location.latitude}},{{i.location.longitude}}"
+                    target="_blank">
+                     <i class="fa fa-map-marker blue-icons" aria-hidden="true" ></i>
+                 </a>-->
+                <i class="fa fa-map-marker blue-icons" aria-hidden="true"
+                   ng-click="ac.setLocationCenter(i.location.latitude,i.location.longitude)"></i>
             </td>
             <td style="width: 50px;">
                 <i class="fa fa-trash blue-icons"
