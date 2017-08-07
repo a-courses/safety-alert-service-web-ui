@@ -541,7 +541,7 @@ class AlertController {
                             //console.log("UPLOAD STREAM LIST : Create UPLOAD/STREAM : " + data.notificationType + " | record name :" + recordName);
                             if (data.mediaType.indexOf("image") !== -1 || data.mediaType.indexOf("jpeg") !== -1
                                 || data.mediaType.indexOf("video") !== -1 || data.mediaType.indexOf("streaming") !== -1
-                                && data.modifiedTime !== undefined) {
+                                && data.modifiedTime !== undefined && !(data.url.indexOf("rtsp")>=0)) {
                                 var uploadData = {
                                     id: data.id,
                                     url: data.url,
