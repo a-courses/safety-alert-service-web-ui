@@ -5,8 +5,9 @@ import _ from 'underscore';
 import moment from 'moment';
 
 class AlertController {
-    constructor(AlertService, CommonService, DeepStreamService, toaster) {
+    constructor(AlertService, CommonService, DeepStreamService, toaster, _$interval_) {
         this.toaster = toaster;
+        this.interval = _$interval_;
         this.alertService = AlertService;
         this.commonService = CommonService;
         this.deepStreamService = DeepStreamService;
@@ -581,7 +582,10 @@ class AlertController {
                     }
                     this.uploadStreamList = _.sortBy(this.uploadStreamList, 'modifiedTime').reverse();
                     this.uploadStreamListWithRTSP = _.sortBy(this.uploadStreamListWithRTSP, 'modifiedTime').reverse();
-                    this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
+                    if(this.uploadStreamListWithRTSP.length>0){
+                        this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
+                    }
+                    // this.updateViewOnTimeInterval(this.uploadStreamList);
                     // var n = 5;
                     //console.log("333333333333333333333333333333333333333");
                     // var lists = _.groupBy(this.uploadStreamList, function (element, index) {
@@ -599,8 +603,7 @@ class AlertController {
                 return list;
             });
         });
-        window.setInterval(() => {
-
+        this.interval(() => {
             var n = 4;
             var lists = _.groupBy(this.uploadStreamList, function (element, index) {
                 return Math.floor(index / n);
@@ -990,5 +993,5 @@ class AlertController {
     }
 }
 
-AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', 'toaster'];
+AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', 'toaster','$interval'];
 export default controllerModule.controller('AlertController', AlertController).name;
