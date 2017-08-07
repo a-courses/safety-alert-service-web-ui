@@ -592,7 +592,7 @@ class AlertController {
                 this.playSelectVideoOrImage(lists[0][0].url, lists[0][0].mediaType);
             }
             this.updateViewOnTimeInterval(lists[this.i]);
-        }, 10000);
+        }, 30000);
     };
 
     updateViewOnTimeInterval(uploadStreamList) {
