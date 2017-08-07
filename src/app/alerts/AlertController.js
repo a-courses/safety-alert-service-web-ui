@@ -854,24 +854,65 @@ class AlertController {
         })
     }
 
-    playVideo(streamList, index) {
-        //console.log(streamList);
-        if (streamList.mediaType.indexOf("streaming") !== -1 || streamList.mediaType.indexOf("video") !== -1) {
-            var URL = streamList.url.replace("rtsp", "rtmp");
-            //rtmp://54.169.237.13:1935/live/
-            //console.log(URL);
-            $("#flowplayer" + index).flowplayer({
-                live: true,
-                swf: "video/flowplayer.swf",
-                rtmp: URL,
-                playlist: [[{
-                    flash: streamList.fileName
-                }]]
-            });
+    playSelectVideoOrImage(url, type) {
+
+        //console.log("LOOPING : ", id);
+        if (value.mediaType.indexOf("streaming") !== -1 || value.mediaType.indexOf("video") !== -1) {
+            var URL = value.url.replace("rtsp", "rtmp"); //rtmp://54.169.237.13:1935/live/
+            //console.log(URL, value.fileName);
+            if (!_.contains(urlArray, URL)) {
+                var vidDiv = document.createElement('div');
+                vidDiv.setAttribute("id", "flowplayer" + id);
+                vidDiv.setAttribute("style", "padding: 0px!important");
+                vidDiv.className = 'col-md-6 channel1';
+                //console.log("element : ", vidDiv);
+                document.getElementById('mbVideos').appendChild(vidDiv);
+                if (value.mediaType.indexOf("streaming") !== -1) {
+                    flowplayer(vidDiv, {
+                        hlsjs: true,
+                        live: true,
+                        autoplay: true, share: false, splash: false,
+                        ratio: 9 / 16,
+                        swf: "video/flowplayer.swf",
+                        rtmp: URL,
+                        playlist: [[{
+                            flash: value.fileName
+                        }]]
+                    });
+                }
+                if (value.mediaType.indexOf("video") !== -1) {
+                    //console.log("----------------------------", value.url);
+                    flowplayer(vidDiv, {
+                        swf: "video/flowplayer.swf",
+                        autoplay: true, share: false, splash: false,
+                        hlsjs: true,
+                        ratio: 9 / 16,
+                        volume: 0.0,
+                        clip: {
+                            sources: [
+                                {
+                                    type: "video/mp4", src: value.url
+                                }
+                            ]
+                        }
+                    });
+                }
+                urlArray.push(URL);
+            }
+            // type: "video/mp4", src: "video/sanmay.mp4"}
         } else {
-            this.imageURL.push(streamList.url);
+            this.selecteImage = value.url;
+            /*var imgDiv = document.createElement('div');
+            imgDiv.setAttribute("id", "flowplayer" + id);
+            imgDiv.setAttribute("style", "padding: 0px!important");
+            imgDiv.className = 'col-md-6 channel1';
+            var imgTag = document.createElement('img');
+            imgTag.setAttribute('src', value.url);
+            imgTag.setAttribute("style", "width: inherit;height: inherit");
+            imgDiv.appendChild(imgTag);
+            //console.log("element : ", imgDiv);
+            document.getElementById('mbVideos').appendChild(imgDiv);*/
         }
-        //console.log(this.imageURL);
     }
 
     setIncidentId(incidentId, id, notificationType) {
