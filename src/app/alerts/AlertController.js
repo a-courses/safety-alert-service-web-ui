@@ -537,6 +537,12 @@ class AlertController {
                             }
                             return currentItem.id === data.id;
                         });
+                        this.uploadStreamListWithRTSP = _.reject(this.uploadStreamListWithRTSP, function (currentItem) {
+                            if (currentItem.id === data.id) {
+                                //console.log("UPLOAD STREAM LIST : remove record message list : " + recordName);
+                            }
+                            return currentItem.id === data.id;
+                        });
                         if (data.notificationType === 'upload' || data.notificationType === 'stream') {
                             //console.log("UPLOAD STREAM LIST : Create UPLOAD/STREAM : " + data.notificationType + " | record name :" + recordName);
                             if (data.mediaType.indexOf("image") !== -1 || data.mediaType.indexOf("jpeg") !== -1
@@ -555,9 +561,27 @@ class AlertController {
                                 this.uploadStreamList.push(uploadData);
                                 //console.log("UPLOAD STREAM added");
                             }
+                            if (data.mediaType.indexOf("image") !== -1 || data.mediaType.indexOf("jpeg") !== -1
+                                || data.mediaType.indexOf("video") !== -1 || data.mediaType.indexOf("streaming") !== -1
+                                && data.modifiedTime !== undefined) {
+                                var uploadData = {
+                                    id: data.id,
+                                    url: data.url,
+                                    fileName: data.fileName,
+                                    phoneNumber: data.user.phoneNumber,
+                                    mediaType: data.mediaType,
+                                    incidentType: data.incidentType,
+                                    time: data.time,
+                                    modifiedTime: data.modifiedTime
+                                };
+                                this.uploadStreamListWithRTSP.push(uploadData);
+                                //console.log("UPLOAD STREAM added");
+                            }
                         }
                     }
                     this.uploadStreamList = _.sortBy(this.uploadStreamList, 'modifiedTime').reverse();
+                    this.uploadStreamListWithRTSP = _.sortBy(this.uploadStreamListWithRTSP, 'modifiedTime').reverse();
+                    this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
                     // var n = 5;
                     //console.log("333333333333333333333333333333333333333");
                     // var lists = _.groupBy(this.uploadStreamList, function (element, index) {
@@ -576,6 +600,7 @@ class AlertController {
             });
         });
         window.setInterval(() => {
+
             var n = 4;
             var lists = _.groupBy(this.uploadStreamList, function (element, index) {
                 return Math.floor(index / n);
@@ -586,11 +611,11 @@ class AlertController {
             this.i++;
             // console.log("this.i");
             // console.log(this.i);
-            if (this.i == 1) {
+            /*if (this.i == 1) {
                 // console.log("lists[0][0].url, lists[0][0].mediaType");
-                // console.log(lists[0][0].url, lists[0][0].mediaType);
-                this.playSelectVideoOrImage(lists[0][0].url, lists[0][0].mediaType);
-            }
+                console.log(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
+                this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
+            }*/
             this.updateViewOnTimeInterval(lists[this.i]);
         }, 30000);
     };
