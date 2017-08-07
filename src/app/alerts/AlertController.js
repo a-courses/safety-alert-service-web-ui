@@ -97,7 +97,7 @@ class AlertController {
                     var incidentType = data.incidentType;
                     var recordName = list.name;
                     if (data.id) {
-                        this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
+                        this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
                             if (currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime) {
                                 //console.log("Load alerts : remove record message list : " + recordName);
                             }
@@ -204,6 +204,7 @@ class AlertController {
                         }
                     }
                     if (data.notificationType === 'incident') {
+                        // console.log("record name : " + recordName);
                         //console.log("Load alerts : Create incident " + data.notificationType + " | record name :" + recordName);
                         var parentAlerts = [];
                         var assignedToList = [];
@@ -230,7 +231,8 @@ class AlertController {
                                         location: {
                                             latitude: data.alert.parentAlert[i].location.latitude,
                                             longitude: data.alert.parentAlert[i].location.longitude
-                                        }
+                                        },
+                                        incidentType: data.alert.parentAlert[i].incidentType
                                     };
                                 } else {
                                     singleAlert = {
@@ -244,7 +246,8 @@ class AlertController {
                                         location: {
                                             latitude: data.alert.parentAlert[i].location.latitude,
                                             longitude: data.alert.parentAlert[i].location.longitude
-                                        }
+                                        },
+                                        incidentType: data.alert.parentAlert[i].incidentType
                                     };
                                 }
                                 parentAlerts.push(singleAlert);
@@ -270,7 +273,8 @@ class AlertController {
                                         location: {
                                             latitude: data.alert.parentAlert[i].location.latitude,
                                             longitude: data.alert.parentAlert[i].location.longitude
-                                        }
+                                        },
+                                        incidentType: data.alert.parentAlert[i].incidentType
                                     };
                                 } else {
                                     singleAlert = {
@@ -284,7 +288,8 @@ class AlertController {
                                         location: {
                                             latitude: data.alert.parentAlert[i].location.latitude,
                                             longitude: data.alert.parentAlert[i].location.longitude
-                                        }
+                                        },
+                                        incidentType: data.alert.parentAlert[i].incidentType
                                     };
                                 }
                                 mappedAlertList.push(singleAlert);
@@ -324,9 +329,11 @@ class AlertController {
                                 description: data.alert.description,
                                 status: data.alert.status,
                                 assignedTo: assignedToList,
-                                alertUsers: alertUsersList
+                                alertUsers: alertUsersList,
+                                incidentType: data.alert.incidentType
                             }
                         };
+                        // console.log(incidentData);
                         this.alertMessageList.push(incidentData);
                         //console.log("INCIDENT alert added");
                     }
@@ -451,7 +458,7 @@ class AlertController {
                 //console.log("Delete alert : mapDetails marker details :", this.mapDetails);
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
-                this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
+                this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
                     if (currentItem.id === id) {
                         //console.log("Delete alert : recordName : " + recordName);
                     }
@@ -501,7 +508,7 @@ class AlertController {
             if (result.data.message === 'success') {
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
-                this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
+                this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
                     if (currentItem.id === id) {
                         //console.log("Delete Linked alert : recordName : " + recordName);
                     }
@@ -524,7 +531,7 @@ class AlertController {
                     var incidentType = data.incidentType;
                     var recordName = list.name;
                     if (data.id) {
-                        this.uploadStreamList = _.reject(this.uploadStreamList, function(currentItem) {
+                        this.uploadStreamList = _.reject(this.uploadStreamList, function (currentItem) {
                             if (currentItem.id === data.id) {
                                 //console.log("UPLOAD STREAM LIST : remove record message list : " + recordName);
                             }
@@ -570,15 +577,20 @@ class AlertController {
         });
         window.setInterval(() => {
             var n = 4;
-            var lists = _.groupBy(this.uploadStreamList, function(element, index) {
+            var lists = _.groupBy(this.uploadStreamList, function (element, index) {
                 return Math.floor(index / n);
             });
             if (this.i >= Math.floor(this.uploadStreamList.length / 5)) {
                 this.i = 0;
             }
             this.i++;
-            console.log("this.i");
-            console.log(this.i);
+            // console.log("this.i");
+            // console.log(this.i);
+            if (this.i == 1) {
+                // console.log("lists[0][0].url, lists[0][0].mediaType");
+                // console.log(lists[0][0].url, lists[0][0].mediaType);
+                this.playSelectVideoOrImage(lists[0][0].url, lists[0][0].mediaType);
+            }
             this.updateViewOnTimeInterval(lists[this.i]);
         }, 10000);
     };
@@ -855,63 +867,69 @@ class AlertController {
     }
 
     playSelectVideoOrImage(url, type) {
-
+        console.log(url);
+        console.log(type);
         //console.log("LOOPING : ", id);
-        if (value.mediaType.indexOf("streaming") !== -1 || value.mediaType.indexOf("video") !== -1) {
-            var URL = value.url.replace("rtsp", "rtmp"); //rtmp://54.169.237.13:1935/live/
+        var elementById = document.getElementById("flowPlayerDefault");
+        if (elementById) {
+            document.getElementById("mbVideosOne").removeChild(elementById);
+        }
+        var loadingTextId = document.getElementById("loadingTextIdOne");
+        if (loadingTextId) {
+            document.getElementById("mbVideosOne").removeChild(loadingTextId);
+        }
+        if (type.indexOf("streaming") !== -1 || type.indexOf("video") !== -1) {
+            var URL = url.replace("rtsp", "rtmp"); //rtmp://54.169.237.13:1935/live/
             //console.log(URL, value.fileName);
-            if (!_.contains(urlArray, URL)) {
-                var vidDiv = document.createElement('div');
-                vidDiv.setAttribute("id", "flowplayer" + id);
-                vidDiv.setAttribute("style", "padding: 0px!important");
-                vidDiv.className = 'col-md-6 channel1';
-                //console.log("element : ", vidDiv);
-                document.getElementById('mbVideos').appendChild(vidDiv);
-                if (value.mediaType.indexOf("streaming") !== -1) {
-                    flowplayer(vidDiv, {
-                        hlsjs: true,
-                        live: true,
-                        autoplay: true, share: false, splash: false,
-                        ratio: 9 / 16,
-                        swf: "video/flowplayer.swf",
-                        rtmp: URL,
-                        playlist: [[{
-                            flash: value.fileName
-                        }]]
-                    });
-                }
-                if (value.mediaType.indexOf("video") !== -1) {
-                    //console.log("----------------------------", value.url);
-                    flowplayer(vidDiv, {
-                        swf: "video/flowplayer.swf",
-                        autoplay: true, share: false, splash: false,
-                        hlsjs: true,
-                        ratio: 9 / 16,
-                        volume: 0.0,
-                        clip: {
-                            sources: [
-                                {
-                                    type: "video/mp4", src: value.url
-                                }
-                            ]
-                        }
-                    });
-                }
-                urlArray.push(URL);
+            var vidDiv = document.createElement('div');
+            vidDiv.setAttribute("id", "flowPlayerDefault");
+            vidDiv.setAttribute("style", "padding: 0px!important");
+            vidDiv.className = 'col-md-12';
+            //console.log("element : ", vidDiv);
+            document.getElementById('mbVideosOne').appendChild(vidDiv);
+            if (type.indexOf("streaming") !== -1) {
+                flowplayer(vidDiv, {
+                    hlsjs: true,
+                    live: true,
+                    autoplay: true, share: false, splash: false,
+                    ratio: 9 / 16,
+                    swf: "video/flowplayer.swf",
+                    rtmp: URL,
+                    playlist: [[{
+                        flash: url
+                    }]]
+                });
+            }
+            if (type.indexOf("video") !== -1) {
+                //console.log("----------------------------", url);
+                flowplayer(vidDiv, {
+                    swf: "video/flowplayer.swf",
+                    autoplay: true, share: false, splash: false,
+                    hlsjs: true,
+                    ratio: 9 / 16,
+                    volume: 0.0,
+                    clip: {
+                        sources: [
+                            {
+                                type: "video/mp4", src: url
+                            }
+                        ]
+                    }
+                });
             }
             // type: "video/mp4", src: "video/sanmay.mp4"}
         } else {
-            this.selecteImage = value.url;
-            /*var imgDiv = document.createElement('div');
-            imgDiv.setAttribute("id", "flowplayer" + id);
+            // this.selecteImage = url;
+            var imgDiv = document.createElement('div');
+            imgDiv.setAttribute("id", "flowPlayerDefault");
             imgDiv.setAttribute("style", "padding: 0px!important");
-            imgDiv.className = 'col-md-6 channel1';
+            imgDiv.className = 'col-md-12';
             var imgTag = document.createElement('img');
-            imgTag.setAttribute('src', value.url);
+            imgTag.setAttribute('src', url);
             imgTag.setAttribute("style", "width: inherit;height: inherit");
             imgDiv.appendChild(imgTag);
             //console.log("element : ", imgDiv);
-            document.getElementById('mbVideos').appendChild(imgDiv);*/
+            document.getElementById('mbVideosOne').appendChild(imgDiv);
         }
     }
 

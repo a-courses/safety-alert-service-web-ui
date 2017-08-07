@@ -1,3 +1,41 @@
+
 {
-  "rtmpIp":"54.169.237.13"
+  "notificationType": "incident",
+  "alert": {
+    "id": "1778546937",
+    "time": "2017-08-07T15:08:32",
+    "modifiedTime": "2017-08-07T15:08:32",
+    "name": null,
+    "parentAlert": [
+      {
+        "notificationType": "stream",
+        "alert": {
+          "id": "8aadc6d1-0ff8-4939-9128-0c69092ca307",
+          "url": "rtsp://54.169.237.13:1935/live/",
+          "fileName": "919845145035",
+          "user": {
+            "phoneNumber": "919845145035",
+            "emailId": "xyz.abc.com",
+            "userName": "1234"
+          },
+          "location": {
+            "latitude": 12.9260531,
+            "longitude": 77.5470447
+          },
+          "status": "read",
+          "mediaType": "streaming",
+          "incidentType": "Police",
+          "time": "2017-08-06T09:56:56",
+          "modifiedTime": "2017-08-07T15:08:32",
+          "incidentId": "1778546937"
+        }
+      }
+    ],
+    "mappedAlerts": null,
+    "createdBy": null,
+    "description": null,
+    "status": "new",
+    "assignedTo": null,
+    "alertUsers": null
+  }
 }
