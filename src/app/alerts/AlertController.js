@@ -5,9 +5,10 @@ import _ from 'underscore';
 import moment from 'moment';
 
 class AlertController {
-    constructor(AlertService, CommonService, DeepStreamService, toaster, _$interval_) {
+    constructor(AlertService, CommonService, DeepStreamService, toaster, _$interval_, _$scope_) {
         this.toaster = toaster;
         this.interval = _$interval_;
+        this.scope = _$scope_;
         this.alertService = AlertService;
         this.commonService = CommonService;
         this.deepStreamService = DeepStreamService;
@@ -98,7 +99,7 @@ class AlertController {
                     var incidentType = data.incidentType;
                     var recordName = list.name;
                     if (data.id) {
-                        this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
+                        this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
                             if (currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime) {
                                 //console.log("Load alerts : remove record message list : " + recordName);
                             }
@@ -459,17 +460,24 @@ class AlertController {
                 //console.log("Delete alert : mapDetails marker details :", this.mapDetails);
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
-                this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
+                this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
                     if (currentItem.id === id) {
                         //console.log("Delete alert : recordName : " + recordName);
                     }
                     return currentItem.id === id;
                 });
+                this.uploadStreamListWithRTSP = _.reject(this.uploadStreamListWithRTSP, function(currentItem) {
+                    if (currentItem.id === id) {
+                        //console.log("Delete alert : recordName : " + recordName);
+                    }
+                    return currentItem.id === id;
+                });
+                this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
                 this.toaster.pop("success", id + " : Record Removed!");
             } else {
                 this.toaster.pop("error", "Error while delete : " + id);
             }
-
+            this.scope.$apply();
         });
 
         // this.deleteAbsoluteRecords();
@@ -509,7 +517,7 @@ class AlertController {
             if (result.data.message === 'success') {
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
-                this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
+                this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
                     if (currentItem.id === id) {
                         //console.log("Delete Linked alert : recordName : " + recordName);
                     }
@@ -532,13 +540,13 @@ class AlertController {
                     var incidentType = data.incidentType;
                     var recordName = list.name;
                     if (data.id) {
-                        this.uploadStreamList = _.reject(this.uploadStreamList, function (currentItem) {
+                        this.uploadStreamList = _.reject(this.uploadStreamList, function(currentItem) {
                             if (currentItem.id === data.id) {
                                 //console.log("UPLOAD STREAM LIST : remove record message list : " + recordName);
                             }
                             return currentItem.id === data.id;
                         });
-                        this.uploadStreamListWithRTSP = _.reject(this.uploadStreamListWithRTSP, function (currentItem) {
+                        this.uploadStreamListWithRTSP = _.reject(this.uploadStreamListWithRTSP, function(currentItem) {
                             if (currentItem.id === data.id) {
                                 //console.log("UPLOAD STREAM LIST : remove record message list : " + recordName);
                             }
@@ -548,7 +556,7 @@ class AlertController {
                             //console.log("UPLOAD STREAM LIST : Create UPLOAD/STREAM : " + data.notificationType + " | record name :" + recordName);
                             if (data.mediaType.indexOf("image") !== -1 || data.mediaType.indexOf("jpeg") !== -1
                                 || data.mediaType.indexOf("video") !== -1 || data.mediaType.indexOf("streaming") !== -1
-                                && data.modifiedTime !== undefined && !(data.url.indexOf("rtsp")>=0)) {
+                                && data.modifiedTime !== undefined && !(data.url.indexOf("rtsp") >= 0)) {
                                 var uploadData = {
                                     id: data.id,
                                     url: data.url,
@@ -582,7 +590,7 @@ class AlertController {
                     }
                     this.uploadStreamList = _.sortBy(this.uploadStreamList, 'modifiedTime').reverse();
                     this.uploadStreamListWithRTSP = _.sortBy(this.uploadStreamListWithRTSP, 'modifiedTime').reverse();
-                    if(this.uploadStreamListWithRTSP.length>0){
+                    if (this.uploadStreamListWithRTSP.length > 0) {
                         this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
                     }
                     // this.updateViewOnTimeInterval(this.uploadStreamList);
@@ -605,7 +613,7 @@ class AlertController {
         });
         this.interval(() => {
             var n = 4;
-            var lists = _.groupBy(this.uploadStreamList, function (element, index) {
+            var lists = _.groupBy(this.uploadStreamList, function(element, index) {
                 return Math.floor(index / n);
             });
             if (this.i >= Math.floor(this.uploadStreamList.length / 5)) {
@@ -615,10 +623,10 @@ class AlertController {
             // console.log("this.i");
             // console.log(this.i);
             /*if (this.i == 1) {
-                // console.log("lists[0][0].url, lists[0][0].mediaType");
-                console.log(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
-                this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
-            }*/
+             // console.log("lists[0][0].url, lists[0][0].mediaType");
+             console.log(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
+             this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
+             }*/
             this.updateViewOnTimeInterval(lists[this.i]);
         }, 30000);
     };
@@ -993,5 +1001,5 @@ class AlertController {
     }
 }
 
-AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', 'toaster','$interval'];
+AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', 'toaster', '$interval', '$scope'];
 export default controllerModule.controller('AlertController', AlertController).name;
