@@ -99,7 +99,7 @@ class AlertController {
                     var incidentType = data.incidentType;
                     var recordName = list.name;
                     if (data.id) {
-                        this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
+                        this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
                             if (currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime) {
                                 //console.log("Load alerts : remove record message list : " + recordName);
                             }
@@ -460,13 +460,13 @@ class AlertController {
                 //console.log("Delete alert : mapDetails marker details :", this.mapDetails);
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
-                this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
+                this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
                     if (currentItem.id === id) {
                         //console.log("Delete alert : recordName : " + recordName);
                     }
                     return currentItem.id === id;
                 });
-                this.uploadStreamListWithRTSP = _.reject(this.uploadStreamListWithRTSP, function(currentItem) {
+                this.uploadStreamListWithRTSP = _.reject(this.uploadStreamListWithRTSP, function (currentItem) {
                     if (currentItem.id === id) {
                         //console.log("Delete alert : recordName : " + recordName);
                     }
@@ -517,7 +517,7 @@ class AlertController {
             if (result.data.message === 'success') {
                 this.connection.record.getRecord(recordName).delete();
                 this.messagelist.removeEntry(recordName);
-                this.alertMessageList = _.reject(this.alertMessageList, function(currentItem) {
+                this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
                     if (currentItem.id === id) {
                         //console.log("Delete Linked alert : recordName : " + recordName);
                     }
@@ -540,13 +540,13 @@ class AlertController {
                     var incidentType = data.incidentType;
                     var recordName = list.name;
                     if (data.id) {
-                        this.uploadStreamList = _.reject(this.uploadStreamList, function(currentItem) {
+                        this.uploadStreamList = _.reject(this.uploadStreamList, function (currentItem) {
                             if (currentItem.id === data.id) {
                                 //console.log("UPLOAD STREAM LIST : remove record message list : " + recordName);
                             }
                             return currentItem.id === data.id;
                         });
-                        this.uploadStreamListWithRTSP = _.reject(this.uploadStreamListWithRTSP, function(currentItem) {
+                        this.uploadStreamListWithRTSP = _.reject(this.uploadStreamListWithRTSP, function (currentItem) {
                             if (currentItem.id === data.id) {
                                 //console.log("UPLOAD STREAM LIST : remove record message list : " + recordName);
                             }
@@ -613,7 +613,7 @@ class AlertController {
         });
         this.interval(() => {
             var n = 4;
-            var lists = _.groupBy(this.uploadStreamList, function(element, index) {
+            var lists = _.groupBy(this.uploadStreamList, function (element, index) {
                 return Math.floor(index / n);
             });
             if (this.i >= Math.floor(this.uploadStreamList.length / 5)) {
@@ -891,8 +891,16 @@ class AlertController {
         });
     }
 
+    setSelectVideoAndMap(latitude, longitude, url, mediaType) {
+        // console.log(latitude, longitude);
+        // console.log(url);
+        // console.log(mediaType);
+        this.setLocationCenter(latitude, longitude);
+        this.playSelectVideoOrImage(url, mediaType);
+    }
+
     setLocationCenter(lat, long) {
-        //console.log(lat, ",", long);
+        console.log(lat, ",", long);
         angular.extend(this, {
             center: {
                 lat: lat,

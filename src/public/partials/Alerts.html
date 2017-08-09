@@ -112,8 +112,9 @@
                     </thead>
                     <tbody>
 
-                    <tr ng-repeat="i in ac.alertMessageList"
-                        ng-if="i.notificationType!=='incident' && !(i.status === 'read' && !i.incidentId)" )>
+                    <tr ng-repeat="i in ac.alertMessageList" ng-style="i.status==='new'?{'font-weight':'bold'}:{'font-weight':'normal'}"
+                        ng-if="i.notificationType!=='incident' && !(i.status === 'read' && !i.incidentId)" )
+                    ng-click="ac.setSelectVideoAndMap(i.location.latitude,i.location.longitude,i.url,i.mediaType)">
                         <td class="icon-cell">
                             <img title="{{i.incidentType}}" ng-if="i.incidentType==='Fire'" src="../img/fire.png"
                                  class="alert-icons"/>
@@ -139,7 +140,7 @@
                                     <i title="{{i.mediaType}}"
                                        ng-if="i.mediaType.indexOf('image')!== -1 || i.mediaType.indexOf('jpeg')!== -1"
                                        class="fa fa-picture-o blue-icons"
-                                        aria-hidden="true"  ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
+                                        aria-hidden="true" ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
 
                                     <i title="{{i.mediaType}}" ng-if="i.mediaType.indexOf('video')!== -1"
                                        class="fa fa-film blue-icons"
