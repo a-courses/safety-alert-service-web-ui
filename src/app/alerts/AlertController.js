@@ -788,7 +788,7 @@ class AlertController {
                 sources: [
                     {
                         type: "video/mp4",
-                        src: "https://s3-us-west-2.amazonaws.com/www.ciclopstech.com/Camera Feed 1 - Liverpool  Shopping.mp4"
+                        src: "https://s3-us-west-2.amazonaws.com/www.ciclopstech.com/Social Feed 1 - Facebook Screen Video.mp4"
                     }
                 ]
             }
