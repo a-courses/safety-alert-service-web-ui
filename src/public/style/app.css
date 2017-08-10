@@ -330,3 +330,12 @@ html, body, .container-fluid, .row {
     border-top: 1px solid #FFFFFF;
     padding: 0px !important;
 }
+
+.col-md-3-resize{
+    flex: 0 0 20% !important;
+    max-width: 20% !important;
+}
+.col-md-6-resize{
+    flex: 0 0 60% !important;
+    max-width: 60% !important;
+}
