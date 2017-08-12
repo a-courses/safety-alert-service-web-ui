@@ -966,11 +966,11 @@ class AlertController {
             // this.selecteImage = url;
             var imgDiv = document.createElement('div');
             imgDiv.setAttribute("id", "flowPlayerDefault");
-            imgDiv.setAttribute("style", "padding: 0px!important");
-            imgDiv.className = 'col-md-12';
+            // imgDiv.setAttribute("style", "padding: 0px!important");
+            imgDiv.className = 'col-md-12 stretchy-wrapper';
             var imgTag = document.createElement('img');
             imgTag.setAttribute('src', url);
-            imgTag.setAttribute("style", "width: inherit;height: inherit");
+            // imgTag.setAttribute("style", "width: inherit;height: inherit");
             imgDiv.appendChild(imgTag);
             //console.log("element : ", imgDiv);
             document.getElementById('mbVideosOne').appendChild(imgDiv);

@@ -1,25 +1,31 @@
 <div class="row" ng-init="ac.loadAsyncMobileVideos();">
 
     <div class="col-md-3 remove-cards-padding col-md-3-resize" style="border-right:2px solid #213B68">
-        <div class="card" style="height: 25%">
+        <div class="card" style="height: 25%;overflow: hidden!important;">
             <div class="card-header text-center">
                 Mobile Feeds
             </div>
-            <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
-                <div class="row" style="height: calc(100%/1);border: 1px solid #FFFFFF;" id="mbVideosOne">
-                    <div class="card text-center"
-                         style="width:100%;height:100%;border: 0px!important;overflow-y:hidden;" id="loadingTextIdOne">
+            <div class="card-block" style="height: inherit;padding: 0em 0rem;">
+                <div class="row" id="mbVideosOne">
+                    <div  class="card text-center" style="width:100%;height:100%;border: 0px!important;overflow-y:hidden;" id="loadingTextIdOne">
                         <div class="card-block">
                             <p class="card-text">Loading ...</p>
                             <img src="../img/loading_blue.gif">
                         </div>
                     </div>
                 </div>
+                <!--<div class="stretchy-wrapper">
+                    &lt;!&ndash;<img src="http://lorempixel.com/320/320/city/">&ndash;&gt;
+                    &lt;!&ndash;<img src="http://localhost:8080/img/Social%20Feed%202%20-%20Twitter%20Print%20Screen.png">&ndash;&gt;
+                    <img src="https://esbucketservice.s3.amazonaws.com/919845145035/IMAGE_20170807_215658_1379755937.jpg">
+                    &lt;!&ndash;<img src="https://esbucketservice.s3.amazonaws.com/919845145035/IMAGE_20170718_093402_-2077939121.jpg">&ndash;&gt;
+                    &lt;!&ndash;<img src="https://esbucketservice.s3.amazonaws.com/919845145035/IMG_20170706_141829.jpg">&ndash;&gt;
+                </div>-->
             </div>
         </div>
 
-        <div class="card" style="height: 25%">
-            <div class="card-block" style="height: inherit;padding: 0em 0.9rem;">
+        <div class="card" style="height: 25%;overflow: hidden!important;">
+            <div class="card-block" style="height: inherit;padding: 0em 0rem;">
                 <div class="row" style="height: calc(100%/2);" id="mbVideos">
                     <div class="card text-center"
                          style="width:100%;height:100%;border: 0px!important;overflow-y:hidden;" id="loadingTextId">
@@ -112,9 +118,10 @@
                     </thead>
                     <tbody>
 
-                    <tr ng-repeat="i in ac.alertMessageList" ng-style="i.status==='new'?{'font-weight':'bold'}:{'font-weight':'normal'}"
+                    <tr ng-repeat="i in ac.alertMessageList"
+                        ng-style="i.status==='new'?{'font-weight':'bold'}:{'font-weight':'normal'}"
                         ng-if="i.notificationType!=='incident' && !(i.status === 'read' && !i.incidentId)" )
-                    ng-click="ac.setSelectVideoAndMap(i.location.latitude,i.location.longitude,i.url,i.mediaType)">
+                        ng-click="ac.setSelectVideoAndMap(i.location.latitude,i.location.longitude,i.url,i.mediaType)">
                         <td class="icon-cell">
                             <img title="{{i.incidentType}}" ng-if="i.incidentType==='Fire'" src="../img/fire.png"
                                  class="alert-icons"/>
@@ -137,30 +144,31 @@
                         </td>
                         <td class="icon-cell">
                             <div ng-if="i.notificationType !== 'incident' || i.notificationType !== 'call'">
-                                    <i title="{{i.mediaType}}"
-                                       ng-if="i.mediaType.indexOf('image')!== -1 || i.mediaType.indexOf('jpeg')!== -1"
-                                       class="fa fa-picture-o blue-icons"
-                                        aria-hidden="true" ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
+                                <i title="{{i.mediaType}}"
+                                   ng-if="i.mediaType.indexOf('image')!== -1 || i.mediaType.indexOf('jpeg')!== -1"
+                                   class="fa fa-picture-o blue-icons"
+                                   aria-hidden="true" ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
 
-                                    <i title="{{i.mediaType}}" ng-if="i.mediaType.indexOf('video')!== -1"
-                                       class="fa fa-film blue-icons"
-                                        aria-hidden="true"  ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
+                                <i title="{{i.mediaType}}" ng-if="i.mediaType.indexOf('video')!== -1"
+                                   class="fa fa-film blue-icons"
+                                   aria-hidden="true" ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
 
-                                    <i title="{{i.mediaType}}"
-                                       ng-if="i.mediaType.indexOf('audio')!== -1 || i.mediaType.indexOf('mpeg')!== -1"
-                                       class="fa fa-microphone blue-icons"
-                                        aria-hidden="true"  ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
+                                <i title="{{i.mediaType}}"
+                                   ng-if="i.mediaType.indexOf('audio')!== -1 || i.mediaType.indexOf('mpeg')!== -1"
+                                   class="fa fa-microphone blue-icons"
+                                   aria-hidden="true" ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
 
-                                    <i title="{{i.mediaType}}" ng-if="i.mediaType.indexOf('streaming')!== -1"
-                                       class="fa fa-video-camera blue-icons"
-                                        aria-hidden="true"  ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
+                                <i title="{{i.mediaType}}" ng-if="i.mediaType.indexOf('streaming')!== -1"
+                                   class="fa fa-video-camera blue-icons"
+                                   aria-hidden="true" ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
 
-                                    <i title="{{i.mediaType}}" ng-if="i.mediaType==='message'"
-                                       class="fa fa-comments-o blue-icons"
-                                        aria-hidden="true"  ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
+                                <i title="{{i.mediaType}}" ng-if="i.mediaType==='message'"
+                                   class="fa fa-comments-o blue-icons"
+                                   aria-hidden="true" ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
 
-                                    <i title="{{i.mediaType}}" ng-if="i.mediaType==='Emergency Call'"
-                                       class="fa fa-phone blue-icons"  aria-hidden="true"  ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
+                                <i title="{{i.mediaType}}" ng-if="i.mediaType==='Emergency Call'"
+                                   class="fa fa-phone blue-icons" aria-hidden="true"
+                                   ng-click="ac.playSelectVideoOrImage(i.url,i.mediaType)"></i>
                             </div>
                         </td>
                         <td class="icon-cell" ng-init="">
@@ -245,15 +253,20 @@
                         </td>
                         <td>{{i.alert.status}}</td>
                         <td ng-if="i.alert.parentAlert[0].incidentType==='Fire'" src="../img/fire.png"
-                            class="alert-icons">678465</td>
+                            class="alert-icons">678465
+                        </td>
                         <td ng-if="i.alert.parentAlert[0].incidentType==='Alerts'" src="../img/hazard.png"
-                            class="alert-icons">694756</td>
+                            class="alert-icons">694756
+                        </td>
                         <td ng-if="i.alert.parentAlert[0].incidentType==='Medical'" src="../img/medical.png"
-                            class="alert-icons">678565</td>
+                            class="alert-icons">678565
+                        </td>
                         <td ng-if="i.alert.parentAlert[0].incidentType==='Accident'" src="../img/accident.png"
-                            class="alert-icons">689326</td>
+                            class="alert-icons">689326
+                        </td>
                         <td ng-if="i.alert.parentAlert[0].incidentType==='Police'" src="../img/police.png"
-                            class="alert-icons">634526</td>
+                            class="alert-icons">634526
+                        </td>
                     </tr>
                     </tbody>
                 </table>
