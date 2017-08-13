@@ -640,12 +640,12 @@ class AlertController {
 
             var elementById = document.getElementById("flowplayer" + id);
             if (elementById) {
-                document.getElementById("mbVideos").removeChild(elementById);
+                document.getElementById("mbVideos"+ id).removeChild(elementById);
             }
-            var loadingTextId = document.getElementById("loadingTextId");
+            /*var loadingTextId = document.getElementById("loadingTextId");
             if (loadingTextId) {
                 document.getElementById("mbVideos").removeChild(loadingTextId);
-            }
+            }*/
         });
 
         var urlArray = [];
@@ -659,9 +659,9 @@ class AlertController {
                         var vidDiv = document.createElement('div');
                         vidDiv.setAttribute("id", "flowplayer" + id);
                         vidDiv.setAttribute("style", "padding: 0px!important");
-                        vidDiv.className = 'col-md-6 channel1';
+                        // vidDiv.className = 'channel1';
                         //console.log("element : ", vidDiv);
-                        document.getElementById('mbVideos').appendChild(vidDiv);
+                        document.getElementById('mbVideos'+ id).appendChild(vidDiv);
                         if (value.mediaType.indexOf("streaming") !== -1) {
                             flowplayer(vidDiv, {
                                 hlsjs: true,
@@ -698,14 +698,14 @@ class AlertController {
                 } else {
                     var imgDiv = document.createElement('div');
                     imgDiv.setAttribute("id", "flowplayer" + id);
-                    imgDiv.setAttribute("style", "padding: 0px!important");
-                    imgDiv.className = 'col-md-6 channel1';
+                    // imgDiv.setAttribute("style", "padding: 0px!important");
+                    imgDiv.className = 'stretchy-wrapper';
                     var imgTag = document.createElement('img');
                     imgTag.setAttribute('src', value.url);
-                    imgTag.setAttribute("style", "width: inherit;height: inherit");
+                    // imgTag.setAttribute("style", "width: inherit;height: inherit");
                     imgDiv.appendChild(imgTag);
                     //console.log("element : ", imgDiv);
-                    document.getElementById('mbVideos').appendChild(imgDiv);
+                    document.getElementById('mbVideos'+ id).appendChild(imgDiv);
                 }
             }
         })
