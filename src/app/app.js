@@ -5,10 +5,10 @@ import angular from 'angular';
 import 'angular-route';
 import 'angular-sanitize';
 import 'angular-messages';
-import 'ui-select/dist/select.css'
-import 'ui-select';
+// import 'ui-select/dist/select.css'
+// import 'ui-select';
 // Material design css
-import 'angular-material/angular-material.css';
+// import 'angular-material/angular-material.css';
 
 // Icons
 import 'font-awesome/css/font-awesome.css';
@@ -16,7 +16,7 @@ import 'font-awesome/css/font-awesome.css';
 import 'angular-animate';
 import 'angular-aria';
 // Materail Design lib
-import 'angular-material';
+// import 'angular-material';
 import 'angular-simple-logger';
 import 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -32,7 +32,7 @@ import './alerts/AlertController';
 import deepstream from 'deepstream.io-client-js';
 const MODULE_NAME = 'SafetyServiceModule';
 
-angular.module(MODULE_NAME, ['ngMaterial', 'ui-leaflet', 'ui.select', 'ngRoute', 'ngMessages', 'ngSanitize', 'ngAnimate', 'toaster', 'ControllerModule', 'ServiceModule'])
+angular.module(MODULE_NAME, ['ui-leaflet', 'ngRoute', 'ngMessages', 'ngSanitize', 'ngAnimate', 'toaster', 'ControllerModule', 'ServiceModule'])
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
