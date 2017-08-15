@@ -1,26 +1,28 @@
 <div class="row" ng-init="ac.loadAsyncMobileVideos();">
 
     <div class="col-md-3 remove-cards-padding col-md-3-resize" style="border-right:2px solid #213B68">
-        <div class="card" style="height: 27%;overflow: hidden!important;">
+        <div class="card" style="height: 26%;overflow: hidden!important;">
             <div class="card-header text-center">
                 Mobile Feeds
             </div>
-            <div class="row" id="mbVideosOne">
-                <div class="card text-center"
-                     style="width:100%;height:100%;border: 0px!important;overflow-y:hidden;" id="loadingTextIdOne">
-                    <div class="card-block">
-                        <p class="card-text">Loading ...</p>
-                        <img src="../img/loading_blue.gif">
+            <div class="card-block" style="height: inherit;padding: 0em 0rem;">
+                <div class="row" id="mbVideosOne">
+                    <div class="card text-center"
+                         style="width:100%;height:100%;border: 0px!important;overflow-y:hidden;" id="loadingTextIdOne">
+                        <div class="card-block">
+                            <p class="card-text">Loading ...</p>
+                            <img src="../img/loading_blue.gif">
+                        </div>
                     </div>
                 </div>
+                <!-- <div class="stretchy-wrapper">
+                     &lt;!&ndash;<img src="http://lorempixel.com/320/320/city/">&ndash;&gt;
+                     &lt;!&ndash;<img src="http://localhost:8080/img/Social%20Feed%202%20-%20Twitter%20Print%20Screen.png">&ndash;&gt;
+                     <img src="../img/3.jpg">
+                     &lt;!&ndash;<img src="https://esbucketservice.s3.amazonaws.com/919845145035/IMAGE_20170718_093402_-2077939121.jpg">&ndash;&gt;
+                     &lt;!&ndash;<img src="https://esbucketservice.s3.amazonaws.com/919845145035/IMG_20170706_141829.jpg">&ndash;&gt;
+                 </div>-->
             </div>
-            <!-- <div class="stretchy-wrapper">
-                 &lt;!&ndash;<img src="http://lorempixel.com/320/320/city/">&ndash;&gt;
-                 &lt;!&ndash;<img src="http://localhost:8080/img/Social%20Feed%202%20-%20Twitter%20Print%20Screen.png">&ndash;&gt;
-                 <img src="../img/3.jpg">
-                 &lt;!&ndash;<img src="https://esbucketservice.s3.amazonaws.com/919845145035/IMAGE_20170718_093402_-2077939121.jpg">&ndash;&gt;
-                 &lt;!&ndash;<img src="https://esbucketservice.s3.amazonaws.com/919845145035/IMG_20170706_141829.jpg">&ndash;&gt;
-             </div>-->
         </div>
 
         <!--<div class="card" style="height:25%;overflow: hidden!important;">
@@ -57,62 +59,74 @@
                 </div>
             </div>
         </div>-->
-        <div class="card" style="height: 25%;overflow: hidden!important;border-top: 1px solid #213B68 !important;">
+        <div class="card" style="height: 24%;overflow: hidden!important;border-top: 1px solid #213B68 !important;">
             <!--<div class="card-block" style="height: inherit;padding: 0em 0rem;">-->
-            <div class="row" style="height: calc(100%/2);">
-                <div id="mbVideos0" class="col-md-6" style="padding: 0px !important;"></div>
-                <div id="mbVideos1" class="col-md-6" style="padding: 0px !important;"></div>
-            </div>
-            <div class="row" style="height: calc(100%/2);">
-                <div id="mbVideos2" class="col-md-6" style="padding: 0px !important;"></div>
-                <div id="mbVideos3" class="col-md-6" style="padding: 0px !important;"></div>
-            </div>
+                <div class="row" style="height: calc(100%/2);">
+                    <div  id="mbVideos0" class="col-md-6" style="padding: 0px !important;"></div>
+                    <div  id="mbVideos1" class="col-md-6" style="padding: 0px !important;"></div>
+                </div>
+                <div class="row" style="height: calc(100%/2);">
+                    <div  id="mbVideos2" class="col-md-6" style="padding: 0px !important;"></div>
+                    <div  id="mbVideos3" class="col-md-6" style="padding: 0px !important;"></div>
+                </div>
             <!--</div>-->
         </div>
 
-        <div class="card" style="height: 25%;overflow: hidden!important;">
+        <div class="card" style="height: 25%">
             <div class="card-header text-center">
                 Camera Feeds
             </div>
-            <div class="row text-center" style="height: calc(100%/2);">
-                <div id="CameraFeed1" class="col-md-6 channel1"></div>
-                <!--    <video autoplay style="height: 100%;width: 100%;">
-                        <source type="video/mp4"
-                                src="video/Camera Feed 1 - Liverpool  Shopping.mp4">
-                    </video>-->
-                <div id="CameraFeed2" class="col-md-6 channel2"></div>
-                <!-- <video autoplay style="height: 100%;width: 100%;">
-                     <source type="video/mp4"
-                             src="video/Camera Feed 2 - Highway Car Video.mp4">
-                 </video>-->
-            </div>
-            <div class="row" style="height: calc(100%/2)">
-                <div id="CameraFeed4" class="col-md-6 channel3"></div>
-                <div id="CameraFeed3" class="col-md-6 channel3"></div>
+            <div class="card-block" style="overflow: hidden;height: inherit;padding: 0em 0.9rem;background: #505050">
+                <div class="row" style="height: calc(100%/2);">
+                    <div id="videoChannel1" class="col-md-6 channel1">
+                        <div id="CameraFeed1"></div>
+                        <!--    <video autoplay style="height: 100%;width: 100%;">
+                                <source type="video/mp4"
+                                        src="video/Camera Feed 1 - Liverpool  Shopping.mp4">
+                            </video>-->
+                    </div>
+                    <div id="videoChannel2" class="col-md-6 channel2">
+                        <div id="CameraFeed2"></div>
+                        <!-- <video autoplay style="height: 100%;width: 100%;">
+                             <source type="video/mp4"
+                                     src="video/Camera Feed 2 - Highway Car Video.mp4">
+                         </video>-->
+                    </div>
+                </div>
+                <div class="row" style="height: calc(100%/2)">
+                    <div id="videoChannel3" class="col-md-6 channel3">
+                        <div id="CameraFeed4"></div>
+                    </div>
+                    <div id="videoChannel4" class="col-md-6 channel4">
+                        <div id="CameraFeed3"></div>
+                    </div>
+                </div>
             </div>
 
         </div>
-        <div class="card" style="height: 25%;overflow: hidden!important;">
+        <div class="card" style="height: 25%">
             <div class="card-header text-center">
                 Social Feeds
             </div>
-            <div class="row" style="height: calc(100%/2);">
-                <div id="socialNetwork1" class="col-md-6 channel1">
-                    <div id="socialFeed1"></div>
+            <div class="card-block" style="overflow: hidden;height: inherit;padding: 0em 0.9rem;background: #505050">
+                <div class="row" style="height: calc(100%/2);">
+                    <div id="socialNetwork1" class="col-md-6 channel1">
+                        <div id="socialFeed1"></div>
+                    </div>
+                    <div id="socialNetwork2" class="col-md-6 channel2">
+                        <!--<div id="socialFeed2"></div>-->
+                        <img src="img/Social Feed 2 - Twitter Print Screen.png" style="width: inherit;height: inherit">
+                    </div>
                 </div>
-                <div id="socialNetwork2" class="col-md-6 channel2">
-                    <!--<div id="socialFeed2"></div>-->
-                    <img src="img/Social Feed 2 - Twitter Print Screen.png" style="width: inherit;height: inherit">
-                </div>
-            </div>
-            <div class="row" style="height: calc(100%/2)">
-                <div id="socialNetwork3" class="col-md-6 channel3">
-                    <img src="img/Social Feed 4 - Google + Print Screen.png" style="width: inherit;height: inherit">
-                </div>
-                <div id="socialNetwork4" class="col-md-6 channel4">
-                    <div id="socialFeed3"></div>
-                </div>
+                <div class="row" style="height: calc(100%/2)">
+                    <div id="socialNetwork3" class="col-md-6 channel3">
+                        <img src="img/Social Feed 4 - Google + Print Screen.png" style="width: inherit;height: inherit">
+                    </div>
+                    <div id="socialNetwork4" class="col-md-6 channel4">
+                        <div id="socialFeed3"></div>
+                    </div>
 
+                </div>
             </div>
         </div>
     </div>
@@ -435,37 +449,42 @@
                 </form>
             </div>
         </div>
-        <div class="card" style="height: 25%;overflow: hidden!important;">
+        <div class="card" style="height: 25%">
             <div class="card-header text-center gr1">
                 Video Camera
             </div>
-            <div class="row" style="height: 100%;">
-                <div id="VideoCamera1"></div>
+            <div class="card-block" style="overflow: hidden;height: inherit;padding: 0em 0.9rem;background: #505050">
+                <div class="row" style="height: 100%;">
+                    <div id="VideoCamera1"></div>
+                </div>
             </div>
         </div>
-        <div class="card" style="height: 25%;overflow: hidden!important;">
+        <div class="card" style="height: 25%">
             <div class="card-header text-center gr1">
                 Content Sharing
             </div>
-            <div class="row" style="height: calc(100%/2);">
-                <div style="position: relative;z-index: 99999;top: 75%; left: 45%;">
-                    <i class="fa fa-play-circle blue-play-icons"
-                       style=" display: inline-block; position: absolute; "
-                       aria-hidden="true"></i>
+            <div class="card-block" style="overflow: hidden;height: inherit;padding: 0em 0.9rem;background: #505050">
+                <div class="row" style="height: calc(100%/2);">
+                    <div style="position: relative;z-index: 99999;top: 75%; left: 45%;">
+                        <i class="fa fa-play-circle blue-play-icons"
+                           style=" display: inline-block; position: absolute; "
+                           aria-hidden="true"></i>
+                    </div>
+                    <div id="contentSharing1" class="col-md-6 channel1">
+                        <div id="sharing1"></div>
+                    </div>
+                    <div id="contentSharing2" class="col-md-6 channel2">
+                        <div id="sharing2"></div>
+                    </div>
                 </div>
-                <div id="contentSharing1" class="col-md-6 channel1">
-                    <div id="sharing1"></div>
-                </div>
-                <div id="contentSharing2" class="col-md-6 channel2">
-                    <div id="sharing2"></div>
-                </div>
-            </div>
-            <div class="row" style="height: calc(100%/2)">
-                <div id="contentSharing3" class="col-md-6 channel3">
-                    <div id="sharing4"></div>
-                </div>
-                <div id="contentSharing4" class="col-md-6 channel4">
-                    <div id="sharing3"></div>
+                <div class="row" style="height: calc(100%/2)">
+                    <div id="contentSharing3" class="col-md-6 channel3">
+                        <div id="sharing4"></div>
+                    </div>
+                    <div id="contentSharing4" class="col-md-6 channel4">
+                        <div id="sharing3"></div>
+                    </div>
+
                 </div>
             </div>
         </div>

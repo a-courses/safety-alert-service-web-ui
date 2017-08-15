@@ -628,7 +628,7 @@ class AlertController {
              this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
              }*/
             this.updateViewOnTimeInterval(lists[this.i]);
-        }, 30000);
+        }, 10000);
     };
 
     updateViewOnTimeInterval(uploadStreamList) {

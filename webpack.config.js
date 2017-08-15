@@ -184,8 +184,7 @@ module.exports = function makeWebpackConfig() {
                 jQuery: 'jquery',
                 $: 'jquery',
                 "window.jQuery": "jquery",
-                "window.Tether": "tether",
-                "window.Popper": "popper.js"
+                "window.Tether": "tether"
             }),
 
             // Reference: https://github.com/webpack/extract-text-webpack-plugin
