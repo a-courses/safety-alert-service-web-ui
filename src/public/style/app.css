@@ -3,6 +3,7 @@ html, body, .container-fluid, .row {
     line-height: 1.2 !important;
     height: 100%;
     font-family: 'Roboto', sans-serif;
+    overflow: hidden!important;
 }
 
 .row > div {
