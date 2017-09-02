@@ -21,6 +21,7 @@ class AlertController {
         this.multiple = {
             incidents: []
         };
+        this.rowClick = [];
         this.loadCameraFeed();
         this.loadsocialFeed();
         this.loadVideoCamera();
@@ -83,6 +84,10 @@ class AlertController {
         this.messagelist = this.connection.record.getList('safety/alerts');
         this.loadAlertsAsync();
     };
+
+    toggleRowClick(i) {
+        this.rowClick[i] = true;
+    }
 
     loadAlertsAsync() {
         //console.log("date  :");
@@ -612,23 +617,23 @@ class AlertController {
             });
         });
         /*this.interval(() => {
-            var n = 4;
-            var lists = _.groupBy(this.uploadStreamList, function (element, index) {
-                return Math.floor(index / n);
-            });
-            if (this.i >= Math.floor(this.uploadStreamList.length / 5)) {
-                this.i = 0;
-            }
-            this.i++;
-            // console.log("this.i");
-            // console.log(this.i);
-            /!*if (this.i == 1) {
-             // console.log("lists[0][0].url, lists[0][0].mediaType");
-             console.log(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
-             this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
-             }*!/
-            this.updateViewOnTimeInterval(lists[this.i]);
-        }, 30000);*/
+         var n = 4;
+         var lists = _.groupBy(this.uploadStreamList, function (element, index) {
+         return Math.floor(index / n);
+         });
+         if (this.i >= Math.floor(this.uploadStreamList.length / 5)) {
+         this.i = 0;
+         }
+         this.i++;
+         // console.log("this.i");
+         // console.log(this.i);
+         /!*if (this.i == 1) {
+         // console.log("lists[0][0].url, lists[0][0].mediaType");
+         console.log(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
+         this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
+         }*!/
+         this.updateViewOnTimeInterval(lists[this.i]);
+         }, 30000);*/
     };
 
     updateViewOnTimeInterval(uploadStreamList) {
@@ -640,12 +645,12 @@ class AlertController {
 
             var elementById = document.getElementById("flowplayer" + id);
             if (elementById) {
-                document.getElementById("mbVideos"+ id).removeChild(elementById);
+                document.getElementById("mbVideos" + id).removeChild(elementById);
             }
             /*var loadingTextId = document.getElementById("loadingTextId");
-            if (loadingTextId) {
-                document.getElementById("mbVideos").removeChild(loadingTextId);
-            }*/
+             if (loadingTextId) {
+             document.getElementById("mbVideos").removeChild(loadingTextId);
+             }*/
         });
 
         var urlArray = [];
@@ -661,7 +666,7 @@ class AlertController {
                         vidDiv.setAttribute("style", "padding: 0px!important");
                         // vidDiv.className = 'channel1';
                         //console.log("element : ", vidDiv);
-                        document.getElementById('mbVideos'+ id).appendChild(vidDiv);
+                        document.getElementById('mbVideos' + id).appendChild(vidDiv);
                         if (value.mediaType.indexOf("streaming") !== -1) {
                             flowplayer(vidDiv, {
                                 volume: 0.0,
@@ -684,7 +689,7 @@ class AlertController {
                                 volume: 0.0,
                                 swf: "video/flowplayer.swf",
                                 autoplay: true,
-                                loop:true,
+                                loop: true,
                                 share: false,
                                 splash: false,
                                 hlsjs: true,
@@ -711,7 +716,7 @@ class AlertController {
                     // imgTag.setAttribute("style", "width: inherit;height: inherit");
                     imgDiv.appendChild(imgTag);
                     //console.log("element : ", imgDiv);
-                    document.getElementById('mbVideos'+ id).appendChild(imgDiv);
+                    document.getElementById('mbVideos' + id).appendChild(imgDiv);
                 }
             }
         })
@@ -796,7 +801,7 @@ class AlertController {
             volume: 0.0,
             swf: "video/flowplayer.swf",
             autoplay: true,
-            loop:true,
+            loop: true,
             share: false,
             splash: false,
             ratio: 9 / 16,
@@ -814,7 +819,7 @@ class AlertController {
             volume: 0.0,
             swf: "video/flowplayer.swf",
             autoplay: true,
-            loop:true,
+            loop: true,
             share: false,
             splash: false,
             ratio: 9 / 16,
@@ -835,7 +840,7 @@ class AlertController {
             volume: 0.0,
             swf: "video/flowplayer.swf",
             autoplay: true,
-            loop:true,
+            loop: true,
             share: false,
             splash: false,
             ratio: 9 / 16,
@@ -856,7 +861,7 @@ class AlertController {
             volume: 0.0,
             swf: "video/flowplayer.swf",
             autoplay: true,
-            loop:true,
+            loop: true,
             share: false,
             splash: false,
             ratio: 9 / 16,
@@ -874,7 +879,7 @@ class AlertController {
             volume: 0.0,
             swf: "video/flowplayer.swf",
             autoplay: true,
-            loop:true,
+            loop: true,
             share: false,
             splash: false,
             ratio: 9 / 16,
@@ -892,7 +897,7 @@ class AlertController {
             volume: 0.0,
             swf: "video/flowplayer.swf",
             autoplay: true,
-            loop:true,
+            loop: true,
             share: false,
             splash: false,
             ratio: 9 / 16,
@@ -910,7 +915,7 @@ class AlertController {
             volume: 0.0,
             swf: "video/flowplayer.swf",
             autoplay: true,
-            loop:true,
+            loop: true,
             share: false,
             splash: false,
             ratio: 9 / 16,
@@ -971,7 +976,7 @@ class AlertController {
                     hlsjs: true,
                     live: true,
                     autoplay: true,
-                    loop:true,
+                    loop: true,
                     share: false,
                     splash: false,
                     ratio: 9 / 16,
@@ -988,7 +993,7 @@ class AlertController {
                     volume: 0.0,
                     swf: "video/flowplayer.swf",
                     autoplay: true,
-                    loop:true,
+                    loop: true,
                     share: false,
                     splash: false,
                     hlsjs: true,

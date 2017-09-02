@@ -61,14 +61,14 @@
         </div>-->
         <div class="card" style="height: 24%;overflow: hidden!important;border-top: 1px solid #213B68 !important;">
             <!--<div class="card-block" style="height: inherit;padding: 0em 0rem;">-->
-                <div class="row" style="height: calc(100%/2);">
-                    <div  id="mbVideos1" class="col-md-6" style="padding: 0px !important;"></div>
-                    <div  id="mbVideos2" class="col-md-6" style="padding: 0px !important;"></div>
-                </div>
-                <div class="row" style="height: calc(100%/2);">
-                    <div  id="mbVideos3" class="col-md-6" style="padding: 0px !important;"></div>
-                    <div  id="mbVideos4" class="col-md-6" style="padding: 0px !important;"></div>
-                </div>
+            <div class="row" style="height: calc(100%/2);">
+                <div id="mbVideos1" class="col-md-6" style="padding: 0px !important;"></div>
+                <div id="mbVideos2" class="col-md-6" style="padding: 0px !important;"></div>
+            </div>
+            <div class="row" style="height: calc(100%/2);">
+                <div id="mbVideos3" class="col-md-6" style="padding: 0px !important;"></div>
+                <div id="mbVideos4" class="col-md-6" style="padding: 0px !important;"></div>
+            </div>
             <!--</div>-->
         </div>
 
@@ -258,7 +258,8 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="i in ac.alertMessageList" ng-if="i.notificationType==='incident'"
-                        ng-class="i.alert.status==='new'? 'row-normal-font-bold' :'row-normal-font'">
+                        ng-class="{'row-normal-font-bold' :i.alert.status==='new' && !ac.rowClick[$index]}"
+                        ng-click="ac.toggleRowClick($index)">
                         <td class="icon-cell">
                             <img title="{{i.alert.parentAlert[0].incidentType}}"
                                  ng-if="i.alert.parentAlert[0].incidentType==='Fire'" src="../img/fire.png"
