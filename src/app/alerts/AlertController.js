@@ -650,7 +650,7 @@ class AlertController {
 
         var urlArray = [];
         _.each(uploadStreamList, (value, id) => {
-            if (id >= 0 && id <= 3) {
+            if (id >= 1 && id <= 4) {
                 //console.log("LOOPING : ", id);
                 if (value.mediaType.indexOf("streaming") !== -1 || value.mediaType.indexOf("video") !== -1) {
                     var URL = value.url.replace("rtsp", "rtmp"); //rtmp://54.169.237.13:1935/live/
