@@ -331,11 +331,12 @@ html, body, .container-fluid, .row {
     padding: 0px !important;
 }
 
-.col-md-3-resize{
+.col-md-3-resize {
     flex: 0 0 20% !important;
     max-width: 20% !important;
 }
-.col-md-6-resize{
+
+.col-md-6-resize {
     flex: 0 0 60% !important;
     max-width: 60% !important;
 }
@@ -383,4 +384,12 @@ div.stretchy-wrapper > img {
     margin: auto;
     /*font-size: 24px;*/
     /*text-align: center;*/
+}
+
+.row-normal-font {
+    font-weight: normal;
+}
+
+.row-normal-font-bold {
+    font-weight: bold;
 }
