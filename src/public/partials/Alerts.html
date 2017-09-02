@@ -257,7 +257,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="i in ac.alertMessageList" ng-if="i.notificationType==='incident'">
+                    <tr ng-repeat="i in ac.alertMessageList" ng-if="i.notificationType==='incident'"
+                        ng-style="i.alert.status==='new'?{'font-weight':'bold'}:{'font-weight':'normal'}">
                         <td class="icon-cell">
                             <img title="{{i.alert.parentAlert[0].incidentType}}"
                                  ng-if="i.alert.parentAlert[0].incidentType==='Fire'" src="../img/fire.png"
