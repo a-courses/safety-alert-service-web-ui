@@ -287,7 +287,13 @@
                             <i class="fa fa-map-marker blue-icons" aria-hidden="true"
                                ng-click="ac.setLocationCenter(i.alert.parentAlert[0].location.latitude,i.alert.parentAlert[0].location.longitude)"></i>
                         </td>
-                        <td>{{i.alert.status}}</td>
+                        <td>
+                            <select>
+                                <option>New</option>
+                                <option>Assigned</option>
+                                <option>Delete</option>
+                            </select>
+                        </td>
                         <td ng-if="i.alert.parentAlert[0].incidentType==='Fire'" src="../img/fire.png"
                             class="alert-icons">678465
                         </td>
