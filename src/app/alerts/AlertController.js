@@ -729,6 +729,7 @@ class AlertController {
             autoplay: true,
             share: false,
             splash: false,
+            loop: true,
             ratio: 9 / 16,
             hlsjs: true,
             clip: {
@@ -747,6 +748,7 @@ class AlertController {
             autoplay: true,
             share: false,
             splash: false,
+            loop: true,
             ratio: 9 / 16,
             hlsjs: true,
             clip: {
@@ -765,6 +767,7 @@ class AlertController {
             autoplay: true,
             share: false,
             splash: false,
+            loop: true,
             ratio: 9 / 16,
             hlsjs: true,
             clip: {
@@ -783,6 +786,7 @@ class AlertController {
             autoplay: true,
             share: false,
             splash: false,
+            loop: true,
             ratio: 9 / 16,
             hlsjs: true,
             clip: {
