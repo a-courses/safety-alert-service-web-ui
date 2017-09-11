@@ -302,32 +302,32 @@ html, body, .container-fluid, .row {
 .channel1 {
     text-align: center;
     color: #FFFFFF;
-    border-right: 1px solid #000000;
-    border-bottom: 1px solid #000000;
+    border-right: 1px solid #505050;
+    border-bottom: 1px solid #505050;
     padding: 0px !important;
 }
 
 .channel2 {
     text-align: center;
     color: #FFFFFF;
-    border-left: 1px solid #000000;
-    border-bottom: 1px solid #000000;
+    border-left: 1px solid #505050;
+    border-bottom: 1px solid #505050;
     padding: 0px !important;
 }
 
 .channel3 {
     text-align: center;
     color: #FFFFFF;
-    border-right: 1px solid #000000;
-    border-top: 1px solid #000000;
+    border-right: 1px solid #505050;
+    border-top: 1px solid #505050;
     padding: 0px !important;
 }
 
 .channel4 {
     text-align: center;
     color: #FFFFFF;
-    border-left: 1px solid #000000;
-    border-top: 1px solid #000000;
+    border-left: 1px solid #505050;
+    border-top: 1px solid #505050;
     padding: 0px !important;
 }
 
@@ -339,6 +339,16 @@ html, body, .container-fluid, .row {
 .col-md-6-resize {
     flex: 0 0 60% !important;
     max-width: 60% !important;
+}
+
+.col-md-3-resize-fullscreen {
+    flex: 0 0 22% !important;
+    max-width: 22% !important;
+}
+
+.col-md-6-resize-fullscreen {
+    flex: 0 0 56% !important;
+    max-width: 56% !important;
 }
 
 div.stretchy-wrapper-big {

@@ -6,6 +6,10 @@ import moment from 'moment';
 
 class AlertController {
     constructor(AlertService, CommonService, DeepStreamService, toaster, _$interval_, _$scope_) {
+
+        this.fullscreen = window.screenTop > 0 ;
+        console.log(window.screenTop);
+
         this.toaster = toaster;
         this.interval = _$interval_;
         this.scope = _$scope_;
@@ -21,6 +25,11 @@ class AlertController {
         this.multiple = {
             incidents: []
         };
+        this.availableOptions = [
+            {id: '1', name: 'New'},
+            {id: '2', name: 'Assigned'},
+            {id: '3', name: 'Delete'}
+        ]
         this.rowClick = [];
         this.loadCameraFeed();
         this.loadsocialFeed();

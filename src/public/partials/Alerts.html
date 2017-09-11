@@ -1,7 +1,8 @@
 <div class="row" ng-init="ac.loadAsyncMobileVideos();">
 
-    <div class="col-md-3 remove-cards-padding col-md-3-resize" style="border-right:2px solid #213B68">
-        <div class="card" style="height: 26%;overflow: hidden!important;">
+    <div class="col-md-3 remove-cards-padding" ng-class="!ac.fullscreen ? 'col-md-3-resize':'col-md-3-resize-fullscreen'"
+         style="border-right:2px solid #213B68">
+        <div class="card" style="height: 25%;overflow: hidden!important;">
             <div class="card-header text-center">
                 Mobile Feeds
             </div>
@@ -59,13 +60,14 @@
                 </div>
             </div>
         </div>-->
-        <div class="card" style="height: 24%;overflow: hidden!important;border-top: 1px solid #213B68 !important;">
+        <div class="card" style="height: 25%;overflow: hidden!important;border-top: 1px solid #213B68 !important;">
             <!--<div class="card-block" style="height: inherit;padding: 0em 0rem;">-->
-            <div class="row" style="height: calc(100%/2);">
+
+            <div class="row" style="height: calc(108%/2);background-color:  #000000;">
                 <div id="mbVideos1" class="col-md-6" style="padding: 0px !important;"></div>
                 <div id="mbVideos2" class="col-md-6" style="padding: 0px !important;"></div>
             </div>
-            <div class="row" style="height: calc(100%/2);">
+            <div class="row" style="height: calc(108%/2);background-color:  #000000;">
                 <div id="mbVideos3" class="col-md-6" style="padding: 0px !important;"></div>
                 <div id="mbVideos4" class="col-md-6" style="padding: 0px !important;"></div>
             </div>
@@ -130,7 +132,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 remove-cards-padding col-md-6-resize">
+    <div class="col-md-6 remove-cards-padding" ng-class="!ac.fullscreen ? 'col-md-6-resize':'col-md-6-resize-fullscreen'">
         <div class="card" style="height: 25%;">
             <div class="card-header text-center gr2">
                 Alerts
@@ -288,10 +290,19 @@
                                ng-click="ac.setLocationCenter(i.alert.parentAlert[0].location.latitude,i.alert.parentAlert[0].location.longitude)"></i>
                         </td>
                         <td>
-                            <select>
-                                <option>New</option>
-                                <option>Assigned</option>
-                                <option>Delete</option>
+                            <!-- <select ng-model="singleSelect">
+                                 <option value="New">New</option>
+                                 <option value="Assigned">Assigned</option>
+                                 <option value="Delete">Delete</option>
+                             </select>-->
+
+                            <!-- <select name="repeatSelect" ng-model="ac.singleSelect">
+                                 <option ng-repeat="option in ac.availableOptions" value="{{option.id}}">{{option.name}}</option>
+                             </select>-->
+
+                            <select ng-model="singleSelect"
+                                    ng-options="option as option.name for option in ac.availableOptions">
+
                             </select>
                         </td>
                         <td ng-if="i.alert.parentAlert[0].incidentType==='Fire'" src="../img/fire.png"
@@ -315,7 +326,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3 remove-cards-padding col-md-3-resize" style="border-left:2px solid #1175BE">
+    <div class="col-md-3 remove-cards-padding"ng-class="!ac.fullscreen ? 'col-md-3-resize':'col-md-3-resize-fullscreen'" style="border-left:2px solid #1175BE">
         <div class="card" style="height: 25%;">
             <div class="card-header text-center gr1">
                 Messaging
@@ -498,4 +509,3 @@
         </div>
     </div>
 </div>
-
