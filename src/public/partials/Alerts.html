@@ -1,6 +1,7 @@
 <div class="row" ng-init="ac.loadAsyncMobileVideos();">
 
-    <div class="col-md-3 remove-cards-padding" ng-class="!ac.fullscreen ? 'col-md-3-resize':'col-md-3-resize-fullscreen'"
+    <div class="col-md-3 remove-cards-padding"
+         ng-class="!ac.fullscreen ? 'col-md-3-resize':'col-md-3-resize-fullscreen'"
          style="border-right:2px solid #213B68">
         <div class="card" style="height: 25%;overflow: hidden!important;">
             <div class="card-header text-center">
@@ -132,7 +133,8 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 remove-cards-padding" ng-class="!ac.fullscreen ? 'col-md-6-resize':'col-md-6-resize-fullscreen'">
+    <div class="col-md-6 remove-cards-padding"
+         ng-class="!ac.fullscreen ? 'col-md-6-resize':'col-md-6-resize-fullscreen'">
         <div class="card" style="height: 25%;">
             <div class="card-header text-center gr2">
                 Alerts
@@ -155,7 +157,7 @@
                     <tbody>
 
                     <tr ng-repeat="i in ac.alertMessageList"
-                        ng-class="i.status==='new'? 'row-normal-font-bold' :'row-normal-font'"
+                        ng-class="i.status==='new'?  'row-normal-font-bold' : i.status==='read'? 'row-normal-read-msg': 'row-normal-font'"
                         ng-if="i.notificationType!=='incident' && !(i.status === 'read' && !i.incidentId)" )
                         ng-click="ac.setSelectVideoAndMap(i.location.latitude,i.location.longitude,i.url,i.mediaType)">
                         <td class="icon-cell">
@@ -326,7 +328,9 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3 remove-cards-padding"ng-class="!ac.fullscreen ? 'col-md-3-resize':'col-md-3-resize-fullscreen'" style="border-left:2px solid #1175BE">
+    <div class="col-md-3 remove-cards-padding"
+         ng-class="!ac.fullscreen ? 'col-md-3-resize':'col-md-3-resize-fullscreen'"
+         style="border-left:2px solid #1175BE">
         <div class="card" style="height: 25%;">
             <div class="card-header text-center gr1">
                 Messaging

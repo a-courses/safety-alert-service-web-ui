@@ -403,3 +403,7 @@ div.stretchy-wrapper > img {
 .row-normal-font-bold {
     font-weight: bold;
 }
+
+.row-normal-read-msg {
+    background: rgba(243, 243, 243, .85);
+}
