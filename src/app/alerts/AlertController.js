@@ -6,9 +6,17 @@ import moment from 'moment';
 
 class AlertController {
     constructor(AlertService, CommonService, DeepStreamService, toaster, _$interval_, _$scope_) {
+        this.fullscreen = false;
+        this.fullscreen = window.screenTop > 0;
 
-        this.fullscreen = window.screenTop > 0 ;
+        if (window.innerHeight == screen.height || screen.height - window.innerHeight <= 2) {
+            this.fullscreen = true;
+        }
+
         console.log(window.screenTop);
+        console.log(window.innerHeight);
+        console.log(screen.height);
+        console.log(this.fullscreen);
 
         this.toaster = toaster;
         this.interval = _$interval_;
@@ -112,113 +120,113 @@ class AlertController {
                     //console.log("Load alerts : notificationType :" + data.notificationType + " | id :" + data.id);
                     var incidentType = data.incidentType;
                     var recordName = list.name;
-                    if (data.id) {
-                        this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
-                            if (currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime) {
-                                //console.log("Load alerts : remove record message list : " + recordName);
-                            }
-                            return currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime;
-                        });
-                        var incId = data.id.replace(/[^a-zA-Z0-9]/g, "");
-                        if (data.notificationType !== 'incident') {
-                            if (this.mapDetails[incidentType] === undefined) {
-                                this.mapDetails[incidentType] = {};
-                            }
-                            this.mapDetails[incidentType][incId] = {
-                                lat: data.location.latitude,
-                                lng: data.location.longitude,
-                                message: data.location.latitude + "," + data.location.longitude,
-                                draggable: false,
-                                icon: {
-                                    iconUrl: '',
+                        if (data.id) {
+                            this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
+                                if (currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime) {
+                                    //console.log("Load alerts : remove record message list : " + recordName);
                                 }
-                            };
-                            if (_.indexOf(this.mappingIncidentIds, incId) === -1) {
-                                this.mappingIncidentIds.push(incId);
-                            }
-                            this.mapDetails[incidentType][incId].draggable = false;
-                            this.mapDetails[incidentType][incId].icon.iconUrl = 'img/location-pointer.png';
-                            this.mapDetails[incidentType][incId].icon.iconSize = [24, 24];
-                            if (incidentType === 'Hazard') {
-                                this.mapDetails[incidentType][incId].icon.iconUrl = 'img/hazard-location.png';
-                            }
-                            if (incidentType === 'Accident') {
+                                return currentItem.id === data.id && currentItem.modifiedTime !== data.modifiedTime;
+                            });
+                            var incId = data.id.replace(/[^a-zA-Z0-9]/g, "");
+                            if (data.notificationType !== 'incident') {
+                                if (this.mapDetails[incidentType] === undefined) {
+                                    this.mapDetails[incidentType] = {};
+                                }
+                                this.mapDetails[incidentType][incId] = {
+                                    lat: data.location.latitude,
+                                    lng: data.location.longitude,
+                                    message: data.location.latitude + "," + data.location.longitude,
+                                    draggable: false,
+                                    icon: {
+                                        iconUrl: '',
+                                    }
+                                };
+                                if (_.indexOf(this.mappingIncidentIds, incId) === -1) {
+                                    this.mappingIncidentIds.push(incId);
+                                }
+                                this.mapDetails[incidentType][incId].draggable = false;
                                 this.mapDetails[incidentType][incId].icon.iconUrl = 'img/location-pointer.png';
+                                this.mapDetails[incidentType][incId].icon.iconSize = [24, 24];
+                                if (incidentType === 'Hazard') {
+                                    this.mapDetails[incidentType][incId].icon.iconUrl = 'img/hazard-location.png';
+                                }
+                                if (incidentType === 'Accident') {
+                                    this.mapDetails[incidentType][incId].icon.iconUrl = 'img/location-pointer.png';
+                                }
+                                if (incidentType === 'Fire') {
+                                    this.mapDetails[incidentType][incId].icon.iconUrl = 'img/fire-location.png';
+                                }
+                                if (incidentType === 'Police') {
+                                    this.mapDetails[incidentType][incId].icon.iconUrl = 'img/police-location.png';
+                                }
+                                if (incidentType === 'Medical') {
+                                    this.mapDetails[incidentType][incId].icon.iconUrl = 'img/medical-location.png';
+                                }
                             }
-                            if (incidentType === 'Fire') {
-                                this.mapDetails[incidentType][incId].icon.iconUrl = 'img/fire-location.png';
+                            else {
+                                if (data.notificationType !== 'incident' && this.mapDetails[incidentType][incId] !== undefined) {
+                                    delete this.mapDetails[incidentType][incId];
+                                }
                             }
-                            if (incidentType === 'Police') {
-                                this.mapDetails[incidentType][incId].icon.iconUrl = 'img/police-location.png';
-                            }
-                            if (incidentType === 'Medical') {
-                                this.mapDetails[incidentType][incId].icon.iconUrl = 'img/medical-location.png';
-                            }
-                        }
-                        else {
-                            if (data.notificationType !== 'incident' && this.mapDetails[incidentType][incId] !== undefined) {
-                                delete this.mapDetails[incidentType][incId];
-                            }
-                        }
 
-                        if (data.notificationType === 'upload' || data.notificationType === 'stream') {
-                            //console.log("Load alerts : Create UPLOAD/STREAM : " + data.notificationType + " | record name :" + recordName);
-                            var uploadData = {
-                                name: recordName,
-                                notificationType: data.notificationType,
-                                id: data.id,
-                                url: data.url,
-                                fileName: data.fileName,
-                                user: {
-                                    phoneNumber: data.user.phoneNumber,
-                                    emailId: data.user.emailId,
-                                    userName: data.user.userName
-                                },
-                                location: {
-                                    latitude: data.location.latitude,
-                                    longitude: data.location.longitude
-                                },
-                                status: data.status,
-                                mediaType: data.mediaType,
-                                incidentType: data.incidentType,
-                                time: moment.utc(data.time).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
-                                modifiedTime: moment.utc(data.modifiedTime).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
-                                incidentId: data.incidentId
-                            };
-                            this.alertMessageList.push(uploadData);
-                            //console.log("UPLOAD/STREAM alert added");
+                            if (data.notificationType === 'upload' || data.notificationType === 'stream') {
+                                //console.log("Load alerts : Create UPLOAD/STREAM : " + data.notificationType + " | record name :" + recordName);
+                                var uploadData = {
+                                    name: recordName,
+                                    notificationType: data.notificationType,
+                                    id: data.id,
+                                    url: data.url,
+                                    fileName: data.fileName,
+                                    user: {
+                                        phoneNumber: data.user.phoneNumber,
+                                        emailId: data.user.emailId,
+                                        userName: data.user.userName
+                                    },
+                                    location: {
+                                        latitude: data.location.latitude,
+                                        longitude: data.location.longitude
+                                    },
+                                    status: data.status,
+                                    mediaType: data.mediaType,
+                                    incidentType: data.incidentType,
+                                    time: moment.utc(data.time).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
+                                    modifiedTime: moment.utc(data.modifiedTime).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
+                                    incidentId: data.incidentId
+                                };
+                                this.alertMessageList.push(uploadData);
+                                //console.log("UPLOAD/STREAM alert added");
+                            }
+                            if (data.notificationType === 'call') {
+                                //console.log("Load alerts : Create CALL :" + data.notificationType + " | record name :" + recordName);
+                                var callData = {
+                                    name: recordName,
+                                    notificationType: data.notificationType,
+                                    id: data.id,
+                                    caller: {
+                                        phoneNumber: data.caller.phoneNumber,
+                                        emailId: data.caller.emailId,
+                                        userName: data.caller.userName
+                                    },
+                                    callee: {
+                                        phoneNumber: data.callee.phoneNumber,
+                                        emailId: data.callee.emailId,
+                                        userName: data.callee.userName
+                                    },
+                                    location: {
+                                        latitude: data.location.latitude,
+                                        longitude: data.location.longitude
+                                    },
+                                    status: data.status,
+                                    mediaType: data.mediaType,
+                                    incidentType: data.incidentType,
+                                    time: moment.utc(data.time).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
+                                    modifiedTime: moment.utc(data.modifiedTime).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
+                                    incidentId: data.incidentId
+                                };
+                                this.alertMessageList.push(callData);
+                                //console.log("CALL alert added");
+                            }
                         }
-                        if (data.notificationType === 'call') {
-                            //console.log("Load alerts : Create CALL :" + data.notificationType + " | record name :" + recordName);
-                            var callData = {
-                                name: recordName,
-                                notificationType: data.notificationType,
-                                id: data.id,
-                                caller: {
-                                    phoneNumber: data.caller.phoneNumber,
-                                    emailId: data.caller.emailId,
-                                    userName: data.caller.userName
-                                },
-                                callee: {
-                                    phoneNumber: data.callee.phoneNumber,
-                                    emailId: data.callee.emailId,
-                                    userName: data.callee.userName
-                                },
-                                location: {
-                                    latitude: data.location.latitude,
-                                    longitude: data.location.longitude
-                                },
-                                status: data.status,
-                                mediaType: data.mediaType,
-                                incidentType: data.incidentType,
-                                time: moment.utc(data.time).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
-                                modifiedTime: moment.utc(data.modifiedTime).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
-                                incidentId: data.incidentId
-                            };
-                            this.alertMessageList.push(callData);
-                            //console.log("CALL alert added");
-                        }
-                    }
                     if (data.notificationType === 'incident') {
                         // console.log("record name : " + recordName);
                         //console.log("Load alerts : Create incident " + data.notificationType + " | record name :" + recordName);
