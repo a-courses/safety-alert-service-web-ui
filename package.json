@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "angular-mocks": "~1.6.4",
+    "angular-modal-service": "^0.12.1",
     "autoprefixer": "^6.0.3",
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",

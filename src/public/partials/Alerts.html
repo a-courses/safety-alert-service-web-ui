@@ -1,3 +1,27 @@
+<script type="text/ng-template" id="modal.html">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="m.close('Cancel')" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Delete Incident</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Do you want to deleted incident</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="m.close('No')" class="btn btn-default" data-dismiss="modal">No
+                    </button>
+                    <button type="button" ng-click="m.close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+
 <div class="row" ng-init="ac.loadAsyncMobileVideos();">
 
     <div class="col-md-3 remove-cards-padding"
@@ -17,52 +41,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="stretchy-wrapper">
-                     &lt;!&ndash;<img src="http://lorempixel.com/320/320/city/">&ndash;&gt;
-                     &lt;!&ndash;<img src="http://localhost:8080/img/Social%20Feed%202%20-%20Twitter%20Print%20Screen.png">&ndash;&gt;
-                     <img src="../img/3.jpg">
-                     &lt;!&ndash;<img src="https://esbucketservice.s3.amazonaws.com/919845145035/IMAGE_20170718_093402_-2077939121.jpg">&ndash;&gt;
-                     &lt;!&ndash;<img src="https://esbucketservice.s3.amazonaws.com/919845145035/IMG_20170706_141829.jpg">&ndash;&gt;
-                 </div>-->
             </div>
         </div>
 
-        <!--<div class="card" style="height:25%;overflow: hidden!important;">
-            <div class="row" style="height: 100%!important;">
-                <div class="card col-md-6">
-                    <div class="card-block" style="padding: 0em 0rem;overflow: hidden!important;">
-                        <div id="mbVideos0">
-                            &lt;!&ndash;<img src="https://esbucketservice.s3.amazonaws.com/919845145035/IMG_20170719_205557.jpg">&ndash;&gt;
-                        </div>
-                    </div>
-                </div>
-                <div class="card col-md-6">
-                    <div class="card-block" style="padding: 0em 0rem;overflow: hidden!important;">
-                        <div id="mbVideos1">
-                            &lt;!&ndash;<img src="https://esbucketservice.s3.amazonaws.com/919845145035/IMAGE_20170808_235634_1735632185.jpg">&ndash;&gt;
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row" style="height: 100%!important;">
-                <div class="card col-md-6">
-                    <div class="card-block" style="padding: 0em 0rem;overflow: hidden!important;">
-                        <div  id="mbVideos2">
-                            &lt;!&ndash;<img src="https://esbucketservice.s3.amazonaws.com/919845145035/IMG-20170705-WA0007.jpg">&ndash;&gt;
-                        </div>
-                    </div>
-                </div>
-                <div class="card col-md-6">
-                    <div  id="mbVideos3" class="card-block" style="padding: 0em 0rem;overflow: hidden!important;">
-                        <div>
-                            &lt;!&ndash;<img src="https://esbucketservice.s3.amazonaws.com/919845145035/IMAGE_20170718_093402_-2077939121.jpg">&ndash;&gt;
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
         <div class="card" style="height: 25%;overflow: hidden!important;border-top: 1px solid #213B68 !important;">
-            <!--<div class="card-block" style="height: inherit;padding: 0em 0rem;">-->
 
             <div class="row" style="height: calc(108%/2);background-color:  #000000;">
                 <div id="mbVideos1" class="col-md-6" style="padding: 0px !important;"></div>
@@ -72,7 +54,6 @@
                 <div id="mbVideos3" class="col-md-6" style="padding: 0px !important;"></div>
                 <div id="mbVideos4" class="col-md-6" style="padding: 0px !important;"></div>
             </div>
-            <!--</div>-->
         </div>
 
         <div class="card" style="height: 25%">
@@ -210,10 +191,6 @@
                             </div>
                         </td>
                         <td class="icon-cell" ng-init="">
-                            <!-- <a href="http://maps.google.com/maps?q={{i.location.latitude}},{{i.location.longitude}}"
-                                target="_blank">
-                                 <i class="fa fa-map-marker blue-icons" aria-hidden="true"></i>
-                             </a>-->
                             <i class="fa fa-map-marker blue-icons" aria-hidden="true"
                                ng-click="ac.setLocationCenter(i.location.latitude,i.location.longitude)"></i>
                         </td>
@@ -263,7 +240,7 @@
                     <tbody>
                     <tr ng-repeat="i in ac.alertMessageList" ng-if="i.notificationType==='incident'"
                         ng-class="{'row-normal-font-bold' :i.alert.status==='new' && !ac.rowClick[$index]}"
-                        ng-click="ac.toggleRowClick($index)">
+                        ng-click="ac.toggleRowClick($index)" ng-init="singleSelect = i.alert.status">
                         <td class="icon-cell">
                             <img title="{{i.alert.parentAlert[0].incidentType}}"
                                  ng-if="i.alert.parentAlert[0].incidentType==='Fire'" src="../img/fire.png"
@@ -292,20 +269,20 @@
                                ng-click="ac.setLocationCenter(i.alert.parentAlert[0].location.latitude,i.alert.parentAlert[0].location.longitude)"></i>
                         </td>
                         <td>
-                            <!-- <select ng-model="singleSelect">
-                                 <option value="New">New</option>
-                                 <option value="Assigned">Assigned</option>
-                                 <option value="Delete">Delete</option>
-                             </select>-->
-
-                            <!-- <select name="repeatSelect" ng-model="ac.singleSelect">
-                                 <option ng-repeat="option in ac.availableOptions" value="{{option.id}}">{{option.name}}</option>
-                             </select>-->
-
-                            <select ng-model="singleSelect"
-                                    ng-options="option as option.name for option in ac.availableOptions">
-
+                            <select ng-model="singleSelect" class="form-control form-control-sm"
+                                    ng-options="option as option.name for option in ac.availableOptions track by option.id"
+                                    ng-change="ac.showModal(i, singleSelect)"
+                                <option value="?">Select</option>
                             </select>
+
+                            <!--<select ng-model="singleSelect" class="form-control form-control-sm" ng-change="ac.showModal(i, singleSelect)">
+                                <option value="?">Select</option>
+                                <option ng-repeat="option in ac.availableOptions" value="{{option.id}}"
+                                        ng-selected="{{ singleSelect == i.alert.status }}">
+                                    {{option.name}}
+                                </option>
+                            </select>-->
+
                         </td>
                         <td ng-if="i.alert.parentAlert[0].incidentType==='Fire'" src="../img/fire.png"
                             class="alert-icons">678465
@@ -507,7 +484,6 @@
                     <div id="contentSharing4" class="col-md-6 channel4">
                         <div id="sharing3"></div>
                     </div>
-
                 </div>
             </div>
         </div>
