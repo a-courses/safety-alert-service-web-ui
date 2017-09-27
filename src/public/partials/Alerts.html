@@ -239,8 +239,8 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="i in ac.alertMessageList" ng-if="i.notificationType==='incident'"
-                        ng-class="{'row-normal-font-bold' :i.alert.status==='new' && !ac.rowClick[$index]}"
-                        ng-click="ac.toggleRowClick($index)" ng-init="singleSelect = i.alert.status">
+                        ng-class="i.alert.status!=='new'? 'row-normal-read-msg': i.alert.status==='new' && !ac.rowClick[$index]? 'row-normal-font-bold':''"
+                        ng-click="ac.toggleRowClick($index)">
                         <td class="icon-cell">
                             <img title="{{i.alert.parentAlert[0].incidentType}}"
                                  ng-if="i.alert.parentAlert[0].incidentType==='Fire'" src="../img/fire.png"
