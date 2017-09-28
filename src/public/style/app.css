@@ -426,3 +426,8 @@ div.stretchy-wrapper > img {
 .leaflet-google-layer {
     width: 100%!important;
 }
+
+.fullscreen {
+    width: 100%;
+    height: 100%;
+}

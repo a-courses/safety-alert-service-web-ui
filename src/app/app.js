@@ -31,9 +31,10 @@ import './common/ServiceModule';
 import './alerts/AlertController';
 import deepstream from 'deepstream.io-client-js';
 import 'angular-modal-service';
+import 'angular-screenfull'
 const MODULE_NAME = 'SafetyServiceModule';
 
-angular.module(MODULE_NAME, ['ui-leaflet', 'ngRoute', 'ngMessages', 'ngSanitize', 'ngAnimate', 'toaster','angularModalService', 'ControllerModule', 'ServiceModule'])
+angular.module(MODULE_NAME, ['ui-leaflet', 'ngRoute', 'ngMessages', 'ngSanitize', 'ngAnimate', 'toaster','angularModalService','angularScreenfull', 'ControllerModule', 'ServiceModule'])
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {

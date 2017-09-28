@@ -26,11 +26,13 @@
     <base href="/">
 </head>
 <body ng-cloak>
-
-<div class="container-fluid">
+<div class="container-fluid" ngsf-fullscreen = "FullScreenCtrl as fsc">
     <ng-view></ng-view>
 </div>
 
 <ng-include src="'/partials/toaster-view.html'"></ng-include>
 </body>
+<script src="/node_modules/angular-screenfull/js/marked.js"></script>
+<script src="/node_modules/angular-screenfull/js/dist/angular-screenfull.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/screenfull.js/2.0.0/screenfull.js"></script>
 </html>

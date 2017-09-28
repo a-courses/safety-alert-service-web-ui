@@ -127,7 +127,7 @@ class AlertController {
         console.log(option);
         if (option.name.toLowerCase() === 'delete') {
             this.modalService.showModal({
-                templateUrl: 'modal.html',
+                templateUrl: 'modalDeleteIncidents.html',
                 controller: "ModalController as m"
             }).then((modal)=> {
                 modal.element.modal();
