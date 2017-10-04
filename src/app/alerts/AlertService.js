@@ -18,8 +18,16 @@ class AlertService {
         if (alertData.notificationType === 'call') {
             url = 'https://siosqa7482.execute-api.us-west-2.amazonaws.com/dev/calldata';
         }
+        // https://siosqa7482.execute-api.us-west-2.amazonaws.com/dev/incidents
         console.log("deleteRecordFromDB URL : ", url);
         return this.commonService.putData(url, alertData, alertData.notificationType + "alert updated Successfully");
+
+    }
+
+    deleteIncidents(incidentData){
+        console.log("incidentData deleteRecordFromDB URL : ");
+        var url = "https://siosqa7482.execute-api.us-west-2.amazonaws.com/dev/incidents";
+        return this.commonService.putData(url, incidentData, incidentData.notificationType + "alert updated Successfully");
 
     }
 

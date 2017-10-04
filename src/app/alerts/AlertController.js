@@ -7,14 +7,14 @@ import moment from 'moment';
 
 
 class AlertController {
-    constructor(AlertService, CommonService, DeepStreamService, toaster, _$interval_,_$timeout_,_$scope_, ModalService) {
+    constructor(AlertService, CommonService, DeepStreamService, toaster, _$interval_, _$timeout_, _$scope_, ModalService) {
         this.fullscreen = false;
         this.fullscreen = window.screenTop > 0;
 
         if (window.innerHeight == screen.height || screen.height - window.innerHeight <= 2) {
             this.fullscreen = true;
         }
-
+        this.isImage = false;
         console.log(window.screenTop);
         console.log(window.innerHeight);
         console.log(screen.height);
@@ -131,30 +131,55 @@ class AlertController {
                 templateUrl: 'modalDeleteIncidents.html',
                 controller: "ModalController as m",
                 inputs: {
-                    alertMessageList: []
+                    alertMessageList: [],
+                    selectedImage: ''
                 }
             }).then((modal)=> {
                 modal.element.modal();
                 modal.close.then((result)=> {
                     if (result.toLowerCase() === 'yes') {
-                        this.yesNoMessage = "You said " + result;
-                    }
+                        var data = {
+                            notificationType: i.notificationType,
+                            status: 'delete',
+                            incidentId: i.alert.id,
+                            alertType : i.alert.parentAlert[0].alertType
+                        };
 
+                        this.alertService.deleteIncidents(data).then((result) => {
+                            console.log(result);
+                            if (result.data.message === "success") {
+                                /*this.connection.record.getRecord(recordName).delete();
+                                 this.messagelist.removeEntry(recordName);
+                                 this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
+                                 return currentItem.id === alert.id;
+                                 });
+                                 this.uploadStreamListWithRTSP = _.reject(this.uploadStreamListWithRTSP, function (currentItem) {
+                                 return currentItem.id === alert.id;
+                                 });*/
+                                this.toaster.pop("success", "Successfully deleted the incident");
+                            } else {
+                                this.toaster.pop("error", "Error deleting incident");
+                            }
+                        });
+                    }
                 });
             });
         }
-    };
+    }
 
-    showImagesProfiles(alertMessageList) {
+    showImagesProfiles(alertMessageList, selectedImage) {
+        console.log("event occurred", alertMessageList);
         this.modalService.showModal({
             templateUrl: 'modalImagePopup.html',
             controller: "ModalController as m",
             inputs: {
-                alertMessageList: alertMessageList
+                alertMessageList: alertMessageList,
+                selectedImage: selectedImage
             }
         }).then((modal)=> {
             modal.element.modal();
             modal.close.then((result)=> {
+
             });
         });
     };
@@ -497,7 +522,7 @@ class AlertController {
                     latitude: '',
                     longitude: ''
                 },
-                status: 'read',
+                status: 'delete',
                 mediaType: '',
                 incidentType: '',
                 time: '',
@@ -522,7 +547,7 @@ class AlertController {
                     latitude: '',
                     longitude: ''
                 },
-                status: "read",
+                status: "delete",
                 mediaType: '',
                 incidentType: '',
                 time: '',
@@ -532,6 +557,7 @@ class AlertController {
         //console.log("Alert Delete service request body : ", alertData);
         this.alertService.deleteRecordFromDB(alertData).then((result) => {
             //console.log("Alert Delete service response body : ", result.data.message);
+            console.log(result);
             if (result.data.message === "success") {
                 var incId = id.replace(/[^a-zA-Z0-9]/g, "");
                 delete this.mapDetails[incId];
@@ -551,9 +577,9 @@ class AlertController {
                     return currentItem.id === id;
                 });
                 this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
-                this.toaster.pop("success", id + " : Record Removed!");
+                this.toaster.pop("success", "Successfully deleted the alert");
             } else {
-                this.toaster.pop("error", "Error while delete : " + id);
+                this.toaster.pop("error", "Alert already mapped to incident. Please delete incident to delete alert");
             }
             this.scope.$apply();
         });
@@ -668,7 +694,7 @@ class AlertController {
                     }
                     this.uploadStreamList = _.sortBy(this.uploadStreamList, 'modifiedTime').reverse();
                     this.uploadStreamListWithRTSP = _.sortBy(this.uploadStreamListWithRTSP, 'modifiedTime').reverse();
-                    if (this.uploadStreamListWithRTSP.length > 0) {
+                    if (this.uploadStreamListWithRTSP.length >= 0) {
                         this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
                     }
                     this.updateViewOnTimeInterval(this.uploadStreamList);
@@ -828,7 +854,7 @@ class AlertController {
             socialFeed3.remove();
             sharing3.remove();
             VideoCamera1.remove();
-        }, 30000);
+        }, 10000);
     }
 
     loadCameraFeed() {
@@ -1064,6 +1090,7 @@ class AlertController {
     }
 
     playSelectVideoOrImage(url, type) {
+        this.isImage = false;
         console.log(url);
         console.log(type);
         //console.log("LOOPING : ", id);
@@ -1075,7 +1102,7 @@ class AlertController {
         if (loadingTextId) {
             document.getElementById("mbVideosOne").removeChild(loadingTextId);
         }
-        if (type.indexOf("streaming") !== -1 || type.indexOf("video") !== -1) {
+        if (type.indexOf("streaming") !== -1 || type.indexOf("video") !== -1 || type.indexOf("audio") !== -1) {
             var URL = url.replace("rtsp", "rtmp"); //rtmp://54.169.237.13:1935/live/
             //console.log(URL, value.fileName);
             var vidDiv = document.createElement('div');
@@ -1120,19 +1147,37 @@ class AlertController {
                     }
                 });
             }
+            if (type.indexOf("audio") !== -1) {
+                flowplayer(vidDiv, {
+                    swf: "video/flowplayer.swf",
+                    autoplay: true,
+                    loop: true,
+                    title: "Audio clip",
+                    audio: true,
+                    coverImage: "../img/Social Feed 2 - Twitter Print Screen.png",
+                    playlist: [[
+                        {mp4: url}
+                    ]]
+                });
+            }
             // type: "video/mp4", src: "video/sanmay.mp4"}
         } else {
+            this.isImage = true;
+            this.imageURLSelected = url;
             // this.selecteImage = url;
-            var imgDiv = document.createElement('div');
-            imgDiv.setAttribute("id", "flowPlayerDefault");
-            // imgDiv.setAttribute("style", "padding: 0px!important");
-            imgDiv.className = 'col-md-12 stretchy-wrapper-big';
-            var imgTag = document.createElement('img');
-            imgTag.setAttribute('src', url);
-            // imgTag.setAttribute("style", "width: inherit;height: inherit");
-            imgDiv.appendChild(imgTag);
+            /* var imgDiv = document.createElement('div');
+             imgDiv.setAttribute("id", "flowPlayerDefault");
+             // imgDiv.setAttribute("style", "padding: 0px!important");
+             imgDiv.className = 'col-md-12 stretchy-wrapper-big';
+             var imgTag = document.createElement('img');
+             imgTag.setAttribute('src', url);
+             // imgTag.setAttribute("style", "width: inherit;height: inherit");
+             imgDiv.appendChild(imgTag);*/
             //console.log("element : ", imgDiv);
-            document.getElementById('mbVideosOne').appendChild(imgDiv);
+            // document.getElementById('mbVideosOne').appendChild(imgDiv);
+            var element = angular.element(document.querySelector('#mbVideosOne'));
+
+            element.append("<div id='flowPlayerDefault' class='col-md-12 stretchy-wrapper-big'><img src='" + url + "'></div>");
         }
 
         var flowPlayerDefault = angular.element(document.querySelector('#flowPlayerDefault > a'));
@@ -1171,5 +1216,5 @@ class AlertController {
     }
 }
 
-AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', 'toaster', '$interval','$timeout', '$scope', 'ModalService'];
+AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', 'toaster', '$interval', '$timeout', '$scope', 'ModalService'];
 export default controllerModule.controller('AlertController', AlertController).name;
