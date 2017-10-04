@@ -14,15 +14,15 @@ html, body, .container-fluid, .row {
     padding-left: 0px !important;
 }
 
-.card {
+.card-columns {
     border-radius: 0rem !important;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow-y: auto !important;
+    overflow-x: hidden!important;
     border: none !important;
     /*border: 1px solid #E9EBEE !important;*/
 }
 
-.card-header {
+.card-columns-header {
     color: #FFFFFF !important;
     background-color: #213B68 !important;
     padding: 0.15rem 1.25rem !important;
@@ -30,11 +30,11 @@ html, body, .container-fluid, .row {
     font-size: 14px !important;
 }
 
-.card-header:first-child {
+.card-columns-header:first-child {
     border-radius: 0px !important;
 }
 
-.card-footer {
+.card-columns-footer {
     background-color: #F0F0F0 !important;
 }
 
@@ -412,22 +412,36 @@ div.stretchy-wrapper > img {
     transition: opacity .5s ease-out;
     opacity: 0;
 }
+
 .modal.ng-enter.ng-enter-active {
     opacity: 1;
 }
+
 .modal.ng-leave {
     transition: opacity .5s ease-out;
     opacity: 1;
 }
+
 .modal.ng-leave.ng-leave-active {
     opacity: 0;
 }
 
 .leaflet-google-layer {
-    width: 100%!important;
+    width: 100% !important;
 }
 
 .fullscreen {
     width: 100%;
     height: 100%;
+}
+
+@media (min-width: 992px) {
+    .modal-lg.profile-view{
+        max-width: 95% !important;
+    }
+    .profile-view .modal-content{
+        overflow: scroll !important;
+        height: -webkit-fill-available!important;
+        background: rgba(243, 243, 243, .85)!important;
+    }
 }

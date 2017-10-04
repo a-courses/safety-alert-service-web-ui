@@ -20,6 +20,135 @@
         </div>
     </div>
 </script>
+<script type="text/ng-template" id="modalImagePopup.html">
+
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg profile-view">
+            <div class="modal-content" style="background-color: #EDEDED !important;">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6" style="height: -webkit-fill-available;background-color: black">
+                            <div class="stretchy-wrapper-big">
+                                <img src="../img/Social Feed 2 - Twitter Print Screen.png"></div>
+                        </div>
+                        <div class="col-lg-6">
+
+                            <div class="card" style="background-color: transparent;border: none!important;">
+                                <div class="card-block" style="overflow-y: auto;padding: 0px;!important; font-size: 10px">
+                                    <table class="table table-sm">
+                                        <thead style="border-bottom: 1px solid #00B0F0">
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Status</th>
+                                            <th>User</th>
+                                            <th>Delete</th>
+                                            <th>Link</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        <tr ng-repeat="i in m.alertMessageListModal" ng-if="$index<1">
+                                            <td class="icon-cell">
+                                                <img src="../img/fire.png" class="alert-icons"/>
+                                            </td>
+                                            <td style="width: 100px;">23-Sep-2017{{i.time | date:'dd-MMM-yyyy'}}</td>
+                                            <td style="width: 50px;">12:26AM{{i.time | date:'hh:mma'}}</td>
+                                            <td style="width: 100px;">new{{i.status}}</td>
+                                            <td class="icon-cell">919845145035{{i.user.phoneNumber}}
+                                                <!--<i class="fa fa-user-circle-o blue-icons" aria-hidden="true" title="{{i.user.phoneNumber}}"></i>-->
+                                            </td>
+                                            <td style="width: 50px;">
+                                                <i class="fa fa-trash blue-icons"
+                                                   ng-click="ac.deleteRecordFromList(i.name, i.id, i.notificationType)"></i>
+                                            </td>
+                                            <td style="width: 50px;">
+                                                <i class="fa fa-link blue-icons" ng-if="i.incidentId"></i>
+                                                <a href="#" data-tooltip="Settings" ng-if="!i.incidentId">
+                                                    <i class="fa fa-chain-broken blue-icons"
+                                                       ng-click="ac.saveMappedIncidents(i.name, i.incidentId,i.id,i.notificationType)">
+                                                    </i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-lg-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            USER DATA
+                                        </div>
+                                        <div class="card-block">
+                                            <table>
+                                                <tr>
+                                                    <td>Name:</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Phone:</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Email:</td>
+                                                </tr>
+                                                <tr>
+                                                    <td> Address:</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="card mt-3">
+                                        <div class="card-header">
+                                            DEVICE DATA
+                                        </div>
+                                        <div class="card-block">
+                                            <table>
+                                                <tr>
+                                                    <td>IMEI:</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SIM Card:</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Location:</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            NOTES
+                                        </div>
+                                        <div class="card-block">
+
+                                            Free Form
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- panel row end-->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="m.close('No')" class="btn btn-default" data-dismiss="modal">No
+                    </button>
+                    <button type="button" ng-click="m.close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</script>
 
 
 <div class="row" ng-init="ac.loadAsyncMobileVideos();">
@@ -27,8 +156,9 @@
     <div class="col-md-3 remove-cards-padding"
          ng-class="!ac.fullscreen ? 'col-md-3-resize':'col-md-3-resize-fullscreen'"
          style="border-right:2px solid #213B68">
-        <div class="card" style="height: 25%;overflow: hidden!important;">
-            <div class="card-header text-center">
+        <div class="card card-columns" style="height: 25%;overflow: hidden!important;">
+            <div class="card-header card-columns-header text-center"
+                 ng-click="ac.showImagesProfiles(ac.alertMessageList)">
                 Mobile Feeds
             </div>
             <div class="card-block" style="height: inherit;padding: 0em 0rem;">
@@ -44,7 +174,7 @@
             </div>
         </div>
 
-        <div class="card" style="height: 25%;overflow: hidden!important;border-top: 1px solid #213B68 !important;">
+        <div class="card card-columns" style="height: 25%;overflow: hidden!important;border-top: 1px solid #213B68 !important;">
 
             <div class="row" style="height: calc(108%/2);background-color:  #000000;">
                 <div id="mbVideos1" class="col-md-6" style="padding: 0px !important;"></div>
@@ -56,8 +186,8 @@
             </div>
         </div>
 
-        <div class="card" style="height: 25%">
-            <div class="card-header text-center">
+        <div class="card card-columns" style="height: 25%">
+            <div class="card-header  card-columns-header text-center">
                 Camera Feeds
             </div>
             <div class="card-block" style="overflow: hidden;height: inherit;padding: 0em 0.9rem;background: #505050">
@@ -88,8 +218,8 @@
             </div>
 
         </div>
-        <div class="card" style="height: 25%">
-            <div class="card-header text-center">
+        <div class="card card-columns" style="height: 25%">
+            <div class="card-header  card-columns-header text-center">
                 Social Feeds
             </div>
             <div class="card-block" style="overflow: hidden;height: inherit;padding: 0em 0.9rem;background: #505050">
@@ -116,8 +246,8 @@
     </div>
     <div class="col-md-6 remove-cards-padding"
          ng-class="!ac.fullscreen ? 'col-md-6-resize':'col-md-6-resize-fullscreen'">
-        <div class="card" style="height: 25%;">
-            <div class="card-header text-center gr2">
+        <div class="card card-columns" style="height: 25%;">
+            <div class="card-header  card-columns-header text-center gr2">
                 Alerts
             </div>
             <div class="card-block" style="overflow-y: auto;padding: 0px;!important; font-size: 10px">
@@ -200,7 +330,7 @@
                         </td>
                         <td style="width: 50px;">
                             <i class="fa fa-link blue-icons" ng-if="i.incidentId"></i>
-                            <a href="#" data-tooltip="Settings" ng-if="!i.incidentId">
+                            <a href="#" data-tooltip="Map incidents" ng-if="!i.incidentId">
                                 <i class="fa fa-chain-broken blue-icons"
                                    ng-click="ac.saveMappedIncidents(i.name, i.incidentId,i.id,i.notificationType)">
                                 </i>
@@ -211,16 +341,16 @@
                 </table>
             </div>
         </div>
-        <div class="card"
+        <div class="card card-columns"
              style="height: 50%;">
-            <div class="card-header text-center gr2">
+            <div class="card-header  card-columns-header text-center gr2">
                 Locations
             </div>
             <leaflet lf-center="ac.center" markers="ac.markers" layers="ac.layers" markers-nested="true" height="460px"
                      width="100%"></leaflet>
         </div>
-        <div class="card" style="height: 25%">
-            <div class="card-header text-center gr2">
+        <div class="card card-columns" style="height: 25%">
+            <div class="card-header  card-columns-header text-center gr2">
                 Incidents
             </div>
             <div class="card-block" style="overflow-y: auto;padding: 0px;!important; font-size: 10px">
@@ -272,7 +402,7 @@
                             <select ng-model="singleSelect" class="form-control form-control-sm"
                                     ng-options="option as option.name for option in ac.availableOptions track by option.id"
                                     ng-change="ac.showModal(i, singleSelect)"
-                                <option value="?">Select</option>
+                            <option value="?">Select</option>
                             </select>
 
                             <!--<select ng-model="singleSelect" class="form-control form-control-sm" ng-change="ac.showModal(i, singleSelect)">
@@ -308,10 +438,10 @@
     <div class="col-md-3 remove-cards-padding"
          ng-class="!ac.fullscreen ? 'col-md-3-resize':'col-md-3-resize-fullscreen'"
          style="border-left:2px solid #1175BE">
-        <div class="card" style="height: 25%;">
-            <div class="card-header text-center gr1">
-                Messaging  <a href="#" ngsf-toggle-fullscreen class="btn btn-sm float-right"
-                              style="border: none !important;padding-bottom: 0px;padding-top: 0px; color: #FFFFFF; line-height: inherit">
+        <div class="card card-columns" style="height: 25%;">
+            <div class="card-header  card-columns-header text-center gr1">
+                Messaging <a href="#" ngsf-toggle-fullscreen class="btn btn-sm float-right"
+                             style="border: none !important;padding-bottom: 0px;padding-top: 0px; color: #FFFFFF; line-height: inherit">
                 <i class="fa fa-arrows-alt"></i>
             </a>
             </div>
@@ -389,7 +519,7 @@
                 </table>
             </div>
         </div>
-        <div class="card" style="height: 25%;">
+        <div class="card card-columns" style="height: 25%;">
             <div class="card-header chat-card-header">
                 <div class="row">
                     <div class="col-md-1"><i class="fa fa-user-circle-o blue-icons" aria-hidden="true"></i></div>
@@ -438,7 +568,7 @@
                     </p>
                 </div>
             </div>
-            <div class="card-footer" style="padding: 0px !important; border-top: none !important;">
+            <div class="card-footer card-columns-footer" style="padding: 0px !important; border-top: none !important;">
                 <form class="form-inline">
                     <div class="input-group col-md-12" style="padding: 0px !important;">
                         <input type="text" class="form-control" style="border-radius: 15px">
@@ -452,8 +582,8 @@
                 </form>
             </div>
         </div>
-        <div class="card" style="height: 25%">
-            <div class="card-header text-center gr1">
+        <div class="card card-columns" style="height: 25%">
+            <div class="card-header card-columns-header text-center gr1">
                 Video Camera
             </div>
             <div class="card-block" style="overflow: hidden;height: inherit;padding: 0em 0.9rem;background: #505050">
@@ -462,13 +592,13 @@
                 </div>
             </div>
         </div>
-        <div class="card" style="height: 25%">
-            <div class="card-header text-center gr1">
+        <div class="card card-columns" style="height: 25%">
+            <div class="card-header  card-columns-header text-center gr1">
                 Content Sharing
             </div>
             <div class="card-block" style="overflow: hidden;height: inherit;padding: 0em 0.9rem;background: #505050">
                 <div class="row" style="height: calc(100%/2);">
-                    <div style="position: relative;z-index: 99999;top: 75%; left: 45%;">
+                    <div style="position: relative;z-index: 99;top: 75%; left: 45%;">
                         <i class="fa fa-play-circle blue-play-icons"
                            style=" display: inline-block; position: absolute; "
                            aria-hidden="true"></i>

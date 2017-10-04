@@ -7,7 +7,7 @@ import moment from 'moment';
 
 
 class AlertController {
-    constructor(AlertService, CommonService, DeepStreamService, toaster, _$interval_, _$scope_, ModalService) {
+    constructor(AlertService, CommonService, DeepStreamService, toaster, _$interval_,_$timeout_,_$scope_, ModalService) {
         this.fullscreen = false;
         this.fullscreen = window.screenTop > 0;
 
@@ -24,6 +24,7 @@ class AlertController {
         this.yesNoMessage = "alert message";
         this.modalService = ModalService;
         this.interval = _$interval_;
+        this.timeout = _$timeout_;
         this.scope = _$scope_;
         this.alertService = AlertService;
         this.commonService = CommonService;
@@ -128,7 +129,10 @@ class AlertController {
         if (option.name.toLowerCase() === 'delete') {
             this.modalService.showModal({
                 templateUrl: 'modalDeleteIncidents.html',
-                controller: "ModalController as m"
+                controller: "ModalController as m",
+                inputs: {
+                    alertMessageList: []
+                }
             }).then((modal)=> {
                 modal.element.modal();
                 modal.close.then((result)=> {
@@ -141,12 +145,25 @@ class AlertController {
         }
     };
 
+    showImagesProfiles(alertMessageList) {
+        this.modalService.showModal({
+            templateUrl: 'modalImagePopup.html',
+            controller: "ModalController as m",
+            inputs: {
+                alertMessageList: alertMessageList
+            }
+        }).then((modal)=> {
+            modal.element.modal();
+            modal.close.then((result)=> {
+            });
+        });
+    };
+
     toggleRowClick(i) {
         this.rowClick[i] = true;
     }
 
     loadAlertsAsync() {
-        //console.log("date  :");
         var offset = moment().utcOffset();
         //console.log(offset);
         this.alertMessageList = [];
@@ -690,6 +707,8 @@ class AlertController {
          }*!/
          this.updateViewOnTimeInterval(lists[this.i]);
          }, 30000);*/
+
+
     };
 
     updateViewOnTimeInterval(uploadStreamList) {
@@ -775,7 +794,41 @@ class AlertController {
                     document.getElementById('mbVideos' + id).appendChild(imgDiv);
                 }
             }
-        })
+        });
+
+        this.timeout(() => {
+            var flowplayer1 = angular.element(document.querySelector('#flowplayer1 > a'));
+            var flowplayer2 = angular.element(document.querySelector('#flowplayer2 > a'));
+            var flowplayer3 = angular.element(document.querySelector('#flowplayer3 > a'));
+            var flowplayer4 = angular.element(document.querySelector('#flowplayer4 > a'));
+            var sharing1 = angular.element(document.querySelector('#sharing1 > a'));
+            var sharing2 = angular.element(document.querySelector('#sharing2 > a'));
+            var sharing3 = angular.element(document.querySelector('#sharing3 > a'));
+            var sharing4 = angular.element(document.querySelector('#sharing4 > a'));
+            var CameraFeed1 = angular.element(document.querySelector('#CameraFeed1 > a'));
+            var CameraFeed2 = angular.element(document.querySelector('#CameraFeed2 > a'));
+            var CameraFeed3 = angular.element(document.querySelector('#CameraFeed3 > a'));
+            var CameraFeed4 = angular.element(document.querySelector('#CameraFeed4 > a'));
+            var socialFeed1 = angular.element(document.querySelector('#socialFeed1 > a'));
+            var socialFeed3 = angular.element(document.querySelector('#socialFeed3 > a'));
+            var VideoCamera1 = angular.element(document.querySelector('#VideoCamera1 > a'));
+            flowplayer1.remove();
+            flowplayer2.remove();
+            flowplayer3.remove();
+            flowplayer4.remove();
+            sharing1.remove();
+            sharing2.remove();
+            sharing3.remove();
+            sharing4.remove();
+            CameraFeed1.remove();
+            CameraFeed2.remove();
+            CameraFeed3.remove();
+            CameraFeed4.remove();
+            socialFeed1.remove();
+            socialFeed3.remove();
+            sharing3.remove();
+            VideoCamera1.remove();
+        }, 30000);
     }
 
     loadCameraFeed() {
@@ -1081,6 +1134,9 @@ class AlertController {
             //console.log("element : ", imgDiv);
             document.getElementById('mbVideosOne').appendChild(imgDiv);
         }
+
+        var flowPlayerDefault = angular.element(document.querySelector('#flowPlayerDefault > a'));
+        flowPlayerDefault.remove();
     }
 
     setIncidentId(incidentId, id, notificationType) {
@@ -1115,5 +1171,5 @@ class AlertController {
     }
 }
 
-AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', 'toaster', '$interval', '$scope', 'ModalService'];
+AlertController.$inject = ['AlertService', 'CommonService', 'DeepStreamService', 'toaster', '$interval','$timeout', '$scope', 'ModalService'];
 export default controllerModule.controller('AlertController', AlertController).name;
