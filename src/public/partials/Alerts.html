@@ -3,17 +3,17 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" ng-click="m.close('Cancel')" data-dismiss="modal"
-                            aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Delete Incident</h4>
+                    <button type="button" class="close" ng-click="m.closeModal('Cancel')" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p>Do you want to delete this incident</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" ng-click="m.close('No')" class="btn btn-default" data-dismiss="modal">No
+                    <button type="button" ng-click="m.closeModal('No')" class="btn btn-default" data-dismiss="modal">No
                     </button>
-                    <button type="button" ng-click="m.close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes
+                    <button type="button" ng-click="m.closeModal('Yes')" class="btn btn-primary" data-dismiss="modal">Yes
                     </button>
                 </div>
             </div>
@@ -26,17 +26,20 @@
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lg profile-view">
-            <div class="modal-content" style="background-color: #EDEDED !important;">
-                <div class="modal-body">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">View</h4>
+                </div>
+                <div class="modal-body" style="background-color: #EDEDED !important;">
                     <div class="row">
-                        <div class="col-lg-6" style="height: -webkit-fill-available;background-color: black">
+                        <div class="col-lg-6" style="background-color: black">
                             <div class="stretchy-wrapper-big">
                                 <img ng-src={{m.selectedImage}}></div>
                         </div>
                         <div class="col-lg-6">
                             <div class="card" style="background-color: transparent;border: none!important;">
                                 <div class="card-block"
-                                     style="overflow-y: auto;padding: 0px;!important; font-size: 10px">
+                                     style="padding: 0px;!important; font-size: 10px">
                                     <table class="table table-sm">
                                         <thead style="border-bottom: 1px solid #00B0F0">
                                         <tr>
@@ -139,9 +142,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" ng-click="m.close('No')" class="btn btn-default" data-dismiss="modal">No
-                    </button>
-                    <button type="button" ng-click="m.close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes
+                    <button type="button" ng-click="m.closeModal('close')" class="btn btn-primary" data-dismiss="modal">
+                        Ok
                     </button>
                 </div>
             </div>
@@ -369,7 +371,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="i in ac.alertMessageList" ng-if="i.notificationType==='incident'"
+                    <tr ng-repeat="i in ac.alertMessageList" ng-if="i.notificationType==='incident' && i.alert.status.toLowerCase() !=='delete'"
                         ng-class="i.alert.status!=='new'? 'row-normal-read-msg': i.alert.status==='new' && !ac.rowClick[$index]? 'row-normal-font-bold':''"
                         ng-click="ac.toggleRowClick($index)">
                         <td class="icon-cell">

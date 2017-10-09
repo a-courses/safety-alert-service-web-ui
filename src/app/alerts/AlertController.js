@@ -15,10 +15,10 @@ class AlertController {
             this.fullscreen = true;
         }
         this.isImage = false;
-        console.log(window.screenTop);
-        console.log(window.innerHeight);
-        console.log(screen.height);
-        console.log(this.fullscreen);
+        // console.log(window.screenTop);
+        // console.log(window.innerHeight);
+        // console.log(screen.height);
+        // console.log(this.fullscreen);
 
         this.toaster = toaster;
         this.yesNoMessage = "alert message";
@@ -142,7 +142,7 @@ class AlertController {
                             notificationType: i.notificationType,
                             status: 'delete',
                             id: i.alert.id,
-                            alertType : i.alert.parentAlert[0].alertType
+                            alertType: i.alert.parentAlert[0].alertType
                         };
 
                         this.alertService.deleteIncidents(data).then((result) => {
@@ -738,9 +738,9 @@ class AlertController {
     };
 
     updateViewOnTimeInterval(uploadStreamList) {
-        console.log("=================================================================:" + this.i);
-        console.log("this.uploadStreamList");
-        console.log(uploadStreamList.length);
+        // console.log("=================================================================:" + this.i);
+        // console.log("this.uploadStreamList");
+        // console.log(uploadStreamList.length);
         this.imageURL = [];
         _.each(uploadStreamList, (value, id) => {
 
@@ -1148,16 +1148,20 @@ class AlertController {
                 });
             }
             if (type.indexOf("audio") !== -1) {
+                vidDiv.className = 'col-md-12 is-audio';
                 flowplayer(vidDiv, {
-                    swf: "video/flowplayer.swf",
+                    ratio: 9 / 16,
+                    volume: 1.0,
                     autoplay: true,
-                    loop: true,
-                    title: "Audio clip",
-                    audio: true,
-                    coverImage: "../img/Social Feed 2 - Twitter Print Screen.png",
-                    playlist: [[
-                        {mp4: url}
-                    ]]
+                    splash: true,
+                    swf: "video/flowplayer.audio-3.2.11.swf",
+                    playlist: [{
+                        audio: true,
+                        autoplay: true,
+                        sources: [
+                            {type: "audio/mpeg", src: url}
+                        ]
+                    }]
                 });
             }
             // type: "video/mp4", src: "video/sanmay.mp4"}

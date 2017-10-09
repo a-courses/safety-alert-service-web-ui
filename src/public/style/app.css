@@ -71,10 +71,6 @@ html, body, .container-fluid, .row {
     text-align: center;
 }
 
-.flowplayer {
-    background-color: #00B0F0;
-}
-
 .table {
 }
 
@@ -297,6 +293,7 @@ html, body, .container-fluid, .row {
     font-family: inherit !important;
     font-size: 12px !important;
     border-radius: 0em !important;
+    background-color: #00B0F0 !important;
 }
 
 .channel1 {
@@ -439,9 +436,15 @@ div.stretchy-wrapper > img {
     .modal-lg.profile-view{
         max-width: 95% !important;
     }
-    .profile-view .modal-content{
-        overflow: scroll !important;
+    .profile-view {
+        overflow: auto !important;
         height: -webkit-fill-available!important;
-        background: rgba(243, 243, 243, .85)!important;
+        height:-moz-available !important;
     }
+}
+
+.is-audio.flowplayer .fp-player {
+    background-size: cover;          /* default: contain */
+    background-position: top center; /* default: center */
+    background-image: url('http://releases.flowplayer.org/data/national.jpg');
 }
