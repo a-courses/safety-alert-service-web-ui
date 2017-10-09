@@ -141,7 +141,7 @@ class AlertController {
                         var data = {
                             notificationType: i.notificationType,
                             status: 'delete',
-                            incidentId: i.alert.id,
+                            id: i.alert.id,
                             alertType : i.alert.parentAlert[0].alertType
                         };
 
