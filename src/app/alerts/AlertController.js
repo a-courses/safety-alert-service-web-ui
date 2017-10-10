@@ -15,6 +15,7 @@ class AlertController {
             this.fullscreen = true;
         }
         this.isImage = false;
+        this.isFullScreen = false;
         // console.log(window.screenTop);
         // console.log(window.innerHeight);
         // console.log(screen.height);

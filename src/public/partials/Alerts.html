@@ -156,7 +156,7 @@
 <div class="row" ng-init="ac.loadAsyncMobileVideos();">
 
     <div class="col-md-3 remove-cards-padding"
-         ng-class="!ac.fullscreen ? 'col-md-3-resize':'col-md-3-resize-fullscreen'"
+         ng-class="!ac.isFullScreen ? 'col-md-3-resize':'col-md-3-resize-fullscreen'"
          style="border-right:2px solid #213B68">
         <div class="card card-columns" style="height: 25%;overflow: hidden!important;">
             <div class="card-header card-columns-header text-center">
@@ -248,7 +248,7 @@
         </div>
     </div>
     <div class="col-md-6 remove-cards-padding"
-         ng-class="!ac.fullscreen ? 'col-md-6-resize':'col-md-6-resize-fullscreen'">
+         ng-class="!ac.isFullScreen ? 'col-md-6-resize':'col-md-6-resize-fullscreen'">
         <div class="card card-columns" style="height: 25%;">
             <div class="card-header  card-columns-header text-center gr2">
                 Alerts
@@ -439,11 +439,13 @@
         </div>
     </div>
     <div class="col-md-3 remove-cards-padding"
-         ng-class="!ac.fullscreen ? 'col-md-3-resize':'col-md-3-resize-fullscreen'"
+         ng-class="!ac.isFullScreen ? 'col-md-3-resize':'col-md-3-resize-fullscreen'"
          style="border-left:2px solid #1175BE">
         <div class="card card-columns" style="height: 25%;">
             <div class="card-header  card-columns-header text-center gr1">
-                Messaging <a href="#" ngsf-toggle-fullscreen class="btn btn-sm float-right"
+                Messaging
+
+                <a href="#" ngsf-toggle-fullscreen class="btn btn-sm float-right" ng-click="ac.isFullScreen = !ac.isFullScreen"
                              style="border: none !important;padding-bottom: 0px;padding-top: 0px; color: #FFFFFF; line-height: inherit">
                 <i class="fa fa-arrows-alt"></i>
             </a>
