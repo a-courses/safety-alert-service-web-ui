@@ -29,7 +29,7 @@
     "font-awesome": "^4.7.0",
     "leaflet": "0.7.x",
     "leaflet-plugins": "1.9.2",
-    "moment": "^2.18.1",
+    "moment": "2.18.1",
     "select2": "^4.0.3",
     "ui-leaflet": "^1.0.3",
     "ui-select": "^0.19.8",
