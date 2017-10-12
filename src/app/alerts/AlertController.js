@@ -16,10 +16,10 @@ class AlertController {
         }
         this.isImage = false;
         this.isFullScreen = false;
-        // console.log(window.screenTop);
-        // console.log(window.innerHeight);
-        // console.log(screen.height);
-        // console.log(this.fullscreen);
+        // //console.log(window.screenTop);
+        // //console.log(window.innerHeight);
+        // //console.log(screen.height);
+        // //console.log(this.fullscreen);
 
         this.toaster = toaster;
         this.yesNoMessage = "alert message";
@@ -125,8 +125,8 @@ class AlertController {
     };
 
     showModal(i, option) {
-        console.log(i);
-        console.log(option);
+        //console.log(i);
+        //console.log(option);
         if (option.name.toLowerCase() === 'delete') {
             this.modalService.showModal({
                 templateUrl: 'modalDeleteIncidents.html',
@@ -147,15 +147,24 @@ class AlertController {
                         };
 
                         this.alertService.deleteIncidents(data).then((result) => {
-                            console.log(result);
+                            //console.log(result);
                             if (result.data.message === "success") {
                                 /*this.connection.record.getRecord(recordName).delete();
-                                 this.messagelist.removeEntry(recordName);
-                                 this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
-                                 return currentItem.id === alert.id;
-                                 });
-                                 this.uploadStreamListWithRTSP = _.reject(this.uploadStreamListWithRTSP, function (currentItem) {
-                                 return currentItem.id === alert.id;
+                                 this.messagelist.removeEntry(recordName);*/
+
+                                this.alertMessageList = _.reject(this.alertMessageList, function (currentItem) {
+                                    if (currentItem.notificationType === "incident" && (currentItem.alert.id === i.alert.id)) {
+                                        //console.log(currentItem.alert.id, i.alert.id);
+                                        //console.log(currentItem.alert.id === i.alert.id);
+                                        /* this.connection.record.getRecord(currentItem.name).delete();
+                                         this.messagelist.removeEntry(currentItem.name);*/
+                                        return currentItem.alert.id === i.alert.id;
+                                    }
+
+                                });
+
+                                /*this.uploadStreamListWithRTSP = _.reject(this.uploadStreamListWithRTSP, function (currentItem) {
+                                 return currentItem.incidentId === i.alert.id;
                                  });*/
                                 this.toaster.pop("success", "Successfully deleted the incident");
                             } else {
@@ -169,7 +178,7 @@ class AlertController {
     }
 
     showImagesProfiles(alertMessageList, selectedImage) {
-        console.log("event occurred", alertMessageList);
+        //console.log("event occurred", alertMessageList);
         this.modalService.showModal({
             templateUrl: 'modalImagePopup.html',
             controller: "ModalController as m",
@@ -310,7 +319,7 @@ class AlertController {
                         }
                     }
                     if (data.notificationType === 'incident') {
-                        // console.log("record name : " + recordName);
+                        // //console.log("record name : " + recordName);
                         //console.log("Load alerts : Create incident " + data.notificationType + " | record name :" + recordName);
                         var parentAlerts = [];
                         var assignedToList = [];
@@ -426,8 +435,8 @@ class AlertController {
                             notificationType: data.notificationType,
                             alert: {
                                 id: data.alert.id,
-                                time: moment.utc(data.time).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
-                                modifiedTime: moment.utc(data.modifiedTime).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
+                                time: moment.utc(data.alert.time).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
+                                modifiedTime: moment.utc(data.alert.modifiedTime).utcOffset(offset).format('YYYY-MM-DDTHH:mm:ss'),
                                 name: data.alert.name,
                                 parentAlert: parentAlerts,
                                 mappedAlerts: data.alert.mappedAlerts,
@@ -439,12 +448,9 @@ class AlertController {
                                 incidentType: data.alert.incidentType
                             }
                         };
-                        // console.log(incidentData);
                         this.alertMessageList.push(incidentData);
-                        //console.log("INCIDENT alert added");
                     }
                     this.alertMessageList = _.sortBy(this.alertMessageList, 'modifiedTime').reverse();
-                    //console.log("=================================================================");
                 });
                 return list;
             });
@@ -558,7 +564,7 @@ class AlertController {
         //console.log("Alert Delete service request body : ", alertData);
         this.alertService.deleteRecordFromDB(alertData).then((result) => {
             //console.log("Alert Delete service response body : ", result.data.message);
-            console.log(result);
+            //console.log(result);
             if (result.data.message === "success") {
                 var incId = id.replace(/[^a-zA-Z0-9]/g, "");
                 delete this.mapDetails[incId];
@@ -725,11 +731,11 @@ class AlertController {
          this.i = 0;
          }
          this.i++;
-         // console.log("this.i");
-         // console.log(this.i);
+         // //console.log("this.i");
+         // //console.log(this.i);
          /!*if (this.i == 1) {
-         // console.log("lists[0][0].url, lists[0][0].mediaType");
-         console.log(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
+         // //console.log("lists[0][0].url, lists[0][0].mediaType");
+         //console.log(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
          this.playSelectVideoOrImage(this.uploadStreamListWithRTSP[0].url, this.uploadStreamListWithRTSP[0].mediaType);
          }*!/
          this.updateViewOnTimeInterval(lists[this.i]);
@@ -739,9 +745,9 @@ class AlertController {
     };
 
     updateViewOnTimeInterval(uploadStreamList) {
-        // console.log("=================================================================:" + this.i);
-        // console.log("this.uploadStreamList");
-        // console.log(uploadStreamList.length);
+        // //console.log("=================================================================:" + this.i);
+        // //console.log("this.uploadStreamList");
+        // //console.log(uploadStreamList.length);
         this.imageURL = [];
         _.each(uploadStreamList, (value, id) => {
 
@@ -1072,15 +1078,15 @@ class AlertController {
     }
 
     setSelectVideoAndMap(latitude, longitude, url, mediaType) {
-        // console.log(latitude, longitude);
-        // console.log(url);
-        // console.log(mediaType);
+        // //console.log(latitude, longitude);
+        // //console.log(url);
+        // //console.log(mediaType);
         this.setLocationCenter(latitude, longitude);
         this.playSelectVideoOrImage(url, mediaType);
     }
 
     setLocationCenter(lat, long) {
-        console.log(lat, ",", long);
+        //console.log(lat, ",", long);
         angular.extend(this, {
             center: {
                 lat: lat,
@@ -1092,8 +1098,8 @@ class AlertController {
 
     playSelectVideoOrImage(url, type) {
         this.isImage = false;
-        console.log(url);
-        console.log(type);
+        //console.log(url);
+        //console.log(type);
         //console.log("LOOPING : ", id);
         var elementById = document.getElementById("flowPlayerDefault");
         if (elementById) {

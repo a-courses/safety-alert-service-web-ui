@@ -272,7 +272,7 @@
 
                     <tr ng-repeat="i in ac.alertMessageList"
                         ng-class="i.status==='new'?  'row-normal-font-bold' : i.status==='read'? 'row-normal-read-msg': 'row-normal-font'"
-                        ng-if="i.notificationType!=='incident' && !(i.status === 'read' && !i.incidentId)" )
+                        ng-if="i.notificationType!=='incident' && !(i.status === 'delete')"
                         ng-click="ac.setSelectVideoAndMap(i.location.latitude,i.location.longitude,i.url,i.mediaType)">
                         <td class="icon-cell">
                             <img title="{{i.incidentType}}" ng-if="i.incidentType==='Fire'" src="../img/fire.png"
