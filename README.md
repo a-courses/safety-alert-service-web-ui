@@ -9,7 +9,8 @@
 # https://deepstreamhub.com/tutorials/getting-started/angularjs/
 # https://www.codementor.io/christiannwamba/building-real-time-chat-angular-deepstream-4miwit44u
 
-/*scopeApply((data) => {
+/*
+scopeApply((data) => {
              console.log(data);
              this.mapDetails[data.incidentId] = {
              lat: data.location.latitude,
@@ -24,7 +25,8 @@
              });
              */
             
-            /*list.whenReady((record) => {
+            /*
+            list.whenReady((record) => {
                              console.log("updated");
                              this.mapDetails[record.get('incidentId')] = {
                              lat: record.get('location.latitude'),
@@ -36,7 +38,8 @@
                              }
                              };
                              console.log(this.mapDetails);
-                             });*/
+                             });
+                             */
 
 /*
              console.log(this.alertMessages);
@@ -60,7 +63,8 @@
 
 
 
-        /*jwplayer("stream1").setup({
+        /*
+        jwplayer("stream1").setup({
          autostart: 'true',
          primary: 'html5',
          file: "rtmp://192.168.1.102:1935/Sandeep-live-demo/myStream",
